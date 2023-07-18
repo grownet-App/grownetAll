@@ -1,0 +1,36 @@
+.suppliers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.tittle-suppliers{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.arrow{
+    font-size: 1.5rem;
+    position: absolute;
+    right: 12rem;
+    top: 2.2rem;
+    color: var(--color-dark-blue);
+}
+.logo-suppliers{
+    width: 50%;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+.img-suppliers{
+ position: relative;
+    width: 5.5rem;
+    top: 1.5rem;
+    margin-right: 1rem;
+ 
+}
+#suppliers-categ{
+    background: var( --color-gradient-blue);
+}
+#suppliers-categ:hover{
+    background: var(--color-gradient-green);
+}

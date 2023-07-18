@@ -21,7 +21,7 @@ const loginPage = () => {
         secureTextEntry={true}
       />
 
-      <TouchableOpacity style={styles.btnPrimary} onPress={() => navigation.navigate("providers")}><Text>Login</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.btnPrimary} onPress={() => navigation.navigate("chat")}><Text>Login</Text></TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   );

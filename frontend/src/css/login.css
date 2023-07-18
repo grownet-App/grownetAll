@@ -1,0 +1,77 @@
+.login{
+    background-color: var(--color-blue-primary);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    Height: 100vh;
+}
+.login-form{
+    margin-top: 3.5rem;
+    margin-bottom: 3rem;
+}
+.text-form{
+    text-align: center;
+    font-size: 16px;
+}
+.react-tel-input .form-control {
+    padding: 25px;
+    font-family: var(--poppins);
+    font-size: 18px !important;
+    color: var(--color-dark-blue);
+    border-radius: 50px !important;
+}
+.react-tel-input .flag-dropdown {
+     border: none !important;
+     background-color: transparent !important;
+     margin-left: 6px;
+     color: var(--color-dark-blue);
+}
+.react-tel-input .flag-dropdown.open .selected-flag {
+    background-color: transparent !important;
+}
+.selected-flag{
+    background-color: transparent !important;
+}
+.country-list {
+    font-family: var(--poppins);
+    text-align: left;
+    color: var(--color-dark-blue);
+}
+img{
+    width: 15%;
+}
+.btn-large {
+    margin-top: 1em;
+    width: 100%;
+    border-radius: 16px;
+}
+
+.cont-forms {
+    height: 85vh;
+    display: grid;
+    align-items: center;
+    background: rgb(13 110 253 / 50%);
+    border-radius: 8px;
+}
+
+@media(max-width:760px) {
+
+    img{
+        width:60%;
+    }
+}
+
+@media(min-width:992px) {
+    .cont-forms {
+        margin: 2em !important;
+    }
+
+    .form {
+        background: white;
+        padding: 2em !important;
+        border-radius: 8px;
+    }
+}

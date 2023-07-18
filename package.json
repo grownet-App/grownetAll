@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@rneui/base": "github:react-native-elements/react-native-elements#base",
+    "@rneui/themed": "github:react-native-elements/react-native-elements#themed",
+    "react-native-paper": "^5.9.1"
+  }
+}

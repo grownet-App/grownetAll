@@ -1,0 +1,29 @@
+.br-1 {
+    border-right: 1px solid gray;
+    background-color: whitesmoke;
+}
+.card-chat{
+    margin-bottom: 0.5rem;
+}
+.center {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cont-btns button {
+    margin: 1rem;
+}
+
+.cont-chats {
+    height: 80vh;
+    overflow-y: auto;
+}
+
+.pr-1 {
+    padding-right: 1rem;
+}
+
+.vh90 {
+    height: 90vh;
+}
