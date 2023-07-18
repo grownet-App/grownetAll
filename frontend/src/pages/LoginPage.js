@@ -50,7 +50,7 @@ function Login() {
         <PhoneNumberValidation className="number-form"/>
     </div>
  
-    <Link className="bttn btn-secundary" to="/restaurants">Let’s Begin</Link>
+{/*     <Link className="bttn btn-secundary" to="/restaurants">Let’s Begin</Link> */}
     </section>
   );
 }
