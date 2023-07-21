@@ -26,7 +26,10 @@
     width: 5.5rem;
     top: 1.5rem;
     margin-right: 1rem;
- 
+}
+.text-supplier{
+    padding-right: 1rem;
+    padding-left: 1rem;
 }
 #suppliers-categ{
     background: var( --color-gradient-blue);
