@@ -29,17 +29,19 @@ function PhoneNumberValidation() {
         e.preventDefault();
         let phone = PhoneNumber;
         let phoneNumberClean = phone.split(country);
-        console.log(phoneNumberClean[1]);
+        let parseCountry = parseInt(country); 
+        let numero = parseInt(phoneNumberClean[1]);
+        console.log(numero);
         const state = {
             form: {
-                "indicador": country,
-                "numero": PhoneNumber
+                "indicador": parseCountry,
+                "numero": numero
             },
             error: false,
             errorMsg: ""
         }
         console.log(state.form);
-        console.log("numero enviado:", country, phoneNumberClean[1]);
+        console.log("numero enviado:", parseCountry, numero);
         let url = 'http://5.161.211.8:88/api/Authentication/ValidateNumber';
         axios.post(url, state.form)
             .then(response => {
