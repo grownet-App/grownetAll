@@ -41,7 +41,7 @@
     color: var(--color-dark-blue);
 }
 img{
-    width: 15%;
+    width: 14%;
 }
 .btn-large {
     margin-top: 1em;
@@ -60,7 +60,7 @@ img{
 @media(max-width:760px) {
 
     img{
-        width:60%;
+        width:55%;
     }
 }
 

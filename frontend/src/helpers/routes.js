@@ -3,6 +3,7 @@ const routes = {
     home: '/',
     login: '/login',
     register: '/register',
+    codeOtp: "/codeOtp",
     account: '/account',
     orders: '/orders',
     order: (orderId) => (orderId ? `/order/:${orderId}` : '/order/:id'),

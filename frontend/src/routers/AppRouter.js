@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from '../pages/HomePage';import Restaurants from '../pages/Restaurants';
 import LoginPage from '../pages/LoginPage';
+import CodeOtp from '../pages/CodeOtp';
 import RegisterPage from '../pages/RegisterPage';
 import AccountPage from '../pages/AccountPage';
 import ProvidersPage from '../pages/ProvidersPage';
@@ -29,6 +30,9 @@ export default function AppRouter() {
             </Route>
             <Route exact path={routes.restaurants} element={<PublicRoute />}>
                 <Route path={routes.restaurants} element={<Restaurants />}/>
+            </Route>
+            <Route exact path={routes.codeOtp} element={<PublicRoute />}>
+                <Route path={routes.codeOtp} element={<CodeOtp />}/>
             </Route>
             <Route exact path={routes.suppliers} element={<PublicRoute />}>
                 <Route path={routes.suppliers} element={<Suppliers />}/>
