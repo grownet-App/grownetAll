@@ -4,9 +4,12 @@ import React, { useState } from "react";
 import { button, Col, Container } from "react-bootstrap";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css"
+import { Route, useNavigate } from "react-router-dom";
+
+
 
 function PhoneNumberValidation() {
-
+    const navigate = useNavigate();
     const [PhoneNumber, setPhoneNumber] = useState('');
     const [valid, setValid] = useState(true);
     const [country, setCountry] = useState('');
@@ -29,7 +32,7 @@ function PhoneNumberValidation() {
         e.preventDefault();
         let phone = PhoneNumber;
         let phoneNumberClean = phone.split(country);
-        let parseCountry = parseInt(country); 
+        let parseCountry = parseInt(country);
         let numero = parseInt(phoneNumberClean[1]);
         console.log(numero);
         const state = {
@@ -47,6 +50,11 @@ function PhoneNumberValidation() {
             .then(response => {
                 console.log(response);
                 console.log(response.data.mensaje);
+                if (response.data.bandera === 1) {
+                    navigate("/codeOtp")
+                }
+            }).catch(function (error) {
+                console.log(error);
             })
     };
 
