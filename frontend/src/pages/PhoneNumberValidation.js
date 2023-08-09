@@ -5,14 +5,24 @@ import { button, Col, Container } from "react-bootstrap";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css"
 import { Route, useNavigate } from "react-router-dom";
-
-
+import CodeOtp from "./CodeOtp";
+import css from "../css/otp.css";
+import InputNumber from '../components/InputNumber';
+import logo_blancov2 from '../img/logo_blancov2.svg';
+import Modal from 'react-bootstrap/Modal';
+import {Icon} from '@iconify/react';
 
 function PhoneNumberValidation() {
     const navigate = useNavigate();
     const [PhoneNumber, setPhoneNumber] = useState('');
     const [valid, setValid] = useState(true);
     const [country, setCountry] = useState('');
+    const [showOtp, setShowOtp] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const handleChange = (value, selectedCountry) => {
         console.log(value);
@@ -20,7 +30,6 @@ function PhoneNumberValidation() {
         setCountry(selectedCountry.dialCode)
         setValid(validatePhoneNumber(value));
     };
-
 
     const validatePhoneNumber = (phoneNumber) => {
         const phoneNumberPattern = /^\d{10}$/;
@@ -45,22 +54,29 @@ function PhoneNumberValidation() {
         }
         console.log(state.form);
         console.log("numero enviado:", parseCountry, numero);
-        let url = 'http://5.161.211.8:88/api/Authentication/ValidateNumber';
+        let url = 'http://5.161.211.8:88/api/authentication/validateNumber';
         axios.post(url, state.form)
             .then(response => {
                 console.log(response);
                 console.log(response.data.mensaje);
                 if (response.data.bandera === 1) {
-                    navigate("/codeOtp")
+                    setShowOtp(true);
+                    handleShow(false);
+                    setShowAlert(false);
+                }
+                else{
+                    setShowAlert(true);
+                    handleShow(false);
                 }
             }).catch(function (error) {
                 console.log(error);
             })
     };
-
     return (
         <Container className="text-center">
-            <form onSubmit={enviarData}>
+            {
+                showOtp ? <CodeOtp></CodeOtp>: <><img className="img-login" src={logo_blancov2} alt="logo-Grownet"/> 
+                <p><form onSubmit={enviarData}>
                 <label className="text-form">
                     <p>Enter your mobile number:</p>
                     <PhoneInput
@@ -75,7 +91,18 @@ function PhoneNumberValidation() {
                 <Col>
                     <button className="bttn btn-secundary mt-4" type="submit">Let’s Begin</button>
                 </Col>
-            </form>
+                </form></p></>
+            }
+            {
+                showAlert ? <Modal show={show} onHide={handleClose} > 
+                <section className='alerta'>
+                    <Icon className="error" icon="pajamas:error" />
+                    <h1>We apologize</h1>
+                    <p>We didn't find the mobile number registered</p><p id='number-phone'>3214631125</p>
+                    <a onClick={handleClose} id="close" >Change mobile number</a>
+                    <a className='bttn btn-primary' href='/restaurants'>Register now</a>
+                </section></Modal> : <></>
+            }
         </Container>
     )
 }

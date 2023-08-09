@@ -45,12 +45,10 @@ function Login() {
 
   return (
     <section className="login">
-      <img src={logo_blancov2} alt="logo-Grownet"/>
       <div className="login-form">
         <PhoneNumberValidation className="number-form"/>
-    </div>
- 
-{/*     <Link className="bttn btn-secundary" to="/restaurants">Let’s Begin</Link> */}
+        <h2 href=''>Don't have an account? <a href='/restaurants'>Sign Up</a></h2>
+      </div>
     </section>
   );
 }

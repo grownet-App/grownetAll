@@ -4,6 +4,9 @@
     align-items: center;
     justify-content: center;
 }
+.bttn-categ{
+    width: 360px;
+}
 .tittle-restaurants{
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -15,6 +18,17 @@
     position: relative;
     right: 15px;
 }
-h2{
+.restaurants h2{
+    font-size: 25px;
     margin-bottom: 0px !important;
+}
+.restaurants p{
+    font-weight: 200;
+    margin-top: 5px;
+}
+.text-categ{
+    text-align: left;
+}
+.restaurants img{
+    margin-left: 1rem;
 }

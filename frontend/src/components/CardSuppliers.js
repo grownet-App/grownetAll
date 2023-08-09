@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import css from "../css/suppliers.css";
 import img_suppliers from "../img/img_suppliers.png";
 import logo__foodpoint from "../img/logo__foodpoint.svg";
 
@@ -9,19 +8,15 @@ export default function Suppliers(props) {
     const [suppliers, setSuppliers] = useState([]);
 
         useEffect (() => {
-            fetch ("http://5.161.211.8:88/api/providers/all")
+            fetch ("http://5.161.211.8:88/api/providers/" + "all")
             .then ((response) => response.json ())
             .then (( {providers}) => setSuppliers(providers));
-            }, [ ]);
-            
-         var prueba = 1;
-
-            
+        }, [ ]);
+              
     return (
         <section className='suppliers'>
-           {
-            
-           /* <div>
+           {/*
+            <div>
             <ul>
             {suppliers.map (providers => <p key={providers.id}>{providers.name}</p>)}
             </ul>
