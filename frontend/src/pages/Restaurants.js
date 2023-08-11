@@ -3,7 +3,6 @@ import css from "../css/restaurants.css";
 import { Icon } from '@iconify/react';
 import { Link } from "react-router-dom";
 import axios from "axios";
-import REACT_APP_API_URL from "../.env";
 
 export default function Restaurants() {
     const urlImg  ="http://5.161.211.8:88/storage/"
