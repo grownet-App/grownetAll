@@ -10,16 +10,18 @@ import css from "../css/otp.css";
 import InputNumber from '../components/InputNumber';
 import logo_blancov2 from '../img/logo_blancov2.svg';
 import Modal from 'react-bootstrap/Modal';
-import {Icon} from '@iconify/react';
+import { Icon } from '@iconify/react';
 
 function PhoneNumberValidation() {
+    
     const navigate = useNavigate();
     const [PhoneNumber, setPhoneNumber] = useState('');
     const [valid, setValid] = useState(true);
     const [country, setCountry] = useState('');
     const [showOtp, setShowOtp] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
-
+    const [userId, setUserId] = useState('');
+    
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -39,6 +41,7 @@ function PhoneNumberValidation() {
 
     const enviarData = (e) => {
         e.preventDefault();
+
         let phone = PhoneNumber;
         let phoneNumberClean = phone.split(country);
         let parseCountry = parseInt(country);
@@ -58,13 +61,14 @@ function PhoneNumberValidation() {
         axios.post(url, state.form)
             .then(response => {
                 console.log(response);
-                console.log(response.data.mensaje);
-                if (response.data.bandera === 1) {
+                if (response.data.flag === 1) {
                     setShowOtp(true);
                     handleShow(false);
                     setShowAlert(false);
+                    setUserId(response.data.users);
+                    console.log(userId);
                 }
-                else{
+                else {
                     setShowAlert(true);
                     handleShow(false);
                 }
@@ -75,33 +79,33 @@ function PhoneNumberValidation() {
     return (
         <Container className="text-center">
             {
-                showOtp ? <CodeOtp></CodeOtp>: <><img className="img-login" src={logo_blancov2} alt="logo-Grownet"/> 
-                <p><form onSubmit={enviarData}>
-                <label className="text-form">
-                    <p>Enter your mobile number:</p>
-                    <PhoneInput
-                        country={'co'}
-                        value={PhoneNumber}
-                        onChange={handleChange}
-                        inputProps={{ required: true, }}
-                        selectedCountry={country}
-                    />
-                </label>
-                {!valid && <p></p>}
-                <Col>
-                    <button className="bttn btn-secundary mt-4" type="submit">Let’s Begin</button>
-                </Col>
-                </form></p></>
+                showOtp ? <CodeOtp idUsuario={userId}></CodeOtp> : <><img className="img-login" src={logo_blancov2} alt="logo-Grownet" />
+                    <p><form onSubmit={enviarData}>
+                        <label className="text-form">
+                            <p>Enter your mobile number:</p>
+                            <PhoneInput
+                                country={'co'}
+                                value={PhoneNumber}
+                                onChange={handleChange}
+                                inputProps={{ required: true, }}
+                                selectedCountry={country}
+                            />
+                        </label>
+                        {!valid && <p></p>}
+                        <Col>
+                            <button className="bttn btn-secundary mt-4" type="submit">Let’s Begin</button>
+                        </Col>
+                    </form></p></>
             }
             {
-                showAlert ? <Modal show={show} onHide={handleClose} > 
-                <section className='alerta'>
-                    <Icon className="error" icon="pajamas:error" />
-                    <h1>We apologize</h1>
-                    <p>We didn't find the mobile number registered</p><p id='number-phone'>3214631125</p>
-                    <a onClick={handleClose} id="close" >Change mobile number</a>
-                    <a className='bttn btn-primary' href='/restaurants'>Register now</a>
-                </section></Modal> : <></>
+                showAlert ? <Modal show={show} onHide={handleClose} >
+                    <section className='alerta'>
+                        <Icon className="error" icon="pajamas:error" />
+                        <h1>We apologize</h1>
+                        <p>We didn't find the mobile number registered</p><p id='number-phone'>3214631125</p>
+                        <a onClick={handleClose} id="close" >Change mobile number</a>
+                        <a className='bttn btn-primary' href='/restaurants'>Register now</a>
+                    </section></Modal> : <></>
             }
         </Container>
     )
