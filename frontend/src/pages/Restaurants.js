@@ -3,6 +3,7 @@ import css from "../css/restaurants.css";
 import { Icon } from '@iconify/react';
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Products from './Products';
 
 export default function Restaurants() {
     const urlImg  ="http://5.161.211.8:88/storage/"
@@ -32,7 +33,7 @@ export default function Restaurants() {
           <img src={urlImg + user.avatar}/>
         </a>
       ))}
-      
+
     </section>
   );
 }

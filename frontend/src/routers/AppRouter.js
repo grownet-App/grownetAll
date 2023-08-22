@@ -16,6 +16,8 @@ import PublicRoute from './PublicRoute';
 import roles_clientes from '../helpers/roles';
 import routes from '../helpers/routes';
 import Suppliers from '../pages/Suppliers';
+import Products from '../pages/Products';
+import OrderDetails from '../pages/OrderDetails';
 
 
 export default function AppRouter() {
@@ -33,6 +35,12 @@ export default function AppRouter() {
             </Route>
             <Route exact path={routes.codeOtp} element={<PublicRoute />}>
                 <Route path={routes.codeOtp} element={<CodeOtp />}/>
+            </Route>
+            <Route exact path={routes.products} element={<PublicRoute />}>
+                <Route path={routes.products} element={<Products />}/>
+            </Route>
+            <Route exact path={routes.details} element={<PublicRoute />}>
+                <Route path={routes.details} element={<OrderDetails />}/>
             </Route>
             <Route exact path={routes.suppliers} element={<PublicRoute />}>
                 <Route path={routes.suppliers} element={<Suppliers />}/>

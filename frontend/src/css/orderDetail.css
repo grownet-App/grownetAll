@@ -1,0 +1,144 @@
+.details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.tittle-detail{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.details .arrow{
+    font-size: 1.5rem;
+    position: absolute;
+    right: 14rem;
+    top: 2.2rem;
+    color: var(--color-dark-blue);
+}
+.tittle-orderDetail{
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    font-size: 25px;
+    font-weight: 700;
+}
+.underline{
+    font-size: 20px;
+    font-weight: 600;
+    padding-bottom: 8px;
+    border-bottom: 1px solid;
+    margin-bottom: 10px !important;
+    margin-top: 1rem !important;
+}
+.details h3{
+    margin-bottom: 0px;
+    font-size: 18px;
+    padding-top: 2px;
+}
+.product-detail{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 7px;
+    align-items: center;
+}
+#trash{
+    margin-left: 8px;
+    font-size: 18px;
+    color: #B1B1B1;
+}
+.details p{
+    font-size: 17px;
+    color: #868686;
+    margin-bottom: 0px;
+}
+.total-detail{
+    background-color: #BBFACF;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.total-detail h2{
+    font-size: 18px;
+    font-weight: 700;
+}
+.details button{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+#tax-font{
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid;
+    border-style: none none dashed none;
+}
+
+.counter{
+    display: flex;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.04);
+    background-color: white;
+    border-radius: 45px;
+    align-items: center;
+    justify-content: space-around;
+}
+.counter button{
+    background-color: white;
+    border: none;
+    color: var(--color-green);
+    font-size: 20px;
+    padding: 0;
+    cursor: pointer;
+    margin: 0;
+    font-weight: 500;
+}
+#decrement{
+    padding: 5px 5px 5px 15px;
+    border-radius: 45px 0 0 45px;
+}
+#increment{
+    padding: 5px 15px 5px 5px;
+    border-radius: 0 45px 45px 0;
+}
+.counter input{
+    width: 40px;
+    padding: 0;
+    border-radius: 0px;
+    font-weight: 500;
+    background-color: white;
+    color: var(--color-dark-blue);
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+    text-align: center;
+    font-size: 18px;
+    padding: 0px;
+}
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+/*parte 2*/
+.data-shipping h3{
+    margin-bottom: 10px;
+}
+.data-shipping input{
+    margin-bottom: 10px;
+}
+/*imagen de hecho*/
+.order-succesful{
+    text-align: center;
+}
+.order-succesful h1{
+    font-weight: 700;
+    color: var(--color-blue-primary);
+    margin-top: 2rem;
+}
+.order-succesful p{
+    color: var(--color-dark-blue);
+}
+.order-succesful img{
+    width: 80%;
+}
