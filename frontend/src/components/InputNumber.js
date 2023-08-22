@@ -17,8 +17,8 @@ export default function InputNumber() {
         element.nextSibling.focus();
       }
     };
-    //console.log(otp.join(""))
-    //console.log(otp)
+    console.log(otp.join(""))
+    console.log(otp)
  
     return (
     <>
