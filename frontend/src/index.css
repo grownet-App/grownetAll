@@ -75,6 +75,7 @@ img{
   margin-right: 1.5rem;
   padding: 1.5rem;
   border-radius: 20px;
+  width: 330px;
 }
 .card-chat{
   display: inline-block;
@@ -122,6 +123,20 @@ img{
   border-radius: 100%;
   width: 40%;
   padding: 1rem;
+}
+input{
+  background-color: #F2F2F2;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  width: 350px;
+}
+textarea{
+  background-color: #F2F2F2;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  width: 350px;
 }
 .App{
   font-family: var(--poppins);

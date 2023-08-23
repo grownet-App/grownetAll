@@ -6,6 +6,8 @@ const routes = {
     codeOtp: "/codeOtp",
     account: '/account',
     orders: '/orders',
+    products: '/products',
+    details: '/details',
     order: (orderId) => (orderId ? `/order/:${orderId}` : '/order/:id'),
     providers: '/providers',
     restaurants: '/restaurants',

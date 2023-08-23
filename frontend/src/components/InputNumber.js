@@ -4,13 +4,12 @@ import css from "../css/otp.css";
 import { Navigate } from 'react-router-dom';
 import axios from "axios";
 
-export default function InputNumber() {
+export default function InputNumber(props) {
 
     const [otp, setOtp] = useState(new Array(4).fill(""));
-
     const handleChange = (element, index) => {
       if(isNaN(element.value))return false;
-      setOtp([...otp.map((d, idx) =>(idx === index) ? element.value : d)]);
+      props.setOtp2([...props.otp2.map((d, idx) =>(idx === index) ? element.value : d)]);
 
       //Focus next
       if(element.nextSibling){
@@ -23,18 +22,19 @@ export default function InputNumber() {
     return (
     <>
     {
-      otp.map((data, index) =>{
+      props.otp2.map((data, index) =>{
         return <input 
           className='input-otp' 
           type='text' 
           name='otp' 
           maxLength="1"
           key={index}
-          value={data}
+          /*value={data}*/
           onChange={e => handleChange(e.target, index)}
           onFocus={e => e.target.select()}
         />
       })
+  
     }</>
       
         

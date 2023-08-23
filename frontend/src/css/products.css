@@ -1,0 +1,163 @@
+/*Productos*/
+.products{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.elements{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.tittle-products{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.products .arrow{
+    font-size: 1.5rem;
+    position: absolute;
+    right: 15rem;
+    top: 1.5rem;
+}
+.tittle-products{
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 25px;
+    font-weight: 700;
+}
+/*Tarjeta producto*/
+.elements{
+    box-shadow: rgba(7, 33, 58, 0.12) 0px 0px 24px;
+    width: 370px;
+    display: flex;
+    padding: 1rem;
+    border-radius: 20px;
+    background-color: white;
+    z-index: 1;
+  }
+  .elements img{
+    width: 120px;
+    margin-right: 8px;
+    margin-left: 0px;
+  }
+  .titlle-products{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .heart-icon{
+    width: 2rem;
+    height: 2rem;
+    padding: 5px;
+  }
+  .elements p{
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--color-blue-primary);
+      margin-bottom: 5px;
+  }
+  .elements h1{
+    margin-bottom: 0px;
+    font-size: 25px;
+  }
+  .product-amount{
+    display: flex;
+    margin-top: 7px;
+  }
+  .product-amount .counter{
+    border: 1px solid #dee2e6;
+    margin-right: 6px;
+  }
+  .product-amount .counter input{
+    font-size: 17px;
+  }
+  .product-amount #increment{
+    padding: 5px 12px 5px 5px;
+  }
+  .product-amount #decrement{
+    padding: 5px 5px 5px 12px;
+  }
+  .form-select{
+    border-radius: 45px !important;
+    font-weight: 500 !important;
+    color: var(--color-dark-blue) !important;
+    font-size: 17px !important;
+  }
+  /*promo*/
+  .promo{
+    background-color: var(--background-light-blue);
+    width: 330px;
+    padding: 10px;
+    padding-top: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 0px 0px 20px 20px;
+    margin-top: -1rem;
+    z-index: 0;
+    pointer-events: auto;
+    margin-bottom: 15px;
+  }
+  .promo h4{
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .promo h5{
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .form-check-input{
+    vertical-align: 0px !important;
+    margin-top: 0px !important;
+  }
+  .form-check-input:checked{
+    background-color: var(--color-green) !important;
+    border-color: var(--color-green) !important;
+  }
+  /*Stepper*/
+  .counter{
+    display: flex;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.04);
+    background-color: white;
+    border-radius: 45px;
+    align-items: center;
+    justify-content: space-around;
+}
+.counter button{
+    background-color: white;
+    border: none;
+    color: var(--color-green);
+    font-size: 20px;
+    padding: 0;
+    cursor: pointer;
+    margin: 0;
+    font-weight: 500;
+}
+#decrement{
+    padding: 5px 5px 5px 15px;
+    border-radius: 45px 0 0 45px;
+}
+#increment{
+    padding: 5px 15px 5px 5px;
+    border-radius: 0 45px 45px 0;
+}
+.counter input{
+    width: 40px;
+    padding: 0;
+    border-radius: 0px;
+    font-weight: 500;
+    background-color: white;
+    color: var(--color-dark-blue);
+}
+input[type="number"]{
+    -moz-appearance: textfield;
+    text-align: center;
+    font-size: 18px;
+    padding: 0px;
+}
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
