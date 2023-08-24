@@ -1,12 +1,13 @@
-import NavigationMobile from "../components/NavigationMobile";
-export default function ProviderPage() {
+import NavigationMobile from "../../components/NavigationMobile";
+export default function ProvidersPage() {
     return (
         <>
             <div>
                 <h1>
-                    ProviderPage Unico
+                    Pedidos page
                 </h1>
             </div>
+          
             <NavigationMobile />
         </>
     )

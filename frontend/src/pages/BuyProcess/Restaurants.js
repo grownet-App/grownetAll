@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import css from "../css/restaurants.css";
-import { Icon } from '@iconify/react';
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import css from "../../css/restaurants.css";
 import axios from "axios";
-import Products from './Products';
 
 export default function Restaurants() {
-    const urlImg  ="http://5.161.211.8:88/storage/"
-  const endpoint = 'http://5.161.211.8:88/api/users/all';
+  const urlImg = "http://5.161.211.8:88/storage/";
+  const endpoint = "http://5.161.211.8:88/api/users/all";
   const [users, setUsers] = useState([]);
   useEffect(() => {
     getAllUsers();
@@ -22,18 +19,19 @@ export default function Restaurants() {
     }
   };
   return (
-    <section className='restaurants'>
-      <h1 className='tittle-restaurants'>Choose your restaurant</h1>
+    <section className="restaurants">
+      <h1 className="tittle-restaurants">Choose your restaurant</h1>
       {users.map((user) => (
-        <a className="bttn-categ" href='/login'>
+        <a className="bttn-categ" href="/login">
           <div className="text-categ" key={user.email}>
-            <h2>{user.names} {user.surnames}</h2>
+            <h2>
+              {user.names} {user.surnames}
+            </h2>
             <p>Address restaurant</p>
-          </div>  
-          <img src={urlImg + user.avatar}/>
+          </div>
+          <img src={urlImg + user.avatar} />
         </a>
       ))}
-
     </section>
   );
 }

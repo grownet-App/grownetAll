@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Nav, Navbar} from 'react-bootstrap';
 import { Icon } from '@iconify/react';
-import css from "../css/menu.css";
+import css from "./menu.css";
 
 export default function Menu() {
 

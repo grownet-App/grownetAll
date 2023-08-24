@@ -55,12 +55,6 @@
   color: var(--color-blue-primary);
   border: 1px solid var(--color-blue-primary);
 }
-
-.hola{
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 2rem;
-}
 img{
   width: 10rem;
 }

@@ -23,7 +23,6 @@ export default function Suppliers(props) {
             </div>*/
            }
            
-           
             <button className="bttn-categ" id='suppliers-categ'>
             {suppliers.filter(sup => sup.id === props.prove).map(filteredPerson => (
              <h2 className='text-supplier'>

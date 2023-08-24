@@ -1,65 +1,49 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from '../pages/HomePage';import Restaurants from '../pages/Restaurants';
-import LoginPage from '../pages/LoginPage';
-import CodeOtp from '../pages/CodeOtp';
-import RegisterPage from '../pages/RegisterPage';
-import AccountPage from '../pages/AccountPage';
-import ProvidersPage from '../pages/ProvidersPage';
-import ProviderPage from '../pages/ProviderPage';
-import TeamPage from '../pages/admin/TeamPage';
-import AdminProviders from '../pages/admin/AdminProviders'
-import NotFoundPage from '../pages/NotFoundPage';
-import OrdersPage from '../pages/OrdersPage';
-import OrderPage from '../pages/OrderPage';
-import PrivateRoute from './PrivateRoute';
-import PublicRoute from './PublicRoute';
+import { Route, Routes } from 'react-router-dom';
 import roles_clientes from '../helpers/roles';
 import routes from '../helpers/routes';
-import Suppliers from '../pages/Suppliers';
-import Products from '../pages/Products';
-import OrderDetails from '../pages/OrderDetails';
+import CodeOtp from '../pages/Authentication/CodeOtp';
+import LoginPage from '../pages/Authentication/LoginPage';
+import OrderDetails from '../pages/BuyProcess/OrderDetails';
+import HomePage from '../pages/HomePage';
+import NotFoundPage from '../pages/NotFoundPage';
+import Products from '../pages/BuyProcess/Products';
+import ProviderPage from '../pages/Temporal Juan/ProviderPage';
+import ProvidersPage from '../pages/Temporal Juan/ProvidersPage';
+import RegisterPage from '../pages/Authentication/RegisterPage';
+import Restaurants from '../pages/BuyProcess/Restaurants';
+import Suppliers from '../pages/BuyProcess/Suppliers';
+import AdminProviders from '../pages/admin/AdminProviders';
+import TeamPage from '../pages/admin/TeamPage';
+import PublicRoute from './PublicRoute';
 
 
 export default function AppRouter() {
     return (
-
-
         <Routes>
             <Route path={routes.landing} element={<HomePage />} exact />
-
             <Route exact path={routes.home} element={<PublicRoute />}>
                 <Route path={routes.home} element={<HomePage />} exact />
             </Route>
             <Route exact path={routes.restaurants} element={<PublicRoute />}>
-                <Route path={routes.restaurants} element={<Restaurants />}/>
+                <Route path={routes.restaurants} element={<Restaurants />} />
             </Route>
             <Route exact path={routes.codeOtp} element={<PublicRoute />}>
-                <Route path={routes.codeOtp} element={<CodeOtp />}/>
+                <Route path={routes.codeOtp} element={<CodeOtp />} />
             </Route>
             <Route exact path={routes.products} element={<PublicRoute />}>
-                <Route path={routes.products} element={<Products />}/>
+                <Route path={routes.products} element={<Products />} />
             </Route>
             <Route exact path={routes.details} element={<PublicRoute />}>
-                <Route path={routes.details} element={<OrderDetails />}/>
+                <Route path={routes.details} element={<OrderDetails />} />
             </Route>
             <Route exact path={routes.suppliers} element={<PublicRoute />}>
-                <Route path={routes.suppliers} element={<Suppliers />}/>
+                <Route path={routes.suppliers} element={<Suppliers />} />
             </Route>
             <Route exact path={routes.login} element={<PublicRoute />}>
                 <Route exact path={routes.login} element={<LoginPage />} />
             </Route>
             <Route exact path={routes.register} element={<PublicRoute />}>
                 <Route exact path={routes.register} element={<RegisterPage />} />
-            </Route>
-
-            <Route exact path={routes.account} element={<PublicRoute />}>
-                <Route exact path={routes.account} element={<AccountPage />} />
-            </Route>
-            <Route exact path={routes.orders} element={<PublicRoute />}>
-                <Route exact path={routes.orders} element={<OrdersPage />} />
-            </Route>
-            <Route exact path={routes.order()} element={<PublicRoute />}>
-                <Route exact path={routes.order()} element={<OrderPage />} />
             </Route>
             <Route exact path={routes.providers} element={<PublicRoute />}>
                 <Route exact path={routes.providers} element={<ProvidersPage />} />

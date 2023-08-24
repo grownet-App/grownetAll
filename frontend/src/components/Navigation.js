@@ -1,9 +1,7 @@
 import { Navbar, Nav } from 'react-bootstrap';
-
 import routes  from '../helpers/routes';
 import useAuth from '../auth/useAuth';
 import { NavLink } from 'react-router-dom';
-
 
 export default function Navigation() {
     const {logout} = useAuth();

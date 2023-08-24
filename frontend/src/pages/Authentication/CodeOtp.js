@@ -1,7 +1,7 @@
 import React from 'react';
-import css from "../css/otp.css";
-import logo_blancov2 from '../img/logo_blancov2.svg';
-import InputNumber from '../components/InputNumber';
+import css from "../../css/otp.css";
+import logo_blancov2 from '../../img/logo_blancov2.svg';
+import InputNumber from '../../components/InputNumber';
 import { useState, useEffect } from 'react';
 import axios from "axios";
 

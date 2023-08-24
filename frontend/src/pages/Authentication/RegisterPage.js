@@ -2,7 +2,7 @@ import { Container, Row, Col, Form, Button, FormGroup } from 'react-bootstrap';
 import { useState, } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+//TODO Reutilizar este código para el nuevo registro
 
 export default function RegisterPage() {
 

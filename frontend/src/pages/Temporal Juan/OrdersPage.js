@@ -1,4 +1,4 @@
-import NavigationMobile from "../components/NavigationMobile";
+import NavigationMobile from "../../components/NavigationMobile";
 import { Container, Row, Col, Form, Card, Button } from "react-bootstrap";
 import cssChat from "../css/chat.css";
 
