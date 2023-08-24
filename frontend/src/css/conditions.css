@@ -1,0 +1,10 @@
+.terms-conditions{
+    text-align: center;
+    margin: 2rem;
+    margin-top: 3rem;
+}
+.terms-conditions h1{
+    font-weight: 600;
+    color: var(--color-blue-primary);
+    margin-bottom: 15px;
+}
