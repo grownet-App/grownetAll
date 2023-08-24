@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useAuth from "../../auth/useAuth";
 import css from "../../css/login.css";
-import PhoneNumberValidation from "./PhoneNumberValidation.js";
+import PhoneNumberValidation from "./PhoneNumberValidation.jsx";
 
 function Login() {
   const [email, setEmail] = useState("");
