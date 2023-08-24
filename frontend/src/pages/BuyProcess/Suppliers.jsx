@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import React from "react";
-import CardSuppliers from "../../components/CardSuppliers.js";
-import Menu from "../../components/Menu/menu.js";
+import CardSuppliers from "../../components/CardSuppliers.jsx";
+import Menu from "../../components/Menu/menu.jsx";
 import css from "../../css/suppliers.css"
 
 export default function Suppliers(props) {
