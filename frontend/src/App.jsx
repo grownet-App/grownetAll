@@ -1,8 +1,7 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import AuthProvider from "./auth/AuthProvider";
+import Layout from "./Layout";
 import AppRouter from "./routers/AppRouter";
-import Layout from "./components/Layouts/Layout";
-
 
 function App() {
   return (
@@ -13,9 +12,8 @@ function App() {
             <AppRouter />
           </Layout>
         </AuthProvider>
-      </Router >
+      </Router>
     </div>
-
   );
 }
 
