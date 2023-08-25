@@ -19,7 +19,7 @@ import SettingsSuppliers from '../pages/Settings/SettingsSuppliers';
 import OrderInformation from '../pages/BuyProcess/OrderInformation';
 import OrderSuccessful from '../pages/BuyProcess/OrderSuccessful';
 import FAQ from '../pages/Settings/FAQ';
-import FirtsView from '../pages/BuyProcess/FirtsView';
+import FirstView from '../pages/BuyProcess/FirstView';
 import AddRestaurants from '../pages/Settings/AddRestaurants';
 import Chat from '../pages/Chat/Chat';
 import Record from '../pages/Record/Record';
@@ -34,8 +34,8 @@ export default function AppRouter() {
             <Route exact path={routes.home} element={<PublicRoute />}>
                 <Route path={routes.home} element={<HomePage />} exact />
             </Route>
-            <Route exact path={routes.firtsView} element={<PublicRoute />}>
-                <Route path={routes.firtsView} element={<FirtsView />} />
+            <Route exact path={routes.firstView} element={<PublicRoute />}>
+                <Route path={routes.firstView} element={<FirstView />} />
             </Route>
             <Route exact path={routes.addRestaurants} element={<PublicRoute />}>
                 <Route path={routes.addRestaurants} element={<AddRestaurants />} />
@@ -91,8 +91,8 @@ export default function AppRouter() {
             <Route exact path={routes.upcomingRecord} element={<PublicRoute />}>
                 <Route exact path={routes.upcomingRecord} element={<UpcomingRecord />} />
             </Route>
-            <Route exact path={routes.detailOrderPastupcomingRecord} element={<PublicRoute />}>
-                <Route exact path={routes.detailOrderPast} element={<DetailOrderPast />} />
+            <Route exact path={routes.detailsOrderPastupcomingRecord} element={<PublicRoute />}>
+                <Route exact path={routes.detailsOrderPast} element={<DetailOrderPast />} />
             </Route>
             <Route exact path={routes.reception} element={<PublicRoute />}>
                 <Route exact path={routes.reception} element={<Reception />} />

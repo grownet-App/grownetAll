@@ -4,7 +4,7 @@ const routes = {
     login: '/login',
     register: '/register',
     addRestaurants: '/addRestaurants',
-    firtsView: '/firtsView',
+    firstView: '/firstView',
     products: '/products',
     details: '/details',
     orderInformation: '/orderInformation',
