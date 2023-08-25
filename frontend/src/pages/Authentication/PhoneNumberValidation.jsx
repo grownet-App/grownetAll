@@ -8,6 +8,7 @@ import CodeOtp from "./CodeOtp";
 import css from "../../css/otp.css";
 import { Icon } from "@iconify/react";
 import Modal from "react-bootstrap/Modal";
+import { validationApiUrl } from "../../config/urls.config";
 import logo_blancov2 from "../../img/logo_blancov2.svg";
 
 function PhoneNumberValidation() {
@@ -54,9 +55,9 @@ function PhoneNumberValidation() {
     };
     console.log(state.form);
     console.log("numero enviado:", parseCountry, numero);
-    let url = "http://5.161.211.8:88/api/authentication/validateNumber";
+
     axios
-      .post(url, state.form)
+      .post(validationApiUrl, state.form)
       .then((response) => {
         console.log(response);
         if (response.data.flag === 1) {
