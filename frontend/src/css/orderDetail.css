@@ -140,9 +140,12 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     color: var(--color-dark-blue);
 }
 .order-succesful img{
-    width: 80%;
+    width: 70%;
     margin-top: 6rem;
 }
 .order-succesful .bttn{
     margin-left: 0;
+}
+.buttons-succesful{
+    margin-top: 2rem;
 }

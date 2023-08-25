@@ -22,7 +22,7 @@ export default function Restaurants() {
     <section className="restaurants">
       <h1 className="tittle-restaurants">Choose your restaurant</h1>
       {users.map((user) => (
-        <a className="bttn-categ" href="/login">
+        <a className="bttn-categ" href="/suppliers">
           <div className="text-categ" key={user.email}>
             <h2>
               {user.names} {user.surnames}

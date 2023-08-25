@@ -23,13 +23,13 @@ export default function Suppliers(props) {
             </div>*/
            }
            
-            <button className="bttn-categ" id='suppliers-categ'>
+            <a className="bttn-categ" id='suppliers-categ' href='/products'>
             {suppliers.filter(sup => sup.id === props.prove).map(filteredPerson => (
              <h2 className='text-supplier'>
             {filteredPerson.name}
             </h2>))}
                 <img src={img_suppliers} alt="logo-restaurant" className='img-suppliers'></img>
-            </button>
+            </a>
            
 
  </section>

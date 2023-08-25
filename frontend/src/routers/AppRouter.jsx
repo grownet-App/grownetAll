@@ -9,8 +9,6 @@ import Restaurants from '../pages/BuyProcess/Restaurants';
 import Suppliers from '../pages/BuyProcess/Suppliers';
 import HomePage from '../pages/HomePage';
 import NotFoundPage from '../pages/NotFoundPage';
-import ProviderPage from '../pages/Temporal Juan/ProviderPage';
-import ProvidersPage from '../pages/Temporal Juan/ProvidersPage';
 import AdminProviders from '../pages/admin/AdminProviders';
 import TeamPage from '../pages/admin/TeamPage';
 import PublicRoute from './PublicRoute';
@@ -24,6 +22,7 @@ import FAQ from '../pages/Settings/FAQ';
 import FirtsView from '../pages/BuyProcess/FirtsView';
 import AddRestaurants from '../pages/Settings/AddRestaurants';
 import Chat from '../pages/Chat/Chat';
+import Record from '../pages/Record/Record';
 import PastRecord from '../pages/Record/PastRecord/PastRecord';
 import UpcomingRecord from '../pages/Record/UpcomingRecord/UpcomingRecord';
 import DetailOrderPast from '../pages/Record/PastRecord/DetailOrderPast';
@@ -65,9 +64,6 @@ export default function AppRouter() {
             <Route exact path={routes.register} element={<PublicRoute />}>
                 <Route exact path={routes.register} element={<RegisterPage />} />
             </Route>
-            <Route exact path={routes.providers} element={<PublicRoute />}>
-                <Route exact path={routes.providers} element={<ProvidersPage />} />
-            </Route>
             <Route exact path={routes.settings} element={<PublicRoute />}>
                 <Route exact path={routes.settings} element={<Settings />} />
             </Route>
@@ -86,6 +82,9 @@ export default function AppRouter() {
             <Route exact path={routes.chat} element={<PublicRoute />}>
                 <Route exact path={routes.chat} element={<Chat />} />
             </Route>
+            <Route exact path={routes.record} element={<PublicRoute />}>
+                <Route exact path={routes.record} element={<Record />} />
+            </Route>
             <Route exact path={routes.pastRecord} element={<PublicRoute />}>
                 <Route exact path={routes.pastRecord} element={<PastRecord />} />
             </Route>
@@ -98,17 +97,6 @@ export default function AppRouter() {
             <Route exact path={routes.reception} element={<PublicRoute />}>
                 <Route exact path={routes.reception} element={<Reception />} />
             </Route>
-            <Route exact path={routes.provider()} element={<PublicRoute />}>
-                <Route exact path={routes.provider()} element={<ProviderPage />} />
-            </Route>
-            <Route exact path={routes.admin.team} element={<PublicRoute hasRole={roles_clientes.admin} />}>
-                <Route exact path={routes.admin.team} element={<TeamPage />} />
-            </Route>
-            <Route exact path={routes.admin.providersAdmin} element={<PublicRoute hasRole={roles_clientes.admin} />}>
-                <Route exact path={routes.admin.providersAdmin} element={<AdminProviders />} />
-            </Route>
-            
-
             <Route path="*" element={<NotFoundPage />} />
         </Routes>
 

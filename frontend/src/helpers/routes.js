@@ -14,6 +14,7 @@ const routes = {
     settingsSuppliers: '/settingsSuppliers',
     FAQ: '/FAQ',
     tAndC: '/tAndC',
+    record: '/record',
     pastRecord: '/pastRecord',
     detailsOrderPast: '/detailsOrderPast',
     reception: '/reception',

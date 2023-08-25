@@ -9,9 +9,9 @@ export default function OrderSuccessful() {
         <img src={img_succesful} />
         <h1>Succesful!</h1>
         <p>Your order is successful</p>
-        <div>
-          <button className="bttn btn-primary">View your orders</button>
-          <button className="bttn btn-outline">Re-order</button>
+        <div className="buttons-succesful">
+          <a className="bttn btn-primary" href="/record">View your orders</a>
+          <a className="bttn btn-outline" href="/restaurants">Re-order</a>
         </div>
     </section>
   );
