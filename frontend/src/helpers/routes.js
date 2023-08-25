@@ -7,6 +7,8 @@ const routes = {
     products: '/products',
     details: '/details',
     settings: '/settings',
+    settingsRestaurants: '/settingsRestaurants',
+    settingsSuppliers: '/settingsSuppliers',
     tAndC: '/tAndC',
     order: (orderId) => (orderId ? `/order/:${orderId}` : '/order/:id'),
     providers: '/providers',

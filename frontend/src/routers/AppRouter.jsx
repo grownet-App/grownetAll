@@ -16,7 +16,8 @@ import TeamPage from '../pages/admin/TeamPage';
 import PublicRoute from './PublicRoute';
 import Settings from '../pages/Settings/Settings';
 import TermsAndConditions from '../pages/TermsAndConditions'
-
+import SettingsRestaurants from '../pages/Settings/SettingsRestaurants';
+import SettingsSuppliers from '../pages/Settings/SettingsSuppliers';
 export default function AppRouter() {
     return (
         <Routes>
@@ -47,6 +48,12 @@ export default function AppRouter() {
             </Route>
             <Route exact path={routes.settings} element={<PublicRoute />}>
                 <Route exact path={routes.settings} element={<Settings />} />
+            </Route>
+            <Route exact path={routes.settingsRestaurants} element={<PublicRoute />}>
+                <Route exact path={routes.settingsRestaurants} element={<SettingsRestaurants />} />
+            </Route>
+            <Route exact path={routes.settingsSuppliers} element={<PublicRoute />}>
+                <Route exact path={routes.settingsSuppliers} element={<SettingsSuppliers />} />
             </Route>
             <Route exact path={routes.tAndC} element={<PublicRoute />}>
                 <Route exact path={routes.tAndC} element={<TermsAndConditions />} />

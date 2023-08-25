@@ -9,13 +9,13 @@ export default function Menu() {
         <Navbar>
         <Container>
         <Nav className="me-auto">
-            <Nav.Link className="icons" href="#settings">
+            <Nav.Link className="icons" href="/settings">
                     <Icon  icon="carbon:settings"> </Icon>
                     <Icon className="icon-active" icon="iconamoon:settings-fill"/>
                     <p>Settings</p>
                  
             </Nav.Link>
-            <Nav.Link className="icons" href="#order">
+            <Nav.Link className="icons" href="/restaurants">
                     <Icon className="" icon="streamline:shopping-cart-basket-2-shopping-basket"/>
                     <Icon className="icon-active2" icon="teenyicons:basket-solid" />
                     <p>Order</p>
