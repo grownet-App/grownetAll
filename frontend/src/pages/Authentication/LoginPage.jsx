@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useAuth from "../../auth/useAuth";
 import css from "../../css/login.css";
 import PhoneNumberValidation from "./PhoneNumberValidation.jsx";
+import { loginApiUrl } from "../../config/urls.config";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -19,11 +20,11 @@ function Login() {
     password: password,
   };
   const { login } = useAuth();
-  /*   const handleLogin = async () => {
+    /* const handleLogin = async () => {
   
       try {
   
-        const response = await axios.post('http://localhost:5000/login', { email, password });
+        const response = await axios.post(loginApiUrl, { email, password });
         const token = response.data.token;
         console.log(response);
         console.log({ email });
