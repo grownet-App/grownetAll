@@ -19,7 +19,7 @@ export default function Products() {
   return (
     <section className="products">
       <div className="tittle-products">
-        <a href="">
+        <a href="/suppliers">
           <Icon
             href="https://www.google.com"
             src="google.com"

@@ -49,7 +49,7 @@ export default function Settings() {
         </Accordion.Item>
       </Accordion>
       <div className="settings-options">
-        <a className="bttn" id="setting-button">
+        <a className="bttn" id="setting-button" href="/FAQ">
           <h2>FAQ</h2>
           <Icon className="icon-arrow" icon="ep:arrow-right-bold" />
         </a>
