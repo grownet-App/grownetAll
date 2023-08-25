@@ -20,12 +20,12 @@ export default function Menu() {
                     <Icon className="icon-active2" icon="teenyicons:basket-solid" />
                     <p>Order</p>
             </Nav.Link>
-            <Nav.Link className="icons" href="#record">
+            <Nav.Link className="icons" href="/record">
                     <Icon className="" icon="basil:invoice-outline"/>
                     <Icon className="icon-active3" icon="basil:invoice-solid" />
                     <p>Record</p>
             </Nav.Link>
-            <Nav.Link className="icons" href="#chat">
+            <Nav.Link className="icons" href="/chat">
                     <Icon className="" icon="solar:chat-round-dots-linear"/>
                     <Icon className="icon-active4" icon="solar:chat-round-bold" />
                     <p>Chat</p> 
