@@ -30,7 +30,7 @@
 /*Tarjeta producto*/
 .elements{
     box-shadow: rgba(7, 33, 58, 0.12) 0px 0px 24px;
-    width: 370px;
+    width: 350px;
     display: flex;
     padding: 1rem;
     border-radius: 20px;
@@ -66,24 +66,31 @@
     display: flex;
     margin-top: 7px;
   }
+  .product-amount #my-input{
+    width: 30px;
+  }
   .product-amount .counter{
     border: 1px solid #dee2e6;
-    margin-right: 6px;
+    margin-right: 5px;
   }
   .product-amount .counter input{
     font-size: 17px;
+    margin-right: 0px;
   }
   .product-amount #increment{
-    padding: 5px 12px 5px 5px;
+    padding: 5px 10px 5px 5px;
   }
   .product-amount #decrement{
-    padding: 5px 5px 5px 12px;
+    padding: 5px 5px 5px 10px;
   }
   .form-select{
     border-radius: 45px !important;
     font-weight: 500 !important;
     color: var(--color-dark-blue) !important;
     font-size: 17px !important;
+  }
+  .products option{
+    color: var(--color-dark-blue);
   }
   /*promo*/
   .promo{
@@ -116,4 +123,24 @@
     background-color: var(--color-green) !important;
     border-color: var(--color-green) !important;
   }
- 
+  @media screen and (max-width: 350px) {
+    .elements{
+     width: 90%;
+   }
+   .product-amount #my-input{
+     width: 20px;
+   }
+   .elements img{
+     width: 25%;
+     margin-right: 5px;
+   }
+   .promo{
+     width: 280px
+   }
+   .products .arrow{
+    position: absolute;
+    right: 13.8rem;
+    top: 1.5rem;
+  }
+
+ }

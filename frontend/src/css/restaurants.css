@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     justify-content: center;
 }
 .bttn-categ{
-    width: 360px;
+    width: 350px;
 }
 .tittle-restaurants{
     margin-top: 2rem;
@@ -31,4 +32,19 @@
 }
 .restaurants img{
     margin-left: 1rem;
+}
+@media screen and (max-width: 345px) {
+    .bttn-categ{
+        width: 90%;
+    }
+    .text-categ{
+        margin-left: 15px;
+    }
+    .text-categ h2{
+        font-size: 22px;
+    }
+    .restaurants img{
+        margin-right: 15px;
+        width: 60%;
+    }
 }

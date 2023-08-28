@@ -41,7 +41,7 @@ export default function HomePage() {
       </Carousel.Item>
     </Carousel>
         <div className="buttons_login">
-            <Link className="bttn btn-secundary" to="/login">Register</Link>
+            <Link className="bttn btn-secundary" to="/register">Register</Link>
             <Link className="bttn btn-white" to="/login">Login</Link>
             
         </div>

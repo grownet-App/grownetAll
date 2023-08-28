@@ -40,7 +40,7 @@ function Login() {
       <div className="login-form">
         <PhoneNumberValidation className="number-form" />
         <h2 href="">
-          Don't have an account? <a href="/restaurants">Sign Up</a>
+          Don't have an account? <a href="/register">Sign Up</a>
         </h2>
       </div>
     </section>
@@ -48,4 +48,3 @@ function Login() {
 }
 
 export default Login;
-/*<button className="bttn btn-secundary" onClick={() => login(userCredentials)}>Let’s Begin</button>*/
