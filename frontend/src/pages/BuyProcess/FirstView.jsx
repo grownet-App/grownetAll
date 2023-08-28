@@ -10,7 +10,7 @@ export default function FirtsView() {
             <h1>You don't have restaurants</h1>
             <p>Add your restaurants to continue</p>
             <a className="bttn btn-primary" href='addRestaurants' id='bttn-restaurant'>
-                <Icon className="icon_plus" icon="simple-line-icons:plus" />Add restaurant
+                <Icon className="icon-plus" icon="simple-line-icons:plus" />Add restaurant
             </a>
         </section> 
     );

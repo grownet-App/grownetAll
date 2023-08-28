@@ -4,18 +4,11 @@ import Form from "react-bootstrap/Form";
 import css from "../../css/products.css";
 import Stepper from "../../components/Stepper/Stepper";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
+import Favorites from "../../components/Favorites";
 
 export default function Products() {
-  const [isFavorite, setIsFavorite] = useState(false);
   const [counter, setCounter] = useState(0);
-  const addFavorite = () => {
-    console.log("Agrego a favoritos");
-    setIsFavorite(true);
-  };
-  const removeFavorite = () => {
-    console.log("Removio de favoritos");
-    setIsFavorite(false);
-  };
+  
   return (
     <section className="products">
       <div className="tittle-products">
@@ -34,14 +27,7 @@ export default function Products() {
         <div>
           <div className="titlle-products">
             <h1>Avocado</h1>
-            <Icon
-              className="heart-icon"
-              icon={isFavorite ? "ph:heart-fill" : "ph:heart"}
-              onClick={isFavorite ? removeFavorite : addFavorite}
-              color="#62C471"
-              size={35}
-              underlayColor="transparent"
-            ></Icon>
+            <Favorites/>
           </div>
           <p>GBP $12</p>
           <div className="product-amount">

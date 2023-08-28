@@ -2,7 +2,6 @@ import React from "react";
 import css from "../../css/settings.css";
 import { Icon } from "@iconify/react";
 import Accordion from "react-bootstrap/Accordion";
-
 export default function Settings() {
   return (
     <section className="settings">

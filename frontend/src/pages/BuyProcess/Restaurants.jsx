@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import css from "../../css/restaurants.css";
 import axios from "axios";
+import { Icon } from "@iconify/react";
 
 export default function Restaurants() {
   const urlImg = "http://5.161.211.8:88/storage/";
@@ -32,6 +33,7 @@ export default function Restaurants() {
           <img src={urlImg + user.avatar} />
         </a>
       ))}
+      <button className="bttn btn-primary"><Icon icon="simple-line-icons:plus" className="icon-plus" />Add restaurants</button>
     </section>
   );
 }
