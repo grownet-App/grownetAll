@@ -17,7 +17,7 @@ export default function OrderInformation() {
         <h1 className="tittle-orderDetail">Order detail</h1>
       </div>
         <div className="data-shipping">
-            <h3>Address</h3>
+            <h3 id="text-data-shipping">Address</h3>
             <input></input>
             <h3>Deliver</h3>
             <input type="date"></input>

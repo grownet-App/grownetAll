@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: center;
     Height: 100vh;
+    text-align: center;
 }
 .login-form{
     margin-top: 3rem;
