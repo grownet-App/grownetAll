@@ -33,7 +33,10 @@ export default function Restaurants() {
           <img src={urlImg + user.avatar} />
         </a>
       ))}
-      <button className="bttn btn-primary"><Icon icon="simple-line-icons:plus" className="icon-plus" />Add restaurants</button>
+      <a className="bttn btn-primary" href="addRestaurants"id="bttn-restaurant">
+        <Icon className="icon-plus" icon="simple-line-icons:plus" />
+        Add restaurant
+      </a>
     </section>
   );
 }

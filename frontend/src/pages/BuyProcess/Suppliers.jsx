@@ -22,7 +22,10 @@ export default function Suppliers(props) {
       <CardSuppliers prove={2}></CardSuppliers>
       <CardSuppliers prove={3}></CardSuppliers>
       <CardSuppliers prove={4}></CardSuppliers>
-      <button className="bttn btn-primary"><Icon icon="simple-line-icons:plus" className="icon-plus" />Add suppliers</button>
+      <a className="bttn btn-primary" href="settingsSuppliers"id="bttn-restaurant">
+        <Icon className="icon-plus" icon="simple-line-icons:plus" />
+        Add suppliers
+      </a>
       <Menu />
     </section>
   );
