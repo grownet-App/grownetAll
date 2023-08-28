@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import css from "../../css/restaurants.css";
 import axios from "axios";
+import Menu from "../../components/Menu/Menu";
 
 export default function Restaurants() {
   const urlImg = "http://5.161.211.8:88/storage/";

@@ -21,7 +21,6 @@ const routes = {
     upcomingRecord: '/upcomingRecord',
     chat: '/chat',
     order: (orderId) => (orderId ? `/order/:${orderId}` : '/order/:id'),
-    providers: '/providers',
     restaurants: '/restaurants',
     suppliers: '/suppliers',
     provider: (providerId) => (providerId ? `/provider/:${providerId}` : '/provider/:id'),
