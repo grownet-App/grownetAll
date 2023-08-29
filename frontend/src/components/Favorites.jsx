@@ -1,25 +1,18 @@
-import { Icon } from "@iconify/react";
-import React, { useState } from "react";
+import React from "react";
+import { useFavoritesStore } from "../store/favoritesStore";
+import ProductCard from "./ProductCard";
 
-export default function Favorites(props) {
-  const [isFavorite, setIsFavorite] = useState(false);
+export default function Favorites() {
+  const { favorites } = useFavoritesStore();
 
-  const addFavorite = () => {
-    console.log("Agrego a favoritos");
-    setIsFavorite(true);
-  };
-  const removeFavorite = () => {
-    console.log("Removio de favoritos");
-    setIsFavorite(false);
-  };
   return (
-    <Icon
-      className="heart-icon"
-      icon={isFavorite ? "ph:heart-fill" : "ph:heart"}
-      onClick={isFavorite ? removeFavorite : addFavorite}
-      color="#62C471"
-      size={35}
-      underlayColor="transparent"
-    ></Icon>
+    <div className="products">
+      <p>You have {favorites.length} favorite products: </p>
+      <div className="favorite-items">
+        {favorites.map((id) => (
+          <ProductCard id={id} />
+        ))}
+      </div>
+    </div>
   );
 }
