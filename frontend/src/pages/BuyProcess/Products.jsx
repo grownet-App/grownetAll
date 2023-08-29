@@ -1,14 +1,17 @@
-import React, { useState } from "react";
 import { Icon } from "@iconify/react";
-import Form from "react-bootstrap/Form";
+import React, { useState } from "react";
 import css from "../../css/products.css";
-import Stepper from "../../components/Stepper/Stepper";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
 import Favorites from "../../components/Favorites";
+import ProductCard from "../../components/ProductCard";
 
 export default function Products() {
-  const [counter, setCounter] = useState(0);
-  
+  const [showFavorites, setShowFavorites] = useState(false);
+
+  const toggleShowFavorites = () => {
+    setShowFavorites(!showFavorites);
+  };
+
   return (
     <section className="products">
       <div className="tittle-products">
@@ -22,34 +25,24 @@ export default function Products() {
         </a>
         <h1 className="tittle-products">Make your order</h1>
       </div>
-      <div className="elements">
-        <img src="https://images.heb.com/is/image/HEBGrocery/002599549-1" />
-        <div>
-          <div className="titlle-products">
-            <h1>Avocado</h1>
-            <Favorites/>
-          </div>
-          <p>GBP $12</p>
-          <div className="product-amount">
-            <Stepper counter={counter} setCounter={setCounter} />
-            <Form.Select
-              aria-label="Default select example"
-              placeholder="Choose the quantity"
-            >
-              <option value="1">Each</option>
-              <option value="2">Box</option>
-              <option value="3">Kg</option>
-            </Form.Select>
-          </div>
-        </div>
-      </div>
 
-      <div className="promo">
-        <h4>Promo price</h4>
-        <h5>$20.9 Bag</h5>
-        <Form.Check aria-label="option 1" />
-      </div>
-      <CategoriesMenu />
+      {showFavorites ? (
+        <Favorites />
+      ) : (
+        <>
+          <ProductCard id={10} />
+          <ProductCard id={11} />
+          <ProductCard id={12} />
+          <ProductCard id={13} />
+          <ProductCard id={14} />
+          <ProductCard id={15} />
+          <ProductCard id={16} />
+        </>
+      )}
+      <CategoriesMenu
+        showFavorites={showFavorites}
+        toggleShowFavorites={toggleShowFavorites}
+      />
     </section>
   );
 }
