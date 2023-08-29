@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Record() {
     return(
-        <section className='add-restaurants' >
+        <section className='' >
             <h1>
                 Record
             </h1>

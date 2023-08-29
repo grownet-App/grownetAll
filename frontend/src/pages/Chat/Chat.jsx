@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Chat() {
     return(
-        <section className='add-restaurants' >
+        <section className='' >
             <h1>Chat</h1>
         </section> 
     );

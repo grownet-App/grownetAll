@@ -1,0 +1,39 @@
+.faq{
+    text-align: center;
+    padding: 2rem;
+}
+.faq img{
+    width: 20%;
+}
+.accordion-faq{
+    margin-top: 2rem;
+}
+.faq h1{
+    margin-bottom: 2rem;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-dark-blue);
+}
+.faq .accordion{
+    margin-bottom: 5rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.faq .accordion-item{
+    /*border: none;*/
+}
+.faq .accordion-button{
+    font-weight: 500;
+}
+.faq .accordion-body{
+    text-align: left;
+}
+.faq .accordion-button:not(.collapsed) {
+    background-color: var(--background-light-blue) !important;
+}
+@media screen and (max-width: 900px) {
+    .faq img{
+        width: 70%;
+    }
+}
