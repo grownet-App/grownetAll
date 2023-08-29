@@ -34,7 +34,7 @@ export default function ProductCard({ id }) {
                 onClick={handleToggleFavorite}
                 color="#62C471"
                 size={35}
-                underlayColor="transparent"
+                underlaycolor="transparent"
               ></Icon>
             </div>
           </div>

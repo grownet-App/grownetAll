@@ -10,7 +10,7 @@ export default function Favorites() {
       <p>You have {favorites.length} favorite products: </p>
       <div className="favorite-items">
         {favorites.map((id) => (
-          <ProductCard id={id} />
+          <ProductCard key={id} id={id} />
         ))}
       </div>
     </div>
