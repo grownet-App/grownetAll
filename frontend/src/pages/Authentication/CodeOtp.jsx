@@ -30,8 +30,8 @@ export default function CodeOtp(props) {
     let otpNumber = otp.join("");
     const state = {
       form: {
-        user: props.idUsuario,
-        codigo: otpNumber,
+        telephone: id,
+        code: otpNumber,
       },
       error: false,
       errorMsg: "",

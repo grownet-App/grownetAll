@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Nav, Navbar} from 'react-bootstrap';
 import { Icon } from '@iconify/react';
 import css from "./menu.css";
+import { Link } from "react-router-dom"
 
 export default function Menu() {
 
@@ -9,13 +10,14 @@ export default function Menu() {
         <Navbar>
         <Container>
         <Nav className="me-auto">
-            <Nav.Link className="icons" href="/settings">
+            <Nav.Link className="icons">
+                <Link to="/settings">
                     <Icon  icon="carbon:settings"> </Icon>
                     <Icon className="icon-active" icon="iconamoon:settings-fill"/>
                     <p>Settings</p>
-                 
+                 </Link>
             </Nav.Link>
-            <Nav.Link className="icons" href="/restaurants">
+            <Nav.Link className="icons" href="/suppliers">
                     <Icon className="" icon="streamline:shopping-cart-basket-2-shopping-basket"/>
                     <Icon className="icon-active2" icon="teenyicons:basket-solid" />
                     <p>Order</p>

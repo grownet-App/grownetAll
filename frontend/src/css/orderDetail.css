@@ -97,9 +97,6 @@
     color: var(--color-blue-primary);
     margin-top: 2rem;
 }
-.order-succesful p{
-    color: var(--color-dark-blue);
-}
 .order-succesful img{
     width: 20%;
     margin-top: 6rem;

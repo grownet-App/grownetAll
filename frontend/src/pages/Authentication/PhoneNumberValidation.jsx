@@ -12,13 +12,13 @@ import { validationApiUrl } from "../../config/urls.config";
 import logo_blancov2 from "../../img/logo_blancov2.svg";
 
 function PhoneNumberValidation() {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [valid, setValid] = useState(true);
   const [country, setCountry] = useState("");
   const [showOtp, setShowOtp] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [userId, setUserId] = useState("");
+  //const [userId, setUserId] = useState("");
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -47,8 +47,8 @@ function PhoneNumberValidation() {
     console.log(numero);
     const state = {
       form: {
-        indicador: parseCountry,
-        numero: numero,
+        countrie: parseCountry,
+        telephone: numero,
       },
       error: false,
       errorMsg: "",
@@ -64,8 +64,8 @@ function PhoneNumberValidation() {
           setShowOtp(true);
           handleShow(false);
           setShowAlert(false);
-          setUserId(response.data.users);
-          console.log(userId);
+          setPhoneNumber(response.data.users);
+          console.log(PhoneNumber);
         } else {
           setShowAlert(true);
           handleShow(false);
@@ -78,7 +78,7 @@ function PhoneNumberValidation() {
   return (
     <Container className="text-center">
       {showOtp ? (
-        <CodeOtp idUsuario={userId}></CodeOtp>
+        <CodeOtp idUsuario={PhoneNumber}></CodeOtp>
       ) : (
         <>
           <img className="img-login" src={logo_blancov2} alt="logo-Grownet" />

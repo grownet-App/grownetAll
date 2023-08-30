@@ -10,8 +10,8 @@ export default function CategoriesMenu({ showFavorites, toggleShowFavorites }) {
         <div className="carousel-categ">
           {showFavorites ? (
             <button className="card-products" onClick={toggleShowFavorites}>
-              <img src={broccoli_img} />
-              <h6>All Products</h6>
+              <Icon icon="fluent-emoji:basket" className="fav"/>
+              <h6>All</h6>
             </button>
           ) : (
             <button className="card-products" onClick={toggleShowFavorites}>

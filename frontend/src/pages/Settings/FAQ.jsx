@@ -2,17 +2,18 @@ import React from "react";
 import css from "../../css/faq.css";
 import Accordion from "react-bootstrap/Accordion";
 import Menu from "../../components/Menu/Menu";
-import grownet_icon from "../../img/grownet_icon.png"
+import fav_icon from "../../img/fav_icon.png"
+import { Icon } from '@iconify/react';
 
 export default function FAQ() {
   return (
     <section className="faq">
-      <img src={grownet_icon} alt="" />
+      <img src={fav_icon} alt="" />
       <div className="accordion-faq">
-        <h1>Do you need assistance?</h1>
+        <h1>How can <span className="span-fqa">we help you?</span></h1>
         <Accordion className="" defaultActiveKey={["0"]} alwaysOpen>
           <Accordion.Item eventKey="0">
-            <Accordion.Header>Accordion Item?</Accordion.Header>
+            <Accordion.Header><Icon icon="octicon:question-24" className="question-icon"/>Accordion Item?</Accordion.Header>
             <Accordion.Body>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut

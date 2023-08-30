@@ -44,6 +44,7 @@
 .fav {
   font-size: 70px;
   color: var(--color-green);
+  z-index: 1;
 }
 .card-products h6 {
   font-weight: 600;

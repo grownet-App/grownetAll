@@ -6,23 +6,19 @@
     width: 20%;
 }
 .accordion-faq{
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 .faq h1{
     margin-bottom: 2rem;
-    font-size: 20px;
-    font-weight: 500;
-    text-align: left;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--color-dark-blue);
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
 }
 .faq .accordion{
     margin-bottom: 5rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-.faq .accordion-item{
-    /*border: none;*/
-}
+
 .faq .accordion-button{
     font-weight: 500;
 }
@@ -30,10 +26,18 @@
     text-align: left;
 }
 .faq .accordion-button:not(.collapsed) {
-    background-color: var(--background-light-blue) !important;
+    background-color: var(--background-light-blue);
+}
+.span-fqa{
+    color: var(--color-blue-primary);
+}
+.question-icon{
+    font-size: 22px;
+    color: var(--color-green);
+    margin-right: 10px;
 }
 @media screen and (max-width: 900px) {
     .faq img{
-        width: 70%;
+        width: 60%;
     }
 }

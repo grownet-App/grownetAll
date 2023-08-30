@@ -2,8 +2,11 @@ import React from "react";
 import css from "../../css/settings.css";
 import { Icon } from "@iconify/react";
 import Accordion from "react-bootstrap/Accordion";
+import Menu from "../../components/Menu/Menu";
+
 export default function Settings() {
   return (
+  <>
     <section className="settings">
       <h1>Settings</h1>
       <div className="saludo">
@@ -61,5 +64,7 @@ export default function Settings() {
         <Icon icon="solar:logout-linear" className="icon-logout" /> Log out
       </button>
     </section>
+    <Menu/>
+  </>
   );
 }
