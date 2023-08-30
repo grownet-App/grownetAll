@@ -1,0 +1,45 @@
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .search-form {
+    display: flex;
+    background-color: white;
+    border: 1px solid #4FC0D0;
+    align-items: center;
+    height: 2.75rem;
+    border-radius: 1.875rem;
+  }
+  
+  .search-input {
+    flex: 1;
+    font-size: 0.875rem;
+    border: none;
+    border-radius: 1.875rem;
+    padding: 0.5rem 1rem;
+    outline: none;
+  }
+  
+  .search-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .search-icon {
+    height: 1.75rem;
+    padding: 0.5rem;
+    color: #4FC0D0;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .search-icon:hover {
+    transform: scale(1.25);
+  }
+  

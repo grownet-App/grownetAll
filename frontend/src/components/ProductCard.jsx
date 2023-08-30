@@ -1,8 +1,8 @@
+import { Icon } from "@iconify/react";
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import css from "../css/products.css";
-import { Icon } from "@iconify/react";
 import Stepper from "../components/Stepper/Stepper";
+import "../css/products.css";
 import { useFavoritesStore } from "../store/favoritesStore";
 
 export default function ProductCard({ id }) {
