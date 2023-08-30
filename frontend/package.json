@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@iconify/icons-eva": "^1.2.6",
+    "@iconify/icons-heroicons-outline": "^1.2.5",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "bootstrap": "^5.3.0",
