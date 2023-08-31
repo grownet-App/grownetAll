@@ -36,14 +36,15 @@ function PhoneNumberValidation() {
     console.log(phoneNumberPattern);
     return phoneNumberPattern.test(phoneNumber);
   };
-
+  
+  //TODO insertar variables dentro de funcion enviardata cuando se cambie la prop que envio a codeOtp
+  let phone = PhoneNumber;
+  let phoneNumberClean = phone.split(country);
+  let parseCountry = parseInt(country);
+  let numero = parseInt(phoneNumberClean[1]);
   const enviarData = (e) => {
     e.preventDefault();
 
-    let phone = PhoneNumber;
-    let phoneNumberClean = phone.split(country);
-    let parseCountry = parseInt(country);
-    let numero = parseInt(phoneNumberClean[1]);
     console.log(numero);
     const state = {
       form: {
@@ -59,13 +60,13 @@ function PhoneNumberValidation() {
     axios
       .post(validationApiUrl, state.form)
       .then((response) => {
-        console.log(response);
+        console.log('This is my response:' + response);
         if (response.data.flag === 1) {
           setShowOtp(true);
           handleShow(false);
           setShowAlert(false);
-          setPhoneNumber(response.data.users);
-          console.log(PhoneNumber);
+          setPhoneNumber(PhoneNumber);
+          console.log('Check this phonenumber:' + numero + '  ' + PhoneNumber);
         } else {
           setShowAlert(true);
           handleShow(false);
@@ -78,7 +79,8 @@ function PhoneNumberValidation() {
   return (
     <Container className="text-center">
       {showOtp ? (
-        <CodeOtp idUsuario={PhoneNumber}></CodeOtp>
+        /* TODO idUsuario={PhoneNumber}  */
+        <CodeOtp idUsuario={numero}></CodeOtp>
       ) : (
         <>
           <img className="img-login" src={logo_blancov2} alt="logo-Grownet" />
