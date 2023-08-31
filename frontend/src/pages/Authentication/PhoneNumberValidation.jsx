@@ -60,11 +60,7 @@ function PhoneNumberValidation() {
     axios
       .post(validationApiUrl, state.form)
       .then((response) => {
-<<<<<<< HEAD
-        console.log("holaaa" + response);
-=======
         console.log('This is my response:' + response);
->>>>>>> 1077479ab36ea2a4a255ba836eaeca8d6a8e5bea
         if (response.data.flag === 1) {
           setShowOtp(true);
           handleShow(false);
@@ -118,7 +114,7 @@ function PhoneNumberValidation() {
             <Icon className="error" icon="pajamas:error" />
             <h1>We apologize</h1>
             <p>We didn't find the mobile number registered</p>
-            <p id="number-phone">3214631125</p>
+            <p id="number-phone">{"+ " + country + " " + numero}</p>
             <a onClick={handleClose} id="close">
               Change mobile number
             </a>

@@ -9,6 +9,8 @@ import logo_blancov2 from "../../img/logo_blancov2.svg";
 export default function CodeOtp(props) {
   const [seconds, setSeconds] = useState(20);
   const [show, setShow] = useState(false);
+  const { history } = props
+
   console.log("hola"+props.idUsuario);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,6 +45,9 @@ export default function CodeOtp(props) {
         console.log(response);
         console.log(response.data);
         console.log(state.form)
+        if (response.data.flag === 1) {
+          history.push('/restaurants')
+        } 
       })
       .catch(function (error) {
         console.log(error);
@@ -70,6 +75,7 @@ export default function CodeOtp(props) {
         ) : (
           <h2>Wait for {seconds} seconds</h2>
         )}
+        
       </form>
     </section>
   );
