@@ -59,7 +59,7 @@ function PhoneNumberValidation() {
     axios
       .post(validationApiUrl, state.form)
       .then((response) => {
-        console.log(response);
+        console.log("holaaa" + response);
         if (response.data.flag === 1) {
           setShowOtp(true);
           handleShow(false);
@@ -75,6 +75,7 @@ function PhoneNumberValidation() {
         console.log(error);
       });
   };
+  console.log("Este es el celular registrado: " + PhoneNumber)
   return (
     <Container className="text-center">
       {showOtp ? (
@@ -87,11 +88,12 @@ function PhoneNumberValidation() {
               <label className="text-form">
                 <p>Enter your mobile number:</p>
                 <PhoneInput
-                  country={"co"}
+                  country={"gb"}
                   value={PhoneNumber}
                   onChange={handleChange}
                   inputProps={{ required: true }}
                   selectedCountry={country}
+                  onlyCountries={['co', 'es', 'pt', 'gb']}
                 />
               </label>
               {!valid && <p></p>}

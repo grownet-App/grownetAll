@@ -9,7 +9,7 @@ import logo_blancov2 from "../../img/logo_blancov2.svg";
 export default function CodeOtp(props) {
   const [seconds, setSeconds] = useState(20);
   const [show, setShow] = useState(false);
-  console.log(props.idUsuario);
+  console.log("hola"+props.idUsuario);
   useEffect(() => {
     const interval = setInterval(() => {
       if (seconds > 0) {

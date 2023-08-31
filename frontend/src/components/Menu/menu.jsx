@@ -8,7 +8,7 @@ export default function Menu() {
 
     return (
         <Navbar>
-        <Container>
+        <Container className='menu'>
         <Nav className="me-auto">
             <Nav.Link className="icons">
                 <Link to="/settings">
