@@ -40,8 +40,9 @@ export default function CodeOtp(props) {
 
     axios.post(otpApiUrl, state.form)
       .then((response) => {
-        console.log("response es:" + response);
-        console.log("data: " + response.data);
+        console.log(response);
+        console.log(response.data);
+        console.log(state.form)
       })
       .catch(function (error) {
         console.log(error);
