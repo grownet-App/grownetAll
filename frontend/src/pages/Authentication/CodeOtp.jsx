@@ -1,12 +1,14 @@
 import React from "react";
-import css from "../../css/otp.css";
+import "../../css/otp.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import InputNumber from "../../components/InputNumber";
 import { otpApiUrl } from "../../config/urls.config";
 import logo_blancov2 from "../../img/logo_blancov2.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function CodeOtp(props) {
+  const navigate = useNavigate();
   const [seconds, setSeconds] = useState(20);
   const [show, setShow] = useState(false);
   console.log(props.idUsuario);
@@ -28,8 +30,11 @@ export default function CodeOtp(props) {
     e.preventDefault();
     let id = props.idUsuario;
     let otpNumber = otp.join("");
+    let countrie = props.countrie;
     const state = {
       form: {
+        /* TODO QUITAR ESTE COUNTRY CUANDO SE INTEGRE EL 57 CON EL TELEPHONE, QUITARLO TAMBIEN DEL PROP DESDE PHONENUMBERVALIDATION */
+        countrie: countrie,
         telephone: id,
         code: otpNumber,
       },
@@ -38,11 +43,18 @@ export default function CodeOtp(props) {
     };
     console.log(state.form);
 
+    //TODO VALIDAR ESTE LOGUEO, CAMBIARON LA BD
     axios.post(otpApiUrl, state.form)
       .then((response) => {
-        console.log(response);
-        console.log(response.data);
-        console.log(state.form)
+        if(response.data.flag === 1) {
+          navigate('/restaurants')
+          console.log('LOGUEO EXITOSO')
+          console.log(response);
+          console.log(response.data);
+          console.log(state.form)
+        } else {
+          console.log('CODIGO INCORRECTO')
+        }
       })
       .catch(function (error) {
         console.log(error);

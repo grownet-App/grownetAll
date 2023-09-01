@@ -66,7 +66,7 @@ function PhoneNumberValidation() {
           handleShow(false);
           setShowAlert(false);
           setPhoneNumber(PhoneNumber);
-          console.log('Check this phonenumber:' + numero + '  ' + PhoneNumber);
+          console.log(JSON.stringify(response.data));
         } else {
           setShowAlert(true);
           handleShow(false);
@@ -80,7 +80,7 @@ function PhoneNumberValidation() {
     <Container className="text-center">
       {showOtp ? (
         /* TODO idUsuario={PhoneNumber}  */
-        <CodeOtp idUsuario={numero}></CodeOtp>
+        <CodeOtp idUsuario={numero} countrie={country}></CodeOtp>
       ) : (
         <>
           <img className="img-login" src={logo_blancov2} alt="logo-Grownet" />
