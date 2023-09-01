@@ -1,6 +1,6 @@
 import React from 'react';
 import css from "../css/conditions.css";
-import Menu from '../components/Menu/Menu';
+
 export default function TermsAndConditions() {
     return(
         <section className='terms-conditions'> 

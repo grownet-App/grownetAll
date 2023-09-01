@@ -55,7 +55,7 @@ function ProductSearcher({
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Buscar"
+          placeholder="Search your products"
           className="search-input"
           onKeyDown={handleKeyDown}
         />

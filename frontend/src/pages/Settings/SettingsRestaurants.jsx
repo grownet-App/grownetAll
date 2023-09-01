@@ -1,6 +1,8 @@
 import React from 'react';
 import css from "../../css/settingsRestaurants.css";
 import {Icon} from '@iconify/react';
+import Menu from "../../components/Menu/Menu";
+
 export default function SettingsRestaurants() {
     return(
         <section className='setting-restaurants'>
@@ -27,6 +29,7 @@ export default function SettingsRestaurants() {
                 </div>
             </div>
             <button className='bttn btn-primary'>Edit Restaurant</button>
+            <Menu/>
         </section> 
     );
 }

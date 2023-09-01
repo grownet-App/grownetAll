@@ -76,6 +76,7 @@ function PhoneNumberValidation() {
         console.log(error);
       });
   };
+  console.log("Este es el celular registrado: " + PhoneNumber)
   return (
     <Container className="text-center">
       {showOtp ? (
@@ -89,11 +90,12 @@ function PhoneNumberValidation() {
               <label className="text-form">
                 <p>Enter your mobile number:</p>
                 <PhoneInput
-                  country={"co"}
+                  country={"gb"}
                   value={PhoneNumber}
                   onChange={handleChange}
                   inputProps={{ required: true }}
                   selectedCountry={country}
+                  onlyCountries={['co', 'es', 'pt', 'gb']}
                 />
               </label>
               {!valid && <p></p>}
@@ -112,7 +114,7 @@ function PhoneNumberValidation() {
             <Icon className="error" icon="pajamas:error" />
             <h1>We apologize</h1>
             <p>We didn't find the mobile number registered</p>
-            <p id="number-phone">3214631125</p>
+            <p id="number-phone">{"+ " + country + " " + numero}</p>
             <a onClick={handleClose} id="close">
               Change mobile number
             </a>

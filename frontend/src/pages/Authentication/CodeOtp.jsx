@@ -11,7 +11,9 @@ export default function CodeOtp(props) {
   const navigate = useNavigate();
   const [seconds, setSeconds] = useState(20);
   const [show, setShow] = useState(false);
-  console.log(props.idUsuario);
+  const { history } = props
+
+  console.log("hola"+props.idUsuario);
   useEffect(() => {
     const interval = setInterval(() => {
       if (seconds > 0) {
@@ -82,6 +84,7 @@ export default function CodeOtp(props) {
         ) : (
           <h2>Wait for {seconds} seconds</h2>
         )}
+        
       </form>
     </section>
   );

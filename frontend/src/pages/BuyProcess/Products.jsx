@@ -17,7 +17,7 @@ export default function Products() {
 
   //TODO Reemplazar estos products por los que vienen de la API
   const products = [
-    { id: 1, name: "product 1" },
+    { id: 1, name: "avocado" },
     { id: 2, name: "product 2" },
     { id: 3, name: "product 3" },
     { id: 4, name: "product 4" },
