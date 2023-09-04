@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container } from "react-bootstrap";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -8,7 +8,7 @@ import CodeOtp from "./CodeOtp";
 import "../../css/otp.css";
 import { Icon } from "@iconify/react";
 import Modal from "react-bootstrap/Modal";
-import { validationApiUrl } from "../../config/urls.config";
+import { onlyCountries, validationApiUrl } from "../../config/urls.config";
 import logo_blancov2 from "../../img/logo_blancov2.svg";
 
 function PhoneNumberValidation() {
@@ -16,6 +16,7 @@ function PhoneNumberValidation() {
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [valid, setValid] = useState(true);
   const [country, setCountry] = useState("");
+  const [countries, setCountries] = useState([]);
   const [showOtp, setShowOtp] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   //const [userId, setUserId] = useState("");
@@ -23,6 +24,23 @@ function PhoneNumberValidation() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  //TODO DELETE THIS TEST COUNTRIES
+
+  useEffect(() => {
+    axios
+      .get(onlyCountries)
+      .then((response) => {
+        const countriesData = response.data.countries;
+        const countryNames = countriesData.map((country) => country.short_name);
+        setCountries(countryNames);
+        console.log("MY COUNTRYNAMES:", countryNames);
+      })
+      .catch((error) => {
+        console.error("Error fetching countries:", error);
+      });
+  }, []);
+  console.log("THERE ARE MY COUNTRIES:", countries);
 
   const handleChange = (value, selectedCountry) => {
     console.log(value);
@@ -59,7 +77,7 @@ function PhoneNumberValidation() {
     axios
       .post(validationApiUrl, state.form)
       .then((response) => {
-        console.log('This is my response:' + response);
+        console.log("This is my response:" + response);
         if (response.data.flag === 1) {
           setShowOtp(true);
           handleShow(false);
@@ -75,7 +93,7 @@ function PhoneNumberValidation() {
         console.log(error);
       });
   };
-  console.log("Este es el celular registrado: " + PhoneNumber)
+  console.log("Este es el celular registrado: " + PhoneNumber);
   return (
     <Container className="text-center">
       {showOtp ? (
@@ -88,14 +106,17 @@ function PhoneNumberValidation() {
             <form onSubmit={enviarData}>
               <label className="text-form">
                 <p>Enter your mobile number:</p>
-                <PhoneInput
-                  country={"gb"}
-                  value={PhoneNumber}
-                  onChange={handleChange}
-                  inputProps={{ required: true }}
-                  selectedCountry={country}
-                  onlyCountries={['co', 'es', 'pt', 'gb']}
-                />
+                {countries && countries.length > 0 ? (
+                  <PhoneInput
+                    country={'co'}
+                    value={PhoneNumber}
+                    onChange={handleChange}
+                    inputProps={{ required: true }}
+                    selectedCountry={country}
+                    onlyCountries={countries}
+                  />
+                ) : null}
+                {console.log("OnlyCountries Value:", countries)}
               </label>
               {!valid && <p></p>}
               <Col>
