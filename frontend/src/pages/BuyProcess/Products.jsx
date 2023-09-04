@@ -50,16 +50,16 @@ export default function Products(props) {
         showSearchResults={showSearchResults}
       />
       {showSearchResults ? (
-        <ProductsFind />
+        <ProductsFind productsData={products}/>
       ) : (
         <>
           {showFavorites ? (
-            <Favorites />
+            <Favorites productsData={products}/> 
           ) : (
             <>
               {products.map((product) => (
                 <>
-                <ProductCard name={product.name} key={product.id} id={product.id} image={product.image}> </ProductCard>
+                <ProductCard key={product.id} productData={product} > </ProductCard>
              </> ))}
             </>
           )}

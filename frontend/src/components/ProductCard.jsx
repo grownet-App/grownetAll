@@ -5,8 +5,9 @@ import Stepper from "../components/Stepper/Stepper";
 import "../css/products.css";
 import { useFavoritesStore } from "../store/favoritesStore";
 
-export default function ProductCard({ id, name, image}) {
+export default function ProductCard({ productData }) {
   const [counter, setCounter] = useState(0);
+  const { id, name, image } = productData;
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
   const isFavorite = favorites.includes(id, name, image);
 

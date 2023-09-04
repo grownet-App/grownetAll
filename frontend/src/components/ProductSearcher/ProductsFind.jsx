@@ -10,7 +10,7 @@ function ProductsFind() {
       <p>You have {filteredProducts.length} found products:</p>
       <div className="favorite-items">
         {filteredProducts.map((product) => (
-          <ProductCard key={product.id} id={product.id} image={product.image} name={product.name}> </ProductCard>
+          <ProductCard key={product.id} productData={product}> </ProductCard>
         ))}
       </div>
     </div>
