@@ -3,7 +3,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import InputNumber from "../../components/InputNumber";
 import { otpApiUrl } from "../../config/urls.config";
 import "../../css/otp.css";
 import logo_blancov2 from "../../img/logo_blancov2.svg";
@@ -14,6 +13,7 @@ export default function CodeOtp(props) {
   const [show, setShow] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [otp, setOtp] = useState(new Array(4).fill(""));
 
   const handleCloseError = () => setShowError(false);
   const handleShowError = () => setShowError(true);
@@ -30,8 +30,6 @@ export default function CodeOtp(props) {
     return () => clearInterval(interval);
   }, [seconds]);
 
-  //Conexion
-  const [otp, setOtp] = useState(new Array(4).fill(""));
   const enviarData = (e) => {
     e.preventDefault();
     let id = props.idUsuario;
@@ -64,6 +62,16 @@ export default function CodeOtp(props) {
       });
   };
 
+  const handleChange = (index, value) => {
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (value && index < otp.length - 1) {
+      document.getElementById(`otp-input-${index + 1}`).focus();
+    }
+  };
+
   return (
     <section className="otp">
       <img className="img-otp" src={logo_blancov2} alt="logo-Grownet" />
@@ -71,9 +79,19 @@ export default function CodeOtp(props) {
       <p className="text-otp">An 4 digit code has been sent to your phone</p>
       <form action="#" className="form-otp">
         <div className="input-field">
-          <InputNumber otp2={otp} setOtp2={setOtp}>
-            {" "}
-          </InputNumber>
+          {otp.map((data, index) => (
+            <input
+              className="input-otp"
+              type="text"
+              name="otp"
+              maxLength="1"
+              key={index}
+              value={data}
+              onChange={(e) => handleChange(index, e.target.value)}
+              onFocus={(e) => e.target.select()}
+              id={`otp-input-${index}`}
+            />
+          ))}
         </div>
         <button className="bttn btn-secundary" onClick={enviarData}>
           Verify & Proceed
