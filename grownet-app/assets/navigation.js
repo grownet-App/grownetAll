@@ -7,6 +7,7 @@ import loginPage from '../screens/loginPage'
 import records from '../screens/records'
 import settings from '../screens/settings'
 import chat from '../screens/chat'
+import home from '../screens/home'
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
@@ -19,32 +20,34 @@ function MyStack() {
     const navigation = useNavigation();
     return (
         <Stack.Navigator
-            initialRouteName="login"
+            initialRouteName="home"
             screenOptions={{
                 headerMode: 'screen',
                 headerTintColor: 'white',
                 headerStyle: { backgroundColor: '#026CD2' },
             }}
         >
-            <Stack.Screen name="settings"
-                component={settings}
-                options={{
-                    headerBackTitleVisible: false,
-                    headerLeft: () => (
-                        <Button
-                            onPress={() => alert('This is a button!')}
-                            title="Info"
-                            color="#fff"
-                        />
-                    ),
-                    headerRight: () => (
-                        <Button
-                            onPress={() => navigation.navigate('loginPage', { screen: 'loginPage' })}
-                            title="Info"
-                            color="#fff"
-                        />
-                    ),
-                }}
+            <Stack.Screen name="home"
+                component={home}
+            /* options={{
+                headerLeft: () => (
+                    <Button
+                        onPress={() => alert('This is a button!')}
+                        title="Info"
+                        color="#fff"
+                    />
+                ),
+                headerRight: () => (
+                    <Button
+                        onPress={() => navigation.navigate('loginPage', { screen: 'loginPage' })}
+                        title="Info"
+                        color="#fff"
+                    />
+                ), 
+            }}*/
+            />
+            <Stack.Screen name= "login"
+            component={loginPage}
             />
         </Stack.Navigator>
     )
@@ -151,7 +154,8 @@ function MyStack3() {
 function MyTabs() {
     return (
         <Tab.Navigator
-            initialRouteName='login'
+            initialRouteName='home'
+            component={home}
             screenOptions={{
                 tabBarActiveTintColor: "green",
             }}
@@ -201,7 +205,7 @@ function MyTabs() {
 export default function Navigation() {
     return (
         <NavigationContainer>
-            <MyTabs />
+            <MyStack />
         </NavigationContainer>
     )
 
