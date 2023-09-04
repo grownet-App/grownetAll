@@ -1,35 +1,47 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity  } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+import PhoneInput from "react-native-phone-number-input";
+import { useState } from 'react';
 const loginPage = () => {
   const navigation = useNavigation();
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const handleChange = () => {
+    console.log(phoneNumber);
+    /*setPhoneNumber(value);
+     setCountry(selectedCountry.dialCode);
+    setValid(validatePhoneNumber(value)); */
+  };
+  console.log(handleChange);
   return (
     <View style={styles.container}>
       <Image
         style={styles.tinyLogo}
         source={require('../assets/logo.png')}
       />
-      <Text style={styles.welcome}>Welcome</Text>
-      <Text style={styles.p}>Let's start!</Text>
-      <TextInput style={styles.textInput}
-        placeholder='example@example.com'
-        placeholderTextColor={'white'}
-      />
-      <TextInput style={styles.textInput}
-        placeholder='Password'
-        placeholderTextColor={'white'}
-        secureTextEntry={true}
+      <Text style={styles.p}>Enter your mobile number:</Text>
+      <PhoneInput
+        countryPickerProps={{
+          countryCodes: ['CO', 'ES', 'PT', 'GB'],
+        }}
+        defaultCode='CO'
+        defaultValue={phoneNumber}
+        onChangeFormattedText={(text) => {
+          setPhoneNumber(text)
+        }}
       />
 
-      <TouchableOpacity style={styles.btnPrimary} onPress={() => navigation.navigate("chat")}><Text>Login</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.btnPrimary} onPress={handleChange}><Text>Ver numero</Text></TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  btnPrimary:{
-    padding:16,
+  btnPrimary: {
+    padding: 16,
     backgroundColor: 'white',
     borderRadius: 16,
     width: "80%",
@@ -50,7 +62,7 @@ const styles = StyleSheet.create({
   },
   p: {
     color: 'white',
-    fontSize: 24,
+    fontSize: 16,
     marginBottom: 36
   },
   tinyLogo: {
