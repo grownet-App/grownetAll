@@ -13,8 +13,8 @@ export default function CodeOtp(props) {
   const [seconds, setSeconds] = useState(20);
   const [show, setShow] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-
   const [showError, setShowError] = useState(false);
+
   const handleCloseError = () => setShowError(false);
   const handleShowError = () => setShowError(true);
 
@@ -39,7 +39,6 @@ export default function CodeOtp(props) {
     let countrie = props.countrie;
     const state = {
       form: {
-        /* TODO QUITAR ESTE COUNTRY CUANDO SE INTEGRE EL 57 CON EL TELEPHONE, QUITARLO TAMBIEN DEL PROP DESDE PHONENUMBERVALIDATION */
         countrie: countrie,
         telephone: id,
         code: otpNumber,
@@ -47,21 +46,15 @@ export default function CodeOtp(props) {
       error: false,
       errorMsg: "",
     };
-    console.log(state.form);
 
-    //TODO VALIDAR ESTE LOGUEO, CAMBIARON LA BD
     axios
       .post(otpApiUrl, state.form)
       .then((response) => {
         if (response.data.flag === 1) {
           handleShowError(false);
           navigate("/restaurants");
-          console.log("LOGUEO EXITOSO");
-          console.log(response);
           console.log(response.data);
-          console.log(state.form);
         } else {
-          console.log("CODIGO INCORRECTO");
           handleShowError(false);
           setShowAlert(true);
         }

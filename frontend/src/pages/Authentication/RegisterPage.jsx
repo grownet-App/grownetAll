@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { registerApiUrl } from "../../config/urls.config";
-import PhoneNumberValidation from "./PhoneNumberValidation";
+import Login from "./LoginPage";
 //TODO Reutilizar este código para el nuevo registro
 
 export default function RegisterPage() {
@@ -49,7 +49,8 @@ export default function RegisterPage() {
     <section className="login">
       <div className="login-form">
         <p>Welcome to</p>
-        <PhoneNumberValidation className="number-form" />
+        {/* TODO CAMBIAR ESTE LOGIN POR EL COMPONENTE PARA REGISTER */}
+        <Login className="number-form" />
       </div>
     </section>  
   );
