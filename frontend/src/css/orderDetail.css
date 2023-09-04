@@ -50,6 +50,7 @@
     font-size: 17px;
     color: #868686;
     margin-bottom: 0px;
+    margin-top: 6px;
 }
 .total-detail{
     background-color: #BBFACF;
@@ -58,6 +59,11 @@
     padding: 15px;
     border-radius: 10px;
     margin-top: 10px;
+}
+.details .form-select{
+    border: none;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.04);
+    width: 100px;
 }
 .total-detail h2{
     font-size: 18px;
@@ -80,6 +86,11 @@
 }
 #increment{
     padding: 5px 15px 5px 5px;
+}
+.type-details{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 /*parte 2*/
 .data-shipping h3{

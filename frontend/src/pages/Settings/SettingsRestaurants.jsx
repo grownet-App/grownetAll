@@ -1,7 +1,8 @@
 import React from 'react';
-import css from "../../css/settingsRestaurants.css";
+import "../../css/settingsRestaurants.css";
 import {Icon} from '@iconify/react';
 import Menu from "../../components/Menu/Menu";
+import { Link } from 'react-router-dom';
 
 export default function SettingsRestaurants() {
     return(
@@ -28,7 +29,8 @@ export default function SettingsRestaurants() {
                     <p>Admin test</p>
                 </div>
             </div>
-            <button className='bttn btn-primary'>Edit Restaurant</button>
+            <a href='/editRestaurants' className='bttn btn-primary'>Edit Restaurant</a>
+            <div className='space-menu'></div>
             <Menu/>
         </section> 
     );

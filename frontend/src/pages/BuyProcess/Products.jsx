@@ -63,7 +63,7 @@ export default function Products() {
           )}
         </>
       )}
-
+      <div className="space-CatgMenu"></div>
       <CategoriesMenu
         showFavorites={showFavorites}
         toggleShowFavorites={toggleShowFavorites}

@@ -1,5 +1,5 @@
 import React from 'react';
-import css from './stepper.css'
+import './stepper.css'
 
 export default function Stepper(props) {
   return (

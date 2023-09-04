@@ -24,7 +24,7 @@ import SettingsRestaurants from "../pages/Settings/SettingsRestaurants";
 import SettingsSuppliers from "../pages/Settings/SettingsSuppliers";
 import TermsAndConditions from "../pages/TermsAndConditions";
 import PublicRoute from "./PublicRoute";
-
+import Hola from "../pages/Settings/hola";
 export default function AppRouter() {
   return (
     <Routes>
@@ -76,6 +76,9 @@ export default function AppRouter() {
       </Route>
       <Route exact path={routes.settingsSuppliers} element={<PublicRoute />}>
         <Route exact path={routes.settingsSuppliers} element={<SettingsSuppliers />}/>
+      </Route>
+      <Route exact path={routes.hola} element={<PublicRoute />}>
+        <Route exact path={routes.hola} element={<Hola />}/>
       </Route>
       <Route exact path={routes.FAQ} element={<PublicRoute />}>
         <Route exact path={routes.FAQ} element={<FAQ />} />

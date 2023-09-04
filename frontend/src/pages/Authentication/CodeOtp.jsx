@@ -1,5 +1,5 @@
 import React from "react";
-import css from "../../css/otp.css";
+import "../../css/otp.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import InputNumber from "../../components/InputNumber";

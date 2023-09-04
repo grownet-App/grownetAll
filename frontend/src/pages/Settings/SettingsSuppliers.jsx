@@ -1,6 +1,7 @@
 import React from "react";
 import {Icon} from '@iconify/react';
-import css from '../../css/settingsSuppliers.css'
+import '../../css/settingsSuppliers.css';
+import Menu from "../../components/Menu/Menu";
 
 export default function SettingsSuppliers() {
   return (
@@ -46,9 +47,8 @@ export default function SettingsSuppliers() {
       <img src="https://placehold.co/300" alt="logo-supplier"/>
       <Icon icon="simple-line-icons:plus"className="plus"/>
     </button>
-
-
-      
+    <div className="space-menu"></div>
+    <Menu/>
     </section>
   );
 }

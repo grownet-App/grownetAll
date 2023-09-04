@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
-import css from "../../css/orderDetail.css";
-import Stepper from "../../components/Stepper/Stepper";
+import "../../css/orderDetail.css";
+import ProductDetail from "../../components/ProductDetail";
 
 export default function OrderDetails(props) {
   const [counter, setCounter] = useState(props.initialounter || 0);
@@ -37,19 +37,8 @@ export default function OrderDetails(props) {
         <h1 className="tittle-orderDetail">Order detail</h1>
       </div>
       <div className="card-invoices">
-        <div>
-          <div className="product-detail">
-            <h3>Broccoli</h3>
-            <div className="product-detail">
-              <h3>€{totalItemToPay}</h3>
-              <Icon id="trash" icon="ph:trash"/>
-            </div>
-          </div>
-          <div className="product-detail">
-            <Stepper counter={counter} setCounter={setCounter} />
-            <p>{counter} Box/Boxes</p>
-          </div>
-        </div>
+        <ProductDetail nameProduct={"Broccoli"} totalItemToPay={totalItemToPay} counter={counter} setCounter={setCounter}/>
+        
         <div>
           <h2 id="tax-font">Payment details</h2>
           <div className="product-detail">
