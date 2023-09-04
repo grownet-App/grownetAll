@@ -1,19 +1,23 @@
-import React from "react";
-import "../../css/otp.css";
+import { Icon } from "@iconify/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import InputNumber from "../../components/InputNumber";
 import { otpApiUrl } from "../../config/urls.config";
+import "../../css/otp.css";
 import logo_blancov2 from "../../img/logo_blancov2.svg";
-import { useNavigate } from "react-router-dom";
 
 export default function CodeOtp(props) {
   const navigate = useNavigate();
   const [seconds, setSeconds] = useState(20);
   const [show, setShow] = useState(false);
-  const { history } = props
+  const [showAlert, setShowAlert] = useState(false);
 
-  console.log("hola"+props.idUsuario);
+  const [showError, setShowError] = useState(false);
+  const handleCloseError = () => setShowError(false);
+  const handleShowError = () => setShowError(true);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (seconds > 0) {
@@ -46,16 +50,20 @@ export default function CodeOtp(props) {
     console.log(state.form);
 
     //TODO VALIDAR ESTE LOGUEO, CAMBIARON LA BD
-    axios.post(otpApiUrl, state.form)
+    axios
+      .post(otpApiUrl, state.form)
       .then((response) => {
-        if(response.data.flag === 1) {
-          navigate('/restaurants')
-          console.log('LOGUEO EXITOSO')
+        if (response.data.flag === 1) {
+          handleShowError(false);
+          navigate("/restaurants");
+          console.log("LOGUEO EXITOSO");
           console.log(response);
           console.log(response.data);
-          console.log(state.form)
+          console.log(state.form);
         } else {
-          console.log('CODIGO INCORRECTO')
+          console.log("CODIGO INCORRECTO");
+          handleShowError(false);
+          setShowAlert(true);
         }
       })
       .catch(function (error) {
@@ -84,8 +92,22 @@ export default function CodeOtp(props) {
         ) : (
           <h2>Wait for {seconds} seconds</h2>
         )}
-        
       </form>
+      {showAlert ? (
+        <Modal show={showError} onHide={handleCloseError}>
+          <section className="alerta">
+            <Icon className="error" icon="pajamas:error" />
+            <h1>We apologize</h1>
+            <p>The code you entered is wrong.</p>
+            <p id="number-otp">{otp}</p>
+            <button className="bttn btn-primary" onClick={handleCloseError}>
+              Try again
+            </button>
+          </section>
+        </Modal>
+      ) : (
+        <></>
+      )}
     </section>
   );
 }
