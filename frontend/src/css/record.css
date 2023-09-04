@@ -1,0 +1,45 @@
+.record{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.past{
+    display: flex;
+}
+.record h1{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+.record p{
+    margin-bottom: 0px;
+}
+.record h4{
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0px;
+}
+.card-record{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    box-shadow: rgba(7, 33, 58, 0.12) 0px 0px 24px;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+.information-past{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+#o2{
+    margin-bottom: 0;
+}
+.information-past button{
+    margin: 0;
+}
+.record .espacio{
+    margin-bottom: 7rem;
+}

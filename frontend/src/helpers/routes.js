@@ -14,7 +14,7 @@ const routes = {
     settingsSuppliers: '/settingsSuppliers',
     FAQ: '/FAQ',
     tAndC: '/tAndC',
-    hola: 'hola',
+    editRestaurant: 'editRestaurant',
     record: '/record',
     pastRecord: '/pastRecord',
     detailsOrderPast: '/detailsOrderPast',

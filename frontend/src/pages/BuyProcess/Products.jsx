@@ -7,7 +7,7 @@ import ProductCard from "../../components/ProductCard";
 import ProductSearcher from "../../components/ProductSearcher/ProductSearcher";
 import ProductsFind from "../../components/ProductSearcher/ProductsFind";
 
-export default function Products() {
+export default function Products(props) {
   const [showFavorites, setShowFavorites] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
 
@@ -17,17 +17,18 @@ export default function Products() {
 
   //TODO Reemplazar estos products por los que vienen de la API
   const products = [
-    { id: 1, name: "avocado" },
-    { id: 2, name: "product 2" },
-    { id: 3, name: "product 3" },
-    { id: 4, name: "product 4" },
-    { id: 5, name: "product 5" },
-    { id: 6, name: "product 6" },
-    { id: 7, name: "product 7" },
-    { id: 8, name: "product 8" },
-    { id: 9, name: "product 9" },
-    { id: 10, name: "product 10" },
+    { id: 1, name: "Avocado",image:"https://images.heb.com/is/image/HEBGrocery/002599549-1" },
+    { id: 2, name: "Broccoli",image:"https://pngimg.com/uploads/broccoli/broccoli_PNG72970.png" },
+    { id: 3, name: "Bananas",image:"https://purepng.com/public/uploads/large/purepng.com-bananafruitsyellowfruit-981524754330lspp8.png" },
+    { id: 4, name: "Strawberry",image:"https://www.pngall.com/wp-content/uploads/2016/05/Strawberry-Download-PNG.png" },
+    { id: 5, name: "Spinach",image:"https://pngimg.com/uploads/spinach/spinach_PNG19.png" },
+    { id: 6, name: "Carrot",image:"https://www.pngkit.com/png/full/344-3446979_zanahorias-png-imagenes-de-zanahoria-png.png" },
+    { id: 7, name: "Red pepper",image:"https://cultivovital.com/wp-content/uploads/2020/11/pimiento-rojo-png-2.png" },
+    { id: 8, name: "Peas",image:"https://domiplaza.com/wp-content/uploads/2019/03/arveja_desgranada_.png" },
+    { id: 9, name: "Pineapple",image:"https://freepngimg.com/download/pineapple/2-2-pineapple-picture.png" },
+    { id: 10, name: "Apple",image:"https://static.vecteezy.com/system/resources/previews/019/818/535/original/group-of-red-apple-fruits-png.png" },
   ];
+
 
   return (
     <section className="products">
@@ -57,13 +58,14 @@ export default function Products() {
           ) : (
             <>
               {products.map((product) => (
-                <ProductCard key={product.id} id={product.id} />
-              ))}
+                <>
+                <ProductCard name={product.name} key={product.id} id={product.id} image={product.image}> </ProductCard>
+             </> ))}
             </>
           )}
         </>
       )}
-      <div className="space-CatgMenu"></div>
+      <div className="espacio"></div>
       <CategoriesMenu
         showFavorites={showFavorites}
         toggleShowFavorites={toggleShowFavorites}
