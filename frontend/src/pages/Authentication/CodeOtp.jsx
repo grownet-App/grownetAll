@@ -9,6 +9,7 @@ import logo_blancov2 from "../../img/logo_blancov2.svg";
 
 export default function CodeOtp(props) {
   const navigate = useNavigate();
+  const { onResendCode } = props;
   const [seconds, setSeconds] = useState(20);
   const [show, setShow] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -72,6 +73,14 @@ export default function CodeOtp(props) {
     }
   };
 
+  const handleResendCode = (e) => {
+    onResendCode(e);
+    setOtp(new Array(4).fill(""));
+    setSeconds(20);
+    setShow(false);
+    console.log("CODIGO FUE REENVIADO");
+  };
+
   return (
     <section className="otp">
       <img className="img-otp" src={logo_blancov2} alt="logo-Grownet" />
@@ -98,7 +107,11 @@ export default function CodeOtp(props) {
         </button>
         {show ? (
           <h2>
-            Didn't you receive the code?<a href=""> Send again</a>
+            Didn't you receive the code?
+            <a href="#" onClick={handleResendCode}>
+              {" "}
+              Send again
+            </a>
           </h2>
         ) : (
           <h2>Wait for {seconds} seconds</h2>

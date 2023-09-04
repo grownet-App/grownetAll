@@ -82,13 +82,17 @@ function Login() {
         console.log(error);
       });
   };
+  
+  const resendCode = (e) => {
+    enviarData(e);
+  };
 
   return (
     <section className="login">
       <div className="login-form">
       <Container className="text-center">
       {showOtp ? (
-        <CodeOtp idUsuario={numero} countrie={country}></CodeOtp>
+        <CodeOtp idUsuario={numero} countrie={country} onResendCode={resendCode}></CodeOtp>
       ) : (
         <>
           <img className="img-login" src={logo_blancov2} alt="logo-Grownet" />
