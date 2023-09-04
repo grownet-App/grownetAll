@@ -5,7 +5,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 import CodeOtp from "./CodeOtp";
-import css from "../../css/otp.css";
+import "../../css/otp.css";
 import { Icon } from "@iconify/react";
 import Modal from "react-bootstrap/Modal";
 import { validationApiUrl } from "../../config/urls.config";
@@ -36,7 +36,7 @@ function PhoneNumberValidation() {
     console.log(phoneNumberPattern);
     return phoneNumberPattern.test(phoneNumber);
   };
-  
+
   //TODO insertar variables dentro de funcion enviardata cuando se cambie la prop que envio a codeOtp
   let phone = PhoneNumber;
   let phoneNumberClean = phone.split(country);
@@ -44,7 +44,6 @@ function PhoneNumberValidation() {
   let numero = parseInt(phoneNumberClean[1]);
   const enviarData = (e) => {
     e.preventDefault();
-
     console.log(numero);
     const state = {
       form: {
