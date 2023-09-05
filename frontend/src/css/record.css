@@ -40,6 +40,21 @@
 .information-past button{
     margin: 0;
 }
-.record .espacio{
-    margin-bottom: 7rem;
+/*Tab*/
+.nav-tabs{
+    border-radius: 15px;
+    position: sticky;
+    align-items: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.record .nav-link{
+    color: var(--color-dark-blue) !important;
+}
+.card-record .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: white !important;
+    border-radius: 15px;
+    background-color: var(--color-green) !important;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: none;
 }

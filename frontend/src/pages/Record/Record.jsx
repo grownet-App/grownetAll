@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Menu from "../../components/Menu/Menu";
 import "../../css/record.css";
 import { Icon } from "@iconify/react";
 import "../../components/ProductSearcher/productSearcher.css";
-
+import { Tabs, Tab } from "react-bootstrap";
+import UpcomingRecord from "./UpcomingRecord/UpcomingRecord";
+import { Link } from "react-router-dom";
 export default function Record() {
   return (
     <>
@@ -12,7 +14,7 @@ export default function Record() {
         <div className="flex-container">
           <form className="search-form">
             <input
-              type="text"
+              type="date"
               placeholder="Search your orders"
               className="search-input"
             />
@@ -21,83 +23,38 @@ export default function Record() {
             </button>
           </form>
         </div>
-        <div className="card-record">
-          <div className="information-past">
-            <div className="">
-              <h4>#Order:</h4>
-              <p>57896547</p>
+        <Tabs
+          defaultActiveKey="home"
+          id="uncontrolled-tab-example"
+          className="mb-3"
+        >
+          <Tab eventKey="home" title="Past orders">
+            <div className="card-record">
+              <div className="information-past">
+                <div className="">
+                  <h4>#Order:</h4>
+                  <p>57896547</p>
+                </div>
+                <div>
+                  <h4>Date</h4>
+                  <p>29/07/2023</p>
+                </div>
+              </div>
+              <div className="information-past o2" id="o2">
+                <div>
+                  <h4>Amount</h4>
+                  <p>£200</p>
+                </div>
+                <Link to={"/pastRecord"} className="bttn btn-primary">View details</Link>
+              </div>
             </div>
-            <div>
-              <h4>Date</h4>
-              <p>29/07/2023</p>
-            </div>
-          </div>
-          <div className="information-past o2" id="o2">
-            <div>
-              <h4>Amount</h4>
-              <p>£200</p>
-            </div>
-            <button className="bttn btn-primary">View details</button>
-          </div>
-        </div>
-        <div className="card-record">
-          <div className="information-past">
-            <div className="">
-              <h4>#Order:</h4>
-              <p>57896987</p>
-            </div>
-            <div>
-              <h4>Date</h4>
-              <p>01/08/2023</p>
-            </div>
-          </div>
-          <div className="information-past o2" id="o2">
-            <div>
-              <h4>Amount</h4>
-              <p>£500</p>
-            </div>
-            <button className="bttn btn-primary">View details</button>
-          </div>
-        </div>
-        <div className="card-record">
-          <div className="information-past">
-            <div className="">
-              <h4>#Order:</h4>
-              <p>57896787</p>
-            </div>
-            <div>
-              <h4>Date</h4>
-              <p>02/08/2023</p>
-            </div>
-          </div>
-          <div className="information-past o2" id="o2">
-            <div>
-              <h4>Amount</h4>
-              <p>£800</p>
-            </div>
-            <button className="bttn btn-primary">View details</button>
-          </div>
-        </div>
-        <div className="card-record">
-          <div className="information-past">
-            <div className="">
-              <h4>#Order:</h4>
-              <p>57896597</p>
-            </div>
-            <div>
-              <h4>Date</h4>
-              <p>05/08/2023</p>
-            </div>
-          </div>
-          <div className="information-past o2" id="o2">
-            <div>
-              <h4>Amount</h4>
-              <p>£300</p>
-            </div>
-            <button className="bttn btn-primary">View details</button>
-          </div>
-        </div>
-        <div className="espacio"></div>
+          </Tab>
+          <Tab eventKey="upcoming" title="Current orders">
+            <UpcomingRecord />
+          </Tab>
+        </Tabs>
+
+        <div className="space-menu"></div>
       </section>
       <Menu />
     </>

@@ -24,6 +24,7 @@
   font-size: 18px !important;
   color: var(--color-dark-blue);
   border-radius: 50px !important;
+  padding-left: 3rem;
 }
 .react-tel-input .flag-dropdown {
   border: none !important;

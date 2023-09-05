@@ -9,7 +9,7 @@ export default function ProductDetail(props) {
       <div className="product-detail">
         <h3>{props.nameProduct}</h3>
         <div className="product-detail">
-          <h3>€{props.totalItemToPay}</h3>
+          <h3>£{props.totalItemToPay}</h3>
           <Icon id="trash" icon="ph:trash" />
         </div>
       </div>

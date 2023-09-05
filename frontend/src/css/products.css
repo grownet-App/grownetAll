@@ -115,11 +115,11 @@
     font-size: 18px;
     font-weight: 500;
   }
-  .form-check-input{
+  .promo .form-check-input{
     vertical-align: 0px !important;
     margin-top: 0px !important;
   }
-  .form-check-input:checked{
+  .promo .form-check-input:checked{
     background-color: var(--color-green) !important;
     border-color: var(--color-green) !important;
   }
