@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 import PhoneInput from "react-native-phone-number-input";
 import { useState } from 'react';
+
+import { onlyCountries, validationApiUrl } from "../config/urls.config"
 const loginPage = () => {
   const navigation = useNavigation();
   const [phoneNumber, setPhoneNumber] = useState("");
