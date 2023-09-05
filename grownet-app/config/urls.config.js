@@ -6,4 +6,6 @@ export const otpApiUrl = 'http://ec2-18-191-177-149.us-east-2.compute.amazonaws.
 
 export const validationApiUrl = 'http://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/authenticate/validateTelephone'
 
-export const onlyCountries = 'http://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/countries/all'
+export const onlyCountries = 'http://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/countries/all';
+
+export const ApiSuppliers = 'http://5.161.211.8:88/api/providers/all' 

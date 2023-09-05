@@ -30,6 +30,10 @@ export const GlobalStyles = StyleSheet.create({
         fontWeight: 500,
         alignItems: 'center'
     },
+    cardSuppliers: {
+        backgroundColor: "#1D446A",
+        fontWeight: 500
+    },
     container: {
         flex: 1,
         backgroundColor: '#026CD2',

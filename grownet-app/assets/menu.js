@@ -18,33 +18,6 @@ const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
 
-function MyStack() {
-    const navigation = useNavigation();
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name="home"
-                component={home}
-                options={{
-                    headerShown: false
-                }}
-            />
-
-            <Stack.Screen name="login"
-                component={loginPage}
-                options={{
-                    headerShown: false
-                }}
-            />
-            
-            <Stack.Screen name="suppliers"
-                component={suppliers}
-                screenOptions={{
-                    headerShown: true
-                }}
-            />
-        </Stack.Navigator >
-    )
-}
 function MyStack1() {
     return (
         <Stack.Navigator
@@ -202,7 +175,7 @@ function MyTabs() {
 export default function Navigation() {
     return (
         <NavigationContainer>
-            <MyStack />
+            <MyTabs />
         </NavigationContainer>
     )
 
