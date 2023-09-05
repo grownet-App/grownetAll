@@ -1,7 +1,7 @@
 import React from "react";
 import css from "../../css/orderDetail.css";
 import img_succesful from "../../img/img_succesful.png";
-import Menu from "../../components/Menu/Menu.jsx";
+import Menu from "../../components/Menu/Menu";
 export default function OrderSuccessful() {
 
   return (
