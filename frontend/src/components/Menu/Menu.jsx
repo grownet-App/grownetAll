@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Nav, Navbar} from 'react-bootstrap';
 import { Icon } from '@iconify/react';
-import css from "./menu.css";
+import "./menu.css";
 import { Link } from "react-router-dom"
 
 export default function Menu() {
