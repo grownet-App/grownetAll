@@ -9,6 +9,7 @@ import settings from '../screens/settings'
 import chat from '../screens/chat'
 import home from '../screens/home'
 import suppliers from '../screens/suppliers'
+import otpPage from '../screens/otp'
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
@@ -31,6 +32,13 @@ function MyStack() {
 
             <Stack.Screen name="login"
                 component={loginPage}
+                options={{
+                    headerShown: false
+                }}
+            />
+            
+            <Stack.Screen name="otp"
+                component={otpPage}
                 options={{
                     headerShown: false
                 }}

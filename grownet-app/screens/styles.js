@@ -39,7 +39,15 @@ export const GlobalStyles = StyleSheet.create({
         backgroundColor: '#026CD2',
         alignItems: 'center',
         justifyContent: "center",
+    },
 
+    containerOTP: {
+        backgroundColor: '#026CD2',
+        alignItems: 'center',
+        justifyContent: "center",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        height: 500
     },
     linkWhite: {
         color: "white",
@@ -66,7 +74,17 @@ export const GlobalStyles = StyleSheet.create({
     textInput: {
         color: 'white',
         fontWeight: 500,
-        fontSize: 18
+        fontSize: 18,
+        textAlign: "center"
+    },
+    textInputView: {
+        borderWidth: 1,
+        borderRadius: 8,
+        borderColor: "white",
+        textAlign: "center",
+        justifyContent: "center",
+        width: 50,
+        marginHorizontal: 12
     },
     textBtnW: {
         color: "#04444F",

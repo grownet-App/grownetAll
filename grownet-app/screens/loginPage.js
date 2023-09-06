@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import PhoneInput from "react-native-phone-number-input";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from "axios";
 import { GlobalStyles } from "./styles";
 
@@ -21,14 +21,14 @@ const loginPage = () => {
 
     const state = {
       form: {
-        countrie: country,
-        telephone: phoneNumber,
+        countrie: parseInt(country),
+        telephone: parseInt(phoneNumber),
       },
       error: false,
       errorMsg: "",
     };
 
-    console.log(country, phoneNumber);
+    console.log(state.form);
 
 
     axios
@@ -38,7 +38,7 @@ const loginPage = () => {
         console.log(response);
         console.log('====================================');
         if (response.data.flag === 1) {
-
+          navigation.navigate("otp")
           //TODO QUITAR ESTE CONSOLE LOG CUANDO YA LLEGUEN LOS MENSAJES POR TWILIO
           console.log("Respuesta con CODIGO TWILIO:", response.data);
         } else {
