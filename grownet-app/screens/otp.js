@@ -3,7 +3,7 @@ import React, { Component, useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { GlobalStyles } from './styles'
 
-const otp = () => {
+export default function Otp(props) {
     const navigation = useNavigation();
     const pin1Ref = useRef()
     const pin2Ref = useRef()
@@ -14,11 +14,10 @@ const otp = () => {
     const [pin3, setPin3] = useState("");
     const [pin4, setPin4] = useState("");
 
-
-
+/*     console.log(props.countryOTP);
+    console.log(props.idPhone); */
     const enviarOTP = () => {
         let otp = pin1 + pin2 + pin3 + pin4;
-        console.log(otp)
     }
 
     return (
@@ -73,11 +72,9 @@ const otp = () => {
                     />
                 </View>
             </View>
-            <TouchableOpacity onPress={enviarOTP}><Text>Verificar</Text></TouchableOpacity>
+            <TouchableOpacity onPress={enviarOTP} style={GlobalStyles.btnSecundary}><Text style={GlobalStyles.textInput}>Verify & Proceed</Text></TouchableOpacity>
         </SafeAreaView>
 
     )
 
 }
-
-export default otp;
