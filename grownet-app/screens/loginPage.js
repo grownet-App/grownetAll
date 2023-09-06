@@ -1,21 +1,61 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, View, Image, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 import PhoneInput from "react-native-phone-number-input";
 import { useState } from 'react';
+import axios from "axios";
+import { GlobalStyles } from "./styles";
+
+import { onlyCountries, validationApiUrl } from "../config/urls.config"
 const loginPage = () => {
   const navigation = useNavigation();
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneDos, setPhoneDos] = useState("");
 
   const handleChange = () => {
     console.log(phoneNumber);
-    /*setPhoneNumber(value);
-     setCountry(selectedCountry.dialCode);
-    setValid(validatePhoneNumber(value)); */
+    console.log(phoneDos);
+    let countrySplit = phoneDos.split(phoneNumber)
+    let countryCod = countrySplit[0];
+    let country = countryCod.split("+")[1];
+
+    const state = {
+      form: {
+        countrie: parseInt(country),
+        telephone: parseInt(phoneNumber),
+      },
+      error: false,
+      errorMsg: "",
+    };
+
+    console.log(state.form);
+
+
+    axios
+      .post(validationApiUrl, state.form)
+      .then((response) => {
+        console.log('====================================');
+        console.log(response);
+        console.log('====================================');
+        if (response.data.flag === 1) {
+          navigation.navigate("otp")
+          //TODO QUITAR ESTE CONSOLE LOG CUANDO YA LLEGUEN LOS MENSAJES POR TWILIO
+          console.log("Respuesta con CODIGO TWILIO:", response.data);
+        } else {
+          console.log('====================================');
+          console.log("puusss");
+          console.log('====================================');
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
   };
-  console.log(handleChange);
+
   return (
+
     <View style={styles.container}>
       <Image
         style={styles.tinyLogo}
@@ -28,12 +68,19 @@ const loginPage = () => {
         }}
         defaultCode='CO'
         defaultValue={phoneNumber}
+        onChangeText={(text) => {
+          setPhoneNumber(text);
+        }}
+        countryCode={(info) => {
+          setPhoneDos(info)
+        }}
         onChangeFormattedText={(text) => {
-          setPhoneNumber(text)
+          setPhoneDos(text)
         }}
       />
 
-      <TouchableOpacity style={styles.btnPrimary} onPress={handleChange}><Text>Ver numero</Text></TouchableOpacity>
+      <TouchableOpacity style={GlobalStyles.btnWhite} onPress={handleChange}><Text>Let’s Begin</Text></TouchableOpacity>
+      <TouchableOpacity style={GlobalStyles.btnSecundary} onPress={() => navigation.navigate("suppliers")}><Text style={GlobalStyles.textInput}>Iniciar sesion</Text></TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   );

@@ -9,7 +9,6 @@ import settings from '../screens/settings'
 import chat from '../screens/chat'
 import home from '../screens/home'
 import suppliers from '../screens/suppliers'
-import otpPage from '../screens/otp'
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
@@ -19,40 +18,6 @@ const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
 
-function MyStack() {
-    const navigation = useNavigation();
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name="home"
-                component={home}
-                options={{
-                    headerShown: false
-                }}
-            />
-
-            <Stack.Screen name="login"
-                component={loginPage}
-                options={{
-                    headerShown: false
-                }}
-            />
-            
-            <Stack.Screen name="otp"
-                component={otpPage}
-                options={{
-                    headerShown: false
-                }}
-            />
-            
-            <Stack.Screen name="suppliers"
-                component={suppliers}
-                screenOptions={{
-                    headerShown: true
-                }}
-            />
-        </Stack.Navigator >
-    )
-}
 function MyStack1() {
     return (
         <Stack.Navigator
@@ -210,7 +175,7 @@ function MyTabs() {
 export default function Navigation() {
     return (
         <NavigationContainer>
-            <MyStack />
+            <MyTabs />
         </NavigationContainer>
     )
 
