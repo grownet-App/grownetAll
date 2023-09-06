@@ -10,7 +10,7 @@ import logo_blancov2 from "../../img/logo_blancov2.svg";
 export default function CodeOtp(props) {
   const navigate = useNavigate();
   const { onResendCode } = props;
-  const [seconds, setSeconds] = useState(20);
+  const [seconds, setSeconds] = useState(10);
   const [show, setShow] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [showError, setShowError] = useState(false);
