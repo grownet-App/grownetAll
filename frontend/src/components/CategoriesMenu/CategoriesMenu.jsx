@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import React from "react";
+import React, { useState } from "react";
 import broccoli_img from "../../img/broccoli_img.png";
 import bread_img from "../../img/bread_img.png";
 import frozen_img from "../../img/frozen_img.png";
@@ -13,17 +13,21 @@ export default function CategoriesMenu({
   showFavorites,
   toggleShowFavorites,
   categories,
-  filterCategory
+  filterCategory,
 }) {
   const categoriesImg = [
-    { name: "Vegetables", image: { broccoli_img } },
-    { name: "Fruit", image: { banana_img } },
-    { name: "Bread", image: { bread_img } },
-    { name: "Frozen", image: { frozen_img } },
-    { name: "Meat", image: { meat_img } },
-    { name: "Prepared", image: { prepared_img } },
-    { name: "Mushrooms", image: { mushrooms_img } },
+    { id:"1",name: "Vegetables", image: "http://placekitten.com/g/200/300" },
+    { id:"2",name: "Fruit", image: "https://img.freepik.com/free-photo/many-different-berries-form-frame-white-background_485709-54.jpg?w=360" },
+    { id:"3",name: "Bread", image:{bread_img} },
+    { id:"4",name: "Frozen", image: { frozen_img } },
+    { id:"5",name: "Meat", image: { meat_img } },
+    { id:"6",name: "Prepared", image: { prepared_img } },
+    { id:"7",name: "Mushrooms", image: { mushrooms_img } },
   ];
+  const [categoriesArray, setCategoriesArray] = useState(categoriesImg);
+  const[showImage, setShowImage]=useState(true);
+  console.log(categories);
+  
   return (
     <section className="menu-categories me-auto">
       <div className="contenido">
@@ -39,14 +43,23 @@ export default function CategoriesMenu({
               <h6>Favorites</h6>
             </button>
           )}
-          {categories.map(category => (
+          {categories.map((category) => (
             <button
-            type="button"
+              type="button"
               className="card-products"
               onClick={() => filterCategory(category)}
               key={category}
             >
-              <img src={broccoli_img} alt="image categoria" />
+
+          {categoriesArray.map((article) => (
+                <>
+                {
+                  category === article.name && <h1>hola</h1>
+                }
+                  {showImage ? ( <img src={article.image} alt={article.name}/>) : (<></>)}
+                             
+             </> ))}
+            
               <h6>{category}</h6>
             </button>
           ))}

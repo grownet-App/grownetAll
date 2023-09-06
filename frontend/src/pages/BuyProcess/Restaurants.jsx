@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import css from "../../css/restaurants.css";
+import "../../css/restaurants.css";
 import axios from "axios";
 import { Icon } from "@iconify/react";
 
