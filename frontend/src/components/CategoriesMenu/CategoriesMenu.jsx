@@ -54,7 +54,7 @@ export default function CategoriesMenu({
           {categoriesArray.map((article) => (
                 <>
                 {
-                  category === article.name && <h1>hola</h1>
+                  category === article.name && <img src={article.image} alt={article.name}/>
                 }
                   {showImage ? ( <img src={article.image} alt={article.name}/>) : (<></>)}
                              

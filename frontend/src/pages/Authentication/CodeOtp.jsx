@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { otpApiUrl } from "../../config/urls.config";
 import "../../css/otp.css";
 import logo_blancov2 from "../../img/logo_blancov2.svg";
+import useTokenStore from "../../store/useTokenStore";
 
 export default function CodeOtp(props) {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ export default function CodeOtp(props) {
   const [showAlert, setShowAlert] = useState(false);
   const [showError, setShowError] = useState(false);
   const [otp, setOtp] = useState(new Array(4).fill(""));
+  const { setToken } = useTokenStore();
 
   const handleCloseError = () => setShowError(false);
   const handleShowError = () => setShowError(true);
@@ -51,8 +53,8 @@ export default function CodeOtp(props) {
       .then((response) => {
         if (response.data.flag === 1) {
           handleShowError(false);
+          setToken(response.data.token);
           navigate("/restaurants");
-          console.log(response.data);
         } else {
           handleShowError(false);
           setShowAlert(true);

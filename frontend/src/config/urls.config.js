@@ -8,4 +8,7 @@ export const validationApiUrl = 'https://ec2-18-191-177-149.us-east-2.compute.am
 
 export const onlyCountries = 'https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/countries/all'
 
-export const restaurants ='http://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/customers/chef'
+export const restaurants ='https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/customers/chef'
+
+export const availableRestaurants = 'https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/customers/chef'
+
