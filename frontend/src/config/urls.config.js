@@ -7,3 +7,5 @@ export const otpApiUrl = 'http://ec2-18-191-177-149.us-east-2.compute.amazonaws.
 export const validationApiUrl = 'http://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/authenticate/validateTelephone'
 
 export const onlyCountries = 'http://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/countries/all'
+
+export const availableRestaurants = 'http://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/customers/chef'
