@@ -13,19 +13,17 @@ import PhoneInput from "react-native-phone-number-input";
 import { useState } from "react";
 import axios from "axios";
 import { GlobalStyles } from "./styles";
+import Otp from "./Otp";
 import { onlyCountries, validationApiUrl } from "../config/urls.config";
-
 const loginPage = () => {
   const navigation = useNavigation();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [phoneDos, setPhoneDos] = useState("");
-
+  let country;
   const handleChange = async () => {
-    console.log(phoneNumber);
-    console.log(phoneDos);
     let countrySplit = phoneDos.split(phoneNumber);
     let countryCod = countrySplit[0];
-    let country = countryCod.split("+")[1];
+    country = countryCod.split("+")[1];
 
     const state = {
       form: {

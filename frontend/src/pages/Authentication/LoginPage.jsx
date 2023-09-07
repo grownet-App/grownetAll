@@ -96,7 +96,6 @@ function Login() {
       ) : (
         <>
           <img className="img-login" src={logo_blancov2} alt="logo-Grownet" />
-          <p>
             <form onSubmit={enviarData}>
               <label className="text-form">
                 <p>Enter your mobile number:</p>
@@ -118,7 +117,6 @@ function Login() {
                 </button>
               </Col>
             </form>
-          </p>
         </>
       )}
       {showAlert ? (

@@ -9,33 +9,28 @@ import mushrooms_img from "../../img/mushrooms_img.png";
 import banana_img from "../../img/banana_img.png";
 import "./categoriesMenu.css";
 
-export default function CategoriesMenu({
-  showFavorites,
-  toggleShowFavorites,
-  categories,
-  filterCategory,
-}) {
-  const categoriesImg = [
-    { id:"1",name: "Vegetables", image: "http://placekitten.com/g/200/300" },
-    { id:"2",name: "Fruit", image: "https://img.freepik.com/free-photo/many-different-berries-form-frame-white-background_485709-54.jpg?w=360" },
-    { id:"3",name: "Bread", image:{bread_img} },
-    { id:"4",name: "Frozen", image: { frozen_img } },
-    { id:"5",name: "Meat", image: { meat_img } },
-    { id:"6",name: "Prepared", image: { prepared_img } },
-    { id:"7",name: "Mushrooms", image: { mushrooms_img } },
-  ];
-  const [categoriesArray, setCategoriesArray] = useState(categoriesImg);
-  const[showImage, setShowImage]=useState(true);
-  console.log(categories);
+export default function CategoriesMenu({showFavorites, toggleShowFavorites, categories, filterCategory}) {
   
+  const categoriesImg = [
+    {id: 1, name: "Vegetable", image: broccoli_img},
+    {id: 2, name: "Fruit", image: banana_img},
+    { id: 3, name: "Bread", image: bread_img },
+    { id: 4, name: "Frozen", image: frozen_img },
+    { id: 5, name: "Meat", image: meat_img},
+    { id: 5, name: "Prepared", image: prepared_img },
+    { id: 6, name: "Mushrooms", image: mushrooms_img },
+  ];
+
+  const [allCategories, setAllCategories] = useState(categoriesImg);
+
   return (
     <section className="menu-categories me-auto">
       <div className="contenido">
         <div className="carousel-categ">
           {showFavorites ? (
             <button className="card-products" onClick={toggleShowFavorites}>
-              <Icon icon="fluent-emoji:basket" className="fav" />
-              <h6>All</h6>
+              <Icon icon="icon-park-solid:back" className="fav" />
+              <h6>Go back</h6>
             </button>
           ) : (
             <button className="card-products" onClick={toggleShowFavorites}>
@@ -50,21 +45,24 @@ export default function CategoriesMenu({
               onClick={() => filterCategory(category)}
               key={category}
             >
-
-          {categoriesArray.map((article) => (
+              {category==="All" &&(
+                <Icon icon="fluent-emoji:basket" className="fav" />
+              )}
+              {allCategories.map((arrayCateg) => (
                 <>
-                {
-                  category === article.name && <img src={article.image} alt={article.name}/>
-                }
-                  {showImage ? ( <img src={article.image} alt={article.name}/>) : (<></>)}
-                             
-             </> ))}
-            
+                  {category === arrayCateg.name && (
+                    <>
+                      <img src={arrayCateg.image} alt={arrayCateg.name}/>
+                    </>
+                  )}
+                </>
+              ))}
+
               <h6>{category}</h6>
             </button>
           ))}
 
-          {/*<button className="card-products">
+          {/*<button classNaxme="card-products">
             <img src={banana_img} />
             <h6>Fruit</h6>
           </button>
