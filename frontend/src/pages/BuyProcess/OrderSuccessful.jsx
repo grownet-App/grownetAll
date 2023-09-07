@@ -7,7 +7,7 @@ import DocumentPdf from "../../components/DocumentPdf"
 import { PDFDownloadLink } from "@react-pdf/renderer";
 
 export default function OrderSuccessful() {
-  const [verPdf, setVerPdf] = useState(false);
+
   return (
     <section className="order-succesful" >
         <img src={img_succesful} />
@@ -15,11 +15,11 @@ export default function OrderSuccessful() {
         <p>Your order is successful</p>
         <div className="buttons-succesful">
           <Link className="bttn btn-primary" to="/record">Your orders</Link>
-          <PDFDownloadLink document={<DocumentPdf></DocumentPdf>} fileName="Order">
+          <PDFDownloadLink  document={<DocumentPdf></DocumentPdf>} fileName="Order">
             <button className="bttn btn-outline" >Download PDF</button>
           </PDFDownloadLink>
         </div>
-        
+        <Menu/>
     </section>
   );
 }

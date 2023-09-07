@@ -118,6 +118,12 @@
 .buttons-succesful{
     margin-top: 2rem;
 }
+.order-succesful .btn-outline{
+    margin-left: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+/*Mobile*/
 @media screen and (max-width: 800px) {
     .order-succesful img{
         width: 70%;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Document, Page, Text, Image, View } from "@react-pdf/renderer";
-
+import "../css/orderDetail.css";
 
 export default function DocumentPdf() {
   return (
