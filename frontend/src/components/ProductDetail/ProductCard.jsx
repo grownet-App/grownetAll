@@ -1,13 +1,12 @@
 import { Icon } from "@iconify/react";
-import React, { useState } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
-import Stepper from "../components/Stepper/Stepper";
-import "../css/products.css";
-import { useFavoritesStore } from "../store/favoritesStore";
+import "../../css/products.css";
+import { useFavoritesStore } from "../../store/useFavoritesStore";
+import Stepper from "../Stepper/Stepper";
 
-export default function ProductCard({ productData }) {
-  const [counter, setCounter] = useState(0);
-  const { id, name, image } = productData;
+export default function ProductCard({ productData, onAmountChange }) {
+  const { id, name, image, price_unit } = productData;
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
   const isFavorite = favorites.includes(id, name, image);
 
@@ -20,11 +19,11 @@ export default function ProductCard({ productData }) {
       addFavorite(id);
     }
   };
-  let price = 10*counter;
+
   return (
     <section className="products">
       <div className="elements">
-        <img src={image} alt={"image "+ name} />
+        <img src={image} alt={"image " + name} />
         <div>
           <div className="titlle-products">
             <h1>{name}</h1>
@@ -39,9 +38,12 @@ export default function ProductCard({ productData }) {
               ></Icon>
             </div>
           </div>
-          <p>GBP £{price}</p>
+          <p>GBP £{price_unit}</p>
           <div className="product-amount">
-            <Stepper counter={counter} setCounter={setCounter} />
+            <Stepper
+              productData={productData}
+              onAmountChange={onAmountChange}
+            />
             <Form.Select
               aria-label="Default select example"
               placeholder="Choose the quantity"
