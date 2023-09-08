@@ -4,27 +4,29 @@ import "../css/orderDetail.css";
 
 export default function DocumentPdf() {
   return (
-   
-      <Document>
-        <Page size="A4">
+    <Document>
+      <Page size="A4" style={{display:"flex", alignItems:"center", justifyContent:"center", backgroundColor:"#E9F4FF"}} >
+        <View style={{ padding:"5px", width:"85%"}}>
           <View>
-          <Text>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries.
-            </Text>
-            <Text>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries.
-            </Text>
+            <View>
+            <View>
+              <Text>Broccoli £5458</Text>
+            </View>
+            <View>
+            <Text>15 Box/Boxes</Text></View>
+            </View>
+            <View>
+              <Text id="tax-font" className="payment-pdf">Payment details</Text>
+              <View className="product-detail" id="tax-pdf">
+                <Text id="h3">Tax £58</Text>
+              </View>
+            </View>
+            <View style={{backgroundColor:"#BBFACF", display:"flex", justifyContent:"space-between", padding:"15px", borderRadius:"10px", marginTop:"10px"}}>
+              <Text style={{fontSize:"18px", fontWeight:"700"}}>Current value £9458</Text>
+            </View>
           </View>
-        </Page>
-      </Document>
-   
+        </View>
+      </Page>
+    </Document>
   );
 }
