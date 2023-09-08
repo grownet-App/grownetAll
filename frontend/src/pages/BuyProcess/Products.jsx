@@ -127,6 +127,7 @@ export default function Products(props) {
   const filterCategory = (category) => {
     if (category === "All") {
       setArticles(products);
+      setShowFavorites(false);
       return;
     }
     const filteredData = products.filter(

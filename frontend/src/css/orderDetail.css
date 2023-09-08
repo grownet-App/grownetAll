@@ -119,6 +119,12 @@
 .buttons-succesful{
     margin-top: 2rem;
 }
+.order-succesful .btn-outline{
+    margin-left: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+/*Mobile*/
 @media screen and (max-width: 800px) {
     .order-succesful img{
         width: 70%;
@@ -150,4 +156,27 @@
         padding: 12px 15px;
         font-size: 15px;
     }
+ }
+ /*PDF*/
+ #h3{
+    margin-bottom: 0px;
+    font-size: 18px;
+    padding-top: 2px;
+    font-weight: 500;
+ }
+ #p{
+    font-size: 17px;
+    color: #868686;
+    margin-bottom: 5px;
+    text-align: left;
+ }
+ .payment-pdf{
+    padding-right: 40%;
+ }
+ #h2-total{
+    font-size: 18px;
+    font-weight: 700;
+ }
+ #tax-pdf{
+    margin-top: 1rem;
  }
