@@ -1,6 +1,6 @@
 import React from "react";
-import { useFavoritesStore } from "../store/favoritesStore";
-import ProductCard from "./ProductCard";
+import { useFavoritesStore } from "../store/useFavoritesStore";
+import ProductCard from "./ProductDetail/ProductCard";
 
 export default function Favorites({ productsData }) {
   const { favorites } = useFavoritesStore();

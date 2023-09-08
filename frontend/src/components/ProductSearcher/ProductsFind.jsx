@@ -1,6 +1,6 @@
 import React from "react";
 import useProductStore from "../../store/useProductStore";
-import ProductCard from "../ProductCard";
+import ProductCard from "../ProductDetail/ProductCard";
 
 function ProductsFind() {
   const filteredProducts = useProductStore((state) => state.filteredProducts);
