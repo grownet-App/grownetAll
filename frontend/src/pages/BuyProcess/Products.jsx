@@ -172,9 +172,6 @@ export default function Products(props) {
         setShowSearchResults={setShowSearchResults}
         showSearchResults={showSearchResults}
       />
-      <a className="bttn btn-primary" href="/details">
-        Continue
-      </a>
       {showSearchResults ? (
         <ProductsFind productsData={products} />
       ) : (
