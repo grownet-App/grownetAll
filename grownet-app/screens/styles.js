@@ -96,7 +96,7 @@ export const GlobalStyles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: "1em",
+    marginTop: 16,
   },
 
   titleSuppliers: {
@@ -114,10 +114,7 @@ export const GlobalStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "0.5em",
-    flex: 1,
-    width: "322px",
-    height: "125px",
+    width: 322,
     backgroundColor: "#164e84",
     marginVertical: 10,
     borderRadius: 21,
@@ -125,9 +122,9 @@ export const GlobalStyles = StyleSheet.create({
   },
   imgsuppliers: {
     position: "relative",
-    marginRight: "1rem",
+    marginRight: 20,
     width: 100,
-    height: 150,
-    top: "2.5em",
+    height: 125,
+    top: 30,
   },
 });

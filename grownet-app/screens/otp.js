@@ -15,7 +15,7 @@ import { useRoute } from "@react-navigation/native";
 import { otpApiUrl } from "../config/urls.config";
 import axios from "axios";
 
-const otp = () => {
+const Otp = () => {
   const navigation = useNavigation();
   const pin1Ref = useRef();
   const pin2Ref = useRef();
@@ -104,4 +104,4 @@ const otp = () => {
   );
 };
 
-export default otp;
+export default Otp;
