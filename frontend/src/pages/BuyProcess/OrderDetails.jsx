@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "../../css/orderDetail.css";
-import ProductDetail from "../../components/ProductDetail";
+import ProductDetail from "../../components/ProductDetail/ProductDetail";
+import useArticlesToPayStore from "../../store/useArticlesToPayStore";
 
 export default function OrderDetails(props) {
   const [counter, setCounter] = useState(props.initialounter || 0);

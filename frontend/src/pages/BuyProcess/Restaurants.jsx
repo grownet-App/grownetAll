@@ -7,7 +7,7 @@ import useTokenStore from "../../store/useTokenStore";
 
 export default function Restaurants() {
   //TODO QUITAR ESTA URL CUANDO EL BACKEND HAYA CARGADO EL LINK DE LA IMG
-    const urlImg = "http://5.161.211.8:88/"
+    const urlImg = "https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/";
     const [restaurants, setRestaurants] = useState([]);
     const { token } = useTokenStore();
   
@@ -18,7 +18,7 @@ export default function Restaurants() {
         },
       })
         .then((response) => {
-          setRestaurants(response.data['customersChef ']);
+          setRestaurants(response.data.customersChef);
           //TODO ELIMINAR ESTE CONSOLE LOG DE DATOS DEL RESTAURANTE
           console.log(response.data);
         })
@@ -38,10 +38,7 @@ export default function Restaurants() {
             </h2>
             <p>{restaurant.address}</p>
           </div>
-          {/* TODO ELIMINAR ESTE P, ES SOLO PARA VER EL LINK DE LA IMAGE */}
-          {/* <p> {urlImg + restaurant.image} </p> */}
-          <img src={urlImg + restaurant.image} />
-
+          <img src={urlImg + restaurant.image} alt={restaurant.account_name} />
         </a>
       ))}
       <a className="bttn btn-primary" href="addRestaurants"id="bttn-restaurant">
