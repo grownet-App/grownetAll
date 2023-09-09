@@ -19,9 +19,11 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
+    "react-intercom": "^1.0.15",
     "react-phone-input-2": "^2.15.1",
     "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
+    "react-use-intercom": "^5.1.4",
     "web-vitals": "^2.1.4",
     "zustand": "^4.4.1"
   },
