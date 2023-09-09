@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import useArticlesToPayStore from "../../store/useArticlesToPayStore";
 import Stepper from "../Stepper/Stepper";
 
-export default function ProductDetail() {
+export default function ProductDetail({ updateTotalToPay}) {
   const articlesToPay = useArticlesToPayStore((state) => state.articlesToPay);
 
   useEffect(() => {
@@ -34,6 +34,8 @@ export default function ProductDetail() {
         `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name}`
       )
     );
+    const newTotalToPay = calculateTotalToPay(updatedArticlesToPay);
+    updateTotalToPay(newTotalToPay);
   };
   
   const handleTrashClick = (productId) => {
@@ -52,6 +54,18 @@ export default function ProductDetail() {
         `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name}`
       )
     );
+    const newTotalToPay = calculateTotalToPay(updatedArticlesToPay);
+    updateTotalToPay(newTotalToPay);
+  };
+
+  const calculateItemTotal = (priceUnit, amount) => {
+    return priceUnit * amount;
+  };
+
+  const calculateTotalToPay = (articles) => {
+    return articles.reduce((total, article) => {
+      return total + article.price_unit * article.amount;
+    }, 0);
   };
 
   return (
@@ -63,7 +77,7 @@ export default function ProductDetail() {
             <div className="product-detail">
               <h3>{article.name}</h3>
               <div className="product-detail">
-                <h3>£{article.price_unit}</h3>
+                <h3>£{calculateItemTotal(article.price_unit, article.amount)}</h3>
                 <Icon
                   id="trash"
                   icon="ph:trash"
@@ -86,14 +100,6 @@ export default function ProductDetail() {
               </Form.Select>
             </div>
             <p> Box/Boxes</p>
-          </div>
-        ))}
-      {articles
-        .filter((article) => article.amount > 0)
-        .map((article) => (
-          <div key={article.id}>
-            ID: {article.id} - You are buying - {article.amount} -{" "}
-            {article.name} !
           </div>
         ))}
     </>
