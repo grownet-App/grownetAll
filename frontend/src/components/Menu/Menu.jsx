@@ -27,7 +27,7 @@ export default function Menu() {
                     <Icon className="icon-active3" icon="basil:invoice-solid" />
                     <p>Record</p>
             </Nav.Link>
-            <Nav.Link className="icons" href="/chat" id='my-intercom'>
+            <Nav.Link className="icons" href="" id='my-intercom'>
                     <Icon className="" icon="solar:chat-round-dots-linear"/>
                     <Icon className="icon-active4" icon="solar:chat-round-bold" />
                     <p>Chat</p> 

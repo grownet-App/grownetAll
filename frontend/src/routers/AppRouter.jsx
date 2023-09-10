@@ -9,7 +9,6 @@ import OrderSuccessful from "../pages/BuyProcess/OrderSuccessful";
 import Products from "../pages/BuyProcess/Products";
 import Restaurants from "../pages/BuyProcess/Restaurants";
 import Suppliers from "../pages/BuyProcess/Suppliers";
-import Chat from "../pages/Chat/Chat";
 import HomePage from "../pages/HomePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import DetailOrderPast from "../pages/Record/PastRecord/DetailOrderPast";
@@ -83,9 +82,6 @@ export default function AppRouter() {
       </Route>
       <Route exact path={routes.FAQ} element={<PublicRoute />}>
         <Route exact path={routes.FAQ} element={<FAQ />} />
-      </Route>
-      <Route exact path={routes.chat} element={<PublicRoute />}>
-        <Route exact path={routes.chat} element={<Chat />} />
       </Route>
       <Route exact path={routes.record} element={<PublicRoute />}>
         <Route exact path={routes.record} element={<Record />} />
