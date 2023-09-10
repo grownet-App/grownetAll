@@ -19,6 +19,8 @@ function Login() {
   const [showOtp, setShowOtp] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [show, setShow] = useState(false);
+  //TODO ELIMINAR ESTE OTP CODE, ES SOLO PARA VER EL CODIGO EN PANTALLA
+  const [otpCode, setOtpCode] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -67,6 +69,8 @@ function Login() {
       .post(validationApiUrl, state.form)
       .then((response) => {
         if (response.data.flag === 1) {
+          //TODO ELIMINAR ESTE SETOTP, SOLO PARA MOSTRAR CODIGO EN PANTALLA
+          setOtpCode(response.data.code);
           setShowOtp(true);
           handleShow(false);
           setShowAlert(false);
@@ -92,7 +96,7 @@ function Login() {
       <div className="login-form">
       <Container className="text-center">
       {showOtp ? (
-        <CodeOtp idUsuario={numero} countrie={country} onResendCode={resendCode}></CodeOtp>
+        <CodeOtp idUsuario={numero} countrie={country} onResendCode={resendCode} code={otpCode}></CodeOtp>
       ) : (
         <>
           <img className="img-login" src={logo_blancov2} alt="logo-Grownet" />

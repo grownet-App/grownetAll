@@ -10,7 +10,7 @@ import useTokenStore from "../../store/useTokenStore";
 
 export default function CodeOtp(props) {
   const navigate = useNavigate();
-  const { onResendCode } = props;
+  const { onResendCode, code } = props;
   const [seconds, setSeconds] = useState(10);
   const [show, setShow] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -104,6 +104,7 @@ export default function CodeOtp(props) {
             />
           ))}
         </div>
+        <p>Your OTP code is: {code}</p>
         <button className="bttn btn-secundary" onClick={enviarData}>
           Verify & Proceed
         </button>
