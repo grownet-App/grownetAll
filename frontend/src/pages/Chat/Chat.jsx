@@ -5,15 +5,14 @@ import Menu from "../../components/Menu/Menu";
 const Chat = () => {
     const { boot, shutdown, hide, show, update } = useIntercom();
 
-    useEffect(() => {
+    /* useEffect(() => {
         show();
-    }, [boot]);
+    }, [boot]); */
     
   return (
     <section className="">
-      <h1>CHAT</h1>
       <button onClick={show}>¡Abrir el chat! ☎️</button>;
-      <div id="intercom-container"></div>
+      <div id="my-intercom"></div>
       <Menu />
     </section>
   );
