@@ -36,11 +36,30 @@ export default function ProductDetail({
 
     updatedArticlesToPay.forEach((article) =>
       console.log(
-        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name}`
+        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume}`
       )
     );
     const newTotalToPay = calculateTotalToPay(updatedArticlesToPay);
     updateTotalToPay(newTotalToPay);
+  };
+
+  // ACTUALIZAR VOLUMEN DE ARTICULOS
+  const handleVolumeChange = (productId, event) => {
+    const newVolume = event.target.value;
+    setArticles((prevArticles) =>
+      prevArticles.map((article) =>
+        article.id === productId ? { ...article, volume: newVolume } : article
+      )
+    );
+    const updatedArticlesToPay = articles.map((article) =>
+      article.id === productId ? { ...article, volume: newVolume } : article
+    );  
+    localStorage.setItem("articlesToPay", JSON.stringify(updatedArticlesToPay));
+    updatedArticlesToPay.forEach((article) =>
+      console.log(
+        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume}`
+      )
+    );
   };
 
   // ELIMINAR ARTICULOS DEL CARRITO
@@ -57,7 +76,7 @@ export default function ProductDetail({
     localStorage.setItem("articlesToPay", JSON.stringify(updatedArticlesToPay));
     updatedArticlesToPay.forEach((article) =>
       console.log(
-        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name}`
+        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume}`
       )
     );
     const newTotalToPay = calculateTotalToPay(updatedArticlesToPay);
@@ -145,15 +164,17 @@ export default function ProductDetail({
                 onAmountChange={handleAmountChange}
               />
               <Form.Select
-                aria-label="Default select example"
-                placeholder="Choose the quantity"
+                aria-label="Select Volume"
+                value={article.volume}
+                onChange={(event) => handleVolumeChange(article.id, event)}
               >
-                <option value="1">Each</option>
-                <option value="2">Box</option>
-                <option value="3">Kg</option>
+                <option value="Unit">Unit</option>
+                <option value="Box">Box</option>
+                <option value="Kg">Kg</option>
               </Form.Select>
             </div>
             <p> Box/Boxes</p>
+          <p>{article.volume}</p>
           </div>
         ))}
     </>
