@@ -1,11 +1,15 @@
 import { Icon } from "@iconify/react";
-import React, { useState } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import "../../css/products.css";
 import { useFavoritesStore } from "../../store/useFavoritesStore";
 import Stepper from "../Stepper/Stepper";
 
-export default function ProductCard({ productData, onAmountChange, onVolumeChange }) {
+export default function ProductCard({
+  productData,
+  onAmountChange,
+  onVolumeChange,
+}) {
   const { id, name, image, priceWithTax, volume } = productData;
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
   const isFavorite = favorites.includes(id, name, image);
@@ -45,7 +49,6 @@ export default function ProductCard({ productData, onAmountChange, onVolumeChang
             </div>
           </div>
           <p>GBP £{priceWithTax.toFixed(2)}</p>
-          <p>Volume: {volume}</p>
           <div className="product-amount">
             <Stepper
               productData={productData}

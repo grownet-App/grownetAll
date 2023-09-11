@@ -1,17 +1,20 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
-import "../../css/products.css";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
 import Favorites from "../../components/Favorites";
 import ProductCard from "../../components/ProductDetail/ProductCard";
 import ProductSearcher from "../../components/ProductSearcher/ProductSearcher";
 import ProductsFind from "../../components/ProductSearcher/ProductsFind";
+import "../../css/products.css";
 
 export default function Products(props) {
   const [showFavorites, setShowFavorites] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [products, setProducts] = useState([]);
-  const allCategories = [ "All", ...new Set(products.map((article) => article.category)),];
+  const allCategories = [
+    "All",
+    ...new Set(products.map((article) => article.category)),
+  ];
   const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
 
@@ -24,8 +27,7 @@ export default function Products(props) {
       setArticles(storedArticlesToPay);
       console.log("TRAJO ALGO DEL STORAGE");
     } else {
-      
-  //TODO Reemplazar estos products por los que vienen de la API
+      //TODO Reemplazar estos products por los que vienen de la API
       const defaultProducts = [
         {
           id: 1,
@@ -201,14 +203,24 @@ export default function Products(props) {
 
   // CAMBIO DE VOLUMEN DE ARTICULOS (UNIT, BOX, KG)
   const handleVolumeChange = (productId, newVolume) => {
-    setArticles((prevArticles) =>
-      prevArticles.map((article) =>
-        article.id === productId ? { ...article, volume: newVolume } : article
-      )
-    );
-    const updatedArticlesToPay = articles.map((article) =>
-      article.id === productId ? { ...article, volume: newVolume } : article
-    );
+    const updatedArticlesToPay = articles.map((article) => {
+      if (article.id === productId) {
+        let updatedPrice = article.price_unit; // Default to price_unit
+        if (newVolume === "Box") {
+          updatedPrice = article.price_box;
+        } else if (newVolume === "Kg") {
+          updatedPrice = article.price_kg;
+        }
+        return {
+          ...article,
+          volume: newVolume,
+          priceWithTax: updatedPrice + updatedPrice * article.tax,
+        };
+      }
+      return article;
+    });
+
+    setArticles(updatedArticlesToPay);
     localStorage.setItem("articlesToPay", JSON.stringify(updatedArticlesToPay));
     updatedArticlesToPay.forEach((article) =>
       console.log(
@@ -250,8 +262,7 @@ export default function Products(props) {
                     productData={article}
                     onAmountChange={handleAmountChange}
                     onVolumeChange={handleVolumeChange}
-                  >
-                  </ProductCard>
+                  ></ProductCard>
                 </>
               ))}
             </>
