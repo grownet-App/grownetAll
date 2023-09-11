@@ -212,10 +212,6 @@ export default function ProductDetail({
     const newTotalNet = calculateTotalNet(articles);
     updateTotalNet(newTotalNet);
 
-    console.log("ACABA DE HACERSE UN USE EFFECT");
-    console.log("TOTAL NET", newTotalNet);
-    console.log("TOTAL TAXES", newTotalTaxes);
-    console.log("TOTAL TO PAY", newTotalToPay);
   }, [articles]);
 
   return (
@@ -250,24 +246,6 @@ export default function ProductDetail({
                 <option value="Kg">Kg</option>
               </Form.Select>
             </div>
-            <p>
-              {article.amount}{" "}
-              {article.amount === 1
-                ? article.volume === "Box"
-                  ? "Box"
-                  : article.volume === "Unit"
-                  ? "Unit"
-                  : article.volume === "Kg"
-                  ? "Kg"
-                  : ""
-                : article.volume === "Box"
-                ? "Boxes"
-                : article.volume === "Unit"
-                ? "Units"
-                : article.volume === "Kg"
-                ? "Kg"
-                : ""}
-            </p>
           </div>
         ))}
     </>
