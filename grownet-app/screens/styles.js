@@ -46,7 +46,7 @@ export const GlobalStyles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     justifyContent: "space-around",
-    height: 500,
+    height: 150,
   },
   linkWhite: {
     color: "white",
@@ -77,18 +77,22 @@ export const GlobalStyles = StyleSheet.create({
     textAlign: "center",
   },
   textInputView: {
+    backgroundColor: "white",
     borderWidth: 1,
     borderRadius: 8,
     borderColor: "white",
     textAlign: "center",
+    textAlignVertical:"center",
     justifyContent: "center",
     width: 50,
+    height: 50,
     marginHorizontal: 12,
   },
   textBtnW: {
     color: "#04444F",
     fontWeight: 500,
     fontSize: 18,
+    textAlign:"center"
   },
   //styles suppliers
   suppliers: {
