@@ -9,7 +9,7 @@ import settings from "../screens/settings";
 import chat from "../screens/chat";
 import home from "../screens/home";
 import providers from "../screens/providers";
-import otpPage from "../screens/Otp";
+import otpPage from "../screens/otpPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
