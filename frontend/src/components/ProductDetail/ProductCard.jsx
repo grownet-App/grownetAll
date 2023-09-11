@@ -6,7 +6,7 @@ import { useFavoritesStore } from "../../store/useFavoritesStore";
 import Stepper from "../Stepper/Stepper";
 
 export default function ProductCard({ productData, onAmountChange }) {
-  const { id, name, image, price_unit } = productData;
+  const { id, name, image, priceWithTax } = productData;
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
   const isFavorite = favorites.includes(id, name, image);
 
@@ -38,7 +38,7 @@ export default function ProductCard({ productData, onAmountChange }) {
               ></Icon>
             </div>
           </div>
-          <p>GBP £{price_unit}</p>
+          <p>GBP £{priceWithTax}</p>
           <div className="product-amount">
             <Stepper
               productData={productData}

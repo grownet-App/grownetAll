@@ -4,7 +4,11 @@ import Form from "react-bootstrap/Form";
 import useArticlesToPayStore from "../../store/useArticlesToPayStore";
 import Stepper from "../Stepper/Stepper";
 
-export default function ProductDetail({ updateTotalToPay}) {
+export default function ProductDetail({
+  updateTotalToPay,
+  updateTotalTaxes,
+  updateTotalNet,
+}) {
   const articlesToPay = useArticlesToPayStore((state) => state.articlesToPay);
 
   useEffect(() => {
@@ -17,6 +21,7 @@ export default function ProductDetail({ updateTotalToPay}) {
     }
   }, []);
 
+  // ACTUALIZAR CANTIDAD DE ARTICULOS
   const [articles, setArticles] = useState(articlesToPay);
   const handleAmountChange = (productId, newAmount) => {
     setArticles((prevArticles) =>
@@ -37,7 +42,8 @@ export default function ProductDetail({ updateTotalToPay}) {
     const newTotalToPay = calculateTotalToPay(updatedArticlesToPay);
     updateTotalToPay(newTotalToPay);
   };
-  
+
+  // ELIMINAR ARTICULOS DEL CARRITO
   const handleTrashClick = (productId) => {
     setArticles((prevArticles) =>
       prevArticles.map((article) =>
@@ -58,14 +64,60 @@ export default function ProductDetail({ updateTotalToPay}) {
     updateTotalToPay(newTotalToPay);
   };
 
-  const calculateItemTotal = (priceUnit, amount) => {
-    return priceUnit * amount;
+  // CALCULAR EL NETO
+  const calculateItemNet = (priceUnit, amount) => {
+    const net = priceUnit * amount;
+    return parseFloat(net.toFixed(2));
+  };
+
+  const calculateTotalNet = (articles) => {
+    const totalNet = articles.reduce((total, article) => {
+      const itemNet = calculateItemNet(article.price_unit, article.amount);
+      return total + itemNet;
+    }, 0);
+    return parseFloat(totalNet.toFixed(2));
+  };
+
+  useEffect(() => {
+    const newTotalNet = calculateTotalNet(articles);
+    updateTotalNet(newTotalNet);
+  }, [articles]);
+
+  // CALCULAR TAXES
+  const calculateItemTaxes = (priceUnit, tax, amount) => {
+    const taxes = priceUnit * tax * amount;
+    return parseFloat(taxes.toFixed(2));
+  };
+
+  const calculateTotalTaxes = (articles) => {
+    const totalTaxes = articles.reduce((total, article) => {
+      const itemTaxes = calculateItemTaxes(
+        article.price_unit,
+        article.tax,
+        article.amount
+      );
+      return total + itemTaxes;
+    }, 0);
+    return parseFloat(totalTaxes.toFixed(2));
+  };
+
+  useEffect(() => {
+    const newTotalTaxes = calculateTotalTaxes(articles);
+    updateTotalTaxes(newTotalTaxes);
+  }, [articles]);
+
+  // CALCULAR TOTAL A PAGAR
+  const calculateItemToPay = (priceWithTax, amount) => {
+    const total = priceWithTax * amount;
+    return parseFloat(total.toFixed(2));
   };
 
   const calculateTotalToPay = (articles) => {
-    return articles.reduce((total, article) => {
-      return total + article.price_unit * article.amount;
+    const totalToPay = articles.reduce((total, article) => {
+      const subtotal = article.priceWithTax * article.amount;
+      return total + subtotal;
     }, 0);
+    return parseFloat(totalToPay.toFixed(2));
   };
 
   return (
@@ -77,7 +129,9 @@ export default function ProductDetail({ updateTotalToPay}) {
             <div className="product-detail">
               <h3>{article.name}</h3>
               <div className="product-detail">
-                <h3>£{calculateItemTotal(article.price_unit, article.amount)}</h3>
+                <h3>
+                  £{calculateItemToPay(article.priceWithTax, article.amount)}
+                </h3>
                 <Icon
                   id="trash"
                   icon="ph:trash"
