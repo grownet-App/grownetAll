@@ -29,28 +29,32 @@ export default function Products(props) {
       const defaultProducts = [
         {
           id: 1,
-          name: "Avocado",
-          image: "https://images.heb.com/is/image/HEBGrocery/002599549-1",
-          price_unit: 11,
+          name: "Red pepper",
+          image:
+            "https://cultivovital.com/wp-content/uploads/2020/11/pimiento-rojo-png-2.png",
+          price_unit: 18,
           amount: 0,
           category: "Vegetable",
+          tax: 0.13,
         },
         {
           id: 2,
-          name: "Broccoli",
-          image: "https://pngimg.com/uploads/broccoli/broccoli_PNG72970.png",
-          price_unit: 16,
-          amount: 0,
-          category: "Vegetable",
-        },
-        {
-          id: 3,
           name: "Bananas",
           image:
             "https://purepng.com/public/uploads/large/purepng.com-bananafruitsyellowfruit-981524754330lspp8.png",
           price_unit: 12,
           amount: 0,
           category: "Fruit",
+          tax: 0.21,
+        },
+        {
+          id: 3,
+          name: "Broccoli",
+          image: "https://pngimg.com/uploads/broccoli/broccoli_PNG72970.png",
+          price_unit: 16,
+          amount: 0,
+          category: "Vegetable",
+          tax: 0.05,
         },
         {
           id: 4,
@@ -60,6 +64,7 @@ export default function Products(props) {
           price_unit: 17,
           amount: 0,
           category: "Fruit",
+          tax: 0.1,
         },
         {
           id: 5,
@@ -68,6 +73,7 @@ export default function Products(props) {
           price_unit: 19,
           amount: 0,
           category: "Vegetable",
+          tax: 0.04,
         },
         {
           id: 6,
@@ -77,15 +83,16 @@ export default function Products(props) {
           price_unit: 12,
           amount: 0,
           category: "Vegetable",
+          tax: 0.23,
         },
         {
           id: 7,
-          name: "Red pepper",
-          image:
-            "https://cultivovital.com/wp-content/uploads/2020/11/pimiento-rojo-png-2.png",
-          price_unit: 18,
+          name: "Avocado",
+          image: "https://images.heb.com/is/image/HEBGrocery/002599549-1",
+          price_unit: 11,
           amount: 0,
           category: "Vegetable",
+          tax: 0.2,
         },
         {
           id: 8,
@@ -95,6 +102,7 @@ export default function Products(props) {
           price_unit: 11,
           amount: 0,
           category: "Vegetable",
+          tax: 0.06,
         },
         {
           id: 9,
@@ -104,6 +112,7 @@ export default function Products(props) {
           price_unit: 10,
           amount: 0,
           category: "Fruit",
+          tax: 0.2,
         },
         {
           id: 10,
@@ -113,9 +122,14 @@ export default function Products(props) {
           price_unit: 18,
           amount: 0,
           category: "Fruit",
+          tax: 0.23,
         },
       ];
-      setArticles(defaultProducts);
+      const productsWithTax = defaultProducts.map((article) => ({
+        ...article,
+        priceWithTax: article.price_unit + article.price_unit * article.tax,
+      }));
+      setArticles(productsWithTax);
       console.log("NO TRAJO NADA DEL STORAGE");
     }
   }, []);
@@ -149,7 +163,7 @@ export default function Products(props) {
     localStorage.setItem("articlesToPay", JSON.stringify(updatedArticlesToPay));
     updatedArticlesToPay.forEach((article) =>
       console.log(
-        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name}`
+        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Tax: ${article.tax}`
       )
     );
   };

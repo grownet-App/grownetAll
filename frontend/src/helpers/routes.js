@@ -20,7 +20,6 @@ const routes = {
     detailsOrderPast: '/detailsOrderPast',
     reception: '/reception',
     upcomingRecord: '/upcomingRecord',
-    chat: '/chat',
     order: (orderId) => (orderId ? `/order/:${orderId}` : '/order/:id'),
     restaurants: '/restaurants',
     suppliers: '/suppliers',
