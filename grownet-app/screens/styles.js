@@ -114,7 +114,7 @@ export const GlobalStyles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: 322,
+    width: 350,
     backgroundColor: "#164e84",
     marginVertical: 10,
     borderRadius: 21,
