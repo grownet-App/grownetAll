@@ -13,7 +13,6 @@ import PhoneInput from "react-native-phone-number-input";
 import { useState } from "react";
 import axios from "axios";
 import { GlobalStyles } from "./styles";
-import Otp from "./Otp";
 import { onlyCountries, validationApiUrl } from "../config/urls.config";
 const loginPage = () => {
   const navigation = useNavigation();

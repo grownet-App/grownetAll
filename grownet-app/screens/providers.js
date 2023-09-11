@@ -37,7 +37,7 @@ const providers = () => {
               <Text style={GlobalStyles.textSupplier}>{supplier.name}</Text>
 
               <Image
-                source={require("../assets/img/img_providers.png")}
+                source={require("../assets/img/img_suppliers.png")}
                 style={GlobalStyles.imgproviders}
               />
             </View>

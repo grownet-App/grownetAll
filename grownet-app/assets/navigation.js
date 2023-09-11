@@ -8,7 +8,7 @@ import records from "../screens/records";
 import settings from "../screens/settings";
 import chat from "../screens/chat";
 import home from "../screens/home";
-import providers from "../screens/providers";
+import suppliers from "../screens/suppliers";
 import otpPage from "../screens/Otp";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";

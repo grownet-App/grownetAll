@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 export const GlobalStyles = StyleSheet.create({
   btnPrimary: {
@@ -34,7 +34,7 @@ export const GlobalStyles = StyleSheet.create({
     fontWeight: 500,
   },
   container: {
-    flex: 1,
+    flex: 2,
     backgroundColor: "#026CD2",
     alignItems: "center",
     justifyContent: "center",
@@ -46,7 +46,7 @@ export const GlobalStyles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     justifyContent: "space-around",
-    height: 500,
+    height: 150,
   },
   linkWhite: {
     color: "white",
@@ -77,18 +77,22 @@ export const GlobalStyles = StyleSheet.create({
     textAlign: "center",
   },
   textInputView: {
+    backgroundColor: "white",
     borderWidth: 1,
     borderRadius: 8,
     borderColor: "white",
     textAlign: "center",
+    textAlignVertical:"center",
     justifyContent: "center",
     width: 50,
+    height: 50,
     marginHorizontal: 12,
   },
   textBtnW: {
     color: "#04444F",
     fontWeight: 500,
     fontSize: 18,
+    textAlign:"center"
   },
   //styles providers
   providers: {
@@ -126,5 +130,20 @@ export const GlobalStyles = StyleSheet.create({
     width: 100,
     height: 125,
     top: 30,
+  },
+  //carousel styles
+  slide: {
+    marginTop: "30%",
+    alignItems: "center",
+  },
+  image: {
+    width: 250,
+    height: 250,
+  },
+  containerButtton: {
+    marginBottom: Platform.OS === "android" ? "20%" : "40%",
+  },
+  paginatioCarousel: {
+    marginBottom: 33,
   },
 });
