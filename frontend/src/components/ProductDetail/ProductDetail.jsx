@@ -196,8 +196,8 @@ export default function ProductDetail({
 
   const calculateTotalToPay = (articles) => {
     const totalToPay = articles.reduce((total, article) => {
-      const subtotal = article.priceWithTax * article.amount;
-      return total + subtotal;
+      const itemTotal = calculateItemToPay(article, article.amount);
+      return total + itemTotal;
     }, 0);
     return parseFloat(totalToPay.toFixed(2));
   };
@@ -212,6 +212,10 @@ export default function ProductDetail({
     const newTotalNet = calculateTotalNet(articles);
     updateTotalNet(newTotalNet);
 
+    console.log("ACABA DE HACERSE UN USE EFFECT");
+    console.log("TOTAL NET", newTotalNet);
+    console.log("TOTAL TAXES", newTotalTaxes);
+    console.log("TOTAL TO PAY", newTotalToPay);
   }, [articles]);
 
   return (
@@ -261,7 +265,7 @@ export default function ProductDetail({
                 : article.volume === "Unit"
                 ? "Units"
                 : article.volume === "Kg"
-                ? "Kgs"
+                ? "Kg"
                 : ""}
             </p>
           </div>
