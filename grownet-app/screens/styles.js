@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 export const GlobalStyles = StyleSheet.create({
   btnPrimary: {
@@ -34,7 +34,7 @@ export const GlobalStyles = StyleSheet.create({
     fontWeight: 500,
   },
   container: {
-    flex: 1,
+    flex: 2,
     backgroundColor: "#026CD2",
     alignItems: "center",
     justifyContent: "center",
@@ -126,5 +126,20 @@ export const GlobalStyles = StyleSheet.create({
     width: 100,
     height: 125,
     top: 30,
+  },
+  //carousel styles
+  slide: {
+    marginTop: "30%",
+    alignItems: "center",
+  },
+  image: {
+    width: 250,
+    height: 250,
+  },
+  containerButtton: {
+    marginBottom: Platform.OS === "android" ? "20%" : "40%",
+  },
+  paginatioCarousel: {
+    marginBottom: 33,
   },
 });
