@@ -23,10 +23,10 @@ export default function Settings() {
           </div>
           <Icon icon="simple-line-icons:plus" className="plus" />
         </a>
-        <a className="bttn btn-secundary" id="settings-button" href="/settingsSuppliers">
+        <a className="bttn btn-secundary" id="settings-button" href="/settingsProviders">
           <div className="text-button">
-            <h2>Suppliers</h2>
-            <p>Edit your suppliers</p>
+            <h2>Providers</h2>
+            <p>Edit your providers</p>
           </div>
           <Icon icon="simple-line-icons:plus" className="plus" />
         </a>

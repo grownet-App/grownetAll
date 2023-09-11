@@ -29,7 +29,7 @@ export const GlobalStyles = StyleSheet.create({
     fontWeight: 500,
     alignItems: "center",
   },
-  cardSuppliers: {
+  cardProviders: {
     backgroundColor: "#1D446A",
     fontWeight: 500,
   },
@@ -90,8 +90,8 @@ export const GlobalStyles = StyleSheet.create({
     fontWeight: 500,
     fontSize: 18,
   },
-  //styles suppliers
-  suppliers: {
+  //styles providers
+  providers: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -99,7 +99,7 @@ export const GlobalStyles = StyleSheet.create({
     marginTop: 16,
   },
 
-  titleSuppliers: {
+  titleProviders: {
     display: "flex",
     alignItems: "center",
   },
@@ -110,7 +110,7 @@ export const GlobalStyles = StyleSheet.create({
     fontSize: 25,
     color: "#FFFFFF",
   },
-  suppliersCateg: {
+  providersCateg: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -120,7 +120,7 @@ export const GlobalStyles = StyleSheet.create({
     borderRadius: 21,
     overflow: "hidden",
   },
-  imgsuppliers: {
+  imgproviders: {
     position: "relative",
     marginRight: 20,
     width: 100,

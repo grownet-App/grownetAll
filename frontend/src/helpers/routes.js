@@ -11,7 +11,7 @@ const routes = {
     orderSuccessful: '/orderSuccessful',
     settings: '/settings',
     settingsRestaurants: '/settingsRestaurants',
-    settingsSuppliers: '/settingsSuppliers',
+    settingsProviders: '/settingsProviders',
     FAQ: '/FAQ',
     tAndC: '/tAndC',
     editRestaurant: 'editRestaurant',
@@ -22,7 +22,7 @@ const routes = {
     upcomingRecord: '/upcomingRecord',
     order: (orderId) => (orderId ? `/order/:${orderId}` : '/order/:id'),
     restaurants: '/restaurants',
-    suppliers: '/suppliers',
+    providers: '/providers',
     provider: (providerId) => (providerId ? `/provider/:${providerId}` : '/provider/:id'),
     admin: {
         team: '/admin/team',

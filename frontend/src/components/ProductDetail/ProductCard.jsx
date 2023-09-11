@@ -5,8 +5,12 @@ import "../../css/products.css";
 import { useFavoritesStore } from "../../store/useFavoritesStore";
 import Stepper from "../Stepper/Stepper";
 
-export default function ProductCard({ productData, onAmountChange }) {
-  const { id, name, image, priceWithTax } = productData;
+export default function ProductCard({
+  productData,
+  onAmountChange,
+  onVolumeChange,
+}) {
+  const { id, name, image, priceWithTax, volume } = productData;
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
   const isFavorite = favorites.includes(id, name, image);
 
@@ -18,6 +22,12 @@ export default function ProductCard({ productData, onAmountChange }) {
       console.log("add the ", id);
       addFavorite(id);
     }
+  };
+
+  const handleVolumeChange = (event) => {
+    const newVolume = event.target.value;
+    onVolumeChange(id, newVolume);
+    console.log(`Selected volume for ${name}: ${newVolume}`);
   };
 
   return (
@@ -38,19 +48,20 @@ export default function ProductCard({ productData, onAmountChange }) {
               ></Icon>
             </div>
           </div>
-          <p>GBP £{priceWithTax}</p>
+          <p>GBP £{priceWithTax.toFixed(2)}</p>
           <div className="product-amount">
             <Stepper
               productData={productData}
               onAmountChange={onAmountChange}
             />
             <Form.Select
-              aria-label="Default select example"
-              placeholder="Choose the quantity"
+              aria-label="Select Volume"
+              value={volume}
+              onChange={handleVolumeChange}
             >
-              <option value="1">Each</option>
-              <option value="2">Box</option>
-              <option value="3">Kg</option>
+              <option value="Unit">Unit</option>
+              <option value="Box">Box</option>
+              <option value="Kg">Kg</option>
             </Form.Select>
           </div>
         </div>

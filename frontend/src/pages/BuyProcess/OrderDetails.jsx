@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
-import "../../css/orderDetail.css";
+import React, { useState } from "react";
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
-import useArticlesToPayStore from "../../store/useArticlesToPayStore";
+import "../../css/orderDetail.css";
 
 export default function OrderDetails(props) {
   const [totalToPay, setTotalToPay] = useState(0);

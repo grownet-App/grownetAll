@@ -79,7 +79,7 @@ const loginPage = () => {
       </TouchableOpacity>
       <TouchableOpacity
         style={GlobalStyles.btnSecundary}
-        onPress={() => navigation.navigate("suppliers")}
+        onPress={() => navigation.navigate("providers")}
       >
         <Text style={GlobalStyles.textInput}>Iniciar sesion</Text>
       </TouchableOpacity>

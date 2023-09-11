@@ -1,12 +1,12 @@
 import React from "react";
 import {Icon} from '@iconify/react';
-import '../../css/settingsSuppliers.css';
+import '../../css/settingsProviders.css';
 import Menu from "../../components/Menu/Menu";
 
-export default function SettingsSuppliers() {
+export default function SettingsProviders() {
   return (
-    <section className="settings-suppliers">
-    <h1>Add suppliers</h1>
+    <section className="settings-providers">
+    <h1>Add providers</h1>
     <button className="bttn" id="supplier-card">
       <img src="https://placehold.co/300" alt="logo-supplier"/>
       <Icon icon="simple-line-icons:plus" className="plus" />

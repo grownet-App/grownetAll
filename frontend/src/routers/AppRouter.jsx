@@ -8,7 +8,7 @@ import OrderInformation from "../pages/BuyProcess/OrderInformation";
 import OrderSuccessful from "../pages/BuyProcess/OrderSuccessful";
 import Products from "../pages/BuyProcess/Products";
 import Restaurants from "../pages/BuyProcess/Restaurants";
-import Suppliers from "../pages/BuyProcess/Suppliers";
+import Providers from "../pages/BuyProcess/Providers";
 import HomePage from "../pages/HomePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import DetailOrderPast from "../pages/Record/PastRecord/DetailOrderPast";
@@ -20,7 +20,7 @@ import AddRestaurants from "../pages/Settings/AddRestaurants";
 import FAQ from "../pages/Settings/FAQ";
 import Settings from "../pages/Settings/Settings";
 import SettingsRestaurants from "../pages/Settings/SettingsRestaurants";
-import SettingsSuppliers from "../pages/Settings/SettingsSuppliers";
+import SettingsProviders from "../pages/Settings/SettingsProviders";
 import TermsAndConditions from "../pages/TermsAndConditions";
 import EditRestaurant from "../pages/Settings/EditRestaurant";
 import PublicRoute from "./PublicRoute";
@@ -65,8 +65,8 @@ export default function AppRouter() {
       <Route exact path={routes.orderSuccessful} element={<PublicRoute />}>
         <Route path={routes.orderSuccessful} element={<OrderSuccessful />} />
       </Route>
-      <Route exact path={routes.suppliers} element={<PublicRoute />}>
-        <Route path={routes.suppliers} element={<Suppliers />} />
+      <Route exact path={routes.providers} element={<PublicRoute />}>
+        <Route path={routes.providers} element={<Providers />} />
       </Route>
       <Route exact path={routes.settings} element={<PublicRoute />}>
         <Route exact path={routes.settings} element={<Settings />} />
@@ -74,8 +74,8 @@ export default function AppRouter() {
       <Route exact path={routes.settingsRestaurants} element={<PublicRoute />}>
         <Route exact path={routes.settingsRestaurants} element={<SettingsRestaurants />}/>
       </Route>
-      <Route exact path={routes.settingsSuppliers} element={<PublicRoute />}>
-        <Route exact path={routes.settingsSuppliers} element={<SettingsSuppliers />}/>
+      <Route exact path={routes.settingsProviders} element={<PublicRoute />}>
+        <Route exact path={routes.settingsProviders} element={<SettingsProviders />}/>
       </Route>
       <Route exact path={routes.editRestaurant} element={<PublicRoute />}>
         <Route exact path={routes.editRestaurant} element={<EditRestaurant />}/>
