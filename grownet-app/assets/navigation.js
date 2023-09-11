@@ -9,7 +9,7 @@ import settings from "../screens/settings";
 import chat from "../screens/chat";
 import home from "../screens/home";
 import suppliers from "../screens/suppliers";
-import otpPage from "../screens/otp";
+import otpPage from "../screens/Otp";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
@@ -56,11 +56,11 @@ function MyStack() {
       />
 
       <Stack.Screen
-        name="suppliers"
-        component={suppliers}
+        name="providers"
+        component={providers}
         options={{
           headerShown: true,
-          title: "Suppliers",
+          title: "Providers",
           headerStyle: {
             backgroundColor: "#f2f2f2",
           },
@@ -136,8 +136,8 @@ function orderStack() {
       }}
     >
       <Stack.Screen
-        name="suppliers"
-        component={suppliers}
+        name="providers"
+        component={providers}
         options={{
           headerBackTitleVisible: false,
           headerLeft: () => (
