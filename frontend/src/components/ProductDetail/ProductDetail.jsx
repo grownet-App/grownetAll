@@ -30,13 +30,19 @@ export default function ProductDetail({
       )
     );
     const updatedArticlesToPay = articles.map((article) =>
-      article.id === productId ? { ...article, amount: newAmount } : article
+      article.id === productId
+        ? {
+            ...article,
+            amount: newAmount,
+            priceWithTax: calculateItemToPay(article, newAmount),
+          }
+        : article
     );
     localStorage.setItem("articlesToPay", JSON.stringify(updatedArticlesToPay));
 
     updatedArticlesToPay.forEach((article) =>
       console.log(
-        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume}`
+        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume} - PriceWithTax: ${article.priceWithTax}`
       )
     );
     const newTotalToPay = calculateTotalToPay(updatedArticlesToPay);
@@ -47,17 +53,37 @@ export default function ProductDetail({
   const handleVolumeChange = (productId, event) => {
     const newVolume = event.target.value;
     setArticles((prevArticles) =>
-      prevArticles.map((article) =>
-        article.id === productId ? { ...article, volume: newVolume } : article
-      )
+      prevArticles.map((article) => {
+        if (article.id === productId) {
+          let updatedPrice;
+          if (newVolume === "Box") {
+            updatedPrice = article.price_box;
+          } else if (newVolume === "Kg") {
+            updatedPrice = article.price_kg;
+          } else {
+            updatedPrice = article.price_unit;
+          }
+          const updatedArticle = {
+            ...article,
+            volume: newVolume,
+            priceWithTax: updatedPrice + updatedPrice * article.tax,
+          };
+          return updatedArticle;
+        }
+        return article;
+      })
     );
-    const updatedArticlesToPay = articles.map((article) =>
-      article.id === productId ? { ...article, volume: newVolume } : article
-    );  
+    const updatedArticlesToPay = articles.map((article) => {
+      if (article.id === productId) {
+        return { ...article, volume: newVolume };
+      }
+      return article;
+    });
+
     localStorage.setItem("articlesToPay", JSON.stringify(updatedArticlesToPay));
     updatedArticlesToPay.forEach((article) =>
       console.log(
-        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume}`
+        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume} - PriceWithTax: ${article.priceWithTax}`
       )
     );
   };
@@ -84,27 +110,57 @@ export default function ProductDetail({
   };
 
   // CALCULAR EL NETO
-  const calculateItemNet = (priceUnit, amount) => {
-    const net = priceUnit * amount;
+  const calculateItemNet = (
+    price_unit,
+    price_box,
+    price_kg,
+    amount,
+    volume
+  ) => {
+    let price;
+    if (volume === "Box") {
+      price = price_box;
+    } else if (volume === "Kg") {
+      price = price_kg;
+    } else {
+      price = price_unit;
+    }
+    const net = price * amount;
     return parseFloat(net.toFixed(2));
   };
 
   const calculateTotalNet = (articles) => {
     const totalNet = articles.reduce((total, article) => {
-      const itemNet = calculateItemNet(article.price_unit, article.amount);
+      const itemNet = calculateItemNet(
+        article.price_unit,
+        article.price_box,
+        article.price_kg,
+        article.amount,
+        article.volume
+      );
       return total + itemNet;
     }, 0);
     return parseFloat(totalNet.toFixed(2));
   };
 
-  useEffect(() => {
-    const newTotalNet = calculateTotalNet(articles);
-    updateTotalNet(newTotalNet);
-  }, [articles]);
-
   // CALCULAR TAXES
-  const calculateItemTaxes = (priceUnit, tax, amount) => {
-    const taxes = priceUnit * tax * amount;
+  const calculateItemTaxes = (
+    price_unit,
+    price_box,
+    price_kg,
+    tax,
+    amount,
+    volume
+  ) => {
+    let price;
+    if (volume === "Box") {
+      price = price_box;
+    } else if (volume === "Kg") {
+      price = price_kg;
+    } else {
+      price = price_unit;
+    }
+    const taxes = price * tax * amount;
     return parseFloat(taxes.toFixed(2));
   };
 
@@ -112,21 +168,28 @@ export default function ProductDetail({
     const totalTaxes = articles.reduce((total, article) => {
       const itemTaxes = calculateItemTaxes(
         article.price_unit,
+        article.price_box,
+        article.price_kg,
         article.tax,
-        article.amount
+        article.amount,
+        article.volume
       );
       return total + itemTaxes;
     }, 0);
     return parseFloat(totalTaxes.toFixed(2));
   };
 
-  useEffect(() => {
-    const newTotalTaxes = calculateTotalTaxes(articles);
-    updateTotalTaxes(newTotalTaxes);
-  }, [articles]);
-
   // CALCULAR TOTAL A PAGAR
-  const calculateItemToPay = (priceWithTax, amount) => {
+  const calculateItemToPay = (article, amount) => {
+    let updatedPrice;
+    if (article.volume === "Box") {
+      updatedPrice = article.price_box;
+    } else if (article.volume === "Kg") {
+      updatedPrice = article.price_kg;
+    } else {
+      updatedPrice = article.price_unit;
+    }
+    const priceWithTax = updatedPrice + updatedPrice * article.tax;
     const total = priceWithTax * amount;
     return parseFloat(total.toFixed(2));
   };
@@ -139,6 +202,18 @@ export default function ProductDetail({
     return parseFloat(totalToPay.toFixed(2));
   };
 
+  useEffect(() => {
+    const newTotalTaxes = calculateTotalTaxes(articles);
+    updateTotalTaxes(newTotalTaxes);
+
+    const newTotalToPay = calculateTotalToPay(articles);
+    updateTotalToPay(newTotalToPay);
+
+    const newTotalNet = calculateTotalNet(articles);
+    updateTotalNet(newTotalNet);
+
+  }, [articles]);
+
   return (
     <>
       {articles
@@ -148,9 +223,7 @@ export default function ProductDetail({
             <div className="product-detail">
               <h3>{article.name}</h3>
               <div className="product-detail">
-                <h3>
-                  £{calculateItemToPay(article.priceWithTax, article.amount)}
-                </h3>
+                <h3>£{calculateItemToPay(article, article.amount)}</h3>
                 <Icon
                   id="trash"
                   icon="ph:trash"
@@ -173,8 +246,24 @@ export default function ProductDetail({
                 <option value="Kg">Kg</option>
               </Form.Select>
             </div>
-            <p> Box/Boxes</p>
-          <p>{article.volume}</p>
+            <p>
+              {article.amount}{" "}
+              {article.amount === 1
+                ? article.volume === "Box"
+                  ? "Box"
+                  : article.volume === "Unit"
+                  ? "Unit"
+                  : article.volume === "Kg"
+                  ? "Kg"
+                  : ""
+                : article.volume === "Box"
+                ? "Boxes"
+                : article.volume === "Unit"
+                ? "Units"
+                : article.volume === "Kg"
+                ? "Kgs"
+                : ""}
+            </p>
           </div>
         ))}
     </>
