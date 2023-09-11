@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 export const GlobalStyles = StyleSheet.create({
   btnPrimary: {
@@ -29,12 +29,12 @@ export const GlobalStyles = StyleSheet.create({
     fontWeight: 500,
     alignItems: "center",
   },
-  cardSuppliers: {
+  cardProviders: {
     backgroundColor: "#1D446A",
     fontWeight: 500,
   },
   container: {
-    flex: 1,
+    flex: 2,
     backgroundColor: "#026CD2",
     alignItems: "center",
     justifyContent: "center",
@@ -94,8 +94,8 @@ export const GlobalStyles = StyleSheet.create({
     fontSize: 18,
     textAlign:"center"
   },
-  //styles suppliers
-  suppliers: {
+  //styles providers
+  providers: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -103,7 +103,7 @@ export const GlobalStyles = StyleSheet.create({
     marginTop: 16,
   },
 
-  titleSuppliers: {
+  titleProviders: {
     display: "flex",
     alignItems: "center",
   },
@@ -114,7 +114,7 @@ export const GlobalStyles = StyleSheet.create({
     fontSize: 25,
     color: "#FFFFFF",
   },
-  suppliersCateg: {
+  providersCateg: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -124,11 +124,26 @@ export const GlobalStyles = StyleSheet.create({
     borderRadius: 21,
     overflow: "hidden",
   },
-  imgsuppliers: {
+  imgproviders: {
     position: "relative",
     marginRight: 20,
     width: 100,
     height: 125,
     top: 30,
+  },
+  //carousel styles
+  slide: {
+    marginTop: "30%",
+    alignItems: "center",
+  },
+  image: {
+    width: 250,
+    height: 250,
+  },
+  containerButtton: {
+    marginBottom: Platform.OS === "android" ? "20%" : "40%",
+  },
+  paginatioCarousel: {
+    marginBottom: 33,
   },
 });

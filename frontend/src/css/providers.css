@@ -1,4 +1,4 @@
-.suppliers{
+.providers{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,7 +9,7 @@
     padding-right: 1.5rem;
     padding-left: 1.5rem;
 }
-.tittle-suppliers{
+.tittle-providers{
     display: flex;
     align-items: center;
     position: relative;
@@ -21,12 +21,12 @@
     top: 2.2rem;
     color: var(--color-dark-blue);
 }
-.logo-suppliers{
+.logo-providers{
     width: 50%;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
 }
-.img-suppliers{
+.img-providers{
     position: relative;
     width: 5.5rem;
     top: 1.5rem;
@@ -37,10 +37,10 @@
     padding-left: 1rem;
     font-size: 25px;
 }
-#suppliers-categ{
+#providers-categ{
     background: var( --color-gradient-blue);
 }
-#suppliers-categ:hover{
+#providers-categ:hover{
     background: var(--color-gradient-green);
 }
 @media only screen and (max-width: 500px) {
@@ -57,7 +57,7 @@
         margin-right: 5px;
         margin-left: 5px;
     }
-    .img-suppliers{
+    .img-providers{
         position: relative;
         width: 5rem;
         top: 1.5rem;
@@ -74,7 +74,7 @@
         top: 2.2rem;
         color: var(--color-dark-blue);
     }
-    .img-suppliers{
+    .img-providers{
         position: relative;
         width: 30%;
         top: 1rem;

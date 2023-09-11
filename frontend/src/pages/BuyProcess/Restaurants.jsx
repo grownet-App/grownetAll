@@ -9,7 +9,7 @@ export default function Restaurants() {
   //TODO QUITAR ESTA URL CUANDO EL BACKEND HAYA CARGADO EL LINK DE LA IMG
     const urlImg = "https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/";
     const [restaurants, setRestaurants] = useState([]);
-    const { token } = useTokenStore();
+    const { token } = useTokenStore(); 
   
     useEffect(() => {  
       axios.get(availableRestaurants, {
@@ -31,7 +31,7 @@ export default function Restaurants() {
       <section className="restaurants">
       <h1 className="tittle-restaurants">Choose your restaurant</h1>
       {restaurants.map((restaurant) => (
-        <a className="bttn-categ" href="/suppliers" key={restaurant.account_number}>
+        <a className="bttn-categ" href="/providers" key={restaurant.account_number}>
           <div className="text-categ" key={restaurant.account_number}>
             <h2>
               {restaurant.account_name}

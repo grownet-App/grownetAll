@@ -19,8 +19,8 @@ const settings = () => {
         </Card>
         <Card style={styles.card}>
           <Card.Content>
-            <Text variant="titleLarge" style={styles.txtCard}>Suppliers</Text>
-            <Text variant="bodyMedium" style={styles.txtCard}>Edit your suppliers</Text>
+            <Text variant="titleLarge" style={styles.txtCard}>Providers</Text>
+            <Text variant="bodyMedium" style={styles.txtCard}>Edit your providers</Text>
           </Card.Content>
         </Card>
         <Card style={styles}>

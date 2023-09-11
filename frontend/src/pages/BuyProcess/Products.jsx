@@ -232,7 +232,7 @@ export default function Products(props) {
   return (
     <section className="products">
       <div className="tittle-products">
-        <a href="/suppliers">
+        <a href="/providers">
           <Icon
             href="https://www.google.com"
             src="google.com"
