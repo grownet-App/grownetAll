@@ -19,7 +19,10 @@ export default function OrderSuccessful() {
             <button className="bttn btn-outline" >Download PDF</button>
           </PDFDownloadLink>
         </div>
+        
         <Menu/>
     </section>
   );
+  
 }
+
