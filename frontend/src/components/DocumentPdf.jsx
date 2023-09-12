@@ -28,6 +28,7 @@ export default function DocumentPdf() {
     tittleRestaurant: {
       marginTop: 50,
       marginLeft: 40,
+      fontFamily: "Roboto"
     },
     restaurantText: {
       fontSize: 35,

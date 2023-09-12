@@ -104,7 +104,7 @@ export default function CodeOtp(props) {
             />
           ))}
         </div>
-        <p>Your OTP code is: {code}</p>
+        <p id="otp-number">Your OTP code is: {code}</p>
         <button className="bttn btn-secundary" onClick={enviarData}>
           Verify & Proceed
         </button>

@@ -8,6 +8,9 @@
     flex-direction: column;
     text-align: center;
 }
+#otp-number{
+    padding-top: 10px;
+}
 
 .otp h1{
     margin-top: 4rem;
@@ -22,7 +25,7 @@
     flex-direction: column;
 }
 .otp button{
-    margin-top: 2.5rem;
+    margin-top: 1.5rem !important;
 }
 .input-otp{
     height: 55px;
