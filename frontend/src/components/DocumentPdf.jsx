@@ -6,6 +6,7 @@ import {
   Document,
   StyleSheet,
   Font,
+  Image,
 } from "@react-pdf/renderer";
 import "../css/orderDetail.css";
 
@@ -52,7 +53,7 @@ export default function DocumentPdf() {
     flexDirection: "row" 
   }, 
   tableCol: { 
-    width: "25%", 
+    width: "25%",
     borderStyle: "solid", 
     borderWidth: 1, 
     borderLeftWidth: 0, 
@@ -61,7 +62,15 @@ export default function DocumentPdf() {
   tableCell: { 
     margin: "auto", 
     marginTop: 5, 
-    fontSize: 15 
+    fontSize: 15,
+
+  },
+    tableColTotal: { 
+    width: "50%", 
+    borderStyle: "solid", 
+    borderWidth: 1, 
+    borderLeftWidth: 0, 
+    borderTopWidth: 0 
   },
   });
 
@@ -251,6 +260,32 @@ export default function DocumentPdf() {
             </View>
           </View>
         </View>
+        <View style={styles.table}> 
+        <View style={styles.tableRow}> 
+          <View style={styles.tableColTotal}> 
+            <Text style={styles.tableCell}>Total Net</Text> 
+          </View> 
+          <View style={styles.tableColTotal}> 
+            <Text style={styles.tableCell}>£50</Text> 
+          </View> 
+        </View>
+        <View style={styles.tableRow}> 
+          <View style={styles.tableColTotal}> 
+            <Text style={styles.tableCell}>Total Tax</Text> 
+          </View> 
+          <View style={styles.tableColTotal}> 
+            <Text style={styles.tableCell}>£50 </Text> 
+          </View> 
+        </View> 
+        <View style={styles.tableRow}> 
+          <View style={styles.tableColTotal}> 
+            <Text style={styles.tableCell}>Total</Text> 
+          </View> 
+          <View style={styles.tableColTotal}> 
+            <Text style={styles.tableCell}>£500</Text> 
+          </View> 
+        </View>
+      </View>
       </Page>
     </Document>
   );
