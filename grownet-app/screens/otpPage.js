@@ -46,7 +46,15 @@ const Otp = () => {
   };
 
   return (
-    <SafeAreaView style={GlobalStyles.container}>
+    <SafeAreaView style={GlobalStyles.containerOtpPage}>
+      <Image
+        style={GlobalStyles.tinyLogoOtp}
+        source={require("../assets/logo.png")}
+      />
+      <Text style={GlobalStyles.textOtp1}>Enter your verification code</Text>
+      <Text style={GlobalStyles.textOtp2}>
+        An 4 digit code has been sent to your phone
+      </Text>
       <View style={GlobalStyles.containerOTP}>
         <View style={GlobalStyles.textInputView}>
           <TextInput
@@ -97,9 +105,18 @@ const Otp = () => {
           />
         </View>
       </View>
-      <TouchableOpacity onPress={enviarOTP}>
-        <Text>Verificar</Text>
+      <TouchableOpacity
+        onPress={enviarOTP}
+        style={GlobalStyles.ContainerTextVerify}
+      >
+        <Text style={GlobalStyles.TextVerify}>Verify & Proceed</Text>
       </TouchableOpacity>
+      <View style={GlobalStyles.ContainerdidntCode}>
+        <Text style={GlobalStyles.didntCode}>Didn't you receive the code?</Text>
+        <TouchableOpacity>
+          <Text style={GlobalStyles.sendCode}>Send again</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
