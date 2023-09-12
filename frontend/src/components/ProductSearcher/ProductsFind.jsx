@@ -2,7 +2,7 @@ import React from "react";
 import useProductStore from "../../store/useProductStore";
 import ProductCard from "../ProductDetail/ProductCard";
 
-function ProductsFind() {
+function ProductsFind({ onAmountChange, onVolumeChange }) {
   const filteredProducts = useProductStore((state) => state.filteredProducts);
 
   return (
@@ -10,7 +10,8 @@ function ProductsFind() {
       <p>You have {filteredProducts.length} found products:</p>
       <div className="favorite-items">
         {filteredProducts.map((product) => (
-          <ProductCard key={product.id} productData={product}> </ProductCard>
+          <ProductCard key={product.id} productData={product} onAmountChange={onAmountChange}
+          onVolumeChange={onVolumeChange}> </ProductCard>
         ))}
       </div>
     </div>
