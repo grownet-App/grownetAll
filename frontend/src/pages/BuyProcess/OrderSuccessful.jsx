@@ -19,7 +19,8 @@ export default function OrderSuccessful() {
   }, []);
 
   const generatePdfDocument = async (fileName) => {
-    const blob = await pdf(<DocumentPdf data={data} />).toBlob();
+    try{
+    const blob = await pdf(<DocumentPdf data={data}/>).toBlob();
       FileSaver.saveAs(blob, fileName);
       console.log("PDF generated", blob);
       console.log("PDF generated", fileName);
@@ -27,10 +28,17 @@ export default function OrderSuccessful() {
       console.log("PDF generated", data[0].name);
       console.log("PDF generated", data[0].amount);
       console.log("PDF generated", data[0].priceWithTax);
+    } catch (error) {
+      console.error("Error generating PDF", error);
+      console.log('NO SE GENERÓ NADA')
+    }
   };
 
   return (
     <section className="order-succesful" >
+      <section>
+        <DocumentPdf data={data} />
+      </section>
         <img src={img_succesful} alt="Succesfull" />
         <h1>Succesful!</h1>
         <p>Your order is successful</p>
@@ -38,7 +46,7 @@ export default function OrderSuccessful() {
           <Link className="bttn btn-primary" to="/record">Your orders</Link>
           <button
           className="bttn btn-outline"
-          onClick={() => generatePdfDocument("Factura Grownet.pdf")}
+          onClick={() => generatePdfDocument("FacturaGrownet.pdf")}
         >
           Download PDF
         </button>
@@ -47,4 +55,6 @@ export default function OrderSuccessful() {
         <Menu/>
     </section>
   );
+  
 }
+

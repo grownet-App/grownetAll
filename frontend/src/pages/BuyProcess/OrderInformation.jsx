@@ -56,13 +56,7 @@ export default function OrderInformation() {
           <textarea id="w3review" name="message" rows="4" cols="50"></textarea>
         {data.filter((article) => article.amount>0).map((article) =>(
           <>
-          <textarea name="product" key={article.id} >{article.name}
-          </textarea>
-          <textarea name="amount" key={article.id} >{article.amount}
-          </textarea>
-          <textarea name="volume" key={article.id} >{article.volume}
-          </textarea>
-          <textarea name="total" key={article.id} >{parseFloat(article.priceWithTax.toFixed(2))}
+          <textarea name="product" key={article.id} >{" Product: "+ article.name + " - Amount: " + article.amount + " - Volume: " + article.volume + " - Total: " + parseFloat(article.priceWithTax.toFixed(2))}
           </textarea>
           </>
         ))}</div>
