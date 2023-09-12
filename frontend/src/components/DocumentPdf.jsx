@@ -138,7 +138,7 @@ export default function DocumentPdf({data}) {
             <Text style={styles.tableCell}>Total Net</Text> 
           </View> 
           <View style={styles.tableColTotal}> 
-            <Text style={styles.tableCell}>£50</Text> 
+            <Text style={styles.tableCell}>£2639.52</Text> 
           </View> 
         </View>
         <View style={styles.tableRow}> 
@@ -146,7 +146,7 @@ export default function DocumentPdf({data}) {
             <Text style={styles.tableCell}>Total Tax</Text> 
           </View> 
           <View style={styles.tableColTotal}> 
-            <Text style={styles.tableCell}>£50 </Text> 
+            <Text style={styles.tableCell}>£465.80 </Text> 
           </View> 
         </View> 
         <View style={styles.tableRow}> 
@@ -154,7 +154,7 @@ export default function DocumentPdf({data}) {
             <Text style={styles.tableCell}>Total</Text> 
           </View> 
           <View style={styles.tableColTotal}> 
-            <Text style={styles.tableCell}>£500</Text> 
+            <Text style={styles.tableCell}>£3105.32</Text> 
           </View> 
         </View>
       </View>
