@@ -36,9 +36,6 @@ export default function OrderSuccessful() {
 
   return (
     <section className="order-succesful" >
-      <section>
-        <DocumentPdf data={data} />
-      </section>
         <img src={img_succesful} alt="Succesfull" />
         <h1>Succesful!</h1>
         <p>Your order is successful</p>

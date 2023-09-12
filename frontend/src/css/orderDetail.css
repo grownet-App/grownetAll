@@ -4,6 +4,10 @@
     align-items: center;
     justify-content: center;
 }
+#resume{
+    display: none;
+
+}
 .tittle-detail{
     display: flex;
     align-items: center;
