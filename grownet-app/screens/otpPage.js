@@ -46,63 +46,82 @@ const Otp = () => {
         }
     };
 
-    return (
-        <View style={GlobalStyles.container}>
-            <View style={GlobalStyles.containerOTP}>
-                <View style={GlobalStyles.textInputView}>
-                    <TextInput
-                        ref={pin1Ref}
-                        style={GlobalStyles.textBtnW}
-                        keyboardType={"number-pad"}
-                        maxLength={1}
-                        onChangeText={(text) => {
-                            setPin1(text);
-                            text ? pin2Ref.current.focus() : pin1Ref.current.focus();
-                        }}
-                    />
-                </View>
-                <View style={GlobalStyles.textInputView}>
-                    <TextInput
-                        ref={pin2Ref}
-                        style={GlobalStyles.textBtnW}
-                        keyboardType={"number-pad"}
-                        maxLength={1}
-                        onChangeText={(text) => {
-                            setPin2(text);
-                            text ? pin3Ref.current.focus() : pin1Ref.current.focus();
-                        }}
-                    />
-                </View>
-                <View style={GlobalStyles.textInputView}>
-                    <TextInput
-                        ref={pin3Ref}
-                        style={GlobalStyles.textBtnW}
-                        keyboardType={"number-pad"}
-                        maxLength={1}
-                        onChangeText={(text) => {
-                            setPin3(text);
-                            text ? pin4Ref.current.focus() : pin2Ref.current.focus();
-                        }}
-                    />
-                </View>
-                <View style={GlobalStyles.textInputView}>
-                    <TextInput
-                        ref={pin4Ref}
-                        style={GlobalStyles.textBtnW}
-                        keyboardType={"number-pad"}
-                        maxLength={1}
-                        onChangeText={(text) => {
-                            setPin4(text);
-                            !text && pin3Ref.current.focus();
-                        }}
-                    />
-                </View>
-            </View>
-            <TouchableOpacity ref={refBtn} style={GlobalStyles.btnSecundary} onPress={enviarOTP}>
-                <Text style={GlobalStyles.textInput}>Verify & Proceed</Text>
-            </TouchableOpacity>
+
+  return (
+    <SafeAreaView style={GlobalStyles.containerOtpPage}>
+      <Image
+        style={GlobalStyles.tinyLogoOtp}
+        source={require("../assets/logo.png")}
+      />
+      <Text style={GlobalStyles.textOtp1}>Enter your verification code</Text>
+      <Text style={GlobalStyles.textOtp2}>
+        An 4 digit code has been sent to your phone
+      </Text>
+      <View style={GlobalStyles.containerOTP}>
+        <View style={GlobalStyles.textInputView}>
+          <TextInput
+            ref={pin1Ref}
+            style={GlobalStyles.textInput}
+            keyboardType={"number-pad"}
+            maxLength={1}
+            onChangeText={(text) => {
+              setPin1(text);
+              text ? pin2Ref.current.focus() : pin1Ref.current.focus();
+            }}
+          />
         </View>
-    );
+        <View style={GlobalStyles.textInputView}>
+          <TextInput
+            ref={pin2Ref}
+            style={GlobalStyles.textInput}
+            keyboardType={"number-pad"}
+            maxLength={1}
+            onChangeText={(text) => {
+              setPin2(text);
+              text ? pin3Ref.current.focus() : pin1Ref.current.focus();
+            }}
+          />
+        </View>
+        <View style={GlobalStyles.textInputView}>
+          <TextInput
+            ref={pin3Ref}
+            style={GlobalStyles.textInput}
+            keyboardType={"number-pad"}
+            maxLength={1}
+            onChangeText={(text) => {
+              setPin3(text);
+              text ? pin4Ref.current.focus() : pin2Ref.current.focus();
+            }}
+          />
+        </View>
+        <View style={GlobalStyles.textInputView}>
+          <TextInput
+            ref={pin4Ref}
+            style={GlobalStyles.textInput}
+            keyboardType={"number-pad"}
+            maxLength={1}
+            onChangeText={(text) => {
+              setPin4(text);
+              !text && pin3Ref.current.focus();
+            }}
+          />
+        </View>
+      </View>
+      <TouchableOpacity
+        onPress={enviarOTP}
+        style={GlobalStyles.ContainerTextVerify}
+      >
+        <Text style={GlobalStyles.TextVerify}>Verify & Proceed</Text>
+      </TouchableOpacity>
+      <View style={GlobalStyles.ContainerdidntCode}>
+        <Text style={GlobalStyles.didntCode}>Didn't you receive the code?</Text>
+        <TouchableOpacity>
+          <Text style={GlobalStyles.sendCode}>Send again</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+
 };
 
 export default Otp;
