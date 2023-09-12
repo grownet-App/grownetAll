@@ -49,7 +49,7 @@ export default function OrderInformation() {
       <form ref={form} onSubmit={sendEmail}>
         <div className="data-shipping">
           <h3 id="text-data-shipping">Address</h3>
-          <input type="text" name="user_address" value={"50-56 Willesden Ln, London NW6 7SX"} required/>
+          <input type="text" name="user_address" value={"50-56 Willesden Ln, London"} required/>
           <h3>Deliver</h3>
           <input type="date" name="user_date" required></input>
           <h3>Any special requirements?</h3>
