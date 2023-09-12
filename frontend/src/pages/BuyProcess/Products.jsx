@@ -18,7 +18,6 @@ export default function Products(props) {
   const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
 
-
   useEffect(() => {
     const storedArticlesToPay = JSON.parse(
       localStorage.getItem("articlesToPay")
@@ -251,11 +250,13 @@ export default function Products(props) {
         showSearchResults={showSearchResults}
       />
       {showSearchResults ? (
-        <ProductsFind productsData={products} />
+        <ProductsFind productsData={products} onAmountChange={handleAmountChange}
+        onVolumeChange={handleVolumeChange} />
       ) : (
         <>
           {showFavorites ? (
-            <Favorites productsData={products} />
+            <Favorites productsData={products} onAmountChange={handleAmountChange}
+            onVolumeChange={handleVolumeChange} />
           ) : (
             <>
               {articles.map((article) => (
