@@ -10,7 +10,7 @@ import {
 } from "@react-pdf/renderer";
 import "../css/orderDetail.css";
 
-export default function DocumentPdf() {
+export default function DocumentPdf({data}) {
   Font.register({ family: "Roboto" });
 
   const styles = StyleSheet.create({
@@ -115,150 +115,22 @@ export default function DocumentPdf() {
               <Text style={styles.tableCell}>Unit price</Text>
             </View>
           </View>
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>126</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Green Peppers</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Unit</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>£80</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>569</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Apple</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Unit</Text>
-            </View>
-
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>£50</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>126</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Green Peppers</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Unit</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>£80</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>569</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Apple</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Unit</Text>
-            </View>
-
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>£50</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>126</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Green Peppers</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Unit</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>£80</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>569</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Apple</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Unit</Text>
-            </View>
-
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>£50</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>126</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Green Peppers</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Unit</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>£80</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>569</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Apple</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Unit</Text>
-            </View>
-
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>£50</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>126</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Green Peppers</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Unit</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>£80</Text>
-            </View>
-          </View>
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>569</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Apple</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Unit</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>£50</Text>
-            </View>
-          </View>
+          {data.map((article) => (
+              <View key={article.id} style={styles.tableRow}>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>{article.id}</Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>{article.name}</Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>{article.volume}</Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>£{article.priceWithTax}</Text>
+                </View>
+              </View>
+            ))}          
         </View>
         <View style={styles.table}> 
         <View style={styles.tableRow}> 
