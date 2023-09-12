@@ -5,8 +5,7 @@ import {
   View,
   Document,
   StyleSheet,
-  Font,
-  Image,
+  Font
 } from "@react-pdf/renderer";
 import "../css/orderDetail.css";
 
@@ -147,7 +146,7 @@ export default function DocumentPdf({data}) {
             <Text style={styles.tableCell}>Total Tax</Text> 
           </View> 
           <View style={styles.tableColTotal}> 
-            <Text style={styles.tableCell}>£465.80 </Text> 
+            <Text style={styles.tableCell}>£465.80</Text> 
           </View> 
         </View> 
         <View style={styles.tableRow}> 
