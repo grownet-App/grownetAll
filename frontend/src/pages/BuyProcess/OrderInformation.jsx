@@ -3,9 +3,11 @@ import { Icon } from "@iconify/react";
 import "../../css/orderDetail.css";
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { useNavigate } from "react-router-dom";
 
 export default function OrderInformation() {
   const form = useRef();
+  const navigate = useNavigate();
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -13,6 +15,7 @@ export default function OrderInformation() {
     emailjs.sendForm('service_zthtpco', 'template_iierimt', form.current, 'KDimKCkRePZ73euid')
       .then((result) => {
           console.log(result.text);
+          navigate("/orderSuccessful");
       }, (error) => {
           console.log(error.text);
       });
@@ -41,9 +44,9 @@ export default function OrderInformation() {
       </div>
       
       <input type="submit" value="Send" className="bttn btn-primary"/></form>
-      <a className="bttn btn-primary" href="/orderSuccessful">
+      {/*<a className="bttn btn-primary" href="/orderSuccessful">
         Continue
-      </a>
+  </a>*/}
     </section>
   );
 }
