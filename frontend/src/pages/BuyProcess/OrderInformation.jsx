@@ -1,25 +1,38 @@
-
 import { Icon } from "@iconify/react";
 import "../../css/orderDetail.css";
-import React, { useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useRef, useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 import { useNavigate } from "react-router-dom";
+import DocumentPdf from "../../components/DocumentPdf";
 
 export default function OrderInformation() {
   const form = useRef();
   const navigate = useNavigate();
+  const [ data, setData ] = useState([]);
+  useEffect(() => {
+    const storedArticlesToPay = JSON.parse(
+      localStorage.getItem("articlesToPay")
+    );
+    setData(storedArticlesToPay);
+  }, []);
+  console.log(data)
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('service_zthtpco', 'template_iierimt', form.current, 'KDimKCkRePZ73euid')
-      .then((result) => {
+    emailjs
+      .sendForm( "service_zthtpco", "template_iierimt", form.current, "KDimKCkRePZ73euid")
+      .then(
+        (result) => {
           console.log(result.text);
           navigate("/orderSuccessful");
-      }, (error) => {
+        },
+        (error) => {
           console.log(error.text);
-      });
+        }
+      );
   };
+  
   return (
     <section className="details">
       <div className="tittle-detail">
@@ -34,19 +47,28 @@ export default function OrderInformation() {
         <h1 className="tittle-orderDetail">Order detail</h1>
       </div>
       <form ref={form} onSubmit={sendEmail}>
-      <div className="data-shipping">
-        <h3 id="text-data-shipping">Address</h3>
-        <input type="text" name="user_address" required></input>
-        <h3>Deliver</h3>
-        <input type="date" name="user_date" required></input>
-        <h3>Any special requirements?</h3>
-        <textarea id="w3review" name="message" rows="4" cols="50"></textarea>
-      </div>
-      
-      <input type="submit" value="Send" className="bttn btn-primary"/></form>
-      {/*<a className="bttn btn-primary" href="/orderSuccessful">
-        Continue
-  </a>*/}
+        <div className="data-shipping">
+          <h3 id="text-data-shipping">Address</h3>
+          <input type="text" name="user_address" value={"50-56 Willesden Ln, London NW6 7SX"} required/>
+          <h3>Deliver</h3>
+          <input type="date" name="user_date" required></input>
+          <h3>Any special requirements?</h3>
+          <textarea id="w3review" name="message" rows="4" cols="50"></textarea>
+        {data.filter((article) => article.amount>0).map((article) =>(
+          <>
+          <textarea name="product" key={article.id} >{article.name}
+          </textarea>
+          <textarea name="amount" key={article.id} >{article.amount}
+          </textarea>
+          <textarea name="volume" key={article.id} >{article.volume}
+          </textarea>
+          <textarea name="total" key={article.id} >{parseFloat(article.priceWithTax.toFixed(2))}
+          </textarea>
+          </>
+        ))}</div>
+        <input type="submit" value="Send" className="bttn btn-primary" />
+      </form>
+    
     </section>
   );
 }
