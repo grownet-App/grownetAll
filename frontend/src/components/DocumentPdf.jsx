@@ -1,11 +1,21 @@
 import React from "react";
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  Font,
+} from "@react-pdf/renderer";
 import "../css/orderDetail.css";
 
 export default function DocumentPdf() {
+  Font.register({ family: "Roboto" });
+
   const styles = StyleSheet.create({
     page: {
       backgroundColor: "#E9F4FF",
+  
     },
     top: {
       flexDirection: "row",
@@ -28,31 +38,31 @@ export default function DocumentPdf() {
     tittle: {
       fontSize: 17,
     },
-    table: {
-      display: "table",
-      width: "auto",
-      borderStyle: "solid",
-      borderWidth: 1,
-      borderRightWidth: 0,
-      borderBottomWidth: 0,
-      margin: 20,
-    },
-    tableRow: {
-      margin: "auto",
-      flexDirection: "row",
-    },
-    tableCol: {
-      width: "25%",
-      borderStyle: "solid",
-      borderWidth: 1,
-      borderLeftWidth: 0,
-      borderTopWidth: 0,
-    },
-    tableCell: {
-      margin: "auto",
-      marginTop: 5,
-      fontSize: 15,
-    },
+    table: { 
+    display: "table", 
+    width: "auto", 
+    borderStyle: "solid", 
+    borderWidth: 1, 
+    borderRightWidth: 0, 
+    borderBottomWidth: 0,
+    margin: 20,
+  }, 
+  tableRow: { 
+    margin: "auto", 
+    flexDirection: "row" 
+  }, 
+  tableCol: { 
+    width: "25%", 
+    borderStyle: "solid", 
+    borderWidth: 1, 
+    borderLeftWidth: 0, 
+    borderTopWidth: 0 
+  }, 
+  tableCell: { 
+    margin: "auto", 
+    marginTop: 5, 
+    fontSize: 15 
+  },
   });
 
   return (
@@ -98,7 +108,7 @@ export default function DocumentPdf() {
           </View>
           <View style={styles.tableRow}>
             <View style={styles.tableCol}>
-              <Text style={styles.tableCell}></Text>
+              <Text style={styles.tableCell}>126</Text>
             </View>
             <View style={styles.tableCol}>
               <Text style={styles.tableCell}>Green Peppers</Text>
@@ -108,6 +118,136 @@ export default function DocumentPdf() {
             </View>
             <View style={styles.tableCol}>
               <Text style={styles.tableCell}>£80</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>569</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Apple</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Unit</Text>
+            </View>
+
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>£50</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>126</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Green Peppers</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Unit</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>£80</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>569</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Apple</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Unit</Text>
+            </View>
+
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>£50</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>126</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Green Peppers</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Unit</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>£80</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>569</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Apple</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Unit</Text>
+            </View>
+
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>£50</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>126</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Green Peppers</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Unit</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>£80</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>569</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Apple</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Unit</Text>
+            </View>
+
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>£50</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>126</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Green Peppers</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Unit</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>£80</Text>
+            </View>
+          </View>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>569</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Apple</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>Unit</Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>£50</Text>
             </View>
           </View>
         </View>
