@@ -1,15 +1,14 @@
-import React, {useState, useEffect}from "react";
-import "../../css/orderDetail.css";
-import img_succesful from "../../img/img_succesful.png";
-import Menu from "../../components/Menu/Menu";
-import { Link } from "react-router-dom";
 import { pdf } from "@react-pdf/renderer";
 import * as FileSaver from "file-saver";
-import DocumentPdf from "../../components/DocumentPdf"
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import DocumentPdf from "../../components/DocumentPdf";
+import Menu from "../../components/Menu/Menu";
+import "../../css/orderDetail.css";
+import img_succesful from "../../img/img_succesful.png";
 
 export default function OrderSuccessful() {
-  const [ data, setData ] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const storedArticlesToPay = JSON.parse(
@@ -19,39 +18,32 @@ export default function OrderSuccessful() {
   }, []);
 
   const generatePdfDocument = async (fileName) => {
-    try{
-    const blob = await pdf(<DocumentPdf data={data}/>).toBlob();
+    try {
+      const blob = await pdf(<DocumentPdf data={data} />).toBlob();
       FileSaver.saveAs(blob, fileName);
-      console.log("PDF generated", blob);
-      console.log("PDF generated", fileName);
-      console.log("PDF generated", data);
-      console.log("PDF generated", data[0].name);
-      console.log("PDF generated", data[0].amount);
-      console.log("PDF generated", data[0].priceWithTax);
     } catch (error) {
       console.error("Error generating PDF", error);
-      console.log('NO SE GENERÓ NADA')
     }
   };
 
   return (
-    <section className="order-succesful" >
-        <img src={img_succesful} alt="Succesfull" />
-        <h1>Succesful!</h1>
-        <p>Your order is successful</p>
-        <div className="buttons-succesful">
-          <Link className="bttn btn-primary" to="/record">Your orders</Link>
-          <button
+    <section className="order-succesful">
+      <img src={img_succesful} alt="Succesfull" />
+      <h1>Succesful!</h1>
+      <p>Your order is successful</p>
+      <div className="buttons-succesful">
+        <Link className="bttn btn-primary" to="/record">
+          Your orders
+        </Link>
+        <button
           className="bttn btn-outline"
           onClick={() => generatePdfDocument("FacturaGrownet.pdf")}
         >
           Download PDF
         </button>
-        </div>
-        
-        <Menu/>
+      </div>
+
+      <Menu />
     </section>
   );
-  
 }
-
