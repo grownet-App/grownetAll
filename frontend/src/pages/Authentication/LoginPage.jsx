@@ -105,7 +105,7 @@ function Login() {
                 <p>Enter your mobile number:</p>
                 {countries && countries.length > 0 ? (
                   <PhoneInput
-                    country={"gb"}
+                    country={"co"}
                     value={PhoneNumber}
                     onChange={handleChange}
                     inputProps={{ required: true }}
