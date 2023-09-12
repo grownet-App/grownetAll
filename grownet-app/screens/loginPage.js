@@ -56,26 +56,32 @@ const loginPage = () => {
     <View style={styles.container}>
       <Image style={styles.tinyLogo} source={require("../assets/logo.png")} />
       <Text style={styles.p}>Enter your mobile number:</Text>
-      <PhoneInput
-        countryPickerProps={{
-          countryCodes: ["CO", "ES", "PT", "GB"],
-        }}
-        defaultCode="CO"
-        defaultValue={phoneNumber}
-        onChangeText={(text) => {
-          setPhoneNumber(text);
-        }}
-        countryCode={(info) => {
-          setPhoneDos(info);
-        }}
-        onChangeFormattedText={(text) => {
-          setPhoneDos(text);
-        }}
-      />
-
-      <TouchableOpacity style={GlobalStyles.btnWhite} onPress={handleChange}>
-        <Text>Let’s Begin</Text>
+      <View style={{ borderRadius: 50, overflow: "hidden" }}>
+        <PhoneInput
+          countryPickerProps={{
+            countryCodes: ["CO", "ES", "PT", "GB"],
+          }}
+          defaultCode="GB"
+          defaultValue={phoneNumber}
+          onChangeText={(text) => {
+            setPhoneNumber(text);
+          }}
+          countryCode={(info) => {
+            setPhoneDos(info);
+          }}
+          onChangeFormattedText={(text) => {
+            setPhoneDos(text);
+          }}
+        />
+      </View>
+      <TouchableOpacity
+        style={GlobalStyles.containerButtonLets}
+        onPress={handleChange}
+      >
+        <Text style={GlobalStyles.buttonLets}>Let’s Begin</Text>
       </TouchableOpacity>
+
+      {/* //TODO: */}
       <TouchableOpacity
         style={GlobalStyles.btnSecundary}
         onPress={() => navigation.navigate("providers")}
