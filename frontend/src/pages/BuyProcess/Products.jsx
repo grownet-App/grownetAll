@@ -6,14 +6,14 @@ import ProductCard from "../../components/ProductDetail/ProductCard";
 import ProductSearcher from "../../components/ProductSearcher/ProductSearcher";
 import ProductsFind from "../../components/ProductSearcher/ProductsFind";
 import "../../css/products.css";
-
+import data from "../../data"
 export default function Products(props) {
   const [showFavorites, setShowFavorites] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [products, setProducts] = useState([]);
   const allCategories = [
     "All",
-    ...new Set(products.map((article) => article.category)),
+    ...new Set(data.map((article) => article.category)),
   ];
   const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
@@ -25,6 +25,7 @@ export default function Products(props) {
     console.log("ESTO TRAE EL LOCAL STORAGE:", storedArticlesToPay);
     if (storedArticlesToPay) {
       setArticles(storedArticlesToPay);
+      setProducts(storedArticlesToPay);
       console.log("TRAJO ALGO DEL STORAGE");
     } else {
       //TODO Reemplazar estos products por los que vienen de la API
@@ -88,7 +89,7 @@ export default function Products(props) {
           price_box: 190,
           price_kg: 19,
           amount: 0,
-          category: "Vegetable",
+          category: "Frozen",
           tax: 0.04,
           volume: "Unit",
         },
@@ -101,7 +102,7 @@ export default function Products(props) {
           price_box: 120,
           price_kg: 12,
           amount: 0,
-          category: "Vegetable",
+          category: "Bread",
           tax: 0.23,
           volume: "Unit",
         },
@@ -162,6 +163,7 @@ export default function Products(props) {
         priceWithTax: article.price_unit + article.price_unit * article.tax,
       }));
       setArticles(productsWithTax);
+      setProducts(productsWithTax);
       console.log("NO TRAJO NADA DEL STORAGE");
     }
   }, []);
@@ -232,7 +234,7 @@ export default function Products(props) {
   return (
     <section className="products">
       <div className="tittle-products">
-        <a href="/providers">
+        <a href="/suppliers">
           <Icon
             href="https://www.google.com"
             src="google.com"
@@ -248,11 +250,13 @@ export default function Products(props) {
         showSearchResults={showSearchResults}
       />
       {showSearchResults ? (
-        <ProductsFind productsData={products} />
+        <ProductsFind productsData={products} onAmountChange={handleAmountChange}
+        onVolumeChange={handleVolumeChange} />
       ) : (
         <>
           {showFavorites ? (
-            <Favorites productsData={products} />
+            <Favorites productsData={products} onAmountChange={handleAmountChange}
+            onVolumeChange={handleVolumeChange} />
           ) : (
             <>
               {articles.map((article) => (

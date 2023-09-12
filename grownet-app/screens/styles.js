@@ -40,6 +40,8 @@ export const GlobalStyles = StyleSheet.create({
     justifyContent: "center",
   },
 
+
+
   linkWhite: {
     color: "white",
     fontWeight: 400,
@@ -63,10 +65,13 @@ export const GlobalStyles = StyleSheet.create({
     marginBottom: 30,
   },
 
+
+
   textBtnW: {
     color: "#04444F",
     fontWeight: 500,
     fontSize: 18,
+    textAlign:"center"
   },
   containerButtonLets: {
     backgroundColor: "#04444F",
