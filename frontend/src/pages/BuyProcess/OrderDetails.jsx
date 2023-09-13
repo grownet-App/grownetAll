@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import React, { useState } from "react";
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
 import "../../css/orderDetail.css";
+import { Link } from "react-router-dom";
 
 export default function OrderDetails(props) {
   const [totalToPay, setTotalToPay] = useState(0);
@@ -55,9 +56,9 @@ export default function OrderDetails(props) {
           <h2>£{totalToPay} </h2>
         </div>
       </div>
-      <a className="bttn btn-primary" href="/orderInformation">
+      <Link className="bttn btn-primary" to="/orderInformation">
         Continue
-      </a>
+      </Link>
     </section>
   );
 }

@@ -8,6 +8,7 @@ import prepared_img from "../../img/prepared_img.png";
 import mushrooms_img from "../../img/mushrooms_img.png";
 import banana_img from "../../img/banana_img.png";
 import "./categoriesMenu.css";
+import { Link } from "react-router-dom";
 
 export default function CategoriesMenu({showFavorites, toggleShowFavorites, categories, filterCategory}) {
   
@@ -61,36 +62,11 @@ export default function CategoriesMenu({showFavorites, toggleShowFavorites, cate
               <h6>{category}</h6>
             </button>
           ))}
-
-          {/*<button classNaxme="card-products">
-            <img src={banana_img} />
-            <h6>Fruit</h6>
-          </button>
-          <button className="card-products">
-            <img src={bread_img} />
-            <h6>Bread</h6>
-          </button>
-          <button className="card-products">
-            <img src={frozen_img} />
-            <h6>Frozen</h6>
-          </button>
-          <button className="card-products">
-            <img src={meat_img} />
-            <h6>Meat</h6>
-          </button>
-          <button className="card-products">
-            <img src={prepared_img} />
-            <h6>Prepared</h6>
-          </button>
-          <button className="card-products">
-            <img src={mushrooms_img} />
-            <h6>Mushrooms</h6>
-          </button>*/}
         </div>
       </div>
-      <a className="bttn btn-primary" href="/details">
+      <Link className="bttn btn-primary" to="/details">
         Continue
-      </a>
+      </Link>
     </section>
   );
 }

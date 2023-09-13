@@ -45,7 +45,7 @@ export default function HomePage() {
             <Link className="bttn btn-white" to="/login">Login</Link>
             
         </div>
-        <a className="t-c">Terms & conditions</a>
+        <Link className="t-c">Terms & conditions</Link>
     </section>
     )
 }

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Icon } from "@iconify/react";
 import { availableRestaurants } from "../../config/urls.config";
 import useTokenStore from "../../store/useTokenStore";
+import { Link } from "react-router-dom";
 
 export default function Restaurants() {
   //TODO QUITAR ESTA URL CUANDO EL BACKEND HAYA CARGADO EL LINK DE LA IMG
@@ -31,7 +32,7 @@ export default function Restaurants() {
       <section className="restaurants">
       <h1 className="tittle-restaurants">Choose your restaurant</h1>
       {restaurants.map((restaurant) => (
-        <a className="bttn-categ" href="/providers" key={restaurant.account_number}>
+        <Link className="bttn-categ" to="/providers" key={restaurant.account_number}>
           <div className="text-categ" key={restaurant.account_number}>
             <h2>
               {restaurant.account_name}
@@ -39,7 +40,7 @@ export default function Restaurants() {
             <p>{restaurant.address}</p>
           </div>
           <img src={urlImg + restaurant.image} alt={restaurant.account_name} />
-        </a>
+        </Link>
       ))}
       <a className="bttn btn-primary" href="addRestaurants"id="bttn-restaurant">
         <Icon className="icon-plus" icon="simple-line-icons:plus" />

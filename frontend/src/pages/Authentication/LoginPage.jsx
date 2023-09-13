@@ -133,18 +133,18 @@ function Login() {
             <a onClick={handleClose} id="close">
               Change mobile number
             </a>
-            <a className="bttn btn-primary" href="/restaurants">
+            {/*<a className="bttn btn-primary" href="/register">
               Register now
-            </a>
+              </a>*/}
           </section>
         </Modal>
       ) : (
         <></>
       )}
     </Container>
-        <h2 href="">
+        {/*<h2>
           Don't have an account? <a href="/register">Sign Up</a>
-        </h2>
+      </h2>*/}
       </div>
     </section>
   );

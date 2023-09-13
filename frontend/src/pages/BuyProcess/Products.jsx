@@ -7,6 +7,8 @@ import ProductSearcher from "../../components/ProductSearcher/ProductSearcher";
 import ProductsFind from "../../components/ProductSearcher/ProductsFind";
 import "../../css/products.css";
 import data from "../../data"
+import { Link } from "react-router-dom";
+
 export default function Products(props) {
   const [showFavorites, setShowFavorites] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -234,14 +236,13 @@ export default function Products(props) {
   return (
     <section className="products">
       <div className="tittle-products">
-        <a href="/providers">
+        <Link to="/providers">
           <Icon
-            href="https://www.google.com"
             src="google.com"
             icon="ic:round-arrow-back"
             className="arrow"
           />
-        </a>
+        </Link>
         <h1 className="tittle-products">Make your order</h1>
       </div>
       <ProductSearcher
