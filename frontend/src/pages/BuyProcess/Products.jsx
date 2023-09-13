@@ -8,6 +8,7 @@ import ProductsFind from "../../components/ProductSearcher/ProductsFind";
 import "../../css/products.css";
 import data from "../../data"
 import { Link } from "react-router-dom";
+import useOrderStore from "../../store/useOrderStore";
 
 export default function Products(props) {
   const [showFavorites, setShowFavorites] = useState(false);
@@ -19,6 +20,7 @@ export default function Products(props) {
   ];
   const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
+  const { selectedProvider } = useOrderStore();
 
   useEffect(() => {
     const storedArticlesToPay = JSON.parse(
@@ -232,6 +234,8 @@ export default function Products(props) {
       )
     );
   };
+
+  console.log("THIS IS THE SELECTEDPROVIDER", selectedProvider);
 
   return (
     <section className="products">

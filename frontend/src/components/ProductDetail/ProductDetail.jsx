@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import useArticlesToPayStore from "../../store/useArticlesToPayStore";
 import Stepper from "../Stepper/Stepper";
+import useOrderStore from "../../store/useOrderStore";
 
 export default function ProductDetail({
   updateTotalToPay,

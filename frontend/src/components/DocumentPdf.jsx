@@ -10,8 +10,9 @@ import {
 } from "@react-pdf/renderer";
 import "../css/orderDetail.css";
 
-export default function DocumentPdf({data}) {
+export default function DocumentPdf({data, selectedRestaurant, formattedDate, selectedProvider  }) {
   Font.register({ family: "Roboto" });
+
 
   const styles = StyleSheet.create({
     page: {
@@ -79,24 +80,24 @@ export default function DocumentPdf({data}) {
       <Page size="A4" style={styles.page}>
         <View style={styles.tittleRestaurant}>
           <Text style={styles.restaurantText}>Purchase Order</Text>
-          <Text style={styles.text}>for FoodPoint produce</Text>
+          <Text style={styles.text}>for {selectedProvider.name} produce</Text>
         </View>
         <View style={styles.top}>
           <View style={styles.section}>
             <Text style={styles.text}>Ordered</Text>
-            <Text style={styles.tittle}>Sun,10 September 2023</Text>
+            <Text style={styles.tittle}>{formattedDate}</Text>
             <Text style={styles.text}>Order number</Text>
             <Text style={styles.tittle}>0234684GF</Text>
             <Text style={styles.text}>Ordered by</Text>
-            <Text style={styles.tittle}>Diego Vanegas + 44 6665655989</Text>
+            <Text style={styles.tittle}>{selectedRestaurant.account_name}</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.text}>Requested delivery date</Text>
-            <Text>Mon, 11 September 2023</Text>
+            <Text>{formattedDate}</Text>
             <Text style={styles.text}>Customer number</Text>
             <Text>Not provided</Text>
             <Text style={styles.text}>Delivery address</Text>
-            <Text>London, 10 high street</Text>
+            <Text>{selectedRestaurant.address}</Text>
           </View>
         </View>
         <View style={styles.table}>
