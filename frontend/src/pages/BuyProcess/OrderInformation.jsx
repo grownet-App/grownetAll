@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import "../../css/orderDetail.css";
 import React, { useRef, useState, useEffect } from "react";
-
+import emailjs from '@emailjs/browser';
 import { useNavigate } from "react-router-dom";
 import DocumentPdf from "../../components/DocumentPdf";
 import { Link } from "react-router-dom";
