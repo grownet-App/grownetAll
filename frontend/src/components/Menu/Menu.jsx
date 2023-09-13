@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Nav, Navbar} from 'react-bootstrap';
 import { Icon } from '@iconify/react';
 import "./menu.css";
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 export default function Menu() {
 
@@ -10,13 +10,13 @@ export default function Menu() {
         <Navbar>
         <Container className='menu'>
         <Nav className="me-auto">
-            <Nav.Link className="icons">
-                <Link to="/settings">
+            <NavLink className="icons" to="/settings">
+                
                     <Icon  icon="carbon:settings"> </Icon>
                     <Icon className="icon-active" icon="iconamoon:settings-fill"/>
                     <p>Settings</p>
-                 </Link>
-            </Nav.Link>
+                 
+            </NavLink>
             <Nav.Link className="icons" href="/providers">
                     <Icon className="" icon="streamline:shopping-cart-basket-2-shopping-basket"/>
                     <Icon className="icon-active2" icon="teenyicons:basket-solid" />
