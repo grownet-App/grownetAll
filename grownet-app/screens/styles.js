@@ -38,9 +38,8 @@ export const GlobalStyles = StyleSheet.create({
     backgroundColor: "#026CD2",
     alignItems: "center",
     justifyContent: "center",
+    overflow: "hidden",
   },
-
-
 
   linkWhite: {
     color: "white",
@@ -65,13 +64,11 @@ export const GlobalStyles = StyleSheet.create({
     marginBottom: 30,
   },
 
-
-
   textBtnW: {
     color: "#04444F",
     fontWeight: 500,
     fontSize: 18,
-    textAlign:"center"
+    textAlign: "center",
   },
   containerButtonLets: {
     backgroundColor: "#04444F",
@@ -184,6 +181,12 @@ export const GlobalStyles = StyleSheet.create({
   },
   textInput: {
     color: "black",
+    fontWeight: 500,
+    fontSize: 18,
+    textAlign: "center",
+  },
+  textRegister: {
+    color: "#FFFFFF",
     fontWeight: 500,
     fontSize: 18,
     textAlign: "center",
