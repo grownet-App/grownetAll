@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "@iconify/icons-eva": "^1.2.6",
     "@iconify/icons-heroicons-outline": "^1.2.5",
     "@react-pdf/renderer": "^3.1.12",

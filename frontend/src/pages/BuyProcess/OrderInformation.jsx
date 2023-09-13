@@ -18,7 +18,7 @@ export default function OrderInformation() {
     setData(storedArticlesToPay);
   }, []);
 
- /* const sendEmail = (e) => {
+  const sendEmail = (e) => {
     e.preventDefault();
 
     emailjs
@@ -32,7 +32,7 @@ export default function OrderInformation() {
           console.log(error.text);
         }
       );
-  };*/
+  };/**/
   
   return (
     <section className="details">
