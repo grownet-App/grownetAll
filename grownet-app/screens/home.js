@@ -70,7 +70,7 @@ const home = () => {
           style={GlobalStyles.btnSecundary}
           onPress={() => navigation.navigate("login")}
         >
-          <Text style={GlobalStyles.textInput}>Register</Text>
+          <Text style={GlobalStyles.textRegister}>Register</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={GlobalStyles.btnWhite}
