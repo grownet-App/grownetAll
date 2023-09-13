@@ -24,14 +24,13 @@ export default function OrderDetails(props) {
   return (
     <section className="details">
       <div className="tittle-detail">
-        <a href="/products">
+        <Link to="/products">
           <Icon
-            href="https://www.google.com"
             src="google.com"
             icon="ic:round-arrow-back"
             className="arrow"
           />
-        </a>
+        </Link>
         <h1 className="tittle-orderDetail">Order detail</h1>
       </div>
       <div className="card-invoices">

@@ -133,9 +133,9 @@ function Login() {
             <a onClick={handleClose} id="close">
               Change mobile number
             </a>
-            {/*<a className="bttn btn-primary" href="/register">
+            {/*<Link> className="bttn btn-primary" to="/register">
               Register now
-              </a>*/}
+              </Link>*/}
           </section>
         </Modal>
       ) : (
@@ -143,7 +143,7 @@ function Login() {
       )}
     </Container>
         {/*<h2>
-          Don't have an account? <a href="/register">Sign Up</a>
+          Don't have an account? <Link> to="/register">Sign Up</Link>
       </h2>*/}
       </div>
     </section>

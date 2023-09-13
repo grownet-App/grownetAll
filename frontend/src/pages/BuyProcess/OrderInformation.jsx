@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { useNavigate } from "react-router-dom";
 import DocumentPdf from "../../components/DocumentPdf";
-
+import { Link } from "react-router-dom";
 export default function OrderInformation() {
   const form = useRef();
   const navigate = useNavigate();
@@ -36,14 +36,13 @@ export default function OrderInformation() {
   return (
     <section className="details">
       <div className="tittle-detail">
-        <a href="/details">
+        <Link to="/details">
           <Icon
-            href="https://www.google.com"
             src="google.com"
             icon="ic:round-arrow-back"
             className="arrow"
           />
-        </a>
+        </Link>
         <h1 className="tittle-orderDetail">Order detail</h1>
       </div>
       <form ref={form} onSubmit={sendEmail}>

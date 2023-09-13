@@ -42,10 +42,10 @@ export default function Restaurants() {
           <img src={urlImg + restaurant.image} alt={restaurant.account_name} />
         </Link>
       ))}
-      <a className="bttn btn-primary" href="addRestaurants"id="bttn-restaurant">
+      <Link className="bttn btn-primary" to="addRestaurants"id="bttn-restaurant">
         <Icon className="icon-plus" icon="simple-line-icons:plus" />
         Add restaurant
-      </a>
+      </Link>
     </section>
     );
   };

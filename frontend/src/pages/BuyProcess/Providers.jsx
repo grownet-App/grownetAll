@@ -10,7 +10,6 @@ export default function Providers() {
       <div className="tittle-providers">
         <Link to="/restaurants">
           <Icon
-            href="https://www.google.com"
             src="google.com"
             icon="ic:round-arrow-back"
             className="arrow"
