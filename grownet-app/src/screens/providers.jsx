@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import React, { Component, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import menuDown from "../assets/navigation";
+import menuDown from "../navigation/navigation";
 import { ApiProviders } from "../config/urls.config";
-import { GlobalStyles } from "./styles";
+import { GlobalStyles } from "../styles/styles";
 import axios from "axios";
 
 const providers = () => {
@@ -37,7 +37,7 @@ const providers = () => {
               <Text style={GlobalStyles.textSupplier}>{supplier.name}</Text>
 
               <Image
-                source={require("../assets/img/img_providers.png")}
+                source={require("../../assets/img/img_providers.png")}
                 style={GlobalStyles.imgproviders}
               />
             </View>

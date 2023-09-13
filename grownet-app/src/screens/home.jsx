@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-import { GlobalStyles } from "./styles";
+import { GlobalStyles } from "../styles/styles";
 import { useNavigation } from "@react-navigation/native";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { useRef, useState } from "react";
@@ -19,10 +19,10 @@ const home = () => {
   const isCarousel = useRef(null);
 
   const images = [
-    { source: require("../assets/img/carousel_img1.png") },
-    { source: require("../assets/img/carousel_img2.png") },
-    { source: require("../assets/img/carousel_img3.png") },
-    { source: require("../assets/img/carousel_img4.png") },
+    { source: require("../../assets/img/carousel_img1.png") },
+    { source: require("../../assets/img/carousel_img2.png") },
+    { source: require("../../assets/img/carousel_img3.png") },
+    { source: require("../../assets/img/carousel_img4.png") },
   ];
 
   const renderItem = ({ item }) => {

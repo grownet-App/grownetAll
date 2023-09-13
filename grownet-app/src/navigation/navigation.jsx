@@ -2,18 +2,18 @@ import { Text, View, Button, StyleSheet, TouchableOpacity } from "react-native";
 import React, { Component } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { orders } from "../screens/orders";
-import loginPage from "../screens/loginPage";
-import records from "../screens/records";
-import settings from "../screens/settings";
-import chat from "../screens/chat";
-import home from "../screens/home";
-import providers from "../screens/providers";
-import otpPage from "../screens/otpPage";
+import { orders } from "../../src/screens/orders";
+import loginPage from "../../src/screens/loginPage";
+import records from "../../src/screens/records";
+import settings from "../../src/screens/settings";
+import chat from "../../src/screens/chat";
+import home from "../../src/screens/home";
+import providers from "../../src/screens/providers";
+import otpPage from "../../src/screens/otpPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
-import AuthNavigator from "../screens/Auth/authNavigator";
+import AuthNavigator from "../navigation/authNavigator";
 
 const Tab = createBottomTabNavigator();
 

@@ -10,11 +10,11 @@ import {
 } from "react-native";
 import React, { Component, useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { GlobalStyles } from "./styles";
+import { GlobalStyles } from "../styles/styles";
 import { useRoute } from "@react-navigation/native";
 import { otpApiUrl } from "../config/urls.config";
 import axios from "axios";
-import useTokenStore from "../store/useTokenStore";
+import useTokenStore from "../../src/store/useTokenStore";
 
 const Otp = () => {
   const navigation = useNavigation();
@@ -56,7 +56,7 @@ const Otp = () => {
     <SafeAreaView style={GlobalStyles.containerOtpPage}>
       <Image
         style={GlobalStyles.tinyLogoOtp}
-        source={require("../assets/logo.png")}
+        source={require("../../assets/logo.png")}
       />
       <Text style={GlobalStyles.textOtp1}>Enter your verification code</Text>
       <Text style={GlobalStyles.textOtp2}>

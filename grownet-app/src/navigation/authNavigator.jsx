@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import useTokenStore from "../../store/useTokenStore";
-import Home from "../home";
-import Login from "../loginPage";
-import OTP from "../otpPage";
-import providers from "../providers";
+import useTokenStore from "../store/useTokenStore";
+import Home from "../screens/home";
+import Login from "../screens/loginPage";
+import OTP from "../screens/otpPage";
+import providers from "../screens/providers";
 import { useFonts, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import { FontAwesome } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
