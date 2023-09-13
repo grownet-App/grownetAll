@@ -29,7 +29,7 @@ export default function SettingsRestaurants() {
                     <p>Admin test</p>
                 </div>
             </div>
-            <a href='/editRestaurants' className='bttn btn-primary'>Edit Restaurant</a>
+            <Link to='/editRestaurants' className='bttn btn-primary'>Edit Restaurant</Link>
             <div className='space-menu'></div>
             <Menu/>
         </section> 
