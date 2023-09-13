@@ -13,7 +13,7 @@ import otpPage from "../screens/otpPage";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
-import { useFonts, Poppins_700Bold } from "@expo-google-fonts/poppins";
+import AuthNavigator from "../screens/Auth/authNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,13 +21,6 @@ const Stack = createStackNavigator();
 
 function MyStack() {
   const navigation = useNavigation();
-  const [fontsLoaded] = useFonts({
-    PoppinsBold: Poppins_700Bold,
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
 
   return (
     <Stack.Navigator>
@@ -251,7 +244,7 @@ function MyTabs() {
 export default function Navigation() {
   return (
     <NavigationContainer>
-      <MyStack />
+      <AuthNavigator />
     </NavigationContainer>
   );
 }
