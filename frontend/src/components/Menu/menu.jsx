@@ -11,21 +11,23 @@ export default function Menu() {
         <Container className='menu'>
         <Nav className="me-auto">
             <NavLink className="icons" to="/settings">
+                
                     <Icon  icon="carbon:settings"> </Icon>
                     <Icon className="icon-active" icon="iconamoon:settings-fill"/>
                     <p>Settings</p>
+                 
             </NavLink>
-            <NavLink className="icons" to="/providers">
+            <Nav.Link className="icons" href="/providers">
                     <Icon className="" icon="streamline:shopping-cart-basket-2-shopping-basket"/>
                     <Icon className="icon-active2" icon="teenyicons:basket-solid" />
                     <p>Order</p>
-            </NavLink>
+            </Nav.Link>
             <Nav.Link className="icons" href="/record">
                     <Icon className="" icon="basil:invoice-outline"/>
                     <Icon className="icon-active3" icon="basil:invoice-solid" />
                     <p>Record</p>
             </Nav.Link>
-            <Nav.Link className="icons" id='my-intercom'>
+            <Nav.Link className="icons" href="" id='my-intercom'>
                     <Icon className="" icon="solar:chat-round-dots-linear"/>
                     <Icon className="icon-active4" icon="solar:chat-round-bold" />
                     <p>Chat</p> 

@@ -18,14 +18,14 @@ export default function SettingsRestaurants() {
             <div className='users'>
                 <img src='https://placehold.co/100'/>
                 <div>
-                    <h4>Paula Vanegas</h4>
+                    <h4>Paula Andrea</h4>
                     <p>Admin test</p>
                 </div>
             </div>
             <div className='users'>
                 <img src='https://placehold.co/100'/>
                 <div>
-                    <h4>Paula Vanegas</h4>
+                    <h4>Paula Andrea</h4>
                     <p>Admin test</p>
                 </div>
             </div>

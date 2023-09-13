@@ -5,17 +5,18 @@ import emailjs from "@emailjs/browser";
 import { useNavigate } from "react-router-dom";
 import DocumentPdf from "../../components/DocumentPdf";
 import { Link } from "react-router-dom";
+
 export default function OrderInformation() {
   const form = useRef();
   const navigate = useNavigate();
   const [ data, setData ] = useState([]);
+
   useEffect(() => {
     const storedArticlesToPay = JSON.parse(
       localStorage.getItem("articlesToPay")
     );
     setData(storedArticlesToPay);
   }, []);
-  console.log(data)
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -45,7 +46,7 @@ export default function OrderInformation() {
         </Link>
         <h1 className="tittle-orderDetail">Order detail</h1>
       </div>
-      <form ref={form} onSubmit={sendEmail}>
+      {/*<form ref={form} onSubmit={sendEmail}>
         <div className="data-shipping">
           <h3 id="text-data-shipping">Address</h3>
           <input type="text" name="user_address" value={"50-56 Willesden Ln, London"} required/>
@@ -53,14 +54,14 @@ export default function OrderInformation() {
           <input type="date" name="user_date" required></input>
           <h3>Any special requirements?</h3>
           <textarea id="w3review" name="message" rows="4" cols="50"></textarea>
-        {/*data.filter((article) => article.amount>0).map((article) =>(
+        data.filter((article) => article.amount>0).map((article) =>(
           <>
           <textarea id="resume" name="product" key={article.id} >{" Product: "+ article.name + " - Amount: " + article.amount + " - Volume: " + article.volume + " - Total: " + parseFloat(article.priceWithTax.toFixed(2))}
           </textarea>
           </>
-        ))*/}</div>
+        ))</div>
         <input type="submit" value="Send" className="bttn btn-primary" />
-      </form>
+      </form>*/}
     
     </section>
   );
