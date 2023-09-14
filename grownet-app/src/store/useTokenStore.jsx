@@ -1,6 +1,6 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { persist } from "zustand/middleware";
-import { create } from "zustand";
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { persist } from 'zustand/middleware'
+import { create } from 'zustand'
 
 const useTokenStore = create(
   persist(
@@ -10,18 +10,18 @@ const useTokenStore = create(
       setToken: (newToken) => set({ token: newToken }),
 
       initializeToken: async () => {
-        const storedToken = await AsyncStorage.getItem("token");
+        const storedToken = await AsyncStorage.getItem('token')
 
         if (storedToken !== null) {
-          set({ token: storedToken });
+          set({ token: storedToken })
         }
       },
     }),
 
     {
-      name: "token-storage",
-    }
-  )
-);
+      name: 'token-storage',
+    },
+  ),
+)
 
-export default useTokenStore;
+export default useTokenStore

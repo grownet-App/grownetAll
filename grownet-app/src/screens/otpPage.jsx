@@ -7,56 +7,56 @@ import {
   Alert,
   View,
   SafeAreaView,
-} from "react-native";
-import React, { Component, useRef, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { GlobalStyles } from "../styles/styles";
-import { useRoute } from "@react-navigation/native";
-import { otpApiUrl } from "../config/urls.config";
-import axios from "axios";
-import useTokenStore from "../../src/store/useTokenStore";
+} from 'react-native'
+import React, { Component, useRef, useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { GlobalStyles } from '../styles/styles'
+import { useRoute } from '@react-navigation/native'
+import { otpApiUrl } from '../config/urls.config'
+import axios from 'axios'
+import useTokenStore from '../../src/store/useTokenStore'
 
 const Otp = () => {
-  const navigation = useNavigation();
-  const pin1Ref = useRef();
-  const pin2Ref = useRef();
-  const pin3Ref = useRef();
-  const pin4Ref = useRef();
-  const refBtn = useRef();
-  const [pin1, setPin1] = useState("");
-  const [pin2, setPin2] = useState("");
-  const [pin3, setPin3] = useState("");
-  const [pin4, setPin4] = useState("");
+  const navigation = useNavigation()
+  const pin1Ref = useRef()
+  const pin2Ref = useRef()
+  const pin3Ref = useRef()
+  const pin4Ref = useRef()
+  const refBtn = useRef()
+  const [pin1, setPin1] = useState('')
+  const [pin2, setPin2] = useState('')
+  const [pin3, setPin3] = useState('')
+  const [pin4, setPin4] = useState('')
 
-  const route = useRoute();
-  const { setToken } = useTokenStore();
+  const route = useRoute()
+  const { setToken } = useTokenStore()
 
   const enviarOTP = async () => {
-    let otp = pin1 + pin2 + pin3 + pin4;
+    let otp = pin1 + pin2 + pin3 + pin4
 
-    const formData = route.params;
+    const formData = route.params
 
-    const apiUrl = `${otpApiUrl}?countrie=${formData.countrie}&telephone=${formData.telephone}&code=${otp}`;
+    const apiUrl = `${otpApiUrl}?countrie=${formData.countrie}&telephone=${formData.telephone}&code=${otp}`
 
     try {
-      const response = await axios.post(apiUrl);
-      console.log("Respuesta de la API:", response.data);
-      const token = response.data.token;
-      setToken(token);
-      console.log("token:", token);
+      const response = await axios.post(apiUrl)
+      console.log('Respuesta de la API:', response.data)
+      const token = response.data.token
+      setToken(token)
+      console.log('token:', token)
       if (response.data.flag === 1) {
-        navigation.navigate("providers");
+        navigation.navigate('providers')
       }
     } catch (error) {
-      console.error("Error al enviar OTP:", error);
+      console.error('Error al enviar OTP:', error)
     }
-  };
+  }
 
   return (
     <SafeAreaView style={GlobalStyles.containerOtpPage}>
       <Image
         style={GlobalStyles.tinyLogoOtp}
-        source={require("../../assets/logo.png")}
+        source={require('../../assets/logo.png')}
       />
       <Text style={GlobalStyles.textOtp1}>Enter your verification code</Text>
       <Text style={GlobalStyles.textOtp2}>
@@ -67,11 +67,11 @@ const Otp = () => {
           <TextInput
             ref={pin1Ref}
             style={GlobalStyles.textInput}
-            keyboardType={"number-pad"}
+            keyboardType={'number-pad'}
             maxLength={1}
             onChangeText={(text) => {
-              setPin1(text);
-              text ? pin2Ref.current.focus() : pin1Ref.current.focus();
+              setPin1(text)
+              text ? pin2Ref.current.focus() : pin1Ref.current.focus()
             }}
           />
         </View>
@@ -79,11 +79,11 @@ const Otp = () => {
           <TextInput
             ref={pin2Ref}
             style={GlobalStyles.textInput}
-            keyboardType={"number-pad"}
+            keyboardType={'number-pad'}
             maxLength={1}
             onChangeText={(text) => {
-              setPin2(text);
-              text ? pin3Ref.current.focus() : pin1Ref.current.focus();
+              setPin2(text)
+              text ? pin3Ref.current.focus() : pin1Ref.current.focus()
             }}
           />
         </View>
@@ -91,11 +91,11 @@ const Otp = () => {
           <TextInput
             ref={pin3Ref}
             style={GlobalStyles.textInput}
-            keyboardType={"number-pad"}
+            keyboardType={'number-pad'}
             maxLength={1}
             onChangeText={(text) => {
-              setPin3(text);
-              text ? pin4Ref.current.focus() : pin2Ref.current.focus();
+              setPin3(text)
+              text ? pin4Ref.current.focus() : pin2Ref.current.focus()
             }}
           />
         </View>
@@ -103,11 +103,11 @@ const Otp = () => {
           <TextInput
             ref={pin4Ref}
             style={GlobalStyles.textInput}
-            keyboardType={"number-pad"}
+            keyboardType={'number-pad'}
             maxLength={1}
             onChangeText={(text) => {
-              setPin4(text);
-              !text && pin3Ref.current.focus();
+              setPin4(text)
+              !text && pin3Ref.current.focus()
             }}
           />
         </View>
@@ -125,7 +125,7 @@ const Otp = () => {
         </TouchableOpacity>
       </View>
     </SafeAreaView>
-  );
-};
+  )
+}
 
-export default Otp;
+export default Otp
