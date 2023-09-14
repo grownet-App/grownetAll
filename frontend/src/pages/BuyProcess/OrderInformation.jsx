@@ -54,9 +54,14 @@ export default function OrderInformation() {
           <input type="date" name="user_date" required></input>
           <h3>Any special requirements?</h3>
           <textarea id="w3review" name="message" rows="4" cols="50"></textarea>
+          <html name="user_address">
+            <p name="hola">hola</p>
+          <div name="adios">adios</div>
+          </html>
+          
         {data.filter((article) => article.amount>0).map((article) =>(
           <>
-          <textarea id="resume" name="product" key={article.id} >{" Product: "+ article.name + " - Amount: " + article.amount + " - Volume: " + article.volume + " - Total: " + parseFloat(article.priceWithTax.toFixed(2))}
+          <textarea  name="product" key={article.id} >{" Product: "+ article.name + " - Amount: " + article.amount + " - Volume: " + article.volume + " - Total: " + parseFloat(article.priceWithTax.toFixed(2))}
           </textarea>
           </>
         ))}

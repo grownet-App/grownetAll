@@ -4,11 +4,7 @@ import Form from "react-bootstrap/Form";
 import useArticlesToPayStore from "../../store/useArticlesToPayStore";
 import Stepper from "../Stepper/Stepper";
 
-export default function ProductDetail({
-  updateTotalToPay,
-  updateTotalTaxes,
-  updateTotalNet,
-}) {
+export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updateTotalNet}) {
   const articlesToPay = useArticlesToPayStore((state) => state.articlesToPay);
 
   useEffect(() => {
@@ -92,7 +88,11 @@ export default function ProductDetail({
   const handleTrashClick = (productId) => {
     setArticles((prevArticles) =>
       prevArticles.map((article) =>
-        article.id === productId ? { ...article, amount: 0 } : article
+        article.id === productId ? <>
+        <button>hola</button>
+        </>
+        
+        : article
       )
     );
 
