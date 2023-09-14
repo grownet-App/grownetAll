@@ -10,7 +10,7 @@ import {
 } from "@react-pdf/renderer";
 import "../css/orderDetail.css";
 
-export default function DocumentPdf({data, selectedRestaurant, formattedDate, selectedProvider  }) {
+export default function DocumentPdf({articlesData, selectedRestaurant, formattedDate, selectedProvider  }) {
   Font.register({ family: "Roboto" });
 
 
@@ -116,7 +116,7 @@ export default function DocumentPdf({data, selectedRestaurant, formattedDate, se
               <Text style={styles.tableCell}>Unit price</Text>
             </View>
           </View>
-          {data.map((article) => (
+          {articlesData.map((article) => (
               <View key={article.id} style={styles.tableRow}>
                 <View style={styles.tableCol}>
                   <Text style={styles.tableCell}>{article.id}</Text>

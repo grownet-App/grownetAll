@@ -164,7 +164,7 @@ export default function Products(props) {
       ];
       const productsWithTax = defaultProducts.map((article) => ({
         ...article,
-        priceWithTax: article.price_unit + article.price_unit * article.tax,
+        priceWithTax: (article.price_unit + article.price_unit * article.tax).toFixed(2),
       }));
       setArticles(productsWithTax);
       setProducts(productsWithTax);
