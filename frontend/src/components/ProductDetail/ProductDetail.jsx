@@ -1,15 +1,14 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
-import Form from "react-bootstrap/Form";
+import {Form, Modal} from "react-bootstrap";
 import useArticlesToPayStore from "../../store/useArticlesToPayStore";
 import Stepper from "../Stepper/Stepper";
 
-export default function ProductDetail({
-  updateTotalToPay,
-  updateTotalTaxes,
-  updateTotalNet,
-}) {
+export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updateTotalNet}) {
   const { articlesToPay, setArticlesToPay } = useArticlesToPayStore();
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const storedArticlesToPay = JSON.parse(
@@ -84,8 +83,11 @@ export default function ProductDetail({
   // ELIMINAR ARTICULOS DEL CARRITO
   const handleTrashClick = (productId) => {
     setArticles((prevArticles) =>
-      prevArticles.map((article) =>
-        article.id === productId ? { ...article, amount: 0, totalItemToPay: 0 } : article
+      prevArticles.map((article) => article.id === productId ? { ...article, amount: 0, totalItemToPay: 0 } : article
+      
+       /* if (article.id === productId) {
+          console.log("hola" + productId);
+        }*/
       )
     );
 
