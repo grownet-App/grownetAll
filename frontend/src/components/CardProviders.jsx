@@ -7,7 +7,8 @@ import useOrderStore from "../store/useOrderStore";
 
 export default function Providers() {
   const { providers, setProviders, setSelectedProvider } = useOrderStore();
-
+const urlImg =
+    "https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/";
   useEffect(() => {
     //TODO QUITAR ESTE AXIOS CUANDO RESTAURANTS TRAIGA LOS PROVIDERS
     axios
@@ -39,7 +40,7 @@ export default function Providers() {
           id="providers-categ"
           to="/products"
         >
-          <h2 className="text-supplier">{provider.name}</h2>
+         <img src={urlImg + provider.image} alt={provider.name} id="logo-providers"/>
           <img
             src={img_providers}
             alt="logo-restaurant"

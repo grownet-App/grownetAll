@@ -1,29 +1,30 @@
-import { usePDF, Document, Page } from "@react-pdf/renderer";
-import emailjs from "@emailjs/browser";
+import { SMTPClient } from 'emailjs';
 
-export default function PruebaPDF() {
- /* const MyDoc = (
-    <Document>
-      <Page>// My document data</Page>
-    </Document>
-  );
-  const [instance, updateInstance] = usePDF({ document: MyDoc });*/
-  function sendCanvasAsAttachment(canvas) {
-    var base64 = canvas.toDataURL("https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80");
-    emailjs.send("service_zthtpco", "template_iierimt", {
-        content: base64
-    });
-}
-  return (
-    <>
-    {/*<a href={instance.url} download="test.pdf">
-      Download
-    </a>*/}
-    <form enctype="multipart/form-data" method="post" onsubmit="formSubmit()">
+const client = new SMTPClient({
+	user: 'user',
+	password: 'password',
+	host: 'smtp.your-email.com',
+	ssl: true,
+});
 
-    <input type="file" name="my_file"/> 
-    <input type="submit" value="Submit"></input>
-    </form>
-    </>
-  );
-}
+const message = {
+	text: 'i hope this works',
+	from: 'you <username@your-email.com>',
+	to: 'someone <someone@your-email.com>, another <another@your-email.com>',
+	cc: 'else <else@your-email.com>',
+	subject: 'testing emailjs',
+	attachment: [
+		{ data: '<html>i <i>hope</i> this works!</html>', alternative: true },
+		{ path: 'path/to/file.zip', type: 'application/zip', name: 'renamed.zip' },
+	],
+};
+
+// send the message and get a callback with an error or details of the message that was sent
+client.send(message, function (err, message) {
+	console.log(err || message);
+});
+
+// you can continue to send more messages with successive calls to 'client.send',
+// they will be queued on the same smtp connection
+
+// or instead of using the built-in client you can create an instance of 'smtp.SMTPConnection'

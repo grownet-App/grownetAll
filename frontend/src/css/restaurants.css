@@ -7,6 +7,7 @@
 }
 .bttn-categ{
     width: 350px;
+    height: 150px;
 }
 .tittle-restaurants{
     margin-top: 2rem;
@@ -20,12 +21,13 @@
     right: 15px;
 }
 .restaurants h2{
-    font-size: 25px;
+    font-size: 23px;
     margin-bottom: 0px !important;
 }
 .restaurants p{
     font-weight: 200;
     margin-top: 5px;
+    font-size: 15px;
 }
 .text-categ{
     text-align: left;
