@@ -2,7 +2,7 @@ import { Text, View, Button, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
-import { orders } from '../../src/screens/orders'
+import Orders from '../../src/screens/orders'
 import loginPage from '../../src/screens/loginPage'
 import records from '../../src/screens/records'
 import settings from '../../src/screens/settings'
@@ -14,6 +14,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { useNavigation } from '@react-navigation/native'
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons'
 import AuthNavigator from '../navigation/authNavigator'
+import TabNavigator from './tabNavigator'
 
 const Tab = createBottomTabNavigator()
 
@@ -114,7 +115,7 @@ function MyStack1() {
           ),
         }}
       />
-      <Stack.Screen name="orders" component={orders} />
+      <Stack.Screen name="orders" component={Orders} />
     </Stack.Navigator>
   )
 }
