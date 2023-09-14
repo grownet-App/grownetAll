@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 import DocumentPdf from "../../components/DocumentPdf";
 import { Link } from "react-router-dom";
 import useOrderStore from "../../store/useOrderStore";
+import PruebaPDF from "../../components/PruebaPDF";
 
 export default function OrderInformation() {
-  const form = useRef();
+
   const navigate = useNavigate();
   const [ data, setData ] = useState([]);
   const { selectedRestaurant } = useOrderStore();
-
 
   useEffect(() => {
     const storedArticlesToPay = JSON.parse(
@@ -21,23 +21,40 @@ export default function OrderInformation() {
     setData(storedArticlesToPay);
   }, []);
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+  const [file, setFile] = useState(null);
 
-    emailjs
-      .sendForm( "service_zthtpco", "template_iierimt", form.current, "KDimKCkRePZ73euid")
-      .then(
-        (result) => {
-          console.log(result.text);
-          navigate("/orderSuccessful");
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = async (e) => {
+
+      const serviceId = "service_2voynei";
+      const templateId = "template_1mqbyuu";
+      const userId = "ZWLp3lK1btJHqpyCa";
+
+    const emailParams = {
+      to_name: "Grownet",
+      restaurant: "Restaurant Don Luis",
+      file: reader.result
+    };
+
+    emailjs.send(serviceId, templateId, emailParams, userId)
+        .then((result) => {
+            navigate("/orderSuccessful");
+            console.log(result);    
+        }, (error) => {
+            console.log(error)
+        })
+    }
   };
+
+
   
   return (
+  
     <section className="details">
       <div className="tittle-detail">
         <Link to="/details">
@@ -49,7 +66,7 @@ export default function OrderInformation() {
         </Link>
         <h1 className="tittle-orderDetail">Order detail</h1>
       </div>
-      <form ref={form} onSubmit={sendEmail}>
+      <form onSubmit={handleSubmit}>
         <div className="data-shipping">
           <h3 id="text-data-shipping">Address</h3>
           <input type="text" name="user_address" value={selectedRestaurant.address} required/>
@@ -57,21 +74,21 @@ export default function OrderInformation() {
           <input type="date" name="user_date" required></input>
           <h3>Any special requirements?</h3>
           <textarea id="w3review" name="message" rows="4" cols="50"></textarea>
-          <html name="user_address">
-            <p name="hola">hola</p>
-          <div name="adios">adios</div>
-          </html>
+          <label>
+            File:
+            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+          </label>
           
         {data.filter((article) => article.amount>0).map((article) =>(
           <>
-          <textarea  name="product" key={article.id} >{" Product: "+ article.name + " - Amount: " + article.amount + " - Volume: " + article.volume + " - Total: " + parseFloat(article.priceWithTax.toFixed(2))}
+          <textarea id="resume" name="product" key={article.id} >{" Product: "+ article.name + " - Amount: " + article.amount + " - Volume: " + article.volume + " - Total: " + parseFloat(article.priceWithTax.toFixed(2))}
           </textarea>
           </>
         ))}
         </div>
-        <input type="submit" value="Send" className="bttn btn-primary" />
+        <button type="submit"className="bttn btn-primary">Continue</button>
+  
       </form>
-    
-    </section>
+        </section>
   );
 }
