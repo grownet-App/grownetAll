@@ -13,13 +13,14 @@ export default function OrderSuccessful() {
   const [articlesData, setArticlesData] = useState([]);
   const { selectedRestaurant, selectedProvider } = useOrderStore();
   const currentDate = new Date();
-  const dayName = currentDate.toLocaleString('en-us', { weekday: 'short' });
+  const dayName = currentDate.toLocaleString("en-us", { weekday: "short" });
   const dayNumber = currentDate.getDate();
-  const monthName = currentDate.toLocaleString('en-us', { month: 'long' });
+  const monthName = currentDate.toLocaleString("en-us", { month: "long" });
   const yearNumber = currentDate.getFullYear();
   const formattedDate = `${dayName}, ${dayNumber} ${monthName}, ${yearNumber}`;
   //TODO PONER FECHA DE ENTREGA QUE SE SELECCIONÓ EN EL CALENDARIO
-  const { articlesToPay } = useArticlesToPayStore();
+  const { articlesToPay, totalNet, totalTaxes, totalToPay } =
+    useArticlesToPayStore();
 
   useEffect(() => {
     setArticlesData(articlesToPay);
@@ -28,13 +29,17 @@ export default function OrderSuccessful() {
   const generatePdfDocument = async (fileName) => {
     try {
       const blob = await pdf(
-      <DocumentPdf 
-        articlesData={articlesData} 
-        selectedRestaurant={selectedRestaurant}
-        selectedProvider={selectedProvider}
-        formattedDate={formattedDate}
-        articlesToPay={articlesToPay}
-      />).toBlob();
+        <DocumentPdf
+          articlesData={articlesData}
+          selectedRestaurant={selectedRestaurant}
+          selectedProvider={selectedProvider}
+          formattedDate={formattedDate}
+          articlesToPay={articlesToPay}
+          totalNet={totalNet}
+          totalTaxes={totalTaxes}
+          totalToPay={totalToPay}
+        />
+      ).toBlob();
       FileSaver.saveAs(blob, fileName);
     } catch (error) {
       console.error("Error generating PDF", error);
@@ -46,19 +51,15 @@ export default function OrderSuccessful() {
 
   return (
     <section className="order-succesful">
-      <DocumentPdf
-  selectedRestaurant={selectedRestaurant}
-  selectedProvider={selectedProvider}
-  formattedDate={formattedDate}
-  articlesData={articlesData}
-/>
-<div>{formattedDate}</div>
-<div> {selectedRestaurant.account_name} </div>
-<div> {selectedProvider.name} </div>
-<div> {selectedRestaurant.address} </div>
-{articlesToPay.map((article) => (
-    <div> {article.name} </div>
-))}
+      {/* TODO ELIMINAR ESTO CUANDO ESTÉ ORGANIZADO EL TOTAL DE PRODUCTS A PAGAR */}
+      {/* <div>{formattedDate}</div>
+      <div> {selectedRestaurant.account_name} </div>
+      {articlesToPay.map((article) => (
+        <div> {article.totalItemToPay} </div> 
+      ))}
+      <div> {totalNet} </div>
+      <div> {totalTaxes} </div>
+      <div> {totalToPay} </div> */}
 
       <img src={img_succesful} alt="Succesfull" />
       <h1>Succesful!</h1>

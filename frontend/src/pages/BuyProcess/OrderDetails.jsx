@@ -3,22 +3,24 @@ import React, { useState } from "react";
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
 import "../../css/orderDetail.css";
 import { Link } from "react-router-dom";
+import useArticlesToPayStore from "../../store/useArticlesToPayStore";
 
 export default function OrderDetails(props) {
-  const [totalToPay, setTotalToPay] = useState(0);
-  const [totalTaxes, setTotalTaxes] = useState(0);
-  const [totalNet, setTotalNet] = useState(0);
+  const articlesToPayStore = useArticlesToPayStore();
+  const totalNet = articlesToPayStore.totalNet;
+  const totalTaxes = articlesToPayStore.totalTaxes;
+  const totalToPay = articlesToPayStore.totalToPay;
 
   const updateTotalNet = (newNet) => {
-    setTotalNet(newNet);
+    articlesToPayStore.setTotalNet(newNet);
   };
 
   const updateTotalTaxes = (newTaxes) => {
-    setTotalTaxes(newTaxes);
+    articlesToPayStore.setTotalTaxes(newTaxes);
   };
 
   const updateTotalToPay = (newTotal) => {
-    setTotalToPay(newTotal);
+    articlesToPayStore.setTotalToPay(newTotal);
   };
 
   return (
@@ -43,16 +45,16 @@ export default function OrderDetails(props) {
           <h2 id="tax-font">Payment details</h2>
           <div className="product-detail">
             <h3>Net</h3>
-            <h3>£{totalNet}</h3>
+            <h3>£{totalNet.toFixed(2)}</h3>
           </div>
           <div className="product-detail">
             <h3>Tax</h3>
-            <h3>£{totalTaxes}</h3>
+            <h3>£{totalTaxes.toFixed(2)}</h3>
           </div>
         </div>
         <div className="total-detail">
           <h2>Current value</h2>
-          <h2>£{totalToPay} </h2>
+          <h2>£{totalToPay.toFixed(2)}</h2>
         </div>
       </div>
       <Link className="bttn btn-primary" to="/orderInformation">

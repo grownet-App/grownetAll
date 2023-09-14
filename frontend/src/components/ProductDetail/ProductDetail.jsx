@@ -71,7 +71,7 @@ export default function ProductDetail({
         return article;
       })
     );
-    const updatedArticlesToPay = articles.map((article) => {
+    const updatedArticlesToPay = articlesToPay.map((article) => {
       if (article.id === productId) {
         return { ...article, volume: newVolume };
       }
@@ -85,12 +85,12 @@ export default function ProductDetail({
   const handleTrashClick = (productId) => {
     setArticles((prevArticles) =>
       prevArticles.map((article) =>
-        article.id === productId ? { ...article, amount: 0 } : article
+        article.id === productId ? { ...article, amount: 0, totalItemToPay: 0 } : article
       )
     );
 
-    const updatedArticlesToPay = articles.map((article) =>
-      article.id === productId ? { ...article, amount: 0 } : article
+    const updatedArticlesToPay = articlesToPay.map((article) =>
+      article.id === productId ? { ...article, amount: 0, totalItemToPay: 0 } : article
     );
     setArticlesToPay(updatedArticlesToPay);
 
@@ -180,13 +180,19 @@ export default function ProductDetail({
     }
     const priceWithTax = updatedPrice + updatedPrice * article.tax;
     const total = priceWithTax * amount;
-    return parseFloat(total.toFixed(2));
+    const totalItemToPay = parseFloat(total.toFixed(2));
+  
+    if ('totalItemToPay' in article) {
+      article.totalItemToPay = totalItemToPay;
+    } else {
+      Object.assign(article, { totalItemToPay });
+    }
+    return totalItemToPay;
   };
 
   const calculateTotalToPay = (articles) => {
     const totalToPay = articles.reduce((total, article) => {
-      const itemTotal = calculateItemToPay(article, article.amount);
-      return total + itemTotal;
+      return total + article.totalItemToPay;
     }, 0);
     return parseFloat(totalToPay.toFixed(2));
   };
