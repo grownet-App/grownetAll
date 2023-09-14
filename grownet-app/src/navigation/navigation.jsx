@@ -1,26 +1,26 @@
-import { Text, View, Button, StyleSheet, TouchableOpacity } from "react-native";
-import React, { Component } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import { orders } from "../screens/orders";
-import loginPage from "../screens/loginPage";
-import records from "../screens/records";
-import settings from "../screens/settings";
-import chat from "../screens/chat";
-import home from "../screens/home";
-import providers from "../screens/providers";
-import otpPage from "../screens/otpPage";
-import { createStackNavigator } from "@react-navigation/stack";
-import { useNavigation } from "@react-navigation/native";
-import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
-import AuthNavigator from "../screens/Auth/authNavigator";
+import { Text, View, Button, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { Component } from 'react'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
+import { orders } from '../../src/screens/orders'
+import loginPage from '../../src/screens/loginPage'
+import records from '../../src/screens/records'
+import settings from '../../src/screens/settings'
+import chat from '../../src/screens/chat'
+import home from '../../src/screens/home'
+import providers from '../../src/screens/providers'
+import otpPage from '../../src/screens/otpPage'
+import { createStackNavigator } from '@react-navigation/stack'
+import { useNavigation } from '@react-navigation/native'
+import { FontAwesome5, FontAwesome } from '@expo/vector-icons'
+import AuthNavigator from '../navigation/authNavigator'
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator()
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 function MyStack() {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   return (
     <Stack.Navigator>
@@ -53,44 +53,44 @@ function MyStack() {
         component={providers}
         options={{
           headerShown: true,
-          title: "Providers",
+          title: 'Providers',
           headerStyle: {
-            backgroundColor: "#f2f2f2",
+            backgroundColor: '#f2f2f2',
           },
-          headerTintColor: "#04444F",
-          headerTitleAlign: "center",
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
           headerTitleStyle: {
-            fontFamily: "PoppinsBold",
+            fontFamily: 'PoppinsBold',
             fontSize: 28,
           },
           headerLeft: () => (
             <TouchableOpacity
               style={{ marginHorizontal: 28 }}
               onPress={() => {
-                navigation.goBack();
+                navigation.goBack()
               }}
             >
               <FontAwesome
                 name="arrow-left"
                 size={24}
                 color="#04444F"
-                style={{ position: "relative" }}
+                style={{ position: 'relative' }}
               />
             </TouchableOpacity>
           ),
         }}
       />
     </Stack.Navigator>
-  );
+  )
 }
 function MyStack1() {
   return (
     <Stack.Navigator
       initialRouteName="login"
       screenOptions={{
-        headerMode: "screen",
-        headerTintColor: "white",
-        headerStyle: { backgroundColor: "#026CD2" },
+        headerMode: 'screen',
+        headerTintColor: 'white',
+        headerStyle: { backgroundColor: '#026CD2' },
       }}
     >
       <Stack.Screen
@@ -100,14 +100,14 @@ function MyStack1() {
           headerBackTitleVisible: false,
           headerLeft: () => (
             <Button
-              onPress={() => alert("This is a button!")}
+              onPress={() => alert('This is a button!')}
               title="Info"
               color="#fff"
             />
           ),
           headerRight: () => (
             <Button
-              onPress={() => alert("This is a button!")}
+              onPress={() => alert('This is a button!')}
               title="Info"
               color="#fff"
             />
@@ -116,16 +116,16 @@ function MyStack1() {
       />
       <Stack.Screen name="orders" component={orders} />
     </Stack.Navigator>
-  );
+  )
 }
 function orderStack() {
   return (
     <Stack.Navigator
       initialRouteName="login"
       screenOptions={{
-        headerMode: "screen",
-        headerTintColor: "#026CD2",
-        headerStyle: { backgroundColor: "white" },
+        headerMode: 'screen',
+        headerTintColor: '#026CD2',
+        headerStyle: { backgroundColor: 'white' },
       }}
     >
       <Stack.Screen
@@ -135,14 +135,14 @@ function orderStack() {
           headerBackTitleVisible: false,
           headerLeft: () => (
             <Button
-              onPress={() => alert("This is a button!")}
+              onPress={() => alert('This is a button!')}
               title="<"
               color="#026CD2"
             />
           ),
           headerRight: () => (
             <Button
-              onPress={() => alert("This is a button!")}
+              onPress={() => alert('This is a button!')}
               title="Info"
               color="#fff"
             />
@@ -150,16 +150,16 @@ function orderStack() {
         }}
       />
     </Stack.Navigator>
-  );
+  )
 }
 function MyStack3() {
   return (
     <Stack.Navigator
       initialRouteName="login"
       screenOptions={{
-        headerMode: "screen",
-        headerTintColor: "white",
-        headerStyle: { backgroundColor: "#026CD2" },
+        headerMode: 'screen',
+        headerTintColor: 'white',
+        headerStyle: { backgroundColor: '#026CD2' },
       }}
     >
       <Stack.Screen
@@ -169,14 +169,14 @@ function MyStack3() {
           headerBackTitleVisible: false,
           headerLeft: () => (
             <Button
-              onPress={() => alert("This is a button!")}
+              onPress={() => alert('This is a button!')}
               title="Info"
               color="#fff"
             />
           ),
           headerRight: () => (
             <Button
-              onPress={() => alert("This is a button!")}
+              onPress={() => alert('This is a button!')}
               title="Info"
               color="#fff"
             />
@@ -184,7 +184,7 @@ function MyStack3() {
         }}
       />
     </Stack.Navigator>
-  );
+  )
 }
 function MyTabs() {
   return (
@@ -192,7 +192,7 @@ function MyTabs() {
       initialRouteName="home"
       component={home}
       screenOptions={{
-        tabBarActiveTintColor: "green",
+        tabBarActiveTintColor: 'green',
       }}
     >
       <Tab.Screen
@@ -200,7 +200,7 @@ function MyTabs() {
         component={settings}
         options={{
           tabBarIcon: ({ color, size }) => {
-            return <FontAwesome5 name="cogs" size={size} color={color} />;
+            return <FontAwesome5 name="cogs" size={size} color={color} />
           },
           headerShown: true,
         }}
@@ -212,7 +212,7 @@ function MyTabs() {
           tabBarIcon: ({ color, size }) => {
             return (
               <FontAwesome5 name="shopping-basket" size={size} color={color} />
-            );
+            )
           },
           headerShown: false,
         }}
@@ -222,7 +222,7 @@ function MyTabs() {
         component={MyStack1}
         options={{
           tabBarIcon: ({ color, size }) => {
-            return <FontAwesome5 name="receipt" size={size} color={color} />;
+            return <FontAwesome5 name="receipt" size={size} color={color} />
           },
           headerShown: false,
         }}
@@ -232,13 +232,13 @@ function MyTabs() {
         component={MyStack3}
         options={{
           tabBarIcon: ({ color, size }) => {
-            return <FontAwesome name="comments" size={size} color={color} />;
+            return <FontAwesome name="comments" size={size} color={color} />
           },
           headerShown: false,
         }}
       />
     </Tab.Navigator>
-  );
+  )
 }
 
 export default function Navigation() {
@@ -246,5 +246,5 @@ export default function Navigation() {
     <NavigationContainer>
       <AuthNavigator />
     </NavigationContainer>
-  );
+  )
 }

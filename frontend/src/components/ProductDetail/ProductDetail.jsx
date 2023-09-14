@@ -12,8 +12,11 @@ export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updat
       localStorage.getItem("articlesToPay")
     );
     if (storedArticlesToPay) {
-      useArticlesToPayStore.setState({ articlesToPay: storedArticlesToPay });
-      setArticles(storedArticlesToPay);
+      const filteredArticles = storedArticlesToPay.filter(
+        (article) => article.amount > 0
+      );
+      useArticlesToPayStore.setState({ articlesToPay: filteredArticles });
+      setArticles(filteredArticles);
     }
   }, []);
 
@@ -34,13 +37,8 @@ export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updat
           }
         : article
     );
-    localStorage.setItem("articlesToPay", JSON.stringify(updatedArticlesToPay));
+    setArticlesToPay(updatedArticlesToPay);
 
-    updatedArticlesToPay.forEach((article) =>
-      console.log(
-        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume} - PriceWithTax: ${article.priceWithTax}`
-      )
-    );
     const newTotalToPay = calculateTotalToPay(updatedArticlesToPay);
     updateTotalToPay(newTotalToPay);
   };
@@ -69,42 +67,37 @@ export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updat
         return article;
       })
     );
-    const updatedArticlesToPay = articles.map((article) => {
+    const updatedArticlesToPay = articlesToPay.map((article) => {
       if (article.id === productId) {
         return { ...article, volume: newVolume };
       }
       return article;
     });
 
-    localStorage.setItem("articlesToPay", JSON.stringify(updatedArticlesToPay));
-    updatedArticlesToPay.forEach((article) =>
-      console.log(
-        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume} - PriceWithTax: ${article.priceWithTax}`
-      )
-    );
+    setArticlesToPay(updatedArticlesToPay);
   };
 
   // ELIMINAR ARTICULOS DEL CARRITO
   const handleTrashClick = (productId) => {
     setArticles((prevArticles) =>
       prevArticles.map((article) =>
+<<<<<<< HEAD
         article.id === productId ? <>
         <button>hola</button>
         </>
         
         : article
+=======
+        article.id === productId ? { ...article, amount: 0, totalItemToPay: 0 } : article
+>>>>>>> e96f5a59d4edd5b19493846e6abc316232b6b4a6
       )
     );
 
-    const updatedArticlesToPay = articles.map((article) =>
-      article.id === productId ? { ...article, amount: 0 } : article
+    const updatedArticlesToPay = articlesToPay.map((article) =>
+      article.id === productId ? { ...article, amount: 0, totalItemToPay: 0 } : article
     );
-    localStorage.setItem("articlesToPay", JSON.stringify(updatedArticlesToPay));
-    updatedArticlesToPay.forEach((article) =>
-      console.log(
-        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume}`
-      )
-    );
+    setArticlesToPay(updatedArticlesToPay);
+
     const newTotalToPay = calculateTotalToPay(updatedArticlesToPay);
     updateTotalToPay(newTotalToPay);
   };
@@ -191,13 +184,19 @@ export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updat
     }
     const priceWithTax = updatedPrice + updatedPrice * article.tax;
     const total = priceWithTax * amount;
-    return parseFloat(total.toFixed(2));
+    const totalItemToPay = parseFloat(total.toFixed(2));
+  
+    if ('totalItemToPay' in article) {
+      article.totalItemToPay = totalItemToPay;
+    } else {
+      Object.assign(article, { totalItemToPay });
+    }
+    return totalItemToPay;
   };
 
   const calculateTotalToPay = (articles) => {
     const totalToPay = articles.reduce((total, article) => {
-      const itemTotal = calculateItemToPay(article, article.amount);
-      return total + itemTotal;
+      return total + article.totalItemToPay;
     }, 0);
     return parseFloat(totalToPay.toFixed(2));
   };

@@ -1,49 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { TouchableOpacity, StatusBar } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import useTokenStore from "../../store/useTokenStore";
-import Home from "../home";
-import Login from "../loginPage";
-import OTP from "../otpPage";
-import providers from "../providers";
-import { useFonts, Poppins_700Bold } from "@expo-google-fonts/poppins";
-import { FontAwesome } from "@expo/vector-icons";
-import { createStackNavigator } from "@react-navigation/stack";
+import React, { useState, useEffect } from 'react'
+import { TouchableOpacity, StatusBar } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import useTokenStore from '../store/useTokenStore'
+import Home from '../screens/home'
+import Login from '../screens/loginPage'
+import OTP from '../screens/otpPage'
+import providers from '../screens/providers'
+import { useFonts, Poppins_700Bold } from '@expo-google-fonts/poppins'
+import { FontAwesome } from '@expo/vector-icons'
+import { createStackNavigator } from '@react-navigation/stack'
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
 function AuthNavigator() {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   const [fontsLoaded] = useFonts({
     PoppinsBold: Poppins_700Bold,
-  });
+  })
 
-  const { token } = useTokenStore();
+  const { token } = useTokenStore()
 
-  const [isLoading, setIsLoading] = useState(true);
-  const { setToken } = useTokenStore();
+  const [isLoading, setIsLoading] = useState(true)
+  const { setToken } = useTokenStore()
 
   const handleLogout = async () => {
     try {
-      setToken(null);
+      setToken(null)
     } catch (error) {
-      console.error("Error al cerrar sesión:", error);
+      console.error('Error al cerrar sesión:', error)
     }
-  };
+  }
 
   useEffect(() => {
     if (token) {
-      setIsLoading(false);
+      setIsLoading(false)
     } else {
-      console.log("No se encontró un token. Redirigiendo a login.");
-      navigation.navigate("home");
-      setIsLoading(false);
+      console.log('No se encontró un token. Redirigiendo a login.')
+      navigation.navigate('home')
+      setIsLoading(false)
     }
-  }, [token, navigation]);
+  }, [token, navigation])
 
   if (!fontsLoaded || isLoading) {
-    return null;
+    return null
   }
 
   return (
@@ -56,29 +56,29 @@ function AuthNavigator() {
             options={({ navigation }) => ({
               headerShown: true,
 
-              title: "Providers",
+              title: 'Providers',
               headerStyle: {
-                backgroundColor: "#f2f2f2",
+                backgroundColor: '#f2f2f2',
                 height: StatusBar.currentHeight + 60,
               },
-              headerTintColor: "#04444F",
-              headerTitleAlign: "center",
+              headerTintColor: '#04444F',
+              headerTitleAlign: 'center',
               headerTitleStyle: {
-                fontFamily: "PoppinsBold",
+                fontFamily: 'PoppinsBold',
                 fontSize: 28,
               },
               headerLeft: () => (
                 <TouchableOpacity
                   style={{ marginHorizontal: 28 }}
                   onPress={() => {
-                    navigation.goBack();
+                    navigation.goBack()
                   }}
                 >
                   <FontAwesome
                     name="arrow-left"
                     size={24}
                     color="#04444F"
-                    style={{ position: "relative" }}
+                    style={{ position: 'relative' }}
                   />
                 </TouchableOpacity>
               ),
@@ -113,7 +113,7 @@ function AuthNavigator() {
         </>
       )}
     </Stack.Navigator>
-  );
+  )
 }
 
-export default AuthNavigator;
+export default AuthNavigator
