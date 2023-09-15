@@ -1,94 +1,71 @@
 import { Icon } from "@iconify/react";
 import "../../css/orderDetail.css";
 import React, { useRef, useState, useEffect } from "react";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 import { useNavigate } from "react-router-dom";
-import DocumentPdf from "../../components/DocumentPdf";
-import { Link } from "react-router-dom";
 import useOrderStore from "../../store/useOrderStore";
-import PruebaPDF from "../../components/PruebaPDF";
-
+import DocumentPdf from "../../components/DocumentPdf";
 export default function OrderInformation() {
-
+  const form = useRef();
   const navigate = useNavigate();
   const [ data, setData ] = useState([]);
   const { selectedRestaurant } = useOrderStore();
-
   useEffect(() => {
     const storedArticlesToPay = JSON.parse(
       localStorage.getItem("articlesToPay")
     );
     setData(storedArticlesToPay);
   }, []);
-
-  const [file, setFile] = useState(null);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = async (e) => {
-
-      const serviceId = "service_2voynei";
-      const templateId = "template_1mqbyuu";
-      const userId = "ZWLp3lK1btJHqpyCa";
-
-    const emailParams = {
-      to_name: "Grownet",
-      restaurant: "Restaurant Don Luis",
-      file: reader.result
-    };
-
-    emailjs.send(serviceId, templateId, emailParams, userId)
-        .then((result) => {
-            navigate("/orderSuccessful");
-            console.log(result);    
-        }, (error) => {
-            console.log(error)
-        })
-    }
+  console.log(data)
+  const sendEmail = (e) => {
+    e.preventDefault();
+    emailjs
+      .sendForm( "service_2voynei", "template_1mqbyuu",form.current, "ZWLp3lK1btJHqpyCa")
+      .then(
+        (result) => {
+          console.log(result.text);
+          navigate("/orderSuccessful");
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
   };
-
-
-  
   return (
-  
     <section className="details">
       <div className="tittle-detail">
-        <Link to="/details">
+        <a href="/details">
           <Icon
+            href="https://www.google.com"
             src="google.com"
             icon="ic:round-arrow-back"
             className="arrow"
           />
-        </Link>
+        </a>
         <h1 className="tittle-orderDetail">Order detail</h1>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form ref={form} onSubmit={sendEmail}>
         <div className="data-shipping">
           <h3 id="text-data-shipping">Address</h3>
-          <input type="text" name="user_address" value={selectedRestaurant.address} required/>
+          <input type="text" name="address" value={selectedRestaurant.address} required/>
+          <input type="text" id="resume" name="restaurant" value={selectedRestaurant.account_name} required/>
           <h3>Deliver</h3>
-          <input type="date" name="user_date" required></input>
+          <input type="date" name="date" required></input>
           <h3>Any special requirements?</h3>
           <textarea id="w3review" name="message" rows="4" cols="50"></textarea>
-          <label>
-            File:
-            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-          </label>
-          
         {data.filter((article) => article.amount>0).map((article) =>(
           <>
           <textarea id="resume" name="product" key={article.id} >{" Product: "+ article.name + " - Amount: " + article.amount + " - Volume: " + article.volume + " - Total: " + parseFloat(article.priceWithTax.toFixed(2))}
           </textarea>
+          <textarea id="resume" name="name" key={article.id} >{ article.name}</textarea>
+          <textarea id="resume" name="amount" key={article.id} >{ article.amount}</textarea>
+          <textarea id="resume" name="volume" key={article.id} >{ article.volume}</textarea>
+          <textarea id="resume" name="total" key={article.id} >{ parseFloat(article.priceWithTax.toFixed(2))}</textarea>
+
           </>
-        ))}
-        </div>
-        <button type="submit"className="bttn btn-primary">Continue</button>
-  
+        ))}</div>
+        <input type="submit" value="Continue" className="bttn btn-primary" />
       </form>
-        </section>
+    </section>
   );
 }
