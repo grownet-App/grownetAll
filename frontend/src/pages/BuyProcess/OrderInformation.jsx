@@ -3,70 +3,116 @@ import "../../css/orderDetail.css";
 import React, { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { useNavigate } from "react-router-dom";
+import { Document, Page, Text, pdf } from "@react-pdf/renderer"; // Importa react-pdf
+import { Link } from "react-router-dom";
 import useOrderStore from "../../store/useOrderStore";
-import DocumentPdf from "../../components/DocumentPdf";
+const PdfDocument = ({ selectedRestaurant, data }) => (
+  <Document>
+    <Page>
+      <Text>Address: {selectedRestaurant.address}</Text>
+      <Text>Restaurant: {selectedRestaurant.account_name}</Text>
+      {data
+        .filter((article) => article.amount > 0)
+        .map((article) => (
+          <Text key={article.id}>
+            {" Product: " +
+              article.name +
+              " - Amount: " +
+              article.amount +
+              " - Volume: " +
+              article.volume +
+              " - Total: " +
+              parseFloat(article.priceWithTax.toFixed(2))}
+          </Text>
+        ))}
+    </Page>
+  </Document>
+);
 export default function OrderInformation() {
-  const [ data, setData ] = useState([]);
-  const form = useRef();
+  const { selectedRestaurant } = useOrderStore();
+  const [address, setAddress] = useState(selectedRestaurant.address);
+  const [deliveryDate, setDeliveryDate] = useState("");
+  const [specialRequirements, setSpecialRequirements] = useState("");
   const navigate = useNavigate();
-  const { selectedRestaurant, articlesToPay } = useOrderStore();
-
+  const [data, setData] = useState([]);
   useEffect(() => {
-    setData(articlesToPay);
+    const storedArticlesToPay = JSON.parse(
+      localStorage.getItem("articlesToPay")
+    );
+    setData(storedArticlesToPay);
   }, []);
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-    emailjs
-      .sendForm( "service_2voynei", "template_1mqbyuu",form.current, "ZWLp3lK1btJHqpyCa")
-      .then(
-        (result) => {
-          console.log(result.text);
-          navigate("/orderSuccessful");
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const pdfBlob = await pdf(
+      <PdfDocument selectedRestaurant={selectedRestaurant} data={data} />
+    ).toBlob();
+    const pdfBase64 = await new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(pdfBlob);
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+    });
+    const serviceId = "service_2voynei";
+    const templateId = "templateorders";
+    const userId = "ZWLp3lK1btJHqpyCa";
+    const emailParams = {
+      to_name: "Grownet",
+      restaurant: selectedRestaurant.account_name,
+      address: address,
+      date: deliveryDate,
+      message: specialRequirements,
+      file: pdfBase64,
+    };
+    emailjs.send(serviceId, templateId, emailParams, userId).then(
+      (result) => {
+        navigate("/orderSuccessful");
+        console.log(result);
+      },
+      (error) => {
+        console.log("no se envio nada de corre", error);
+      }
+    );
   };
   return (
     <section className="details">
       <div className="tittle-detail">
-        <a href="/details">
-          <Icon
-            href="https://www.google.com"
-            src="google.com"
-            icon="ic:round-arrow-back"
-            className="arrow"
-          />
-        </a>
+        <Link to="/details">
+          <Icon src="google.com" icon="ic:round-arrow-back" className="arrow" />
+        </Link>
         <h1 className="tittle-orderDetail">Order detail</h1>
       </div>
-      <form ref={form} onSubmit={sendEmail}>
+      <form onSubmit={handleSubmit}>
         <div className="data-shipping">
           <h3 id="text-data-shipping">Address</h3>
-          <input type="text" name="address" value={selectedRestaurant.address} required/>
-          <input type="text" id="resume" name="restaurant" value={selectedRestaurant.account_name} required/>
+          <input
+            type="text"
+            name="address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
           <h3>Deliver</h3>
-          <input type="date" name="date" required></input>
+          <input
+            type="date"
+            name="date"
+            value={deliveryDate}
+            onChange={(e) => setDeliveryDate(e.target.value)}
+            required
+          ></input>
           <h3>Any special requirements?</h3>
-          <textarea id="w3review" name="message" rows="4" cols="50"></textarea>
-
-        {data.filter((article) => article.amount>0).map((article) =>(
-          <>
-          <textarea id="resume" name="product" key={article.id} >{" Product: "+ article.name + " - Amount: " + article.amount + " - Volume: " + article.volume + " - Total: " + parseFloat(article.priceWithTax.toFixed(2))}
-          </textarea>
-       
-          <textarea id="resume" name="name" key={article.id} >{ article.name}</textarea>
-          <textarea id="resume" name="amount" key={article.id} >{ article.amount}</textarea>
-          <textarea id="resume" name="volume" key={article.id} >{ article.volume}</textarea>
-          <textarea id="resume" name="total" key={article.id} >{ parseFloat(article.priceWithTax.toFixed(2))}</textarea>
-
-          </>
-        ))}</div>
-
-        <input type="submit" value="Continue" className="bttn btn-primary" />
-
+          <textarea
+            id="w3review"
+            name="message"
+            value={specialRequirements}
+            onChange={(e) => setSpecialRequirements(e.target.value)}
+            rows="4"
+            cols="50"
+          ></textarea>
+          <button type="submit" className="bttn btn-primary">
+            Continue
+          </button>
+        </div>
       </form>
     </section>
   );
