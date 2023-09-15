@@ -29,19 +29,18 @@ const PdfDocument = ({ selectedRestaurant, data }) => (
   </Document>
 );
 export default function OrderInformation() {
-  const { selectedRestaurant } = useOrderStore();
+  const { selectedRestaurant, articlesToPay } = useOrderStore();
   const [address, setAddress] = useState(selectedRestaurant.address);
+
   const [deliveryDate, setDeliveryDate] = useState("");
   const [specialRequirements, setSpecialRequirements] = useState("");
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   console.log(data)
   useEffect(() => {
-    const storedArticlesToPay = JSON.parse(
-      localStorage.getItem("articlesToPay")
-    );
-    setData(storedArticlesToPay);
+    setData(articlesToPay);
   }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const pdfBlob = await pdf(
