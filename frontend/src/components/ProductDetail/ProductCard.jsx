@@ -28,6 +28,7 @@ export default function ProductCard({
     const newVolume = event.target.value;
     onVolumeChange(id, newVolume);
     console.log(`Selected volume for ${name}: ${newVolume}`);
+    console.log(`Selected price for ${name}: ${priceWithTax}`);
   };
 
   return (

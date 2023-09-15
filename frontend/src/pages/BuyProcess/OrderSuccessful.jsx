@@ -22,7 +22,8 @@ export default function OrderSuccessful() {
     useOrderStore();
 
   useEffect(() => {
-    setArticlesData(articlesToPay);
+    const filteredArticles = articlesToPay.filter((article)=> article.amount > 0)
+    setArticlesData(filteredArticles);
   }, []);
 
   const generatePdfDocument = async (fileName) => {

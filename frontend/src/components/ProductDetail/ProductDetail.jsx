@@ -12,9 +12,9 @@ export default function ProductDetail({
   const { articlesToPay, setArticlesToPay } = useOrderStore();
   // ACTUALIZAR CANTIDAD DE ARTICULOS
   const [articles, setArticles] = useState(articlesToPay);
-  
+
   useEffect(() => {
-      setArticles(articlesToPay);
+    setArticles(articlesToPay);
   }, []);
 
   const handleAmountChange = (productId, newAmount) => {
@@ -28,7 +28,6 @@ export default function ProductDetail({
         ? {
             ...article,
             amount: newAmount,
-            priceWithTax: calculateItemToPay(article, newAmount),
           }
         : article
     );
@@ -41,6 +40,8 @@ export default function ProductDetail({
   // ACTUALIZAR VOLUMEN DE ARTICULOS
   const handleVolumeChange = (productId, event) => {
     const newVolume = event.target.value;
+    let newPriceWithTax;
+
     setArticles((prevArticles) =>
       prevArticles.map((article) => {
         if (article.id === productId) {
@@ -52,10 +53,11 @@ export default function ProductDetail({
           } else {
             updatedPrice = article.price_unit;
           }
+          newPriceWithTax = updatedPrice + updatedPrice * article.tax
           const updatedArticle = {
             ...article,
             volume: newVolume,
-            priceWithTax: updatedPrice + updatedPrice * article.tax,
+            priceWithTax: newPriceWithTax,
           };
           return updatedArticle;
         }
@@ -64,7 +66,7 @@ export default function ProductDetail({
     );
     const updatedArticlesToPay = articlesToPay.map((article) => {
       if (article.id === productId) {
-        return { ...article, volume: newVolume };
+        return { ...article, volume: newVolume , priceWithTax: newPriceWithTax};
       }
       return article;
     });
@@ -76,12 +78,16 @@ export default function ProductDetail({
   const handleTrashClick = (productId) => {
     setArticles((prevArticles) =>
       prevArticles.map((article) =>
-        article.id === productId ? { ...article, amount: 0, totalItemToPay: 0 } : article
+        article.id === productId
+          ? { ...article, amount: 0, totalItemToPay: 0 }
+          : article
       )
     );
 
     const updatedArticlesToPay = articlesToPay.map((article) =>
-      article.id === productId ? { ...article, amount: 0, totalItemToPay: 0 } : article
+      article.id === productId
+        ? { ...article, amount: 0, totalItemToPay: 0 }
+        : article
     );
     setArticlesToPay(updatedArticlesToPay);
 
@@ -172,8 +178,8 @@ export default function ProductDetail({
     const priceWithTax = updatedPrice + updatedPrice * article.tax;
     const total = priceWithTax * amount;
     const totalItemToPay = parseFloat(total.toFixed(2));
-  
-    if ('totalItemToPay' in article) {
+
+    if ("totalItemToPay" in article) {
       article.totalItemToPay = totalItemToPay;
     } else {
       Object.assign(article, { totalItemToPay });
@@ -198,7 +204,6 @@ export default function ProductDetail({
 
     const newTotalNet = calculateTotalNet(articles);
     updateTotalNet(newTotalNet);
-
   }, [articles]);
 
   return (

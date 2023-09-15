@@ -10,16 +10,7 @@ import useOrderStore from "../../store/useOrderStore";
 export default function OrderInformation() {
   const form = useRef();
   const navigate = useNavigate();
-  const [ data, setData ] = useState([]);
   const { selectedRestaurant } = useOrderStore();
-
-
-  useEffect(() => {
-    const storedArticlesToPay = JSON.parse(
-      localStorage.getItem("articlesToPay")
-    );
-    setData(storedArticlesToPay);
-  }, []);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -57,12 +48,6 @@ export default function OrderInformation() {
           <input type="date" name="user_date" required></input>
           <h3>Any special requirements?</h3>
           <textarea id="w3review" name="message" rows="4" cols="50"></textarea>
-        {data.filter((article) => article.amount>0).map((article) =>(
-          <>
-          <textarea id="resume" name="product" key={article.id} >{" Product: "+ article.name + " - Amount: " + article.amount + " - Volume: " + article.volume + " - Total: " + parseFloat(article.priceWithTax.toFixed(2))}
-          </textarea>
-          </>
-        ))}
         </div>
         <input type="submit" value="Send" className="bttn btn-primary" />
       </form>
