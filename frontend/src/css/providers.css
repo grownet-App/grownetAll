@@ -5,6 +5,10 @@
     justify-content: center;
     text-align: center;
 }
+#img-suppliers{
+    width: 350px;
+    height: 150px;
+}
 .bttn-categ{
     padding-right: 1.5rem;
     padding-left: 1.5rem;
@@ -38,7 +42,9 @@
     font-size: 25px;
 }
 #providers-categ{
-    background: var( --color-gradient-blue);
+   /*background: var( --color-gradient-blue);*/
+    margin-bottom: 1rem;
+   
 }
 #providers-categ:hover{
     background: var(--color-gradient-green);

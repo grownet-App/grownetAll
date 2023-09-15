@@ -57,6 +57,7 @@ export default function OrderInformation() {
           <>
           <textarea id="resume" name="product" key={article.id} >{" Product: "+ article.name + " - Amount: " + article.amount + " - Volume: " + article.volume + " - Total: " + parseFloat(article.priceWithTax.toFixed(2))}
           </textarea>
+       
           <textarea id="resume" name="name" key={article.id} >{ article.name}</textarea>
           <textarea id="resume" name="amount" key={article.id} >{ article.amount}</textarea>
           <textarea id="resume" name="volume" key={article.id} >{ article.volume}</textarea>
