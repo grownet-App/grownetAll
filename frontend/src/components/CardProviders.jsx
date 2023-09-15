@@ -32,8 +32,20 @@ const urlImg =
 
   return (
     <section className="providers">
+      {providers.filter((provider) => provider.name === "eurofrutta" || provider.name === "HG WALTER" || provider.name === "County Suppplies" || provider.name === "The Menu Partners" || provider.name === "IMS" || provider.name === "Smithfield Butchers" || provider.name === "Direct Meats"|| provider.name === "Big K" ).map((provider) => (
+        <>
+        <Link onClick={() => handleProviderSelect(provider)}
+          key={provider.idproveedor}
+          id="providers-categ"
+          to="/products">
+        <img src={urlImg + provider.image} alt={provider.name} id="img-suppliers"/>
+        </Link>
+        </>
+      ))}
       {providers.map((provider) => (
-        <Link
+        <>
+        
+        {/*<Link
           className="bttn-categ"
           onClick={() => handleProviderSelect(provider)}
           key={provider.idproveedor}
@@ -46,7 +58,7 @@ const urlImg =
             alt="logo-restaurant"
             className="img-providers"
           ></img>
-        </Link>
+      </Link>*/}</>
       ))}
     </section>
   );

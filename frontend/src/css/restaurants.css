@@ -33,7 +33,7 @@
     text-align: left;
 }
 .restaurants img{
-    margin-left: 1rem;
+    /*margin-left: 1rem;*/
 }
 @media screen and (max-width: 345px) {
     .bttn-categ{

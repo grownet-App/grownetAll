@@ -48,11 +48,12 @@ export default function Restaurants() {
           to={"/providers"}
           key={restaurant.account_number}
         >
+          <img src={urlImg + restaurant.image} alt={restaurant.account_name}  />
           <div className="text-categ" key={restaurant.account_number}>
-            <h2>{restaurant.account_name}</h2>
+            {/*<h2>{restaurant.account_name}</h2>*/}
             <p>{restaurant.address}</p>
           </div>
-          <img src={urlImg + restaurant.image} alt={restaurant.account_name}  />
+          
         </Link>
       ))}
       <Link

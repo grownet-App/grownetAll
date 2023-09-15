@@ -1,30 +1,25 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
 import {Form, Modal} from "react-bootstrap";
-import useArticlesToPayStore from "../../store/useArticlesToPayStore";
+import useOrderStore from "../../store/useOrderStore";
 import Stepper from "../Stepper/Stepper";
 
-export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updateTotalNet}) {
-  const { articlesToPay, setArticlesToPay } = useArticlesToPayStore();
+export default function ProductDetail({
+  updateTotalToPay,
+  updateTotalTaxes,
+  updateTotalNet,
+}) {
+  const { articlesToPay, setArticlesToPay } = useOrderStore();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const storedArticlesToPay = JSON.parse(
-      localStorage.getItem("articlesToPay")
-    );
-    if (storedArticlesToPay) {
-      const filteredArticles = storedArticlesToPay.filter(
-        (article) => article.amount > 0
-      );
-      useArticlesToPayStore.setState({ articlesToPay: filteredArticles });
-      setArticles(filteredArticles);
-    }
-  }, []);
-
   // ACTUALIZAR CANTIDAD DE ARTICULOS
   const [articles, setArticles] = useState(articlesToPay);
+
+  useEffect(() => {
+    setArticles(articlesToPay);
+  }, []);
+
   const handleAmountChange = (productId, newAmount) => {
     setArticles((prevArticles) =>
       prevArticles.map((article) =>
@@ -36,7 +31,6 @@ export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updat
         ? {
             ...article,
             amount: newAmount,
-            priceWithTax: calculateItemToPay(article, newAmount),
           }
         : article
     );
@@ -49,6 +43,8 @@ export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updat
   // ACTUALIZAR VOLUMEN DE ARTICULOS
   const handleVolumeChange = (productId, event) => {
     const newVolume = event.target.value;
+    let newPriceWithTax;
+
     setArticles((prevArticles) =>
       prevArticles.map((article) => {
         if (article.id === productId) {
@@ -60,10 +56,11 @@ export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updat
           } else {
             updatedPrice = article.price_unit;
           }
+          newPriceWithTax = updatedPrice + updatedPrice * article.tax
           const updatedArticle = {
             ...article,
             volume: newVolume,
-            priceWithTax: updatedPrice + updatedPrice * article.tax,
+            priceWithTax: newPriceWithTax,
           };
           return updatedArticle;
         }
@@ -72,7 +69,7 @@ export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updat
     );
     const updatedArticlesToPay = articlesToPay.map((article) => {
       if (article.id === productId) {
-        return { ...article, volume: newVolume };
+        return { ...article, volume: newVolume , priceWithTax: newPriceWithTax};
       }
       return article;
     });
@@ -83,16 +80,17 @@ export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updat
   // ELIMINAR ARTICULOS DEL CARRITO
   const handleTrashClick = (productId) => {
     setArticles((prevArticles) =>
-      prevArticles.map((article) => article.id === productId ? { ...article, amount: 0, totalItemToPay: 0 } : article
-      
-       /* if (article.id === productId) {
-          console.log("hola" + productId);
-        }*/
+      prevArticles.map((article) =>
+        article.id === productId
+          ? { ...article, amount: 0, totalItemToPay: 0 }
+          : article
       )
     );
 
     const updatedArticlesToPay = articlesToPay.map((article) =>
-      article.id === productId ? { ...article, amount: 0, totalItemToPay: 0 } : article
+      article.id === productId
+        ? { ...article, amount: 0, totalItemToPay: 0 }
+        : article
     );
     setArticlesToPay(updatedArticlesToPay);
 
@@ -183,8 +181,8 @@ export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updat
     const priceWithTax = updatedPrice + updatedPrice * article.tax;
     const total = priceWithTax * amount;
     const totalItemToPay = parseFloat(total.toFixed(2));
-  
-    if ('totalItemToPay' in article) {
+
+    if ("totalItemToPay" in article) {
       article.totalItemToPay = totalItemToPay;
     } else {
       Object.assign(article, { totalItemToPay });
@@ -193,7 +191,8 @@ export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updat
   };
 
   const calculateTotalToPay = (articles) => {
-    const totalToPay = articles.reduce((total, article) => {
+    const filteredArticles = articles.filter((article) => article.amount > 0);
+    const totalToPay = filteredArticles.reduce((total, article) => {
       return total + article.totalItemToPay;
     }, 0);
     return parseFloat(totalToPay.toFixed(2));
@@ -208,7 +207,6 @@ export default function ProductDetail({updateTotalToPay, updateTotalTaxes, updat
 
     const newTotalNet = calculateTotalNet(articles);
     updateTotalNet(newTotalNet);
-
   }, [articles]);
 
   return (
