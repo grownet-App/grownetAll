@@ -52,7 +52,7 @@ export default function Restaurants() {
             <h2>{restaurant.account_name}</h2>
             <p>{restaurant.address}</p>
           </div>
-          <img src={urlImg + restaurant.image} alt={restaurant.account_name} />
+          <img src={urlImg + restaurant.image} alt={restaurant.account_name}  />
         </Link>
       ))}
       <Link

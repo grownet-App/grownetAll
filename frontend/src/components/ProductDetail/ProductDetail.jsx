@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
-import Form from "react-bootstrap/Form";
+import {Form, Modal} from "react-bootstrap";
 import useOrderStore from "../../store/useOrderStore";
 import Stepper from "../Stepper/Stepper";
 
@@ -10,6 +10,9 @@ export default function ProductDetail({
   updateTotalNet,
 }) {
   const { articlesToPay, setArticlesToPay } = useOrderStore();
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
   // ACTUALIZAR CANTIDAD DE ARTICULOS
   const [articles, setArticles] = useState(articlesToPay);
 

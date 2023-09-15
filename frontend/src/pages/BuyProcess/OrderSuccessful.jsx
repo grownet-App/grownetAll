@@ -70,7 +70,7 @@ export default function OrderSuccessful() {
         </Link>
         <button
           className="bttn btn-outline"
-          onClick={() => generatePdfDocument("FacturaGrownet.pdf")}
+          onClick={() => generatePdfDocument("GrownetInvoice.pdf")}
         >
           Download PDF
         </button>

@@ -1,29 +1,33 @@
-import { usePDF, Document, Page } from "@react-pdf/renderer";
-import emailjs from "@emailjs/browser";
 
-export default function PruebaPDF() {
- /* const MyDoc = (
-    <Document>
-      <Page>// My document data</Page>
-    </Document>
-  );
-  const [instance, updateInstance] = usePDF({ document: MyDoc });*/
-  function sendCanvasAsAttachment(canvas) {
-    var base64 = canvas.toDataURL("https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80");
-    emailjs.send("service_zthtpco", "template_iierimt", {
-        content: base64
-    });
-}
+import React, { useRef, useState, useEffect } from "react";
+import emailjs from '@emailjs/browser';
+import bread_img from "../img/bread_img.png"
+export default function OrderInformation() {
+ 
+  
+
+      const serviceId = "service_zthtpco";
+      const templateId = "template_iierimt";
+      const userId = "KDimKCkRePZ73euid";
+      function sendCanvasAsAttachment(canvas) {
+        var base64 = canvas.toDataURL({bread_img});
+        emailjs.send("service_zthtpco", "template_iierimt", {
+            content: base64
+        });
+    }
+ 
+  
+
+
+  
   return (
-    <>
-    {/*<a href={instance.url} download="test.pdf">
-      Download
-    </a>*/}
-    <form enctype="multipart/form-data" method="post" onsubmit="formSubmit()">
-
-    <input type="file" name="my_file"/> 
-    <input type="submit" value="Submit"></input>
-    </form>
-    </>
+  
+    <section className="details">
+      <form onSubmit={sendCanvasAsAttachment}>
+        
+        <button type="submit"className="bttn btn-primary">hola</button>
+  
+      </form>
+        </section>
   );
 }
