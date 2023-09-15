@@ -29,9 +29,9 @@ const PdfDocument = ({ selectedRestaurant, data }) => (
   </Document>
 );
 export default function OrderInformation() {
+
   const { selectedRestaurant, articlesToPay } = useOrderStore();
   const [address, setAddress] = useState(selectedRestaurant.address);
-
   const [deliveryDate, setDeliveryDate] = useState("");
   const [specialRequirements, setSpecialRequirements] = useState("");
   const navigate = useNavigate();
