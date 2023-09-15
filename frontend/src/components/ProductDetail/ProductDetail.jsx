@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
-import useArticlesToPayStore from "../../store/useArticlesToPayStore";
+import useOrderStore from "../../store/useOrderStore";
 import Stepper from "../Stepper/Stepper";
 
 export default function ProductDetail({
@@ -9,23 +9,14 @@ export default function ProductDetail({
   updateTotalTaxes,
   updateTotalNet,
 }) {
-  const { articlesToPay, setArticlesToPay } = useArticlesToPayStore();
-
-  useEffect(() => {
-    const storedArticlesToPay = JSON.parse(
-      localStorage.getItem("articlesToPay")
-    );
-    if (storedArticlesToPay) {
-      const filteredArticles = storedArticlesToPay.filter(
-        (article) => article.amount > 0
-      );
-      useArticlesToPayStore.setState({ articlesToPay: filteredArticles });
-      setArticles(filteredArticles);
-    }
-  }, []);
-
+  const { articlesToPay, setArticlesToPay } = useOrderStore();
   // ACTUALIZAR CANTIDAD DE ARTICULOS
   const [articles, setArticles] = useState(articlesToPay);
+  
+  useEffect(() => {
+      setArticles(articlesToPay);
+  }, []);
+
   const handleAmountChange = (productId, newAmount) => {
     setArticles((prevArticles) =>
       prevArticles.map((article) =>
@@ -191,7 +182,8 @@ export default function ProductDetail({
   };
 
   const calculateTotalToPay = (articles) => {
-    const totalToPay = articles.reduce((total, article) => {
+    const filteredArticles = articles.filter((article) => article.amount > 0);
+    const totalToPay = filteredArticles.reduce((total, article) => {
       return total + article.totalItemToPay;
     }, 0);
     return parseFloat(totalToPay.toFixed(2));

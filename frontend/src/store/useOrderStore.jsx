@@ -12,11 +12,16 @@
     setSelectedRestaurant: (restaurant) => set({ selectedRestaurant: restaurant }),
     setProviders: (providers) => set({ providers: providers }),
     setSelectedProvider: (provider) => set({ selectedProvider: provider }),
-    addProductToOrder: (articles) => set((state) => 
-    ({ selectedProducts: [...state.selectedProducts, articles] })),
+   
     
-    products: [],
-    clearOrder: () => set({ selectedRestaurant: null, selectedProvider: null, selectedProducts: [] }),
+    articlesToPay: [],
+    totalNet: 0,
+    totalTaxes: 0,
+    totalToPay: 0,
+    setArticlesToPay: (articles) => set({ articlesToPay: articles }),
+    setTotalNet: (newNet) => set({ totalNet: newNet }),
+    setTotalTaxes: (newTaxes) => set({ totalTaxes: newTaxes }),
+    setTotalToPay: (newTotal) => set({ totalToPay: newTotal }),
     }));
 
     export default useOrderStore;

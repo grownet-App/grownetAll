@@ -7,7 +7,6 @@ import Menu from "../../components/Menu/Menu";
 import "../../css/orderDetail.css";
 import img_succesful from "../../img/img_succesful.png";
 import useOrderStore from "../../store/useOrderStore";
-import useArticlesToPayStore from "../../store/useArticlesToPayStore";
 
 export default function OrderSuccessful() {
   const [articlesData, setArticlesData] = useState([]);
@@ -20,7 +19,7 @@ export default function OrderSuccessful() {
   const formattedDate = `${dayName}, ${dayNumber} ${monthName}, ${yearNumber}`;
   //TODO PONER FECHA DE ENTREGA QUE SE SELECCIONÓ EN EL CALENDARIO
   const { articlesToPay, totalNet, totalTaxes, totalToPay } =
-    useArticlesToPayStore();
+    useOrderStore();
 
   useEffect(() => {
     setArticlesData(articlesToPay);

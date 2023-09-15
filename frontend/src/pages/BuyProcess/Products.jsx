@@ -21,16 +21,13 @@ export default function Products(props) {
   const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
   const { selectedProvider } = useOrderStore();
+  const { articlesToPay, totalNet, totalTaxes, totalToPay } = useOrderStore();
 
   useEffect(() => {
-    const storedArticlesToPay = JSON.parse(
-      localStorage.getItem("articlesToPay")
-    );
-    console.log("ESTO TRAE EL LOCAL STORAGE:", storedArticlesToPay);
-    if (storedArticlesToPay) {
-      setArticles(storedArticlesToPay);
-      setProducts(storedArticlesToPay);
-      console.log("TRAJO ALGO DEL STORAGE");
+    if (articlesToPay.length > 0) {
+      setArticles(articlesToPay );
+      setProducts(articlesToPay);
+      console.log("TRAJO ALGO DEL STORAGE", articlesToPay);
     } else {
       //TODO Reemplazar estos products por los que vienen de la API
       const defaultProducts = [
@@ -166,6 +163,7 @@ export default function Products(props) {
         ...article,
         priceWithTax: article.price_unit + article.price_unit * article.tax,
       }));
+      useOrderStore.setState({ articlesToPay: productsWithTax });
       setArticles(productsWithTax);
       setProducts(productsWithTax);
       console.log("NO TRAJO NADA DEL STORAGE");
@@ -199,7 +197,7 @@ export default function Products(props) {
     const updatedArticlesToPay = articles.map((article) =>
       article.id === productId ? { ...article, amount: newAmount } : article
     );
-    localStorage.setItem("articlesToPay", JSON.stringify(updatedArticlesToPay));
+    useOrderStore.setState({ articlesToPay: updatedArticlesToPay });
     updatedArticlesToPay.forEach((article) =>
       console.log(
         `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume}`
@@ -227,7 +225,8 @@ export default function Products(props) {
     });
 
     setArticles(updatedArticlesToPay);
-    localStorage.setItem("articlesToPay", JSON.stringify(updatedArticlesToPay));
+    useOrderStore.setState({ articlesToPay: updatedArticlesToPay });
+
     updatedArticlesToPay.forEach((article) =>
       console.log(
         `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume}`

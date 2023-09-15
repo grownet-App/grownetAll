@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
 import "../../css/orderDetail.css";
 import { Link } from "react-router-dom";
-import useArticlesToPayStore from "../../store/useArticlesToPayStore";
+import useOrderStore from "../../store/useOrderStore";
 
 export default function OrderDetails(props) {
-  const articlesToPayStore = useArticlesToPayStore();
+  const articlesToPayStore = useOrderStore();
   const totalNet = articlesToPayStore.totalNet;
   const totalTaxes = articlesToPayStore.totalTaxes;
   const totalToPay = articlesToPayStore.totalToPay;
