@@ -12,8 +12,9 @@ import "../css/orderDetail.css";
 export default function DocumentPdf({
   articlesData,
   selectedRestaurant,
-  formattedDate,
   selectedProvider,
+  formattedDate,
+  specialRequirements,
   totalNet,
   totalTaxes,
   totalToPay
@@ -95,7 +96,7 @@ export default function DocumentPdf({
             <Text style={styles.text}>Ordered by</Text>
             <Text style={styles.tittle}>{selectedRestaurant.account_name}</Text>
             <Text style={styles.text}>Special requirements</Text>
-            <Text style={styles.tittle}>Nothing</Text>
+            <Text style={styles.tittle}>{specialRequirements}</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.text}>Requested delivery date</Text>

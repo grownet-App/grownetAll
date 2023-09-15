@@ -9,7 +9,11 @@ export default function OrderInformation() {
   const [ data, setData ] = useState([]);
   const form = useRef();
   const navigate = useNavigate();
-  const { selectedRestaurant, articlesToPay } = useOrderStore();
+  const { 
+    selectedRestaurant, 
+    articlesToPay, 
+    specialRequirements, 
+    setSpecialRequirements } = useOrderStore();
 
   useEffect(() => {
     setData(articlesToPay);
@@ -50,7 +54,15 @@ export default function OrderInformation() {
           <h3>Deliver</h3>
           <input type="date" name="date" required></input>
           <h3>Any special requirements?</h3>
-          <textarea id="w3review" name="message" rows="4" cols="50"></textarea>
+          <textarea 
+          id="w3review" 
+          name="message" 
+          value={specialRequirements}
+          onChange={(e)=>{
+            setSpecialRequirements(e.target.value)
+          }}
+          rows="4" 
+          cols="50"></textarea>
 
         {data.filter((article) => article.amount>0).map((article) =>(
           <>
