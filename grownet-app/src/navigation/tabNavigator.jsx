@@ -1,22 +1,51 @@
-import { Text, View, Button, StyleSheet } from 'react-native'
-import React, { Component } from 'react'
+import React from 'react'
+import Providers from '../screens/providers'
+import Settings from '../screens/settings'
+import Records from '../screens/records'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { NavigationContainer } from '@react-navigation/native'
-import Orders from '../screens/orders'
-import loginPage from '../screens/loginPage'
-import records from '../screens/records'
-import settings from '../screens/settings'
-import chat from '../screens/chat'
-import home from '../screens/home'
-import providers from '../screens/providers'
 import { createStackNavigator } from '@react-navigation/stack'
-import { useNavigation } from '@react-navigation/native'
+import Chat from '../screens/chat'
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons'
+import { Button } from 'react-native-paper'
+import Orders from '../screens/orders'
 
 const Tab = createBottomTabNavigator()
-
 const Stack = createStackNavigator()
 
+function orderStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="login"
+      screenOptions={{
+        headerMode: 'screen',
+        headerTintColor: '#026CD2',
+        headerStyle: { backgroundColor: 'white' },
+      }}
+    >
+      <Stack.Screen
+        name="orders"
+        component={Orders}
+        options={{
+          headerBackTitleVisible: false,
+          headerLeft: () => (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="<"
+              color="#026CD2"
+            />
+          ),
+          headerRight: () => (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="Info"
+              color="#fff"
+            />
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
 function MyStack1() {
   return (
     <Stack.Navigator
@@ -29,7 +58,7 @@ function MyStack1() {
     >
       <Stack.Screen
         name="recordsStack"
-        component={records}
+        component={Records}
         options={{
           headerBackTitleVisible: false,
           headerLeft: () => (
@@ -52,40 +81,6 @@ function MyStack1() {
     </Stack.Navigator>
   )
 }
-function orderStack() {
-  return (
-    <Stack.Navigator
-      initialRouteName="login"
-      screenOptions={{
-        headerMode: 'screen',
-        headerTintColor: '#026CD2',
-        headerStyle: { backgroundColor: 'white' },
-      }}
-    >
-      <Stack.Screen
-        name="providers"
-        component={providers}
-        options={{
-          headerBackTitleVisible: false,
-          headerLeft: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="<"
-              color="#026CD2"
-            />
-          ),
-          headerRight: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="#fff"
-            />
-          ),
-        }}
-      />
-    </Stack.Navigator>
-  )
-}
 function MyStack3() {
   return (
     <Stack.Navigator
@@ -98,7 +93,7 @@ function MyStack3() {
     >
       <Stack.Screen
         name="chat"
-        component={chat}
+        component={Chat}
         options={{
           headerBackTitleVisible: false,
           headerLeft: () => (
@@ -120,18 +115,18 @@ function MyStack3() {
     </Stack.Navigator>
   )
 }
-function MyTabs() {
+
+const TabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="home"
-      component={home}
+      initialRouteName="providers"
       screenOptions={{
         tabBarActiveTintColor: 'green',
       }}
     >
       <Tab.Screen
         name="settings"
-        component={settings}
+        component={Settings}
         options={{
           tabBarIcon: ({ color, size }) => {
             return <FontAwesome5 name="cogs" size={size} color={color} />
@@ -151,6 +146,7 @@ function MyTabs() {
           headerShown: false,
         }}
       />
+
       <Tab.Screen
         name="records"
         component={MyStack1}
@@ -174,11 +170,4 @@ function MyTabs() {
     </Tab.Navigator>
   )
 }
-
-export default function Navigation() {
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  )
-}
+export default TabNavigator
