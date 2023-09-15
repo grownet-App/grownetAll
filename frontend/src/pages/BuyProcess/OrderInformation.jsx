@@ -2,9 +2,9 @@ import { Icon } from "@iconify/react";
 import "../../css/orderDetail.css";
 import React, { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import useOrderStore from "../../store/useOrderStore";
-import DocumentPdf from "../../components/DocumentPdf";
+
 export default function OrderInformation() {
   const [ data, setData ] = useState([]);
   const form = useRef();
@@ -32,14 +32,13 @@ export default function OrderInformation() {
   return (
     <section className="details">
       <div className="tittle-detail">
-        <a href="/details">
+        <Link to="/details">
           <Icon
-            href="https://www.google.com"
             src="google.com"
             icon="ic:round-arrow-back"
             className="arrow"
           />
-        </a>
+        </Link>
         <h1 className="tittle-orderDetail">Order detail</h1>
       </div>
       <form ref={form} onSubmit={sendEmail}>
