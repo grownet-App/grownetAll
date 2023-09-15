@@ -6,17 +6,15 @@ import { useNavigate } from "react-router-dom";
 import useOrderStore from "../../store/useOrderStore";
 import DocumentPdf from "../../components/DocumentPdf";
 export default function OrderInformation() {
+  const [ data, setData ] = useState([]);
   const form = useRef();
   const navigate = useNavigate();
-  const [ data, setData ] = useState([]);
-  const { selectedRestaurant } = useOrderStore();
+  const { selectedRestaurant, articlesToPay } = useOrderStore();
+
   useEffect(() => {
-    const storedArticlesToPay = JSON.parse(
-      localStorage.getItem("articlesToPay")
-    );
-    setData(storedArticlesToPay);
+    setData(articlesToPay);
   }, []);
-  console.log(data)
+
   const sendEmail = (e) => {
     e.preventDefault();
     emailjs
@@ -53,6 +51,7 @@ export default function OrderInformation() {
           <input type="date" name="date" required></input>
           <h3>Any special requirements?</h3>
           <textarea id="w3review" name="message" rows="4" cols="50"></textarea>
+
         {data.filter((article) => article.amount>0).map((article) =>(
           <>
           <textarea id="resume" name="product" key={article.id} >{" Product: "+ article.name + " - Amount: " + article.amount + " - Volume: " + article.volume + " - Total: " + parseFloat(article.priceWithTax.toFixed(2))}
@@ -65,7 +64,9 @@ export default function OrderInformation() {
 
           </>
         ))}</div>
+
         <input type="submit" value="Continue" className="bttn btn-primary" />
+
       </form>
     </section>
   );
