@@ -15,7 +15,7 @@ export default function Providers() {
             className="arrow"
           />
         </Link>
-        <h1 className="tittle-restaurants">Providers</h1>
+        <h1 className="tittle-restaurants">Suppliers</h1>
       </div>
       <CardProviders></CardProviders>
       <Link
@@ -24,7 +24,7 @@ export default function Providers() {
         id="bttn-restaurant"
       >
         <Icon className="icon-plus" icon="simple-line-icons:plus" />
-        Add providers
+        Add suppliers
       </Link>
       <Menu />
     </section>

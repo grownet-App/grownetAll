@@ -47,7 +47,7 @@
    
 }
 #providers-categ:hover{
-    background: var(--color-gradient-green);
+    /*background: var(--color-gradient-green);*/
 }
 #logo-providers{
     width: 43%;
