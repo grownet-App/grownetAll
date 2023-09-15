@@ -7,7 +7,7 @@ import { Document, Page, Text, pdf } from "@react-pdf/renderer"; // Importa reac
 import { Link } from "react-router-dom";
 import useOrderStore from "../../store/useOrderStore";
 const PdfDocument = ({ selectedRestaurant, data }) => (
-  <Document>
+  <Document style={{backgroundColor:"blue"}}>
     <Page>
       <Text>Address: {selectedRestaurant.address}</Text>
       <Text>Restaurant: {selectedRestaurant.account_name}</Text>
@@ -35,6 +35,7 @@ export default function OrderInformation() {
   const [specialRequirements, setSpecialRequirements] = useState("");
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  console.log(data)
   useEffect(() => {
     const storedArticlesToPay = JSON.parse(
       localStorage.getItem("articlesToPay")
@@ -93,13 +94,7 @@ export default function OrderInformation() {
             required
           />
           <h3>Deliver</h3>
-          <input
-            type="date"
-            name="date"
-            value={deliveryDate}
-            onChange={(e) => setDeliveryDate(e.target.value)}
-            required
-          ></input>
+          <input type="date" name="date" value={deliveryDate} onChange={(e) => setDeliveryDate(e.target.value)} required></input>
           <h3>Any special requirements?</h3>
           <textarea
             id="w3review"
@@ -109,10 +104,8 @@ export default function OrderInformation() {
             rows="4"
             cols="50"
           ></textarea>
-          <button type="submit" className="bttn btn-primary">
-            Continue
-          </button>
         </div>
+        <input type="submit" className="bttn btn-primary" value={"Continue"}/>
       </form>
     </section>
   );
