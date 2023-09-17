@@ -1,5 +1,5 @@
 import React from 'react'
-import Providers from '../screens/providers'
+import Providers from '../screens/buyingProcess/providers'
 import Settings from '../screens/settings'
 import Records from '../screens/records'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -7,19 +7,33 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Chat from '../screens/chat'
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons'
 import { Button } from 'react-native-paper'
-import Orders from '../screens/orders'
+import Orders from '../screens/buyingProcess/orders'
+import { TouchableOpacity, StatusBar } from 'react-native'
+import useTokenStore from '../store/useTokenStore'
+import Restauranst from '../screens/buyingProcess/restaurants'
+import { goBack } from './rootNavigation'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 
-function orderStack() {
+function OrderStack() {
+  const { setToken } = useTokenStore()
+  const handleLogout = async () => {
+    try {
+      setToken(null)
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error)
+    }
+  }
   return (
     <Stack.Navigator
-      initialRouteName="login"
+      initialRouteName="providers"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#026CD2',
-        headerStyle: { backgroundColor: 'white' },
+        headerStyle: {
+          backgroundColor: 'white',
+        },
       }}
     >
       <Stack.Screen
@@ -40,6 +54,74 @@ function orderStack() {
               title="Info"
               color="#fff"
             />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="restaurants"
+        component={Restauranst}
+        options={{
+          headerShown: true,
+
+          title: 'Choose your restaurant',
+          headerStyle: {
+            backgroundColor: '#f2f2f2',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsBold',
+            fontSize: 28,
+          },
+
+          headerRight: () => (
+            <TouchableOpacity
+              style={{ marginRight: 20 }}
+              onPress={handleLogout}
+            >
+              <FontAwesome name="sign-out" size={24} color="#04444F" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="providers"
+        component={Providers}
+        options={{
+          headerShown: true,
+
+          title: 'Providers',
+          headerStyle: {
+            backgroundColor: '#f2f2f2',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsBold',
+            fontSize: 28,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              style={{ marginHorizontal: 28 }}
+              onPress={() => goBack()}
+            >
+              <FontAwesome
+                name="arrow-left"
+                size={24}
+                color="#04444F"
+                style={{ position: 'relative' }}
+              />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity
+              style={{ marginRight: 20 }}
+              onPress={handleLogout}
+            >
+              <FontAwesome name="sign-out" size={24} color="#04444F" />
+            </TouchableOpacity>
           ),
         }}
       />
@@ -119,7 +201,7 @@ function MyStack3() {
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="providers"
+      initialRouteName="orders"
       screenOptions={{
         tabBarActiveTintColor: 'green',
       }}
@@ -136,7 +218,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="orders"
-        component={orderStack}
+        component={OrderStack}
         options={{
           tabBarIcon: ({ color, size }) => {
             return (

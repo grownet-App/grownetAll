@@ -84,13 +84,6 @@ const LoginPage = () => {
         <Text style={GlobalStyles.buttonLets}>Let’s Begin</Text>
       </TouchableOpacity>
 
-      {/* //TODO: */}
-      <TouchableOpacity
-        style={GlobalStyles.btnSecundary}
-        onPress={() => navigation.navigate('providers')}
-      >
-        <Text style={GlobalStyles.textInput}>Iniciar sesion</Text>
-      </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   )
@@ -109,6 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#026CD2',
     alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: 100,
   },
   welcome: {
