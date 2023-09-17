@@ -1,16 +1,7 @@
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-  Image,
-  ImageBackground,
-} from 'react-native'
-import React, { Component, useEffect, useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
-import menuDown from '../navigation/navigation'
-import { ApiProviders } from '../config/urls.config'
-import { GlobalStyles } from '../styles/styles'
+import { SafeAreaView, ScrollView, Text, View, Image } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { ApiProviders } from '../../config/urls.config'
+import { GlobalStyles } from '../../styles/styles'
 import axios from 'axios'
 
 const Providers = () => {
@@ -37,7 +28,7 @@ const Providers = () => {
               <Text style={GlobalStyles.textSupplier}>{supplier.name}</Text>
 
               <Image
-                source={require('../../assets/img/img_providers.png')}
+                source={require('../../../assets/img/img_providers.png')}
                 style={GlobalStyles.imgproviders}
               />
             </View>

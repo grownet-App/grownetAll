@@ -1,28 +1,25 @@
-import { Text, View, Button, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { Component } from 'react'
+import { Button, TouchableOpacity } from 'react-native'
+import * as React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
-import Orders from '../../src/screens/orders'
+import Orders from '../screens/buyingProcess/orders'
 import loginPage from '../../src/screens/loginPage'
 import records from '../../src/screens/records'
 import settings from '../../src/screens/settings'
 import chat from '../../src/screens/chat'
 import home from '../../src/screens/home'
-import providers from '../../src/screens/providers'
+import providers from '../screens/buyingProcess/providers'
 import otpPage from '../../src/screens/otpPage'
 import { createStackNavigator } from '@react-navigation/stack'
-import { useNavigation } from '@react-navigation/native'
+import { goBack, navigate } from './rootNavigation'
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons'
 import AuthNavigator from '../navigation/authNavigator'
-import TabNavigator from './tabNavigator'
 
 const Tab = createBottomTabNavigator()
 
 const Stack = createStackNavigator()
 
 function MyStack() {
-  const navigation = useNavigation()
-
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -67,9 +64,7 @@ function MyStack() {
           headerLeft: () => (
             <TouchableOpacity
               style={{ marginHorizontal: 28 }}
-              onPress={() => {
-                navigation.goBack()
-              }}
+              onPress={() => goBack()}
             >
               <FontAwesome
                 name="arrow-left"
@@ -244,7 +239,7 @@ function MyTabs() {
 
 export default function Navigation() {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigate}>
       <AuthNavigator />
     </NavigationContainer>
   )
