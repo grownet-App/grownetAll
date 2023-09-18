@@ -6,6 +6,7 @@ import { availableRestaurants } from "../../config/urls.config";
 import "../../css/restaurants.css";
 import useOrderStore from "../../store/useOrderStore";
 import useTokenStore from "../../store/useTokenStore";
+import backgroundRestaurants from "../../img/backgroundRestaurants.png";
 
 export default function Restaurants() {
   //TODO QUITAR ESTA URL CUANDO EL BACKEND HAYA CARGADO EL LINK DE LA IMG
@@ -41,13 +42,15 @@ export default function Restaurants() {
   return (
     <section className="restaurants">
       <h1 className="tittle-restaurants">Choose your restaurant</h1>
+      
       {restaurants.map((restaurant) => (
-        <Link
-          className="bttn-categ"
+        <Link id="background-boton"
+          className="bttn-categ" style={{backgroundImage: `url(${backgroundRestaurants})` }}
           onClick={() => handleRestaurantSelect(restaurant)}
           to={"/providers"}
           key={restaurant.account_number}
         >
+          
           <img src={urlImg + restaurant.image} alt={restaurant.account_name}  />
           <div className="text-categ" key={restaurant.account_number}>
             {/*<h2>{restaurant.account_name}</h2>*/}

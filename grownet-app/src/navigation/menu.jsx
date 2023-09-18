@@ -2,7 +2,7 @@ import { Text, View, Button, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
-import { orders } from '../screens/orders'
+import Orders from '../screens/orders'
 import loginPage from '../screens/loginPage'
 import records from '../screens/records'
 import settings from '../screens/settings'
@@ -48,7 +48,7 @@ function MyStack1() {
           ),
         }}
       />
-      <Stack.Screen name="orders" component={orders} />
+      <Stack.Screen name="orders" component={Orders} />
     </Stack.Navigator>
   )
 }

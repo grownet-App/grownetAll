@@ -5,6 +5,12 @@
     text-align: center;
     justify-content: center;
 }
+#background-boton{
+    width: 350px;
+    height: 150px;
+    background-color: var(--color-dark-blue);
+    background-size: 100%;
+}
 .bttn-categ{
     width: 350px;
     height: 150px;
@@ -32,9 +38,9 @@
 .text-categ{
     text-align: left;
 }
-.restaurants img{
-    /*margin-left: 1rem;*/
-}
+/*.restaurants img{
+    margin-left: 1rem;
+}*/
 @media screen and (max-width: 345px) {
     .bttn-categ{
         width: 90%;

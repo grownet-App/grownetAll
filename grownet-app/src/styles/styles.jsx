@@ -179,13 +179,13 @@ export const GlobalStyles = StyleSheet.create({
   },
   textInput: {
     color: 'black',
-    fontWeight: 500,
+    fontWeight: 'bold',
     fontSize: 18,
     textAlign: 'center',
   },
   textRegister: {
     color: '#FFFFFF',
-    fontWeight: 500,
+    fontWeight: 'bold',
     fontSize: 18,
     textAlign: 'center',
   },
