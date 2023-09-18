@@ -67,11 +67,12 @@ export default function ProductCard({
           </div>
         </div>
       </div>
-      <div className="promo">
+      {/* TODO INTEGRAR LUEGO LAS PROMO, POR AHORA NO SE USA */}
+      {/* <div className="promo">
         <h4>Promo price</h4>
         <h5>£20.9 Bag</h5>
         <Form.Check aria-label="option 1" />
-      </div>
+      </div> */}
     </section>
   );
 }
