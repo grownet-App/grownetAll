@@ -13,13 +13,13 @@ var routes = {
   order: function order(orderId) {
     return orderId ? "/order/:".concat(orderId) : '/order/:id';
   },
-  providers: '/providers',
-  provider: function provider(providerId) {
-    return providerId ? "/provider/:".concat(providerId) : '/provider/:id';
+  suppliers: '/suppliers',
+  supplier: function supplier(supplierId) {
+    return supplierId ? "/supplier/:".concat(supplierId) : '/supplier/:id';
   },
   admin: {
     team: '/admin/team',
-    providersAdmin: '/admin/providers'
+    suppliersAdmin: '/admin/suppliers'
   }
 };
 var _default = routes;

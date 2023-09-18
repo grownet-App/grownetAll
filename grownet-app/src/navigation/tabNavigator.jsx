@@ -1,5 +1,5 @@
 import React from 'react'
-import Providers from '../screens/buyingProcess/providers'
+import Suppliers from '../screens/buyingProcess/suppliers'
 import Settings from '../screens/settings'
 import Records from '../screens/records'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -27,7 +27,7 @@ function OrderStack() {
   }
   return (
     <Stack.Navigator
-      initialRouteName="providers"
+      initialRouteName="suppliers"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#026CD2',
@@ -86,12 +86,12 @@ function OrderStack() {
         }}
       />
       <Stack.Screen
-        name="providers"
-        component={Providers}
+        name="suppliers"
+        component={Suppliers}
         options={{
           headerShown: true,
 
-          title: 'Providers',
+          title: 'Suppliers',
           headerStyle: {
             backgroundColor: '#f2f2f2',
             height: StatusBar.currentHeight + 60,

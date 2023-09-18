@@ -47,7 +47,7 @@ export default function Restaurants() {
         <Link id="background-boton"
           className="bttn-categ" style={{backgroundImage: `url(${backgroundRestaurants})` }}
           onClick={() => handleRestaurantSelect(restaurant)}
-          to={"/providers"}
+          to={"/suppliers"}
           key={restaurant.account_number}
         >
           

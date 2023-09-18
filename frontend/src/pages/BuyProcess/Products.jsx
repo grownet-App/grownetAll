@@ -20,7 +20,7 @@ export default function Products(props) {
   ];
   const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
-  const { selectedProvider } = useOrderStore();
+  const { selectedSupplier } = useOrderStore();
   const { articlesToPay, totalNet, totalTaxes, totalToPay } = useOrderStore();
 
   useEffect(() => {
@@ -236,12 +236,12 @@ export default function Products(props) {
     );
   };
 
-  console.log("THIS IS THE SELECTEDPROVIDER", selectedProvider);
+  console.log("THIS IS THE SELECTEDSUPPLIER", selectedSupplier);
 
   return (
     <section className="products">
       <div className="tittle-products">
-        <Link to="/providers">
+        <Link to="/suppliers">
           <Icon
             src="google.com"
             icon="ic:round-arrow-back"

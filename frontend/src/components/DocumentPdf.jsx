@@ -12,7 +12,7 @@ import "../css/orderDetail.css";
 export default function DocumentPdf({
   articlesData,
   selectedRestaurant,
-  selectedProvider,
+  selectedSupplier,
   formattedDate,
   deliveryData,
   specialRequirements,
@@ -86,7 +86,7 @@ export default function DocumentPdf({
       <Page size="A4" style={styles.page}>
         <View style={styles.tittleRestaurant}>
           <Text style={styles.restaurantText}>Purchase Order</Text>
-          <Text style={styles.text}>for {selectedProvider.name} produce</Text>
+          <Text style={styles.text}>for {selectedSupplier.name} produce</Text>
         </View>
         <View style={styles.top}>
           <View style={styles.section}>

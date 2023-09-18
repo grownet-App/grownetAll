@@ -10,7 +10,7 @@ import useOrderStore from "../../store/useOrderStore";
 
 export default function OrderSuccessful() {
   const [articlesData, setArticlesData] = useState([]);
-  const { selectedRestaurant, selectedProvider } = useOrderStore();
+  const { selectedRestaurant, selectedSupplier } = useOrderStore();
   const currentDate = new Date();
   const dayName = currentDate.toLocaleString("en-us", { weekday: "short" });
   const dayNumber = currentDate.getDate();
@@ -32,7 +32,7 @@ export default function OrderSuccessful() {
         <DocumentPdf
           articlesData={articlesData}
           selectedRestaurant={selectedRestaurant}
-          selectedProvider={selectedProvider}
+          selectedSupplier={selectedSupplier}
           formattedDate={formattedDate}
           deliveryData={deliveryData}
           specialRequirements={specialRequirements}

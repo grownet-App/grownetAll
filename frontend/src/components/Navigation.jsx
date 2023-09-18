@@ -13,7 +13,7 @@ export default function Navigation() {
             <Navbar.Toggle aria-controls='responsive-navbar-nav' />
             <Navbar.Collapse id='responsive-navbar-nav'>
                 <Nav className='me-auto'>
-                    <Nav.Link as={NavLink} to={routes.providers}>Pedidos</Nav.Link>
+                    <Nav.Link as={NavLink} to={routes.suppliers}>Pedidos</Nav.Link>
                     <Nav.Link as={NavLink} to={routes.orders}>Ordenes</Nav.Link>
                 </Nav>
                 <Nav>

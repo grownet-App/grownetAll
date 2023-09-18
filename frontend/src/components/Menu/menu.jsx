@@ -17,7 +17,7 @@ export default function Menu() {
                     <p>Settings</p>
                  
             </NavLink>
-            <Nav.Link className="icons" href="/providers">
+            <Nav.Link className="icons" href="/suppliers">
                     <Icon className="" icon="streamline:shopping-cart-basket-2-shopping-basket"/>
                     <Icon className="icon-active2" icon="teenyicons:basket-solid" />
                     <p>Order</p>
