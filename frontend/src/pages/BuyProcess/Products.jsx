@@ -42,7 +42,9 @@ export default function Products(props) {
           amount: 0,
           category: "Vegetable",
           tax: 0.13,
+          /* TODO VOLUME VA A SER UOM */
           volume: "Unit",
+          uomAvailables: ["Unit", "Box", "Lts", "Kg"],
         },
         {
           id: 2,
