@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { otpApiUrl } from "../../config/urls.config";
 import "../../css/otp.css";
 import logo_blancov2 from "../../img/logo_blancov2.svg";
@@ -80,7 +80,6 @@ export default function CodeOtp(props) {
     setOtp(new Array(4).fill(""));
     setSeconds(10);
     setShow(false);
-    console.log("CODIGO FUE REENVIADO");
   };
 
   return (

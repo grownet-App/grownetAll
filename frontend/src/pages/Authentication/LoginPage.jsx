@@ -75,8 +75,6 @@ function Login() {
           handleShow(false);
           setShowAlert(false);
           setPhoneNumber(PhoneNumber);
-//TODO QUITAR ESTE CONSOLE LOG CUANDO YA LLEGUEN LOS MENSAJES POR TWILIO
-          console.log("Respuesta con CODIGO TWILIO:", response.data);
         } else {
           setShowAlert(true);
           handleShow(false);
@@ -86,7 +84,7 @@ function Login() {
         console.log(error);
       });
   };
-  
+
   const resendCode = (e) => {
     enviarData(e);
   };
@@ -94,54 +92,63 @@ function Login() {
   return (
     <section className="login">
       <div className="login-form">
-      <Container className="text-center">
-      {showOtp ? (
-        <CodeOtp idUsuario={numero} countrie={country} onResendCode={resendCode} code={otpCode}></CodeOtp>
-      ) : (
-        <>
-          <img className="img-login" src={logo_blancov2} alt="logo-Grownet" />
-            <form onSubmit={enviarData}>
-              <label className="text-form">
-                <p>Enter your mobile number:</p>
-                {countries && countries.length > 0 ? (
-                  <PhoneInput
-                    country={"gb"}
-                    value={PhoneNumber}
-                    onChange={handleChange}
-                    inputProps={{ required: true }}
-                    selectedCountry={country}
-                    onlyCountries={countries}
-                  />
-                ) : null}
-              </label>
-              {!valid && <p></p>}
-              <Col>
-                <button className="bttn btn-secundary" type="submit">
-                  Let’s Begin
-                </button>
-              </Col>
-            </form>
-        </>
-      )}
-      {showAlert ? (
-        <Modal show={show} onHide={handleClose}>
-          <section className="alerta">
-            <Icon className="error" icon="pajamas:error" />
-            <h1>We apologize</h1>
-            <p>We didn't find the mobile number registered</p>
-            <p id="number-phone">{"+ " + country + " " + numero}</p>
-            <a onClick={handleClose} id="close">
-              Change mobile number
-            </a>
-            {/*<Link> className="bttn btn-primary" to="/register">
+        <Container className="text-center">
+          {showOtp ? (
+            <CodeOtp
+              idUsuario={numero}
+              countrie={country}
+              onResendCode={resendCode}
+              code={otpCode}
+            ></CodeOtp>
+          ) : (
+            <>
+              <img
+                className="img-login"
+                src={logo_blancov2}
+                alt="logo-Grownet"
+              />
+              <form onSubmit={enviarData}>
+                <label className="text-form">
+                  <p>Enter your mobile number:</p>
+                  {countries && countries.length > 0 ? (
+                    <PhoneInput
+                      country={"gb"}
+                      value={PhoneNumber}
+                      onChange={handleChange}
+                      inputProps={{ required: true }}
+                      selectedCountry={country}
+                      onlyCountries={countries}
+                    />
+                  ) : null}
+                </label>
+                {!valid && <p></p>}
+                <Col>
+                  <button className="bttn btn-secundary" type="submit">
+                    Let’s Begin
+                  </button>
+                </Col>
+              </form>
+            </>
+          )}
+          {showAlert ? (
+            <Modal show={show} onHide={handleClose}>
+              <section className="alerta">
+                <Icon className="error" icon="pajamas:error" />
+                <h1>We apologize</h1>
+                <p>We didn't find the mobile number registered</p>
+                <p id="number-phone">{"+ " + country + " " + numero}</p>
+                <a onClick={handleClose} id="close">
+                  Change mobile number
+                </a>
+                {/*<Link> className="bttn btn-primary" to="/register">
               Register now
               </Link>*/}
-          </section>
-        </Modal>
-      ) : (
-        <></>
-      )}
-    </Container>
+              </section>
+            </Modal>
+          ) : (
+            <></>
+          )}
+        </Container>
         {/*<h2>
           Don't have an account? <Link> to="/register">Sign Up</Link>
       </h2>*/}
