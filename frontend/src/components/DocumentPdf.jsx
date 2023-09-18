@@ -1,11 +1,4 @@
-import {
-  Document,
-  Font,
-  Page,
-  StyleSheet,
-  Text,
-  View,
-} from "@react-pdf/renderer";
+import { Document, Font, Page, StyleSheet, Text, View,} from "@react-pdf/renderer";
 import React from "react";
 import "../css/orderDetail.css";
 
@@ -20,7 +13,6 @@ export default function DocumentPdf({
   totalTaxes,
   totalToPay
 }) {
-  Font.register({ family: "Roboto" });
 
   const styles = StyleSheet.create({
     page: {
