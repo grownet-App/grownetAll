@@ -18,7 +18,7 @@ export default function OrderSuccessful() {
   const yearNumber = currentDate.getFullYear();
   const formattedDate = `${dayName}, ${dayNumber} ${monthName}, ${yearNumber}`;
   //TODO PONER FECHA DE ENTREGA QUE SE SELECCIONÓ EN EL CALENDARIO
-  const { articlesToPay, totalNet, totalTaxes, totalToPay, specialRequirements } =
+  const { articlesToPay, totalNet, totalTaxes, totalToPay, specialRequirements, deliveryData } =
     useOrderStore();
 
   useEffect(() => {
@@ -34,6 +34,7 @@ export default function OrderSuccessful() {
           selectedRestaurant={selectedRestaurant}
           selectedProvider={selectedProvider}
           formattedDate={formattedDate}
+          deliveryData={deliveryData}
           specialRequirements={specialRequirements}
           //TODO QUITAR ESTE ARTICLES TO PAY PORQUE EN ARTICLES DATA SE LO PASO FILTRADO
           articlesToPay={articlesToPay}

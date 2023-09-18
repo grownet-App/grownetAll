@@ -14,6 +14,7 @@ export default function DocumentPdf({
   selectedRestaurant,
   selectedProvider,
   formattedDate,
+  deliveryData,
   specialRequirements,
   totalNet,
   totalTaxes,
@@ -100,7 +101,7 @@ export default function DocumentPdf({
           </View>
           <View style={styles.section}>
             <Text style={styles.text}>Requested delivery date</Text>
-            <Text>{formattedDate}</Text>
+            <Text>{deliveryData}</Text>
             <Text style={styles.text}>Customer number</Text>
             <Text>Not provided</Text>
             <Text style={styles.text}>Delivery address</Text>

@@ -12,6 +12,8 @@ export default function OrderInformation() {
   const { 
     selectedRestaurant, 
     articlesToPay, 
+    deliveryData,
+    setDeliveryData,
     specialRequirements, 
     setSpecialRequirements } = useOrderStore();
 
@@ -27,12 +29,15 @@ export default function OrderInformation() {
         (result) => {
           console.log(result.text);
           navigate("/orderSuccessful");
+          console.log('THIS IS THE SPECIAL' ,specialRequirements, deliveryData)
         },
         (error) => {
           console.log(error.text);
         }
       );
   };
+
+  console.log('THIS IS THE SPECIAL' ,specialRequirements, deliveryData)
   return (
     <section className="details">
       <div className="tittle-detail">
@@ -52,7 +57,14 @@ export default function OrderInformation() {
           <input type="text" name="address" value={selectedRestaurant.address} required/>
           <input type="text" id="resume" name="restaurant" value={selectedRestaurant.account_name} required/>
           <h3>Deliver</h3>
-          <input type="date" name="date" required></input>
+          <input 
+          type="date" 
+          name="date"
+          value={deliveryData}
+          onChange={(e)=> {
+            setDeliveryData(e.target.value)
+          }}
+          required></input>
           <h3>Any special requirements?</h3>
           <textarea 
           id="w3review" 
