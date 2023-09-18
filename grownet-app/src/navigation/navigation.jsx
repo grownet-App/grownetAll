@@ -8,7 +8,7 @@ import records from '../../src/screens/records'
 import settings from '../../src/screens/settings'
 import chat from '../../src/screens/chat'
 import home from '../../src/screens/home'
-import providers from '../screens/buyingProcess/providers'
+import suppliers from '../screens/buyingProcess/suppliers'
 import otpPage from '../../src/screens/otpPage'
 import { createStackNavigator } from '@react-navigation/stack'
 import { goBack, navigate } from './rootNavigation'
@@ -47,11 +47,11 @@ function MyStack() {
       />
 
       <Stack.Screen
-        name="providers"
-        component={providers}
+        name="suppliers"
+        component={suppliers}
         options={{
           headerShown: true,
-          title: 'Providers',
+          title: 'Suppliers',
           headerStyle: {
             backgroundColor: '#f2f2f2',
           },
@@ -125,8 +125,8 @@ function orderStack() {
       }}
     >
       <Stack.Screen
-        name="providers"
-        component={providers}
+        name="suppliers"
+        component={suppliers}
         options={{
           headerBackTitleVisible: false,
           headerLeft: () => (

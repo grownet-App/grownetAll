@@ -7,9 +7,7 @@ import { Document, Page, Text, pdf, StyleSheet, View, Font, Image } from "@react
 import { Link } from "react-router-dom";
 import useOrderStore from "../../store/useOrderStore";
 import grownet_icon from "../../img/grownet_icon.png"
-Font.register({
-  family: "Poppins", src:"https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-});
+
 const styles = StyleSheet.create({
   page: {
     backgroundColor: "#E9F4FF",
@@ -150,18 +148,20 @@ const styles = StyleSheet.create({
     fontSize: 15,
     borderTopLeftRadius: "30",
     borderTopRightRadius: "30",
+    left: 0,
+    bottom: 0,
   }
   
 });
   
-const PdfDocument = ({ selectedRestaurant, data, selectedProvider, deliveryDate, specialRequirements, totalNet, totalTaxes, totalToPay }) => (
+const PdfDocument = ({ selectedRestaurant, data, selectedSupplier, deliveryData, specialRequirements, totalNet, totalTaxes, totalToPay }) => (
   <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.information}>
         <View style={styles.top}>
           <View style={styles.sectionTop}>
           <Text style={styles.restaurantText}>Purchase Order </Text>
-            <Text style={styles.text}>for <Text style={styles.fontSpan}>{selectedProvider.name} produce</Text></Text>
+            <Text style={styles.text}>for <Text style={styles.fontSpan}>{selectedSupplier.name} produce</Text></Text>
           </View>
           <View style={styles.sectionTop1}>
           <Image style={styles.image} src={grownet_icon} cache={false} />
@@ -170,7 +170,7 @@ const PdfDocument = ({ selectedRestaurant, data, selectedProvider, deliveryDate,
         <View style={styles.top}>
           <View style={styles.section}>
             <Text style={styles.text}>Requested delivery date</Text>
-            <Text style={styles.tittle}>{deliveryDate}</Text>
+            <Text style={styles.tittle}>{deliveryData}</Text>
             <Text style={styles.text}>Ordered by</Text>
             <Text style={styles.tittle}>{selectedRestaurant.account_name}</Text>
           </View>
@@ -258,20 +258,16 @@ const PdfDocument = ({ selectedRestaurant, data, selectedProvider, deliveryDate,
             </View>
           </View>
         </View>
-        <View style={styles.footer} fixed>
-        	<Text>Grownet, London | www.grownetapp.com</Text>
-        </View>
+       
       </Page>
     </Document>
   
 );
 export default function OrderInformation() {
-  const { selectedRestaurant, selectedProvider, articlesToPay, totalNet, totalTaxes, totalToPay  } = useOrderStore();
-  const [address, setAddress] = useState(selectedRestaurant.address);
-  const [deliveryDate, setDeliveryDate] = useState("");
-  const [specialRequirements, setSpecialRequirements] = useState("");
-  const navigate = useNavigate();
+
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
+  const { selectedRestaurant, articlesToPay, deliveryData, setDeliveryData, specialRequirements, selectedSupplier, setSpecialRequirements, totalNet, totalTaxes, totalToPay } = useOrderStore();
 
   useEffect(() => {
     setData(articlesToPay);
@@ -280,7 +276,7 @@ export default function OrderInformation() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const pdfBlob = await pdf(
-      <PdfDocument selectedRestaurant={selectedRestaurant} selectedProvider={selectedProvider} specialRequirements={specialRequirements} deliveryDate={deliveryDate} data={data} totalNet={totalNet} totalTaxes={totalTaxes} totalToPay={totalToPay} />
+      <PdfDocument selectedRestaurant={selectedRestaurant} selectedSupplier={selectedSupplier} specialRequirements={specialRequirements} deliveryData={deliveryData} data={data} totalNet={totalNet} totalTaxes={totalTaxes} totalToPay={totalToPay} />
     ).toBlob();
     const pdfBase64 = await new Promise((resolve) => {
       const reader = new FileReader();
@@ -295,11 +291,11 @@ export default function OrderInformation() {
     const emailParams = {
       to_name: "Grownet",
       restaurant: selectedRestaurant.account_name,
-      address: address,
-      date: deliveryDate,
+      address: selectedRestaurant.address,
+      date: deliveryData,
       message: specialRequirements,
       file: pdfBase64,
-      supplier: selectedProvider.name
+      supplier: selectedSupplier.name
     };
     emailjs.send(serviceId, templateId, emailParams, userId).then(
       (result) => {
@@ -311,6 +307,8 @@ export default function OrderInformation() {
       }
     );
   };
+
+  console.log("THIS IS THE SPECIAL", specialRequirements, deliveryData);
   return (
     <section className="details">
       <div className="tittle-detail">
@@ -325,12 +323,17 @@ export default function OrderInformation() {
           <input
             type="text"
             name="address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
+            value={selectedRestaurant.address}
+            disabled
           />
           <h3>Deliver</h3>
-          <input type="date" name="date" value={deliveryDate} onChange={(e) => setDeliveryDate(e.target.value)} required></input>
+          <input
+            type="date"
+            name="date"
+            value={deliveryData}
+            onChange={(e) => setDeliveryData(e.target.value)}
+            required
+          ></input>
           <h3>Any special requirements?</h3>
           <textarea
             id="w3review"
@@ -341,7 +344,7 @@ export default function OrderInformation() {
             cols="50"
           ></textarea>
         </div>
-        <input type="submit" className="bttn btn-primary" value={"Continue"}/>
+        <input type="submit" className="bttn btn-primary" value={"Continue"} />
       </form>
     </section>
   );

@@ -45,7 +45,7 @@ const Otp = () => {
       setToken(token)
       console.log('token:', token)
       if (response.data.flag === 1) {
-        navigation.navigate('providers')
+        navigation.navigate('suppliers')
       }
     } catch (error) {
       console.error('Error al enviar OTP:', error)

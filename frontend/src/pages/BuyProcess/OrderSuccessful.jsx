@@ -10,7 +10,7 @@ import useOrderStore from "../../store/useOrderStore";
 
 export default function OrderSuccessful() {
   const [articlesData, setArticlesData] = useState([]);
-  const { selectedRestaurant, selectedProvider } = useOrderStore();
+  const { selectedRestaurant, selectedSupplier } = useOrderStore();
   const currentDate = new Date();
   const dayName = currentDate.toLocaleString("en-us", { weekday: "short" });
   const dayNumber = currentDate.getDate();
@@ -18,7 +18,7 @@ export default function OrderSuccessful() {
   const yearNumber = currentDate.getFullYear();
   const formattedDate = `${dayName}, ${dayNumber} ${monthName}, ${yearNumber}`;
   //TODO PONER FECHA DE ENTREGA QUE SE SELECCIONÓ EN EL CALENDARIO
-  const { articlesToPay, totalNet, totalTaxes, totalToPay } =
+  const { articlesToPay, totalNet, totalTaxes, totalToPay, specialRequirements, deliveryData } =
     useOrderStore();
 
   useEffect(() => {
@@ -32,8 +32,11 @@ export default function OrderSuccessful() {
         <DocumentPdf
           articlesData={articlesData}
           selectedRestaurant={selectedRestaurant}
-          selectedProvider={selectedProvider}
+          selectedSupplier={selectedSupplier}
           formattedDate={formattedDate}
+          deliveryData={deliveryData}
+          specialRequirements={specialRequirements}
+          //TODO QUITAR ESTE ARTICLES TO PAY PORQUE EN ARTICLES DATA SE LO PASO FILTRADO
           articlesToPay={articlesToPay}
           totalNet={totalNet}
           totalTaxes={totalTaxes}

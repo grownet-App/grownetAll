@@ -24,10 +24,10 @@ const Settings = () => {
         <Card style={styles.card}>
           <Card.Content>
             <Text variant="titleLarge" style={styles.txtCard}>
-              Providers
+              Suppliers
             </Text>
             <Text variant="bodyMedium" style={styles.txtCard}>
-              Edit your providers
+              Edit your suppliers
             </Text>
           </Card.Content>
         </Card>

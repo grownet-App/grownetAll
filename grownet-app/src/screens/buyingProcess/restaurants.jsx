@@ -34,17 +34,17 @@ export default Restaurants
 
 //   return (
 //     <SafeAreaView>
-//       <ScrollView contentContainerStyle={GlobalStyles.providers}>
+//       <ScrollView contentContainerStyle={GlobalStyles.suppliers}>
 //         {restaurants.map((restaurant, index) => (
 //           <View key={index}>
-//             <View style={GlobalStyles.providersCateg}>
+//             <View style={GlobalStyles.suppliersCateg}>
 //               <Text style={GlobalStyles.textSupplier}>
 //                 {restaurant.account_name}
 //               </Text>
 
 //               <Image
-//                 source={require('../../../assets/img/img_providers.png')}
-//                 style={GlobalStyles.imgproviders}
+//                 source={require('../../../assets/img/img_suppliers.png')}
+//                 style={GlobalStyles.imgsuppliers}
 //               />
 //             </View>
 //           </View>

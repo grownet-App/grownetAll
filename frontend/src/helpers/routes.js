@@ -11,7 +11,7 @@ const routes = {
     orderSuccessful: '/orderSuccessful',
     settings: '/settings',
     settingsRestaurants: '/settingsRestaurants',
-    settingsProviders: '/settingsProviders',
+    settingsSuppliers: '/settingsSuppliers',
     FAQ: '/FAQ',
     tAndC: '/tAndC',
     editRestaurant: 'editRestaurant',
@@ -22,11 +22,11 @@ const routes = {
     upcomingRecord: '/upcomingRecord',
     order: (orderId) => (orderId ? `/order/:${orderId}` : '/order/:id'),
     restaurants: '/restaurants',
-    providers: '/providers',
-    provider: (providerId) => (providerId ? `/provider/:${providerId}` : '/provider/:id'),
+    suppliers: '/suppliers',
+    supplier: (supplierId) => (supplierId ? `/supplier/:${supplierId}` : '/supplier/:id'),
     admin: {
         team: '/admin/team',
-        providersAdmin: '/admin/providers'
+        suppliersAdmin: '/admin/suppliers'
     }
 }
 export default routes;

@@ -1,18 +1,18 @@
 import { SafeAreaView, ScrollView, Text, View, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { ApiProviders } from '../../config/urls.config'
+import { ApiSuppliers } from '../../config/urls.config'
 import { GlobalStyles } from '../../styles/styles'
 import axios from 'axios'
 
-const Providers = () => {
-  const [providers, setProviders] = useState([])
+const Suppliers = () => {
+  const [suppliers, setSuppliers] = useState([])
 
   useEffect(() => {
     axios
-      .get(ApiProviders)
+      .get(ApiSuppliers)
       .then(function (response) {
         console.log('response', response)
-        setProviders(response.data.providers)
+        setSuppliers(response.data.suppliers)
       })
       .catch(function (error) {
         console.log(error)
@@ -21,15 +21,15 @@ const Providers = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView contentContainerStyle={GlobalStyles.providers}>
-        {providers.map((supplier, index) => (
+      <ScrollView contentContainerStyle={GlobalStyles.suppliers}>
+        {suppliers.map((supplier, index) => (
           <View key={index}>
-            <View style={GlobalStyles.providersCateg}>
+            <View style={GlobalStyles.suppliersCateg}>
               <Text style={GlobalStyles.textSupplier}>{supplier.name}</Text>
 
               <Image
-                source={require('../../../assets/img/img_providers.png')}
-                style={GlobalStyles.imgproviders}
+                source={require('../../../assets/img/img_suppliers.png')}
+                style={GlobalStyles.imgsuppliers}
               />
             </View>
           </View>
@@ -39,4 +39,4 @@ const Providers = () => {
   )
 }
 
-export default Providers
+export default Suppliers

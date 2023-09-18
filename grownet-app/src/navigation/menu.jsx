@@ -8,7 +8,7 @@ import records from '../screens/records'
 import settings from '../screens/settings'
 import chat from '../screens/chat'
 import home from '../screens/home'
-import providers from '../screens/providers'
+import suppliers from '../screens/suppliers'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useNavigation } from '@react-navigation/native'
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons'
@@ -63,8 +63,8 @@ function orderStack() {
       }}
     >
       <Stack.Screen
-        name="providers"
-        component={providers}
+        name="suppliers"
+        component={suppliers}
         options={{
           headerBackTitleVisible: false,
           headerLeft: () => (
