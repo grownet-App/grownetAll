@@ -1,13 +1,12 @@
-import { Icon } from "@iconify/react";
-import "../../css/orderDetail.css";
-import React, { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import { useNavigate } from "react-router-dom";
+import { Icon } from "@iconify/react";
 import { Document, Page, Text, pdf } from "@react-pdf/renderer"; // Importa react-pdf
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "../../css/orderDetail.css";
 import useOrderStore from "../../store/useOrderStore";
 const PdfDocument = ({ selectedRestaurant, data }) => (
-  <Document style={{backgroundColor:"blue"}}>
+  <Document style={{ backgroundColor: "blue" }}>
     <Page>
       <Text>Address: {selectedRestaurant.address}</Text>
       <Text>Restaurant: {selectedRestaurant.account_name}</Text>
@@ -29,17 +28,17 @@ const PdfDocument = ({ selectedRestaurant, data }) => (
   </Document>
 );
 export default function OrderInformation() {
-  const [ data, setData ] = useState([]);
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const { 
-    selectedRestaurant, 
-    articlesToPay, 
+  const {
+    selectedRestaurant,
+    articlesToPay,
     deliveryData,
     setDeliveryData,
-    specialRequirements, 
-    setSpecialRequirements } = useOrderStore();
-  const [address, setAddress] = useState(selectedRestaurant.address);
-  console.log(data)
+    specialRequirements,
+    setSpecialRequirements,
+  } = useOrderStore();
+  console.log(data);
   useEffect(() => {
     setData(articlesToPay);
   }, []);
@@ -62,7 +61,7 @@ export default function OrderInformation() {
     const emailParams = {
       to_name: "Grownet",
       restaurant: selectedRestaurant.account_name,
-      address: address,
+      address: selectedRestaurant.address,
       date: deliveryData,
       message: specialRequirements,
       file: pdfBase64,
@@ -78,7 +77,7 @@ export default function OrderInformation() {
     );
   };
 
-  console.log('THIS IS THE SPECIAL' ,specialRequirements, deliveryData)
+  console.log("THIS IS THE SPECIAL", specialRequirements, deliveryData);
   return (
     <section className="details">
       <div className="tittle-detail">
@@ -93,12 +92,17 @@ export default function OrderInformation() {
           <input
             type="text"
             name="address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
+            value={selectedRestaurant.address}
+            disabled
           />
           <h3>Deliver</h3>
-          <input type="date" name="date" value={deliveryData} onChange={(e) => setDeliveryData(e.target.value)} required></input>
+          <input
+            type="date"
+            name="date"
+            value={deliveryData}
+            onChange={(e) => setDeliveryData(e.target.value)}
+            required
+          ></input>
           <h3>Any special requirements?</h3>
           <textarea
             id="w3review"
@@ -109,7 +113,7 @@ export default function OrderInformation() {
             cols="50"
           ></textarea>
         </div>
-        <input type="submit" className="bttn btn-primary" value={"Continue"}/>
+        <input type="submit" className="bttn btn-primary" value={"Continue"} />
       </form>
     </section>
   );
