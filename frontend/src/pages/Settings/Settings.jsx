@@ -17,14 +17,14 @@ export default function Settings() {
       </div>
       <p>How can we help you?</p>
       <div>
-        <Link className="bttn btn-primary" id="settings-button" to="/settingsRestaurants">
+        <Link className="bttn btn-primary settings-button" id="my-intercom">
           <div className="text-button">
             <h2>Restaurants</h2>
             <p>Edit your restaurants</p>
           </div>
           <Icon icon="simple-line-icons:plus" className="plus" />
         </Link>
-        <Link className="bttn btn-secundary" id="settings-button" to="/settingsSuppliers">
+        <Link className="bttn btn-secundary settings-button" id="my-intercom">
           <div className="text-button">
             <h2>Suppliers</h2>
             <p>Edit your suppliers</p>
