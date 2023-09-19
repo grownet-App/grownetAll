@@ -2,15 +2,15 @@ import { pdf } from "@react-pdf/renderer";
 import * as FileSaver from "file-saver";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import DocumentPdf from "../../components/DocumentPdf";
 import Menu from "../../components/Menu/Menu";
 import "../../css/orderDetail.css";
 import img_succesful from "../../img/img_succesful.png";
 import useOrderStore from "../../store/useOrderStore";
+import { PdfDocument } from "./OrderInformation";
 
 export default function OrderSuccessful() {
   const [articlesData, setArticlesData] = useState([]);
-  const { selectedRestaurant, selectedSupplier } = useOrderStore();
+  const { selectedRestaurant, selectedSupplier, articlesToPay, totalNet, totalTaxes, totalToPay, specialRequirements, deliveryData } = useOrderStore();
   const currentDate = new Date();
   const dayName = currentDate.toLocaleString("en-us", { weekday: "short" });
   const dayNumber = currentDate.getDate();
@@ -18,8 +18,6 @@ export default function OrderSuccessful() {
   const yearNumber = currentDate.getFullYear();
   const formattedDate = `${dayName}, ${dayNumber} ${monthName}, ${yearNumber}`;
   //TODO PONER FECHA DE ENTREGA QUE SE SELECCIONÓ EN EL CALENDARIO
-  const { articlesToPay, totalNet, totalTaxes, totalToPay, specialRequirements, deliveryData } =
-    useOrderStore();
 
   useEffect(() => {
     const filteredArticles = articlesToPay.filter((article)=> article.amount > 0)
@@ -29,19 +27,7 @@ export default function OrderSuccessful() {
   const generatePdfDocument = async (fileName) => {
     try {
       const blob = await pdf(
-        <DocumentPdf
-          articlesData={articlesData}
-          selectedRestaurant={selectedRestaurant}
-          selectedSupplier={selectedSupplier}
-          formattedDate={formattedDate}
-          deliveryData={deliveryData}
-          specialRequirements={specialRequirements}
-          //TODO QUITAR ESTE ARTICLES TO PAY PORQUE EN ARTICLES DATA SE LO PASO FILTRADO
-          articlesToPay={articlesToPay}
-          totalNet={totalNet}
-          totalTaxes={totalTaxes}
-          totalToPay={totalToPay}
-        />
+        <PdfDocument selectedRestaurant={selectedRestaurant} selectedSupplier={selectedSupplier} specialRequirements={specialRequirements} deliveryData={deliveryData} data={articlesData} totalNet={totalNet} totalTaxes={totalTaxes} totalToPay={totalToPay} />
       ).toBlob();
       FileSaver.saveAs(blob, fileName);
     } catch (error) {

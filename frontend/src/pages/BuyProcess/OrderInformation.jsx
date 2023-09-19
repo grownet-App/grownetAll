@@ -6,12 +6,30 @@ import { useNavigate } from "react-router-dom";
 import { Document, Page, Text, pdf, StyleSheet, View, Font, Image } from "@react-pdf/renderer"; 
 import { Link } from "react-router-dom";
 import useOrderStore from "../../store/useOrderStore";
-import grownet_icon from "../../img/grownet_icon.png"
+import fav_icon from "../../img/fav_icon.png";
+import DocumentPdf from "../../components/DocumentPdf";
 
+Font.register({
+  family: 'Poppins',
+  fonts: [
+    {
+      src: 'https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrFJDUc1NECPY.ttf',
+    },
+    {
+      src: 'https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7V1tvFP-KUEg.ttf',
+      fontWeight: '700',
+    },
+    {
+      src: 'https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6V1tvFP-KUEg.ttf',
+      fontWeight: '600',
+    },
+  ],
+});
 const styles = StyleSheet.create({
   page: {
     backgroundColor: "#E9F4FF",
     color: "#04444F",
+    fontFamily: "Poppins"
   },
   information: {
     borderBottomLeftRadius: "30",
@@ -20,23 +38,26 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   image: {
-    width: "80%",
+    width: "55%",
+    marginTop: -5,
   },
   sectionTop: {
     margin: 30,
     padding: 10,
     width: "70%",
     marginBottom: 0,
+    paddingBottom: 0,
   },
   sectionTop1: {
     margin: 30,
     padding: 10,
     width: "30%",
     marginBottom: 0,
+    paddingBottom: 0,
   },
   fontSpan: {
     color: "#026CD2",
-    fontWeight: "700",
+    fontWeight: "600",
   },
   top: {
     flexDirection: "row",
@@ -47,10 +68,12 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     padding: 10,
     width: "50%",
+    paddingBottom: 5
   },
   message:{
-    margin: 30,
+    margin: 40,
     marginTop: 0,
+    marginBottom: 20
   },
   tittleRestaurant: {
     marginTop: 50,
@@ -58,15 +81,15 @@ const styles = StyleSheet.create({
   },
   restaurantText: {
     fontSize: 35,
-    fontWeight: "700",
+    fontWeight: '700',
   },
   text: {
     fontSize: 15,
-    paddingTop: 10,
+    paddingTop: 6,
   },
   tittle: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: "600",
   },
   table: {
     display: "table",
@@ -102,9 +125,8 @@ const styles = StyleSheet.create({
     margin: "auto",
     marginTop: 5,
     fontSize: 15,
-    fontWeight: "700",
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingTop: 8,
+    paddingBottom: 8,
   },
   table2: {
     display: "table",
@@ -114,7 +136,7 @@ const styles = StyleSheet.create({
     borderRadius: "14",
     borderColor: "#026CD2",
     margin: 20,
-    marginTop: 0,
+    marginTop: 10,
     marginLeft: "40%",
     backgroundColor: "white"
   },
@@ -154,7 +176,7 @@ const styles = StyleSheet.create({
   
 });
   
-const PdfDocument = ({ selectedRestaurant, data, selectedSupplier, deliveryData, specialRequirements, totalNet, totalTaxes, totalToPay }) => (
+export const PdfDocument = ({ selectedRestaurant, data, selectedSupplier, deliveryData, specialRequirements, totalNet, totalTaxes, totalToPay }) => (
   <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.information}>
@@ -164,7 +186,7 @@ const PdfDocument = ({ selectedRestaurant, data, selectedSupplier, deliveryData,
             <Text style={styles.text}>for <Text style={styles.fontSpan}>{selectedSupplier.name} produce</Text></Text>
           </View>
           <View style={styles.sectionTop1}>
-          <Image style={styles.image} src={grownet_icon} cache={false} />
+          <Image style={styles.image} src={fav_icon} cache={false} />
           </View>
         </View>
         <View style={styles.top}>
@@ -225,8 +247,8 @@ const PdfDocument = ({ selectedRestaurant, data, selectedSupplier, deliveryData,
         </View>
         ))}
         </View>
-        
-        <View style={styles.table2}>
+        <View>
+        <View style={styles.table2} break>
           <View style={styles.tableRow}>
             <View style={styles.tableColTotal}>
             <View style={styles.radiusTotalNet}>
@@ -258,11 +280,12 @@ const PdfDocument = ({ selectedRestaurant, data, selectedSupplier, deliveryData,
             </View>
           </View>
         </View>
-       
+       </View>
       </Page>
     </Document>
   
 );
+
 export default function OrderInformation() {
 
   const [data, setData] = useState([]);
