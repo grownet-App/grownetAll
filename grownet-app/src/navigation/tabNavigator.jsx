@@ -26,8 +26,9 @@ function OrderStack() {
     }
   }
   return (
+    //TODO. PONER RUTA DE RESTAURANTES
     <Stack.Navigator
-      initialRouteName="restaurants"
+      initialRouteName="suppliers"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#026CD2',
@@ -184,6 +185,18 @@ const TabNavigator = () => {
             return <FontAwesome5 name="cogs" size={size} color={color} />
           },
           headerShown: true,
+          title: 'Settings',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#f2f2f2',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTitleStyle: {
+            fontFamily: 'PoppinsBold',
+            fontSize: 28,
+            fontWeight: 'bold',
+            color: '#026CD2',
+          },
         }}
       />
       <Tab.Screen

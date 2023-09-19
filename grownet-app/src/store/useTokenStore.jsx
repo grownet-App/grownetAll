@@ -1,31 +1,35 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
+AsyncStorage.clear()
+AsyncStorage.getItem('test')
+
 import { persist } from 'zustand/middleware'
 import { create } from 'zustand'
 
 const useTokenStore = create(
-  persist(
-    (set) => ({
-      token: null,
+  (set) => ({
+    token: null,
+    setToken: (newToken) => set({ token: newToken }),
+    initializeToken: async () => {
+      try {
+        const storedToken = await AsyncStorage.getItem('token')
 
-      setToken: (newToken) => set({ token: newToken }),
-
-      initializeToken: async () => {
-        try {
-          const storedToken = await AsyncStorage.getItem('token')
-
-          if (storedToken !== null) {
-            set({ token: storedToken })
-          }
-        } catch (error) {
-          console.error('Error al obtener el token de AsyncStorage:', error)
+        if (storedToken) {
+          set({ token: storedToken })
+        } else {
+          console.error('no se encontro el token')
         }
-      },
-    }),
-
-    {
-      name: 'token-storage',
+      } catch (error) {
+        console.error('Error al obtener el token de AsyncStorage:', error)
+      }
     },
-  ),
+  }),
+
+  {
+    name: 'token-storage',
+  },
+
+  persist,
 )
 
 export default useTokenStore

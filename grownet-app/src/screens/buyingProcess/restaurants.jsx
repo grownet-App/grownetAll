@@ -14,10 +14,11 @@ import axios from 'axios'
 import useTokenStore from '../../store/useTokenStore'
 import useOrderStore from '../../store/UseOrderStore'
 import BgRestaurant from '../../../assets/img/backgroundRestaurants.png'
-import { navigate } from '../../navigation/rootNavigation'
-import { FontAwesome } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
 
 const Restaurants = () => {
+  const navigation = useNavigation()
   const { token } = useTokenStore()
   const { restaurants, setRestaurants, setSelectedRestaurant } = useOrderStore()
 
@@ -46,36 +47,42 @@ const Restaurants = () => {
   const onPressAdd = () => {
     //TODO,agregar restaurante
   }
+  const onPressSuppliers = () => {
+    navigation.navigate('suppliers')
+  }
 
   return (
     <SafeAreaView>
       <ScrollView contentContainerStyle={GlobalStyles.suppliers}>
         {restaurants.map((restaurant) => (
-          <ImageBackground
-            style={GlobalStyles.RestaurantBg}
+          <TouchableOpacity
+            onPress={() => onPressSuppliers}
             key={restaurant.account_number}
-            source={{ uri: BgRestaurant }}
           >
-            <Image
-              source={{ uri: urlImg + restaurant.image }}
-              alt={restaurant.account_name}
-              style={{ width: 160, height: 160 }}
-            />
-            <Text style={GlobalStyles.TextDirectionRestaurant}>
-              {restaurant.address}
-            </Text>
-          </ImageBackground>
+            <ImageBackground
+              style={GlobalStyles.RestaurantBg}
+              source={{ uri: BgRestaurant }}
+            >
+              <Image
+                source={{ uri: urlImg + restaurant.image }}
+                alt={restaurant.account_name}
+                style={{ width: 160, height: 160 }}
+              />
+              <Text style={GlobalStyles.TextDirectionRestaurant}>
+                {restaurant.address}
+              </Text>
+            </ImageBackground>
+          </TouchableOpacity>
         ))}
         <TouchableOpacity
           onPress={onPressAdd}
           style={GlobalStyles.buttonAddCont}
         >
           <View style={GlobalStyles.containButtonAdd}>
-            <FontAwesome
-              name="plus-circle"
-              size={30}
+            <Ionicons
+              name="add-circle-outline"
+              size={34}
               color="#ffff"
-              regular
               style={{ padding: 10 }}
             />
             <Text style={GlobalStyles.textAddRestaurant}>Add restaurant</Text>
