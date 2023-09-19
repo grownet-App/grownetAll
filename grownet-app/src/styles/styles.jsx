@@ -82,43 +82,6 @@ export const GlobalStyles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: 'bold',
   },
-  //styles suppliers
-  suppliers: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 16,
-  },
-
-  titleSuppliers: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-
-  textSupplier: {
-    paddingRight: 10,
-    paddingLeft: 10,
-    fontSize: 25,
-    color: '#FFFFFF',
-  },
-  suppliersCateg: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: 350,
-    backgroundColor: '#164e84',
-    marginVertical: 10,
-    borderRadius: 21,
-    overflow: 'hidden',
-  },
-  imgsuppliers: {
-    position: 'relative',
-    marginRight: 20,
-    width: 100,
-    height: 125,
-    top: 30,
-  },
   //carousel styles
   slide: {
     marginTop: '30%',
@@ -213,5 +176,62 @@ export const GlobalStyles = StyleSheet.create({
     fontWeight: 'bold',
 
     marginLeft: 5,
+  },
+  // suppliers styles
+  suppliers: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 16,
+  },
+
+  suppliersBg: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: 322,
+    height: 125,
+    backgroundColor: '#04444f',
+    marginVertical: 10,
+    borderRadius: 21,
+    overflow: 'hidden',
+  },
+  // restaurants  styles
+
+  TextDirectionRestaurant: {
+    color: '#FFFFFF',
+    fontSize: 15,
+  },
+  RestaurantBg: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: 322,
+    height: 150,
+    backgroundColor: '#04444f',
+    marginVertical: 10,
+    borderRadius: 21,
+    overflow: 'hidden',
+    padding: 10,
+  },
+  buttonAddCont: {
+    marginTop: 10,
+    backgroundColor: '#026cd2',
+    paddingHorizontal: 10,
+    borderRadius: 50,
+    width: 222,
+  },
+  containButtonAdd: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  textAddRestaurant: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: '#ffff',
+    paddingRight: 10,
   },
 })
