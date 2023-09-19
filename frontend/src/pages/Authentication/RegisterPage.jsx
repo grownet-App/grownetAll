@@ -32,7 +32,7 @@ export default function RegisterPage() {
     console.log(data);
     try {
       const { data: res } = await axios.post(registerApiUrl, data);
-      navigate("/providers");
+      navigate("/suppliers");
       console.log(res.message);
     } catch (error) {
       if (

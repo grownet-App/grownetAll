@@ -1,24 +1,18 @@
-import {
-  Document,
-  Font,
-  Page,
-  StyleSheet,
-  Text,
-  View,
-} from "@react-pdf/renderer";
+import { Document, Font, Page, StyleSheet, Text, View,} from "@react-pdf/renderer";
 import React from "react";
 import "../css/orderDetail.css";
 
 export default function DocumentPdf({
   articlesData,
   selectedRestaurant,
+  selectedSupplier,
   formattedDate,
-  selectedProvider,
+  deliveryData,
+  specialRequirements,
   totalNet,
   totalTaxes,
   totalToPay
 }) {
-  Font.register({ family: "Roboto" });
 
   const styles = StyleSheet.create({
     page: {
@@ -84,7 +78,7 @@ export default function DocumentPdf({
       <Page size="A4" style={styles.page}>
         <View style={styles.tittleRestaurant}>
           <Text style={styles.restaurantText}>Purchase Order</Text>
-          <Text style={styles.text}>for {selectedProvider.name} produce</Text>
+          <Text style={styles.text}>for {selectedSupplier.name} produce</Text>
         </View>
         <View style={styles.top}>
           <View style={styles.section}>
@@ -95,11 +89,11 @@ export default function DocumentPdf({
             <Text style={styles.text}>Ordered by</Text>
             <Text style={styles.tittle}>{selectedRestaurant.account_name}</Text>
             <Text style={styles.text}>Special requirements</Text>
-            <Text style={styles.tittle}>Nothing</Text>
+            <Text style={styles.tittle}>{specialRequirements}</Text>
           </View>
           <View style={styles.section}>
             <Text style={styles.text}>Requested delivery date</Text>
-            <Text>{formattedDate}</Text>
+            <Text>{deliveryData}</Text>
             <Text style={styles.text}>Customer number</Text>
             <Text>Not provided</Text>
             <Text style={styles.text}>Delivery address</Text>

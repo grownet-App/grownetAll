@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { otpApiUrl } from "../../config/urls.config";
 import "../../css/otp.css";
 import logo_blancov2 from "../../img/logo_blancov2.svg";
@@ -78,9 +78,8 @@ export default function CodeOtp(props) {
   const handleResendCode = (e) => {
     onResendCode(e);
     setOtp(new Array(4).fill(""));
-    setSeconds(20);
+    setSeconds(10);
     setShow(false);
-    console.log("CODIGO FUE REENVIADO");
   };
 
   return (
@@ -101,6 +100,13 @@ export default function CodeOtp(props) {
               onChange={(e) => handleChange(index, e.target.value)}
               onFocus={(e) => e.target.select()}
               id={`otp-input-${index}`}
+              inputMode="numeric"
+              pattern="[0-9]*"
+              onKeyDown={(e) => {
+                if (isNaN(Number(e.key))) {
+                  e.preventDefault();
+                }
+              }}
             />
           ))}
         </div>

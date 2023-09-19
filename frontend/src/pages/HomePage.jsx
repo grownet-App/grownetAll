@@ -1,11 +1,10 @@
 import Carousel from 'react-bootstrap/Carousel';
-import css from "../css/prelogin.css"
+import "../css/prelogin.css"
 import { Link } from "react-router-dom"
 import carousel_img1 from '../img/carousel_img1.png';
 import carousel_img2 from '../img/carousel_img2.png';
 import carousel_img3 from '../img/carousel_img3.png';
 import carousel_img4 from '../img/carousel_img4.png';
-
 
 export default function HomePage() {
     return(
@@ -43,7 +42,6 @@ export default function HomePage() {
         <div className="buttons_login">
             <Link className="bttn btn-secundary" to="/register">Register</Link>
             <Link className="bttn btn-white" to="/login">Login</Link>
-            
         </div>
         <Link className="t-c">Terms & conditions</Link>
     </section>

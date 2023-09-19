@@ -82,7 +82,6 @@ export const GlobalStyles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: 'bold',
   },
-
   //carousel styles
   slide: {
     marginTop: '30%',

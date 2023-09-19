@@ -10,4 +10,4 @@ export const onlyCountries = 'https://ec2-18-191-177-149.us-east-2.compute.amazo
 
 export const availableRestaurants = 'https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/customers/chef'
 
-export const availableProviders = 'https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/providers/all'
+export const availableSuppliers = 'https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/suppliers/all'
