@@ -335,7 +335,6 @@ export default function OrderInformation() {
     const year = date.getFullYear();
     const formattedDate = `${day}/${month}/${year}`;
     setDeliveryData(formattedDate);
-    console.log("THIS IS THE DATE FORMATTED", formattedDate);
   };
 
   useEffect(() => {
@@ -385,9 +384,6 @@ export default function OrderInformation() {
       }
     );
   };
-
-  console.log("THIS IS THE SPECIAL", specialRequirements, deliveryData);
-  console.log("THIS IS THE DELIVERY DATE:", deliveryData);
   return (
     <section className="details">
       <div className="tittle-detail">
@@ -411,6 +407,7 @@ export default function OrderInformation() {
             onChange={handleChangeDate}
             minDate={tomorrow}
             placeholderText="Select a date"
+            required
           />
           <h3>Any special requirements?</h3>
           <textarea
