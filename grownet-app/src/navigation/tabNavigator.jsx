@@ -1,5 +1,5 @@
 import React from 'react'
-import Providers from '../screens/buyingProcess/providers'
+import Suppliers from '../screens/buyingProcess/suppliers'
 import Settings from '../screens/settings'
 import Records from '../screens/records'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -27,7 +27,7 @@ function OrderStack() {
   }
   return (
     <Stack.Navigator
-      initialRouteName="providers"
+      initialRouteName="restaurants"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#026CD2',
@@ -36,27 +36,6 @@ function OrderStack() {
         },
       }}
     >
-      <Stack.Screen
-        name="orders"
-        component={Orders}
-        options={{
-          headerBackTitleVisible: false,
-          headerLeft: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="<"
-              color="#026CD2"
-            />
-          ),
-          headerRight: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="#fff"
-            />
-          ),
-        }}
-      />
       <Stack.Screen
         name="restaurants"
         component={Restauranst}
@@ -74,24 +53,15 @@ function OrderStack() {
             fontFamily: 'PoppinsBold',
             fontSize: 28,
           },
-
-          headerRight: () => (
-            <TouchableOpacity
-              style={{ marginRight: 20 }}
-              onPress={handleLogout}
-            >
-              <FontAwesome name="sign-out" size={24} color="#04444F" />
-            </TouchableOpacity>
-          ),
         }}
       />
       <Stack.Screen
-        name="providers"
-        component={Providers}
+        name="suppliers"
+        component={Suppliers}
         options={{
           headerShown: true,
 
-          title: 'Providers',
+          title: 'Suppliers',
           headerStyle: {
             backgroundColor: '#f2f2f2',
             height: StatusBar.currentHeight + 60,

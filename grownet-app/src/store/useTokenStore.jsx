@@ -10,10 +10,14 @@ const useTokenStore = create(
       setToken: (newToken) => set({ token: newToken }),
 
       initializeToken: async () => {
-        const storedToken = await AsyncStorage.getItem('token')
+        try {
+          const storedToken = await AsyncStorage.getItem('token')
 
-        if (storedToken !== null) {
-          set({ token: storedToken })
+          if (storedToken !== null) {
+            set({ token: storedToken })
+          }
+        } catch (error) {
+          console.error('Error al obtener el token de AsyncStorage:', error)
         }
       },
     }),
