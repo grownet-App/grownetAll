@@ -156,6 +156,9 @@
         flex-direction: column;
         align-items: center;
     }
+    .date-shipping input{
+        user-select: none;
+    }
     .order-succesful .bttn{
         padding: 12px 15px;
         font-size: 15px;

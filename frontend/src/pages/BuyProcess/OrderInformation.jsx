@@ -1,27 +1,36 @@
-import { Icon } from "@iconify/react";
-import "../../css/orderDetail.css";
-import React, { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import { useNavigate } from "react-router-dom";
-import { Document, Page, Text, pdf, StyleSheet, View, Font, Image } from "@react-pdf/renderer"; 
-import { Link } from "react-router-dom";
-import useOrderStore from "../../store/useOrderStore";
+import { Icon } from "@iconify/react";
+import {
+  Document,
+  Font,
+  Image,
+  Page,
+  StyleSheet,
+  Text,
+  View,
+  pdf,
+} from "@react-pdf/renderer";
+import React, { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { Link, useNavigate } from "react-router-dom";
+import "../../css/orderDetail.css";
 import fav_icon from "../../img/fav_icon.png";
-import DocumentPdf from "../../components/DocumentPdf";
+import useOrderStore from "../../store/useOrderStore";
 
 Font.register({
-  family: 'Poppins',
+  family: "Poppins",
   fonts: [
     {
-      src: 'https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrFJDUc1NECPY.ttf',
+      src: "https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrFJDUc1NECPY.ttf",
     },
     {
-      src: 'https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7V1tvFP-KUEg.ttf',
-      fontWeight: '700',
+      src: "https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7V1tvFP-KUEg.ttf",
+      fontWeight: "700",
     },
     {
-      src: 'https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6V1tvFP-KUEg.ttf',
-      fontWeight: '600',
+      src: "https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6V1tvFP-KUEg.ttf",
+      fontWeight: "600",
     },
   ],
 });
@@ -29,7 +38,7 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: "#E9F4FF",
     color: "#04444F",
-    fontFamily: "Poppins"
+    fontFamily: "Poppins",
   },
   information: {
     borderBottomLeftRadius: "30",
@@ -68,12 +77,12 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     padding: 10,
     width: "50%",
-    paddingBottom: 5
+    paddingBottom: 5,
   },
-  message:{
+  message: {
     margin: 40,
     marginTop: 0,
-    marginBottom: 20
+    marginBottom: 20,
   },
   tittleRestaurant: {
     marginTop: 50,
@@ -81,7 +90,7 @@ const styles = StyleSheet.create({
   },
   restaurantText: {
     fontSize: 35,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   text: {
     fontSize: 15,
@@ -107,9 +116,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   tableRowTittle: {
-  	margin: "auto",
+    margin: "auto",
     flexDirection: "row",
- 	backgroundColor: "#026CD2",
+    backgroundColor: "#026CD2",
     borderTopLeftRadius: "12",
     borderTopRightRadius: "12",
     color: "white",
@@ -138,7 +147,7 @@ const styles = StyleSheet.create({
     margin: 20,
     marginTop: 10,
     marginLeft: "40%",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   tableColTotal: {
     width: "50%",
@@ -150,17 +159,17 @@ const styles = StyleSheet.create({
   radiusTotalNet: {
     backgroundColor: "#026CD2",
     borderTopLeftRadius: "12",
-    borderBottomLeftRadius: "0"
+    borderBottomLeftRadius: "0",
   },
   radiusTotalTax: {
     backgroundColor: "#026CD2",
     borderTopLeftRadius: "0",
-    borderBottomLeftRadius: "0"
+    borderBottomLeftRadius: "0",
   },
   radiusTotal: {
     backgroundColor: "#026CD2",
     borderTopLeftRadius: "0",
-    borderBottomLeftRadius: "12"
+    borderBottomLeftRadius: "12",
   },
   footer: {
     backgroundColor: "#026CD2",
@@ -172,21 +181,34 @@ const styles = StyleSheet.create({
     borderTopRightRadius: "30",
     left: 0,
     bottom: 0,
-  }
-  
+  },
 });
-  
-export const PdfDocument = ({ selectedRestaurant, data, selectedSupplier, deliveryData, specialRequirements, totalNet, totalTaxes, totalToPay }) => (
+
+export const PdfDocument = ({
+  selectedRestaurant,
+  data,
+  selectedSupplier,
+  deliveryData,
+  specialRequirements,
+  totalNet,
+  totalTaxes,
+  totalToPay,
+}) => (
   <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.information}>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.information}>
         <View style={styles.top}>
           <View style={styles.sectionTop}>
-          <Text style={styles.restaurantText}>Purchase Order </Text>
-            <Text style={styles.text}>for <Text style={styles.fontSpan}>{selectedSupplier.name} produce</Text></Text>
+            <Text style={styles.restaurantText}>Purchase Order </Text>
+            <Text style={styles.text}>
+              for{" "}
+              <Text style={styles.fontSpan}>
+                {selectedSupplier.name} produce
+              </Text>
+            </Text>
           </View>
           <View style={styles.sectionTop1}>
-          <Image style={styles.image} src={fav_icon} cache={false} />
+            <Image style={styles.image} src={fav_icon} cache={false} />
           </View>
         </View>
         <View style={styles.top}>
@@ -204,55 +226,57 @@ export const PdfDocument = ({ selectedRestaurant, data, selectedSupplier, delive
           </View>
         </View>
         <View style={styles.message}>
-        	<Text style={styles.text}>Special requirements</Text>
-        	<Text style={styles.tittle}>{specialRequirements}</Text>
+          <Text style={styles.text}>Special requirements</Text>
+          <Text style={styles.tittle}>{specialRequirements}</Text>
         </View>
+      </View>
+
+      <View style={styles.table}>
+        <View style={styles.tableRowTittle}>
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>ID</Text>
+          </View>
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>Product name</Text>
+          </View>
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>Quantity</Text>
+          </View>
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>UOM</Text>
+          </View>
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>Items price</Text>
+          </View>
         </View>
-        
-        <View style={styles.table}>
-          <View style={styles.tableRowTittle}>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>ID</Text>
+        {data
+          .filter((article) => article.amount > 0)
+          .map((article) => (
+            <View key={article.id} style={styles.tableRow}>
+              <View style={styles.tableCol}>
+                <Text style={styles.tableCell}>{article.id}</Text>
+              </View>
+              <View style={styles.tableCol}>
+                <Text style={styles.tableCell}>{article.name}</Text>
+              </View>
+              <View style={styles.tableCol}>
+                <Text style={styles.tableCell}>{article.amount}</Text>
+              </View>
+              <View style={styles.tableCol}>
+                <Text style={styles.tableCell}>{article.volume}</Text>
+              </View>
+              <View style={styles.tableCol}>
+                <Text style={styles.tableCell}>£{article.totalItemToPay}</Text>
+              </View>
             </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Product name</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Quantity</Text>
-            </View>  
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>UOM</Text>
-            </View>                      
-            <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Items price</Text>
-            </View>
-          </View>
-          {data.filter((article) => article.amount > 0).map((article) => (
-          <View key={article.id} style={styles.tableRow}>
-          <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>{article.id}</Text>
-          </View>
-          <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>{article.name}</Text>
-          </View>
-          <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>{article.amount}</Text>
-          </View>
-          <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>{article.volume}</Text>
-          </View>
-          <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>£{article.totalItemToPay}</Text>
-          </View>
-        </View>
-        ))}
-        </View>
-        <View>
+          ))}
+      </View>
+      <View>
         <View style={styles.table2} break>
           <View style={styles.tableRow}>
             <View style={styles.tableColTotal}>
-            <View style={styles.radiusTotalNet}>
-              <Text style={styles.tableCell}>Total Net</Text>
+              <View style={styles.radiusTotalNet}>
+                <Text style={styles.tableCell}>Total Net</Text>
               </View>
             </View>
             <View style={styles.tableColTotal2}>
@@ -262,7 +286,7 @@ export const PdfDocument = ({ selectedRestaurant, data, selectedSupplier, delive
           <View style={styles.tableRow}>
             <View style={styles.tableColTotal}>
               <View style={styles.radiusTotalTax}>
-              <Text style={styles.tableCell}>Total Tax</Text>
+                <Text style={styles.tableCell}>Total Tax</Text>
               </View>
             </View>
             <View style={styles.tableColTotal2}>
@@ -271,26 +295,48 @@ export const PdfDocument = ({ selectedRestaurant, data, selectedSupplier, delive
           </View>
           <View style={styles.tableRow}>
             <View style={styles.tableColTotal}>
-            <View style={styles.radiusTotal}>
-              <Text style={styles.tableCell}>Total</Text>
-            </View>
+              <View style={styles.radiusTotal}>
+                <Text style={styles.tableCell}>Total</Text>
+              </View>
             </View>
             <View style={styles.tableColTotal2}>
               <Text style={styles.tableCell}>£{totalToPay}</Text>
             </View>
           </View>
         </View>
-       </View>
-      </Page>
-    </Document>
-  
+      </View>
+    </Page>
+  </Document>
 );
 
 export default function OrderInformation() {
-
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const { selectedRestaurant, articlesToPay, deliveryData, setDeliveryData, specialRequirements, selectedSupplier, setSpecialRequirements, totalNet, totalTaxes, totalToPay } = useOrderStore();
+  const {
+    selectedRestaurant,
+    articlesToPay,
+    deliveryData,
+    setDeliveryData,
+    specialRequirements,
+    selectedSupplier,
+    setSpecialRequirements,
+    totalNet,
+    totalTaxes,
+    totalToPay,
+  } = useOrderStore();
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const [dateToPicker, setDateToPicker] = useState();
+
+  const handleChangeDate = (date) => {
+    setDateToPicker(date);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const formattedDate = `${day}/${month}/${year}`;
+    setDeliveryData(formattedDate);
+    console.log("THIS IS THE DATE FORMATTED", formattedDate);
+  };
 
   useEffect(() => {
     setData(articlesToPay);
@@ -299,7 +345,16 @@ export default function OrderInformation() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const pdfBlob = await pdf(
-      <PdfDocument selectedRestaurant={selectedRestaurant} selectedSupplier={selectedSupplier} specialRequirements={specialRequirements} deliveryData={deliveryData} data={data} totalNet={totalNet} totalTaxes={totalTaxes} totalToPay={totalToPay} />
+      <PdfDocument
+        selectedRestaurant={selectedRestaurant}
+        selectedSupplier={selectedSupplier}
+        specialRequirements={specialRequirements}
+        deliveryData={deliveryData}
+        data={data}
+        totalNet={totalNet}
+        totalTaxes={totalTaxes}
+        totalToPay={totalToPay}
+      />
     ).toBlob();
     const pdfBase64 = await new Promise((resolve) => {
       const reader = new FileReader();
@@ -318,7 +373,7 @@ export default function OrderInformation() {
       date: deliveryData,
       message: specialRequirements,
       file: pdfBase64,
-      supplier: selectedSupplier.name
+      supplier: selectedSupplier.name,
     };
     emailjs.send(serviceId, templateId, emailParams, userId).then(
       (result) => {
@@ -332,6 +387,7 @@ export default function OrderInformation() {
   };
 
   console.log("THIS IS THE SPECIAL", specialRequirements, deliveryData);
+  console.log("THIS IS THE DELIVERY DATE:", deliveryData);
   return (
     <section className="details">
       <div className="tittle-detail">
@@ -350,13 +406,12 @@ export default function OrderInformation() {
             disabled
           />
           <h3>Deliver</h3>
-          <input
-            type="date"
-            name="date"
-            value={deliveryData}
-            onChange={(e) => setDeliveryData(e.target.value)}
-            required
-          ></input>
+          <DatePicker
+            selected={dateToPicker}
+            onChange={handleChangeDate}
+            minDate={tomorrow}
+            placeholderText="Select a date"
+          />
           <h3>Any special requirements?</h3>
           <textarea
             id="w3review"
