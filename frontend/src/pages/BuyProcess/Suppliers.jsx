@@ -15,14 +15,12 @@ export default function Suppliers() {
         <h1 className="tittle-restaurants">Suppliers</h1>
       </div>
       <CardSuppliers></CardSuppliers>
-      <Link
-        className="bttn btn-primary"
-        to="settingsSuppliers"
-        id="bttn-restaurant"
-      >
+
+      <Link className="bttn btn-primary" id="my-intercom">
         <Icon className="icon-plus" icon="simple-line-icons:plus" />
-        Add suppliers
+        Contact us to add suppliers!
       </Link>
+      <div className="space-menu"></div>
       <Menu />
     </section>
   );
