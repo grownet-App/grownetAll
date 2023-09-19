@@ -187,15 +187,11 @@ export const GlobalStyles = StyleSheet.create({
   },
 
   suppliersBg: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     width: 322,
     height: 125,
-    backgroundColor: '#04444f',
     marginVertical: 10,
     borderRadius: 21,
-    overflow: 'hidden',
+    marginBottom: 10,
   },
   // restaurants  styles
 
@@ -230,7 +226,7 @@ export const GlobalStyles = StyleSheet.create({
   },
   textAddRestaurant: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 15,
     color: '#ffff',
     paddingRight: 10,
   },
