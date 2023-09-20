@@ -13,6 +13,7 @@ import {
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import "../../css/orderDetail.css";
 import fav_icon from "../../img/fav_icon.png";
@@ -306,6 +307,7 @@ export const PdfDocument = ({
 );
 
 export default function OrderInformation() {
+  const { t } = useTranslation();
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const {
@@ -386,26 +388,28 @@ export default function OrderInformation() {
         <Link to="/details">
           <Icon src="google.com" icon="ic:round-arrow-back" className="arrow" />
         </Link>
-        <h1 className="tittle-orderDetail">Order detail</h1>
+        <h1 className="tittle-orderDetail">
+          {t("deliveryDetail.orderDetail")}
+        </h1>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="data-shipping">
-          <h3 id="text-data-shipping">Address</h3>
+          <h3 id="text-data-shipping">{t("deliveryDetail.address")}</h3>
           <input
             type="text"
             name="address"
             value={selectedRestaurant.address}
             disabled
           />
-          <h3>Deliver</h3>
+          <h3>{t("deliveryDetail.deliver")}</h3>
           <DatePicker
             selected={dateToPicker}
             onChange={handleChangeDate}
             minDate={tomorrow}
-            placeholderText="Select a date"
+            placeholderText={t("deliveryDetail.selectDate")}
             required
           />
-          <h3>Any special requirements?</h3>
+          <h3>{t("deliveryDetail.specialRequirements")}</h3>
           <textarea
             id="w3review"
             name="message"
@@ -415,7 +419,12 @@ export default function OrderInformation() {
             cols="50"
           ></textarea>
         </div>
-        <input type="submit" className="bttn btn-primary" value={"Continue"} />
+        {/* TODO REVISAR QUE ESTE BOTÓN TRADUZCA LA INFO Y NO ROMPA EL CODIGO */}
+        <input
+          type="submit"
+          className="bttn btn-primary"
+          value={t("deliveryDetail.continue")}
+        />
       </form>
     </section>
   );

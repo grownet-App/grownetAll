@@ -53,6 +53,22 @@ const esTranslations = {
     favorites: "Favoritos",
     continue: "Continuar",
   },
+  orderDetails: {
+    orderDetail: "Detalles del pedido",
+    paymentDetails: "Detalles del pago",
+    net: "Neto",
+    tax: "Impuestos",
+    currentTotal: "Total actual",
+    continue: "Continuar",
+  },
+  deliveryDetail: {
+    orderDetail: "Detalle del pedido",
+    address: "Dirección",
+    deliver: "Entrega",
+    selectDate: "Seleccione una fecha",
+    specialRequirements: "¿Requisitos especiales?",
+    continue: "Continuar",
+  },
   orderSuccessful: {
     title: "¡Éxito!",
     message: "Tu pedido se ha realizado con éxito",

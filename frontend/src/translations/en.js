@@ -53,6 +53,22 @@ const enTranslations = {
     favorites: "Favorites",
     continue: "Continue",
   },
+  orderDetails: {
+    orderDetail: "Order detail",
+    paymentDetails: "Payment details",
+    net: "Net",
+    tax: "Tax",
+    currentTotal: "Current value",
+    continue: "Continue",
+  },
+  deliveryDetail: {
+    orderDetail: "Order detail",
+    address: "Address",
+    deliver: "Deliver",
+    selectDate: "Select a date",
+    specialRequirements: "Any special requirements?",
+    continue: "Continue",
+  },
   orderSuccessful: {
     title: "Successful!",
     message: "Your order is successful",
