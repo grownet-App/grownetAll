@@ -1,36 +1,41 @@
-import React from 'react';
-import { Container, Nav, Navbar} from 'react-bootstrap';
-import { Icon } from '@iconify/react';
+import { Icon } from "@iconify/react";
+import React from "react";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
 import "./menu.css";
-import { Link, NavLink } from "react-router-dom"
+
 export default function MenuPrimary() {
-    return (
-        <Navbar>
-        <Container className='menu'>
+  const { t } = useTranslation();
+  return (
+    <Navbar>
+      <Container className="menu">
         <Nav className="me-auto">
-            <NavLink className="icons" to="/settings">
-                    <Icon  icon="carbon:settings"> </Icon>
-                    <Icon className="icon-active" icon="iconamoon:settings-fill"/>
-                    <p>Settings</p>
-            </NavLink>
-            <NavLink className="icons" to="/suppliers">
-                    <Icon className="" icon="streamline:shopping-cart-basket-2-shopping-basket"/>
-                    <Icon className="icon-active2" icon="teenyicons:basket-solid" />
-                    <p>Order</p>
-            </NavLink>
-            <Nav.Link className="icons" href="/record">
-                    <Icon className="" icon="basil:invoice-outline"/>
-                    <Icon className="icon-active3" icon="basil:invoice-solid" />
-                    <p>Record</p>
-            </Nav.Link>
-            <Nav.Link className="icons" href="" id='my-intercom'>
-                    <Icon className="" icon="solar:chat-round-dots-linear"/>
-                    <Icon className="icon-active4" icon="solar:chat-round-bold" />
-                    <p>Chat</p> 
-            </Nav.Link>
+          <NavLink className="icons" to="/settings">
+            <Icon icon="carbon:settings"> </Icon>
+            <Icon className="icon-active" icon="iconamoon:settings-fill" />
+            <p> {t("menuPrimary.settings")} </p>
+          </NavLink>
+          <NavLink className="icons" to="/suppliers">
+            <Icon
+              className=""
+              icon="streamline:shopping-cart-basket-2-shopping-basket"
+            />
+            <Icon className="icon-active2" icon="teenyicons:basket-solid" />
+            <p> {t("menuPrimary.order")} </p>
+          </NavLink>
+          <Nav.Link className="icons" href="/record">
+            <Icon className="" icon="basil:invoice-outline" />
+            <Icon className="icon-active3" icon="basil:invoice-solid" />
+            <p> {t("menuPrimary.record")} </p>
+          </Nav.Link>
+          <Nav.Link className="icons" href="" id="my-intercom">
+            <Icon className="" icon="solar:chat-round-dots-linear" />
+            <Icon className="icon-active4" icon="solar:chat-round-bold" />
+            <p> {t("menuPrimary.chat")} </p>
+          </Nav.Link>
         </Nav>
-        </Container>
+      </Container>
     </Navbar>
-        
-    )
+  );
 }

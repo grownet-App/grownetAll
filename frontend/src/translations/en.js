@@ -22,16 +22,34 @@ const enTranslations = {
     tryAgain: "Try again",
   },
   restaurants: {
-    chooseRestaurant: 'Choose your restaurant',
-    addRestaurant: 'Contact us to add a restaurant!',
+    chooseRestaurant: "Choose your restaurant",
+    addRestaurant: "Contact us to add a restaurant!",
   },
   suppliers: {
-    title: 'Suppliers',
-    addSuppliers: 'Contact us to add suppliers!',
+    title: "Suppliers",
+    addSuppliers: "Contact us to add suppliers!",
+  },
+  menuPrimary: {
+    settings: "Settings",
+    order: "Order",
+    record: "Record",
+    chat: "Chat",
   },
   settings: {
     title: "Settings",
+    hi: "Hi",
     helpText: "How can we help you?",
+    restaurants: "Restaurants",
+    editRestaurants: "Edit your restaurants",
+    suppliers: "Suppliers",
+    editSuppliers: "Edit your suppliers",
+    languages: "Languages",
+    english: "English",
+    spanish: "Spanish",
+    portuguese: "Portuguese",
+    faq: "FAQ",
+    termsAndConditions: "Terms & conditions",
+    logOut: "Log out",
   },
 };
 
