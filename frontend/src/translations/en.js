@@ -21,6 +21,14 @@ const enTranslations = {
     wrongCode: "The code you entered is wrong.",
     tryAgain: "Try again",
   },
+  restaurants: {
+    chooseRestaurant: 'Choose your restaurant',
+    addRestaurant: 'Contact us to add a restaurant!',
+  },
+  suppliers: {
+    title: 'Suppliers',
+    addSuppliers: 'Contact us to add suppliers!',
+  },
   settings: {
     title: "Settings",
     helpText: "How can we help you?",

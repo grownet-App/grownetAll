@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import axios from "axios";
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { availableRestaurants } from "../../config/urls.config";
 import "../../css/restaurants.css";
@@ -9,6 +10,7 @@ import useOrderStore from "../../store/useOrderStore";
 import useTokenStore from "../../store/useTokenStore";
 
 export default function Restaurants() {
+  const { t } = useTranslation();
   const urlImg =
     "https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/";
   const { token } = useTokenStore();
@@ -37,7 +39,10 @@ export default function Restaurants() {
 
   return (
     <section className="restaurants">
-      <h1 className="tittle-restaurants">Choose your restaurant</h1>
+      <h1 className="tittle-restaurants">
+        {" "}
+        {t("restaurants.chooseRestaurant")}{" "}
+      </h1>
 
       {restaurants.map((restaurant) => (
         <Link
@@ -54,12 +59,9 @@ export default function Restaurants() {
           </div>
         </Link>
       ))}
-      <Link
-        className="bttn btn-primary"
-        id="my-intercom"
-      >
+      <Link className="bttn btn-primary" id="my-intercom">
         <Icon className="icon-plus" icon="simple-line-icons:plus" />
-        Contact us to add restaurant!
+        {t("restaurants.addRestaurant")}
       </Link>
       <div className="space-menu"></div>
     </section>

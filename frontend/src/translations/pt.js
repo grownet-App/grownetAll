@@ -21,6 +21,14 @@ const ptTranslations = {
     wrongCode: "O código que você digitou está incorreto.",
     tryAgain: "Tente novamente",
   },
+  restaurants: {
+    chooseRestaurant: 'Escolha seu restaurante',
+    addRestaurant: 'Entre em contato para adicionar restaurante!',
+  },
+  suppliers: {
+    title: 'Fornecedores',
+    addSuppliers: 'Entre em contato para adicionar fornecedores!',
+  },
   settings: {
     title: "Configurações",
     helpText: "Como podemos ajudar você?",

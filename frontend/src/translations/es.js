@@ -21,6 +21,14 @@ const esTranslations = {
     wrongCode: 'El código que ingresaste es incorrecto.',
     tryAgain: 'Intentar de nuevo',
   },
+  restaurants: {
+    chooseRestaurant: 'Elige tu restaurante',
+    addRestaurant: '¡Contáctanos para agregar restaurantes!',
+  },
+  suppliers: {
+    title: 'Proveedores',
+    addSuppliers: '¡Contáctanos para agregar proveedores!',
+  },
   settings: {
     title: "Ajustes",
     helpText: "¿Cómo podemos ayudarte?",
