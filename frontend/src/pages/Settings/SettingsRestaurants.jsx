@@ -1,7 +1,7 @@
 import React from 'react';
 import "../../css/settingsRestaurants.css";
 import {Icon} from '@iconify/react';
-import Menu from "../../components/Menu/Menu";
+import MenuPrimary from "../../components/Menu/MenuPrimary";
 import { Link } from 'react-router-dom';
 
 export default function SettingsRestaurants() {
@@ -31,7 +31,7 @@ export default function SettingsRestaurants() {
             </div>
             <Link to='/editRestaurants' className='bttn btn-primary'>Edit Restaurant</Link>
             <div className='space-menu'></div>
-            <Menu/>
+            <MenuPrimary/>
         </section> 
     );
 }

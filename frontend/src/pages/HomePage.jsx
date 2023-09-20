@@ -43,7 +43,7 @@ export default function HomePage() {
             <Link className="bttn btn-secundary" to="/register">Register</Link>
             <Link className="bttn btn-white" to="/login">Login</Link>
         </div>
-        <Link className="t-c">Terms & conditions</Link>
+        {/*<Link className="t-c">Terms & conditions</Link>*/}
     </section>
     )
 }

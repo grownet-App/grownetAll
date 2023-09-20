@@ -1,7 +1,7 @@
 import React from "react";
 import css from "../../css/faq.css";
 import Accordion from "react-bootstrap/Accordion";
-import Menu from "../../components/Menu/Menu";
+import MenuPrimary from "../../components/Menu/MenuPrimary";
 import fav_icon from "../../img/fav_icon.png"
 import { Icon } from '@iconify/react';
 
@@ -50,7 +50,7 @@ export default function FAQ() {
           </Accordion.Item>
         </Accordion>
       </div>
-      <Menu />
+      <MenuPrimary />
     </section>
   );
 }
