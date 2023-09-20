@@ -12,8 +12,8 @@ import { useNavigation } from '@react-navigation/native'
 import PhoneInput from 'react-native-phone-number-input'
 import { useState } from 'react'
 import axios from 'axios'
-import { GlobalStyles } from '../styles/styles'
-import { onlyCountries, validationApiUrl } from '../config/urls.config'
+import { GlobalStyles } from '../../styles/styles'
+import { onlyCountries, validationApiUrl } from '../../config/urls.config'
 const LoginPage = () => {
   const navigation = useNavigation()
   const [phoneNumber, setPhoneNumber] = useState('')
@@ -56,7 +56,7 @@ const LoginPage = () => {
     <View style={styles.container}>
       <Image
         style={styles.tinyLogo}
-        source={require('../../assets/logo.png')}
+        source={require('../../../assets/logo.png')}
       />
       <Text style={styles.p}>Enter your mobile number:</Text>
       <View style={{ borderRadius: 50, overflow: 'hidden' }}>
@@ -83,7 +83,6 @@ const LoginPage = () => {
       >
         <Text style={GlobalStyles.buttonLets}>Let’s Begin</Text>
       </TouchableOpacity>
-
       <StatusBar style="auto" />
     </View>
   )

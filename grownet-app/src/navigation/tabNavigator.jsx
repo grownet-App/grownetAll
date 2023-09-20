@@ -28,7 +28,7 @@ function OrderStack() {
   return (
     //TODO. PONER RUTA DE RESTAURANTES
     <Stack.Navigator
-      initialRouteName="suppliers"
+      initialRouteName="restaurants"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#026CD2',

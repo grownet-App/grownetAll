@@ -3,14 +3,20 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { availableSuppliers } from "../config/urls.config";
 import useOrderStore from "../store/useOrderStore";
+import useTokenStore from "../store/useTokenStore";
 
 export default function Suppliers() {
   const { suppliers, setSuppliers, setSelectedSupplier } = useOrderStore();
+  const { token } = useTokenStore();
   const urlImg =
     "https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/";
   useEffect(() => {
     axios
-      .get(availableSuppliers)
+      .get(availableSuppliers, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         setSelectedSupplier(null);
         setSuppliers(response.data.suppliers);
