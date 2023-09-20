@@ -1,7 +1,9 @@
 import React from 'react';
 import {Form }from 'react-bootstrap';
 import css from '../../css/addRestaurants.css'; 
-import background_icons from '../../img/background_icons.png'
+import background_icons from '../../img/background_icons.png';
+import MenuPrimary from "../../components/Menu/MenuPrimary";
+
 export default function AddRestaurants() {
     return(
         <section className='add-restaurants' style={{backgroundImage: `url(${background_icons})` }}>
@@ -28,6 +30,7 @@ export default function AddRestaurants() {
            
             </Form> 
             </div>
+            <MenuPrimary/>
         </section> 
     );
 }

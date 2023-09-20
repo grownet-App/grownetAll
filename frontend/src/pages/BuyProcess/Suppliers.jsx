@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import React from "react";
 import { Link } from "react-router-dom";
 import CardSuppliers from "../../components/CardSuppliers.jsx";
-import Menu from "../../components/Menu/Menu.jsx";
+import MenuPrimary from "../../components/Menu/MenuPrimary";
 import "../../css/suppliers.css";
 
 export default function Suppliers() {
@@ -21,7 +21,7 @@ export default function Suppliers() {
         Contact us to add suppliers!
       </Link>
       <div className="space-menu"></div>
-      <Menu />
+      <MenuPrimary />
     </section>
   );
 }

@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import { useTranslation } from "react-i18next";
+import MenuPrimary from "../../components/Menu/MenuPrimary";
 import { Link } from "react-router-dom";
 import Menu from "../../components/Menu/Menu";
 import "../../css/settings.css";
@@ -78,7 +79,7 @@ export default function Settings() {
           <Icon icon="solar:logout-linear" className="icon-logout" /> Log out
         </button>
       </section>
-      <Menu />
+      <MenuPrimary />
     </>
   );
 }
