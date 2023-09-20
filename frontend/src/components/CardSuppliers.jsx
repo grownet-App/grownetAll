@@ -24,7 +24,7 @@ export default function Suppliers() {
       .catch((error) => {
         console.error("Error al obtener los proveedores:", error);
       });
-  }, [setSuppliers, setSelectedSupplier]);
+  }, [token, setSuppliers, setSelectedSupplier]);
 
   const handleSupplierSelect = (supplier) => {
     setSelectedSupplier(supplier);
