@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Col, Container } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
+import { useTranslation } from "react-i18next";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { onlyCountries, validationApiUrl } from "../../config/urls.config";
@@ -12,6 +13,7 @@ import logo_blancov2 from "../../img/logo_blancov2.svg";
 import CodeOtp from "./CodeOtp";
 
 function Login() {
+  const { t, i18n } = useTranslation();
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [valid, setValid] = useState(true);
   const [country, setCountry] = useState("");
@@ -42,6 +44,8 @@ function Login() {
     setPhoneNumber(value);
     setCountry(selectedCountry.dialCode);
     setValid(validatePhoneNumber(value));
+    const selectedLang = selectedCountry.countryCode;
+    i18n.changeLanguage(selectedLang);
   };
 
   const validatePhoneNumber = (phoneNumber) => {
@@ -109,7 +113,7 @@ function Login() {
               />
               <form onSubmit={enviarData}>
                 <label className="text-form">
-                  <p>Enter your mobile number:</p>
+                  <p>{t("login.title")}</p>
                   {countries && countries.length > 0 ? (
                     <PhoneInput
                       country={"gb"}
@@ -124,7 +128,7 @@ function Login() {
                 {!valid && <p></p>}
                 <Col>
                   <button className="bttn btn-secundary" type="submit">
-                    Let’s Begin
+                    {t("login.button")}
                   </button>
                 </Col>
               </form>
