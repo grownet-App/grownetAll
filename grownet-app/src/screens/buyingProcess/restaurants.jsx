@@ -57,7 +57,7 @@ const Restaurants = () => {
         {restaurants.map((restaurant) => (
           <TouchableOpacity
             onPress={() => onPressSuppliers}
-            key={restaurant.account_number}
+            key={restaurant.accountNumber}
           >
             <ImageBackground
               style={GlobalStyles.RestaurantBg}
@@ -65,7 +65,7 @@ const Restaurants = () => {
             >
               <Image
                 source={{ uri: urlImg + restaurant.image }}
-                alt={restaurant.account_name}
+                alt={restaurant.accountName}
                 style={{ width: 160, height: 160 }}
               />
               <Text style={GlobalStyles.TextDirectionRestaurant}>

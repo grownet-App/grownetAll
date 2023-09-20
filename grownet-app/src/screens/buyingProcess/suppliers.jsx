@@ -4,14 +4,20 @@ import { ApiSuppliers } from '../../config/urls.config'
 import { GlobalStyles } from '../../styles/styles'
 import axios from 'axios'
 import useOrderStore from '../../store/UseOrderStore'
+import useTokenStore from '../../store/useTokenStore'
 
 const Suppliers = () => {
   const { suppliers, setSuppliers, setSelectedSupplier } = useOrderStore()
+  const { token } = useTokenStore()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(ApiSuppliers)
+        const response = await axios.get(ApiSuppliers, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         console.log('response', response.data.suppliers)
         setSelectedSupplier(null)
         setSuppliers(response.data.suppliers)
@@ -50,7 +56,7 @@ const Suppliers = () => {
             <ImageBackground
               resizeMode="cover"
               style={GlobalStyles.suppliersBg}
-              key={supplier.idproveedor}
+              key={supplier.id}
               source={{
                 uri: imageUrl,
                 cache: 'reload',
