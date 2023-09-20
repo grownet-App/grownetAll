@@ -84,11 +84,11 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   text: {
-    fontSize: 15,
+    fontSize: 12,
     paddingTop: 6,
   },
   tittle: {
-    fontSize: 16,
+    fontSize: 13,
     fontWeight: "600",
   },
   table: {
@@ -109,24 +109,20 @@ const styles = StyleSheet.create({
   tableRowTittle: {
   	margin: "auto",
     flexDirection: "row",
- 	backgroundColor: "#026CD2",
+ 	  backgroundColor: "#026CD2",
     borderTopLeftRadius: "12",
     borderTopRightRadius: "12",
     color: "white",
   },
   tableCol: {
     width: "20%",
-    /*borderStyle: "solid",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,*/
   },
   tableCell: {
     margin: "auto",
     marginTop: 5,
-    fontSize: 15,
-    paddingTop: 8,
-    paddingBottom: 8,
+    fontSize: 13,
+    paddingTop: 7,
+    paddingBottom: 7,
   },
   table2: {
     display: "table",

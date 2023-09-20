@@ -1,5 +1,5 @@
 import React from "react";
-import Menu from "../../components/Menu/Menu";
+import MenuPrimary from "../../components/Menu/MenuPrimary";
 import "../../css/record.css";
 import { Icon } from "@iconify/react";
 import "../../components/ProductSearcher/productSearcher.css";
@@ -56,7 +56,7 @@ export default function Record() {
 
         <div className="space-menu"></div>
       </section>
-      <Menu />
+      <MenuPrimary />
     </>
   );
 }

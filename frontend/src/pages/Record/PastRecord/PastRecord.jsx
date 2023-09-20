@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs, Tab } from "react-bootstrap";
 import "../../../css/pastRecord.css";
-import Menu from "../../../components/Menu/Menu.jsx";
+import MenuPrimary from "../../../components/Menu/MenuPrimary"
 import Reception from "./Reception";
 
 export default function PastRecord() {
@@ -59,7 +59,7 @@ export default function PastRecord() {
           </Tab>
         </Tabs>
       </section>
-      <Menu />
+      <MenuPrimary />
     </>
   );
 }

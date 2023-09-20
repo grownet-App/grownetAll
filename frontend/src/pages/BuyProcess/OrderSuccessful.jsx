@@ -2,7 +2,7 @@ import { pdf } from "@react-pdf/renderer";
 import * as FileSaver from "file-saver";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Menu from "../../components/Menu/Menu";
+import MenuPrimary from "../../components/Menu/MenuPrimary";
 import "../../css/orderDetail.css";
 import img_succesful from "../../img/img_succesful.png";
 import useOrderStore from "../../store/useOrderStore";
@@ -65,7 +65,7 @@ export default function OrderSuccessful() {
         </button>
       </div>
 
-      <Menu />
+      <MenuPrimary />
     </section>
   );
 }

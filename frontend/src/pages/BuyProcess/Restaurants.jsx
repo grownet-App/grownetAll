@@ -61,6 +61,7 @@ export default function Restaurants() {
         <Icon className="icon-plus" icon="simple-line-icons:plus" />
         Contact us to add restaurant!
       </Link>
+      <div className="space-menu"></div>
     </section>
   );
 }

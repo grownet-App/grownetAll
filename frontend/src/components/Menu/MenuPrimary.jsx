@@ -3,25 +3,21 @@ import { Container, Nav, Navbar} from 'react-bootstrap';
 import { Icon } from '@iconify/react';
 import "./menu.css";
 import { Link, NavLink } from "react-router-dom"
-
-export default function Menu() {
-
+export default function MenuPrimary() {
     return (
         <Navbar>
         <Container className='menu'>
         <Nav className="me-auto">
             <NavLink className="icons" to="/settings">
-                
                     <Icon  icon="carbon:settings"> </Icon>
                     <Icon className="icon-active" icon="iconamoon:settings-fill"/>
                     <p>Settings</p>
-                 
             </NavLink>
-            <Nav.Link className="icons" href="/suppliers">
+            <NavLink className="icons" to="/suppliers">
                     <Icon className="" icon="streamline:shopping-cart-basket-2-shopping-basket"/>
                     <Icon className="icon-active2" icon="teenyicons:basket-solid" />
                     <p>Order</p>
-            </Nav.Link>
+            </NavLink>
             <Nav.Link className="icons" href="/record">
                     <Icon className="" icon="basil:invoice-outline"/>
                     <Icon className="icon-active3" icon="basil:invoice-solid" />
@@ -35,7 +31,6 @@ export default function Menu() {
         </Nav>
         </Container>
     </Navbar>
-
         
     )
 }
