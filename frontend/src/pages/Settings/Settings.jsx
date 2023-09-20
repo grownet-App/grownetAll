@@ -1,26 +1,33 @@
 import React from "react";
-import css from "../../css/settings.css";
+import "../../css/settings.css";
 import { Icon } from "@iconify/react";
 import Accordion from "react-bootstrap/Accordion";
 import Menu from "../../components/Menu/Menu";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Settings() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (language) => {
+    i18n.changeLanguage(language);
+  };
+
   return (
   <>
     <section className="settings">
-      <h1>Settings</h1>
+      <h1>{t("settings.title")}</h1>
       <div className="saludo">
         <h4>
           Hi <Icon icon="noto:waving-hand" />
         </h4>
       </div>
-      <p>How can we help you?</p>
+      <p>{t("settings.helpText")}</p>
       <div>
         <Link className="bttn btn-primary settings-button" id="my-intercom">
           <div className="text-button">
-            <h2>Restaurants</h2>
-            <p>Edit your restaurants</p>
+            <h2>{t("Restaurants")}</h2>
+            <p>{t("Edit your restaurants")}</p>
           </div>
           <Icon icon="simple-line-icons:plus" className="plus" />
         </Link>
@@ -38,15 +45,15 @@ export default function Settings() {
           <Accordion.Body>
             <div id="banderas">
               <Icon icon="circle-flags:uk" />
-              <Link to="">English</Link>
+              <Link to="" onClick={()=> changeLanguage("en")} >English</Link>
             </div>
             <div id="banderas">
               <Icon icon="emojione:flag-for-spain" />
-              <Link to="">Spanish</Link>
+              <Link to="" onClick={()=> changeLanguage("es")} >Spanish</Link>
             </div>
             <div id="banderas">
               <Icon icon="emojione:flag-for-portugal" />
-              <Link to="">Portuguese</Link>
+              <Link to="" onClick={()=> changeLanguage("pt")}>Portuguese</Link>
             </div>
           </Accordion.Body>
         </Accordion.Item>
