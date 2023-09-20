@@ -35,6 +35,22 @@ const ptTranslations = {
     record: 'Registro',
     chat: 'Chat',
   },
+  orderSuccessful: {
+    title: "Bem-sucedido!",
+    message: "Seu pedido foi concluído com sucesso",
+    ordersButton: "Seus pedidos",
+    pdfButton: "Baixar PDF",
+  },
+  record: {
+    title: "Seus pedidos",
+    searchPlaceholder: "Pesquisar seus pedidos",
+    pastOrders: "Pedidos antigos",
+    currentOrders: "Pedidos atuais",
+    orderNumber: "#Pedido:",
+    date: "Data",
+    amount: "Valor",
+    viewDetails: "Ver detalhes",
+  },
   settings: {
     title: 'Configurações',
     hi: 'Olá',

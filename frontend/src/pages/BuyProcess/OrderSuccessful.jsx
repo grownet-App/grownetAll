@@ -7,8 +7,10 @@ import "../../css/orderDetail.css";
 import img_succesful from "../../img/img_succesful.png";
 import useOrderStore from "../../store/useOrderStore";
 import { PdfDocument } from "./OrderInformation";
+import { useTranslation } from "react-i18next";
 
 export default function OrderSuccessful() {
+  const { t } = useTranslation();
   const [articlesData, setArticlesData] = useState([]);
   const { selectedRestaurant, selectedSupplier, articlesToPay, totalNet, totalTaxes, totalToPay, specialRequirements, deliveryData } = useOrderStore();
   const currentDate = new Date();
@@ -51,17 +53,17 @@ export default function OrderSuccessful() {
       <div> {totalToPay} </div> */}
 
       <img src={img_succesful} alt="Succesfull" />
-      <h1>Succesful!</h1>
-      <p>Your order is successful</p>
+      <h1>{t("orderSuccessful.title")}</h1>
+      <p>{t("orderSuccessful.message")}</p>
       <div className="buttons-succesful">
         <Link className="bttn btn-primary" to="/record">
-          Your orders
+        {t("orderSuccessful.ordersButton")}
         </Link>
         <button
           className="bttn btn-outline"
           onClick={() => generatePdfDocument("GrownetInvoice.pdf")}
         >
-          Download PDF
+          {t("orderSuccessful.pdfButton")}
         </button>
       </div>
 

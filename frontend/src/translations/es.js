@@ -35,6 +35,22 @@ const esTranslations = {
     record: 'Historial',
     chat: 'Chat',
   },
+  orderSuccessful: {
+    title: "¡Éxito!",
+    message: "Tu pedido se ha realizado con éxito",
+    ordersButton: "Tus pedidos",
+    pdfButton: "Descargar PDF",
+  },
+  record: {
+    title: "Tus pedidos",
+    searchPlaceholder: "Buscar tus pedidos",
+    pastOrders: "Pedidos anteriores",
+    currentOrders: "Pedidos actuales",
+    orderNumber: "#Pedido:",
+    date: "Fecha",
+    amount: "Monto",
+    viewDetails: "Ver detalles",
+  },
   settings: {
     title: 'Configuración',
     hi: 'Hola',

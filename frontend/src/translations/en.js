@@ -35,6 +35,22 @@ const enTranslations = {
     record: "Record",
     chat: "Chat",
   },
+  orderSuccessful: {
+    title: "Successful!",
+    message: "Your order is successful",
+    ordersButton: "Your orders",
+    pdfButton: "Download PDF",
+  },
+  record: {
+    title: "Your orders",
+    searchPlaceholder: "Search your orders",
+    pastOrders: "Past orders",
+    currentOrders: "Current orders",
+    orderNumber: "#Order:",
+    date: "Date",
+    amount: "Amount",
+    viewDetails: "View details",
+  },
   settings: {
     title: "Settings",
     hi: "Hi",
