@@ -1,11 +1,13 @@
 import { Icon } from "@iconify/react";
-import React, { useState } from "react";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
 import "../../css/orderDetail.css";
-import { Link } from "react-router-dom";
 import useOrderStore from "../../store/useOrderStore";
 
 export default function OrderDetails(props) {
+  const { t } = useTranslation();
   const articlesToPayStore = useOrderStore();
   const totalNet = articlesToPayStore.totalNet;
   const totalTaxes = articlesToPayStore.totalTaxes;
@@ -27,13 +29,9 @@ export default function OrderDetails(props) {
     <section className="details">
       <div className="tittle-detail">
         <Link to="/products">
-          <Icon
-            src="google.com"
-            icon="ic:round-arrow-back"
-            className="arrow"
-          />
+          <Icon src="google.com" icon="ic:round-arrow-back" className="arrow" />
         </Link>
-        <h1 className="tittle-orderDetail">Order detail</h1>
+        <h1 className="tittle-orderDetail">{t("orderDetails.orderDetail")}</h1>
       </div>
       <div className="card-invoices">
         <ProductDetail
@@ -42,23 +40,23 @@ export default function OrderDetails(props) {
           updateTotalNet={updateTotalNet}
         />
         <div>
-          <h2 id="tax-font">Payment details</h2>
+          <h2 id="tax-font">{t("orderDetails.paymentDetails")}</h2>
           <div className="product-detail">
-            <h3>Net</h3>
+            <h3>{t("orderDetails.net")}</h3>
             <h3>£{totalNet.toFixed(2)}</h3>
           </div>
           <div className="product-detail">
-            <h3>Tax</h3>
+            <h3>{t("orderDetails.tax")}</h3>
             <h3>£{totalTaxes.toFixed(2)}</h3>
           </div>
         </div>
         <div className="total-detail">
-          <h2>Current value</h2>
+          <h2>{t("orderDetails.currentTotal")}</h2>
           <h2>£{totalToPay.toFixed(2)}</h2>
         </div>
       </div>
       <Link className="bttn btn-primary" to="/orderInformation">
-        Continue
+        {t("orderDetails.continue")}
       </Link>
     </section>
   );

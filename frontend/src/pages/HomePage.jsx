@@ -5,8 +5,10 @@ import carousel_img1 from '../img/carousel_img1.png';
 import carousel_img2 from '../img/carousel_img2.png';
 import carousel_img3 from '../img/carousel_img3.png';
 import carousel_img4 from '../img/carousel_img4.png';
+import { useTranslation } from "react-i18next";
 
 export default function HomePage() {
+  const { t } = useTranslation();
     return(
     <section className="prelogin">
     <Carousel>
@@ -40,10 +42,10 @@ export default function HomePage() {
       </Carousel.Item>
     </Carousel>
         <div className="buttons_login">
-            <Link className="bttn btn-secundary" to="/register">Register</Link>
-            <Link className="bttn btn-white" to="/login">Login</Link>
+            <Link className="bttn btn-secundary" to="/register"> {t("home.register")} </Link>
+            <Link className="bttn btn-white" to="/login"> {t("home.login")} </Link>
         </div>
-        {/*<Link className="t-c">Terms & conditions</Link>*/}
+        <Link className="t-c"> {t("home.tandc")} </Link>
     </section>
     )
 }

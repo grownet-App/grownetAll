@@ -3,6 +3,7 @@ import searchIcon from "@iconify/icons-heroicons-outline/search";
 import { Icon } from "@iconify/react";
 import React, { useState } from "react";
 //TODO ORGANIZAR LOS ICONS PARA EL SEARCHER
+import { useTranslation } from "react-i18next";
 import useProductStore from "../../store/useProductStore";
 import "./productSearcher.css";
 
@@ -11,6 +12,7 @@ function ProductSearcher({
   setShowSearchResults,
   showSearchResults,
 }) {
+  const { t } = useTranslation();
   const [input, setInput] = useState("");
   const setSearchResults = useProductStore((state) => state.setSearchResults);
   const [searchButtonIcon, setSearchButtonIcon] = useState(searchIcon);
@@ -55,7 +57,7 @@ function ProductSearcher({
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Search your products"
+          placeholder={t("productSearcher.placeholder")}
           className="search-input"
           onKeyDown={handleKeyDown}
         />

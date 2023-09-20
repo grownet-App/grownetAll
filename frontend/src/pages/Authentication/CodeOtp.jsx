@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { otpApiUrl } from "../../config/urls.config";
 import "../../css/otp.css";
@@ -9,6 +10,7 @@ import logo_blancov2 from "../../img/logo_blancov2.svg";
 import useTokenStore from "../../store/useTokenStore";
 
 export default function CodeOtp(props) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { onResendCode, code } = props;
   const [seconds, setSeconds] = useState(10);
@@ -85,8 +87,8 @@ export default function CodeOtp(props) {
   return (
     <section className="otp">
       <img className="img-otp" src={logo_blancov2} alt="logo-Grownet" />
-      <h1>Enter your verification code</h1>
-      <p className="text-otp">An 4 digit code has been sent to your phone</p>
+      <h1> {t("codeOtp.enterCode")} </h1>
+      <p className="text-otp"> {t("codeOtp.codeSent")} </p>
       <form action="#" className="form-otp">
         <div className="input-field">
           {otp.map((data, index) => (
@@ -110,31 +112,37 @@ export default function CodeOtp(props) {
             />
           ))}
         </div>
-        <p id="otp-number">Your OTP code is: {code}</p>
+        <p id="otp-number">
+          {" "}
+          {t("codeOtp.yourOtpCodeIs")} {code}
+        </p>
         <button className="bttn btn-secundary" onClick={enviarData}>
-          Verify & Proceed
+          {t("codeOtp.verifyAndProceed")}
         </button>
         {show ? (
           <h2>
-            Didn't you receive the code?
+            {t("codeOtp.didntReceiveCode")}
             <Link to="#" onClick={handleResendCode}>
               {" "}
-              Send again
+              {t("codeOtp.sendAgain")}
             </Link>
           </h2>
         ) : (
-          <h2>Wait for {seconds} seconds</h2>
+          <h2>
+            {" "}
+            {t("codeOtp.waitFirstPart")} {seconds} {t("codeOtp.waitSecondPart")}{" "}
+          </h2>
         )}
       </form>
       {showAlert ? (
         <Modal show={showError} onHide={handleCloseError}>
           <section className="alerta">
             <Icon className="error" icon="pajamas:error" />
-            <h1>We apologize</h1>
-            <p>The code you entered is wrong.</p>
+            <h1>{t("codeOtp.apologize")}</h1>
+            <p>{t("codeOtp.wrongCode")}</p>
             <p id="number-otp">{otp}</p>
             <button className="bttn btn-primary" onClick={handleCloseError}>
-              Try again
+              {t("codeOtp.tryAgain")}
             </button>
           </section>
         </Modal>

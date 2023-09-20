@@ -1,8 +1,14 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useFavoritesStore } from "../store/useFavoritesStore";
 import ProductCard from "./ProductDetail/ProductCard";
 
-export default function Favorites({ productsData, onAmountChange, onVolumeChange }) {
+export default function Favorites({
+  productsData,
+  onAmountChange,
+  onVolumeChange,
+}) {
+  const { t } = useTranslation();
   const { favorites } = useFavoritesStore();
 
   const favoriteProducts = productsData.filter((product) =>
@@ -11,11 +17,18 @@ export default function Favorites({ productsData, onAmountChange, onVolumeChange
 
   return (
     <div className="products">
-      <p>You have {favorites.length} favorite products: </p>
+      <p>
+        {t("favorites.findFirstPart")} {favorites.length}{" "}
+        {t("favorites.findSecondPart")}{" "}
+      </p>
       <div className="favorite-items">
         {favoriteProducts.map((product) => (
-          <ProductCard key={product.id} productData={product} onAmountChange={onAmountChange}
-          onVolumeChange={onVolumeChange} />
+          <ProductCard
+            key={product.id}
+            productData={product}
+            onAmountChange={onAmountChange}
+            onVolumeChange={onVolumeChange}
+          />
         ))}
       </div>
     </div>
