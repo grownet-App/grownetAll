@@ -1,18 +1,27 @@
 import { pdf } from "@react-pdf/renderer";
 import * as FileSaver from "file-saver";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import MenuPrimary from "../../components/Menu/MenuPrimary";
 import "../../css/orderDetail.css";
 import img_succesful from "../../img/img_succesful.png";
 import useOrderStore from "../../store/useOrderStore";
 import { PdfDocument } from "./OrderInformation";
-import { useTranslation } from "react-i18next";
 
 export default function OrderSuccessful() {
   const { t } = useTranslation();
   const [articlesData, setArticlesData] = useState([]);
-  const { selectedRestaurant, selectedSupplier, articlesToPay, totalNet, totalTaxes, totalToPay, specialRequirements, deliveryData } = useOrderStore();
+  const {
+    selectedRestaurant,
+    selectedSupplier,
+    articlesToPay,
+    totalNet,
+    totalTaxes,
+    totalToPay,
+    specialRequirements,
+    deliveryData,
+  } = useOrderStore();
   const currentDate = new Date();
   const dayName = currentDate.toLocaleString("en-us", { weekday: "short" });
   const dayNumber = currentDate.getDate();
@@ -22,14 +31,25 @@ export default function OrderSuccessful() {
   //TODO PONER FECHA DE ENTREGA QUE SE SELECCIONÓ EN EL CALENDARIO
 
   useEffect(() => {
-    const filteredArticles = articlesToPay.filter((article)=> article.amount > 0)
+    const filteredArticles = articlesToPay.filter(
+      (article) => article.amount > 0
+    );
     setArticlesData(filteredArticles);
   }, []);
 
   const generatePdfDocument = async (fileName) => {
     try {
       const blob = await pdf(
-        <PdfDocument selectedRestaurant={selectedRestaurant} selectedSupplier={selectedSupplier} specialRequirements={specialRequirements} deliveryData={deliveryData} data={articlesData} totalNet={totalNet} totalTaxes={totalTaxes} totalToPay={totalToPay} />
+        <PdfDocument
+          selectedRestaurant={selectedRestaurant}
+          selectedSupplier={selectedSupplier}
+          specialRequirements={specialRequirements}
+          deliveryData={deliveryData}
+          data={articlesData}
+          totalNet={totalNet}
+          totalTaxes={totalTaxes}
+          totalToPay={totalToPay}
+        />
       ).toBlob();
       FileSaver.saveAs(blob, fileName);
     } catch (error) {
@@ -57,7 +77,7 @@ export default function OrderSuccessful() {
       <p>{t("orderSuccessful.message")}</p>
       <div className="buttons-succesful">
         <Link className="bttn btn-primary" to="/record">
-        {t("orderSuccessful.ordersButton")}
+          {t("orderSuccessful.ordersButton")}
         </Link>
         <button
           className="bttn btn-outline"

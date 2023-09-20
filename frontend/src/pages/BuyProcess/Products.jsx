@@ -1,16 +1,18 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
 import Favorites from "../../components/Favorites";
 import ProductCard from "../../components/ProductDetail/ProductCard";
 import ProductSearcher from "../../components/ProductSearcher/ProductSearcher";
 import ProductsFind from "../../components/ProductSearcher/ProductsFind";
 import "../../css/products.css";
-import data from "../../data"
-import { Link } from "react-router-dom";
+import data from "../../data";
 import useOrderStore from "../../store/useOrderStore";
 
 export default function Products(props) {
+  const { t } = useTranslation();
   const [showFavorites, setShowFavorites] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [products, setProducts] = useState([]);
@@ -25,7 +27,7 @@ export default function Products(props) {
 
   useEffect(() => {
     if (articlesToPay.length > 0) {
-      setArticles(articlesToPay );
+      setArticles(articlesToPay);
       setProducts(articlesToPay);
       console.log("TRAJO ALGO DEL STORAGE", articlesToPay);
     } else {
@@ -242,13 +244,9 @@ export default function Products(props) {
     <section className="products">
       <div className="tittle-products">
         <Link to="/suppliers">
-          <Icon
-            src="google.com"
-            icon="ic:round-arrow-back"
-            className="arrow"
-          />
+          <Icon src="google.com" icon="ic:round-arrow-back" className="arrow" />
         </Link>
-        <h1 className="tittle-products">Make your order</h1>
+        <h1 className="tittle-products">{t("products.title")}</h1>
       </div>
       <ProductSearcher
         products={products}
@@ -256,13 +254,19 @@ export default function Products(props) {
         showSearchResults={showSearchResults}
       />
       {showSearchResults ? (
-        <ProductsFind productsData={products} onAmountChange={handleAmountChange}
-        onVolumeChange={handleVolumeChange} />
+        <ProductsFind
+          productsData={products}
+          onAmountChange={handleAmountChange}
+          onVolumeChange={handleVolumeChange}
+        />
       ) : (
         <>
           {showFavorites ? (
-            <Favorites productsData={products} onAmountChange={handleAmountChange}
-            onVolumeChange={handleVolumeChange} />
+            <Favorites
+              productsData={products}
+              onAmountChange={handleAmountChange}
+              onVolumeChange={handleVolumeChange}
+            />
           ) : (
             <>
               {articles.map((article) => (

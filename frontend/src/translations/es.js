@@ -35,6 +35,24 @@ const esTranslations = {
     record: 'Historial',
     chat: 'Chat',
   },
+  products: {
+    title: "Realiza tu pedido",
+  },
+  productSearcher: {
+    placeholder: "Buscar productos",
+    findFirstPart: "Usted tiene ",
+    findSecondPart: " productos encontrados:",
+  },
+  favorites: {
+    title: "Favoritos",
+    findFirstPart: "Usted tiene ",
+    findSecondPart: " favoritos encontrados:",
+  },
+  categoriesMenu: {
+    goBack: "Volver",
+    favorites: "Favoritos",
+    continue: "Continuar",
+  },
   orderSuccessful: {
     title: "¡Éxito!",
     message: "Tu pedido se ha realizado con éxito",

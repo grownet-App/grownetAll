@@ -35,6 +35,24 @@ const ptTranslations = {
     record: 'Registro',
     chat: 'Chat',
   },
+  products: {
+    title: "Faça seu pedido",
+  },
+  productSearcher: {
+    placeholder: "Buscar produtos",
+    findFirstPart: "Você tem ",
+    findSecondPart: " produtos encontrados:",
+  },
+  favorites: {
+    title: "Favoritos",
+    findFirstPart: "Você tem ",
+    findSecondPart: " favoritos encontrados:",
+  },
+  categoriesMenu: {
+    goBack: "Voltar",
+    favorites: "Favoritos",
+    continue: "Continuar",
+  },
   orderSuccessful: {
     title: "Bem-sucedido!",
     message: "Seu pedido foi concluído com sucesso",

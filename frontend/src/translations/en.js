@@ -35,6 +35,24 @@ const enTranslations = {
     record: "Record",
     chat: "Chat",
   },
+  products: {
+    title: "Make your order",
+  },
+  productSearcher: {
+    placeholder: "Search for products",
+    findFirstPart: "You have ",
+    findSecondPart: " found products:",
+  },
+  favorites: {
+    title: "Favorites",
+    findFirstPart: "You have ",
+    findSecondPart: " favorites products:",
+  },
+  categoriesMenu: {
+    goBack: "Go back",
+    favorites: "Favorites",
+    continue: "Continue",
+  },
   orderSuccessful: {
     title: "Successful!",
     message: "Your order is successful",
