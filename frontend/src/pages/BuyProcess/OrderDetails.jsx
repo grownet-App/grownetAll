@@ -55,7 +55,9 @@ export default function OrderDetails(props) {
           <h2>£{totalToPay.toFixed(2)}</h2>
         </div>
       </div>
-      <Link className="bttn btn-primary" to="/orderInformation">
+      <Link 
+        className={`bttn btn-primary ${ totalToPay === 0 ? 'disabled' : ''}`} 
+        to={totalToPay===0 ? '#' : '/orderInformation'}>
         {t("orderDetails.continue")}
       </Link>
     </section>
