@@ -10,9 +10,45 @@ import ProductsFind from "../../components/ProductSearcher/ProductsFind";
 import "../../css/products.css";
 import data from "../../data";
 import useOrderStore from "../../store/useOrderStore";
+import axios from "axios";
+import useTokenStore from "../../store/useTokenStore";
+
+// TODO LLAMADO A TODAS LAS CATEGORIAS PARA EL FILTER
+/* useEffect(() => {
+  axios
+    .get(allCategories, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error("Error al obtener los datos de la API:", error);
+    });
+}, [token]); */
+
+//TODO MODIFICARLO PARA LLAMAR SOLO LA CATEGORIA SELECCIONADA
+/* 
+  useEffect(() => {
+    axios
+      .get(selectedCategory, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los datos de la API:", error);
+      });
+  }, [token]); */
 
 export default function Products(props) {
   const { t } = useTranslation();
+  const { token } = useTokenStore();
   const [showFavorites, setShowFavorites] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [products, setProducts] = useState([]);
@@ -22,8 +58,27 @@ export default function Products(props) {
   ];
   const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
-  const { selectedSupplier } = useOrderStore();
-  const { articlesToPay, totalNet, totalTaxes, totalToPay } = useOrderStore();
+  const { articlesToPay, totalNet, totalTaxes, totalToPay, selectedSupplier } = useOrderStore();
+
+  useEffect(() => {
+    if (selectedSupplier) {
+      // Verifica que haya un proveedor seleccionado
+      axios
+        .get(`https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/products/supplier/${selectedSupplier.id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          // Muestra los productos en la consola
+          console.log("Productos del proveedor:", response.data);
+          console.log('NEW SELECTED SUPPLIER ID', selectedSupplier.id);
+        })
+        .catch((error) => {
+          console.error("Error al obtener los productos del proveedor:", error);
+        });
+    }
+  }, [selectedSupplier]);
 
   useEffect(() => {
     if (articlesToPay.length > 0) {
@@ -202,11 +257,6 @@ export default function Products(props) {
       article.id === productId ? { ...article, amount: newAmount } : article
     );
     useOrderStore.setState({ articlesToPay: updatedArticlesToPay });
-    updatedArticlesToPay.forEach((article) =>
-      console.log(
-        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume}`
-      )
-    );
   };
 
   // CAMBIO DE VOLUMEN DE ARTICULOS (UNIT, BOX, KG)
@@ -230,12 +280,6 @@ export default function Products(props) {
 
     setArticles(updatedArticlesToPay);
     useOrderStore.setState({ articlesToPay: updatedArticlesToPay });
-
-    updatedArticlesToPay.forEach((article) =>
-      console.log(
-        `ID: ${article.id} - Amount: ${article.amount} - Name: ${article.name} - Volume: ${article.volume}`
-      )
-    );
   };
 
   console.log("THIS IS THE SELECTEDSUPPLIER", selectedSupplier);

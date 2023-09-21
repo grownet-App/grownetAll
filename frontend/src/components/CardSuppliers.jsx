@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { availableSuppliers } from "../config/urls.config";
+import { availableSuppliers, selectedCategory } from "../config/urls.config";
 import useOrderStore from "../store/useOrderStore";
 import useTokenStore from "../store/useTokenStore";
 
@@ -24,11 +24,13 @@ export default function Suppliers() {
       .catch((error) => {
         console.error("Error al obtener los proveedores:", error);
       });
-  }, [setSuppliers, setSelectedSupplier]);
+  }, []);
 
   const handleSupplierSelect = (supplier) => {
     setSelectedSupplier(supplier);
   };
+
+  console.log("suppliers:", suppliers)
 
   return (
     <section className="suppliers">
