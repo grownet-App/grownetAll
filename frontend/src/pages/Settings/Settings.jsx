@@ -2,15 +2,23 @@ import { Icon } from "@iconify/react";
 import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../auth/useAuth";
 import MenuPrimary from "../../components/Menu/MenuPrimary";
 import "../../css/settings.css";
 
 export default function Settings() {
   const { t, i18n } = useTranslation();
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/home");
   };
 
   return (
@@ -74,7 +82,7 @@ export default function Settings() {
             <Icon className="icon-arrow" icon="ep:arrow-right-bold" />
           </Link>
         </div>
-        <button id="log-out">
+        <button id="log-out" onClick={handleLogout}>
           <Icon icon="solar:logout-linear" className="icon-logout" />{" "}
           {t("settings.logOut")}
         </button>
