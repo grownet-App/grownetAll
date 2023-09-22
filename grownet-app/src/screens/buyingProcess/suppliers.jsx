@@ -1,4 +1,10 @@
-import { SafeAreaView, ScrollView, ImageBackground, Image } from 'react-native'
+import {
+  SafeAreaView,
+  ScrollView,
+  ImageBackground,
+  Image,
+  Text,
+} from 'react-native'
 import React, { useEffect } from 'react'
 import { ApiSuppliers } from '../../config/urls.config'
 import { GlobalStyles } from '../../styles/styles'
@@ -27,7 +33,7 @@ const Suppliers = () => {
     }
 
     fetchData()
-  }, [setSuppliers, setSelectedSupplier])
+  }, [token, setSuppliers, setSelectedSupplier])
 
   const urlImg =
     'https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/'
@@ -61,7 +67,9 @@ const Suppliers = () => {
                 uri: imageUrl,
                 cache: 'reload',
               }}
-            />
+            >
+              <Text> {supplier.name}</Text>
+            </ImageBackground>
           )
         })}
       </ScrollView>

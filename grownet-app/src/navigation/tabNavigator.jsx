@@ -5,13 +5,14 @@ import Records from '../screens/records'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import Chat from '../screens/chat'
-import { FontAwesome5, FontAwesome } from '@expo/vector-icons'
+import { FontAwesome5, FontAwesome, AntDesign } from '@expo/vector-icons'
 import { Button } from 'react-native-paper'
 import Orders from '../screens/buyingProcess/orders'
 import { TouchableOpacity, StatusBar } from 'react-native'
 import useTokenStore from '../store/useTokenStore'
 import Restauranst from '../screens/buyingProcess/restaurants'
 import { goBack } from './rootNavigation'
+import Products from '../screens/buyingProcess/products'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -28,7 +29,7 @@ function OrderStack() {
   return (
     //TODO. PONER RUTA DE RESTAURANTES
     <Stack.Navigator
-      initialRouteName="restaurants"
+      initialRouteName="products"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#026CD2',
@@ -37,6 +38,38 @@ function OrderStack() {
         },
       }}
     >
+      <Stack.Screen
+        name="products"
+        component={Products}
+        options={{
+          headerShown: true,
+
+          title: 'Make your order',
+          headerStyle: {
+            backgroundColor: '#f2f2f2',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsBold',
+            fontSize: 24,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              style={{ marginHorizontal: 28 }}
+              onPress={() => goBack()}
+            >
+              <FontAwesome
+                name="arrow-left"
+                size={24}
+                color="#04444F"
+                style={{ position: 'relative' }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
       <Stack.Screen
         name="restaurants"
         component={Restauranst}
@@ -84,14 +117,6 @@ function OrderStack() {
                 color="#04444F"
                 style={{ position: 'relative' }}
               />
-            </TouchableOpacity>
-          ),
-          headerRight: () => (
-            <TouchableOpacity
-              style={{ marginRight: 20 }}
-              onPress={handleLogout}
-            >
-              <FontAwesome name="sign-out" size={24} color="#04444F" />
             </TouchableOpacity>
           ),
         }}

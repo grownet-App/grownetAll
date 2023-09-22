@@ -230,4 +230,23 @@ export const GlobalStyles = StyleSheet.create({
     color: '#ffff',
     paddingRight: 10,
   },
+
+  //MAKE YOUR ORDER
+  containerSeachr: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+    width: '100%',
+  },
+
+  BgInput: {
+    flex: 1,
+    width: '80%',
+    borderColor: 'black',
+    backgroundColor: 'black',
+    borderRadius: 51,
+  },
+  iconSearch: {
+    position: 'absolute',
+  },
 })
