@@ -187,3 +187,10 @@
  #tax-pdf{
     margin-top: 1rem;
  }
+ /*alert*/
+#text-alert{
+    margin-top: 5px !important;
+ }
+ .alert-delete{
+    margin-top: 10px;
+ }

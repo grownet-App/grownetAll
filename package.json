@@ -5,6 +5,9 @@
     "@iconify/icons-heroicons-outline": "^1.2.5",
     "@rneui/base": "github:react-native-elements/react-native-elements#base",
     "@rneui/themed": "github:react-native-elements/react-native-elements#themed",
+    "i18next": "^23.5.1",
+    "i18next-browser-languagedetector": "^7.1.0",
+    "react-i18next": "^13.2.2",
     "react-native-paper": "^5.9.1",
     "zustand": "^4.4.1"
   }

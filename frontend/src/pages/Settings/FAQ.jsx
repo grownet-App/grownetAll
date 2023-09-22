@@ -1,5 +1,5 @@
 import React from "react";
-import css from "../../css/faq.css";
+import "../../css/faq.css";
 import Accordion from "react-bootstrap/Accordion";
 import MenuPrimary from "../../components/Menu/MenuPrimary";
 import fav_icon from "../../img/fav_icon.png"
