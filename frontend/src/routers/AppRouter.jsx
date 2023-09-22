@@ -13,9 +13,9 @@ import HomePage from "../pages/HomePage";
 import NotFoundPage from "../pages/NotFoundPage";
 import DetailOrderPast from "../pages/Record/PastRecord/DetailOrderPast";
 import PastRecord from "../pages/Record/PastRecord/PastRecord";
-import Reception from "../pages/Record/PastRecord/Reception";
+import Reception from "../pages/Record/PendingRecord/Reception";
 import Record from "../pages/Record/Record";
-import UpcomingRecord from "../pages/Record/UpcomingRecord/UpcomingRecord";
+import PendingRecord from "../pages/Record/PendingRecord/PendingRecord";
 import AddRestaurants from "../pages/Settings/AddRestaurants";
 import FAQ from "../pages/Settings/FAQ";
 import Settings from "../pages/Settings/Settings";
@@ -89,8 +89,8 @@ export default function AppRouter() {
       <Route exact path={routes.pastRecord} element={<PublicRoute />}>
         <Route exact path={routes.pastRecord} element={<PastRecord />} />
       </Route>
-      <Route exact path={routes.upcomingRecord} element={<PublicRoute />}>
-        <Route exact path={routes.upcomingRecord} element={<UpcomingRecord />}/>
+      <Route exact path={routes.pendingRecord} element={<PublicRoute />}>
+        <Route exact path={routes.pendingRecord} element={<PendingRecord />}/>
       </Route>
       <Route exact path={routes.detailsOrderPastupcomingRecord} element={<PublicRoute />}>
         <Route exact path={routes.detailsOrderPast} element={<DetailOrderPast />}/>

@@ -1,27 +1,23 @@
 import React from "react";
-import { Tabs, Tab } from "react-bootstrap";
-import "../../../css/pastRecord.css";
-import MenuPrimary from "../../../components/Menu/MenuPrimary"
-import Reception from "./Reception";
+import { Tabs, Tab, Form } from "react-bootstrap";
+import "../../../css/pedingRecord.css";
+import MenuPrimary from "../../../components/Menu/MenuPrimary";
+import { Link } from "react-router-dom";
+import Reception from "../PendingRecord/Reception";
 
 export default function PastRecord() {
   return (
     <>
-      <section className="past-record">
+      <section className="pending-record">
         <h1>Order details</h1>
-        <Tabs
-          defaultActiveKey="home"
-          id="uncontrolled-tab-example"
-          className="mb-3">
-          <Tab eventKey="home" title="Products">
-            <div className="card-invoices">
-            <h2 id="tax-tittle">Supplier details</h2>
-            <div className="product-detail">
-              <h3>Bid Food</h3>
-              <h3>#698989</h3>
-            </div>
-            <p>20/06/2023</p>
-            <h2 id="tax-tittle">Details items</h2>
+        <div className="card-invoices">
+              <h2 id="tax-tittle">Supplier details</h2>
+              <div className="product-detail">
+                <h3>Bid Food</h3>
+                <h3>#698989</h3>
+              </div>
+              <p>20/06/2023</p>
+              <h2 id="tax-tittle">Details items</h2>
               <div>
                 <div className="product-detail">
                   <h3>Broccoli</h3>
@@ -53,11 +49,6 @@ export default function PastRecord() {
                 <h2>£569 </h2>
               </div>
             </div>
-          </Tab>
-          <Tab eventKey="reception" title="Reception">
-            <Reception/>
-          </Tab>
-        </Tabs>
       </section>
       <MenuPrimary />
     </>

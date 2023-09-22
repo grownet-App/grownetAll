@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import MenuPrimary from "../../components/Menu/MenuPrimary";
 import "../../components/ProductSearcher/productSearcher.css";
 import "../../css/record.css";
-import UpcomingRecord from "./UpcomingRecord/UpcomingRecord";
 
 export default function Record() {
   const { t } = useTranslation();
@@ -28,7 +27,7 @@ export default function Record() {
           </form>
         </div>
         <Tabs
-          defaultActiveKey="home"
+          defaultActiveKey="pending"
           id="uncontrolled-tab-example"
           className="mb-3"
         >
@@ -55,8 +54,28 @@ export default function Record() {
               </div>
             </div>
           </Tab>
-          <Tab eventKey="upcoming" title={t("record.currentOrders")}>
-            <UpcomingRecord />
+          <Tab eventKey="pending" title={t("record.currentOrders")}>
+            <section className="">
+              <div className="card-record">
+                <div className="information-past">
+                  <div className="">
+                    <h4>#Order:</h4>
+                    <p>57896547</p>
+                  </div>
+                  <div>
+                    <h4>Date</h4>
+                    <p>29/07/2023</p>
+                  </div>
+                </div>
+                <div className="information-past o2" id="o2">
+                  <div>
+                    <h4>Amount</h4>
+                    <p>£200</p>
+                  </div>
+                  <Link className="bttn btn-primary" to={"/pendingRecord"}>View details</Link>
+                </div>
+              </div>
+            </section>
           </Tab>
         </Tabs>
 

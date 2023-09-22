@@ -10,12 +10,13 @@ export default function ProductDetail({
   updateTotalNet,
 }) {
   const { articlesToPay, setArticlesToPay } = useOrderStore();
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
   const [show, setShow] = useState(false);
+  
+  console.log(show)
   // ACTUALIZAR CANTIDAD DE ARTICULOS
   const [articles, setArticles] = useState(articlesToPay);
-
+const handleClose = () => setShow(false);
   useEffect(() => {
     setArticles(articlesToPay);
   }, []);
@@ -78,13 +79,51 @@ export default function ProductDetail({
   };
 
   // ELIMINAR ARTICULOS DEL CARRITO
+  const alertDelete = (productId) =>{
+    setShow(true);
+  }
+  const deleteFunction = (productId) =>{
+    const filterTask = articles.filter(article => article.id != productId)
+    if (show==true) {
+      setArticles(filterTask);
+    handleClose();
+    }
+    
+    
+    const updatedArticlesToPay = articlesToPay.map((article) =>
+      article.id === productId
+        ? { ...article, amount: 0, totalItemToPay: 0 }
+        : article
+    );
+    setArticlesToPay(updatedArticlesToPay);
+
+    const newTotalToPay = calculateTotalToPay(updatedArticlesToPay);
+    updateTotalToPay(newTotalToPay);
+
+    
+  }
+
   const handleTrashClick = (productId) => {
+    
+    /*setArticles((prevArticles) =>
+      prevArticles.map((article) => {
+        if(article.id === productId){
+          console.log("hola")
+          setShow(true);
+        }
+        
+      })
+      );*/
+
     setArticles((prevArticles) =>
       prevArticles.map((article) =>
         article.id === productId
-          ? { ...article, amount: 0, totalItemToPay: 0 }
+          ? { ...article, amount: 0, totalItemToPay: 0 } 
           : article
       )
+     
+      
+  
     );
 
     const updatedArticlesToPay = articlesToPay.map((article) =>
@@ -222,10 +261,29 @@ export default function ProductDetail({
                 <Icon
                   id="trash"
                   icon="ph:trash"
-                  onClick={() => handleTrashClick(article.id)}
+                  onClick={alertDelete}
                 />
               </div>
             </div>
+            {show ? (
+            <Modal show={show} onHide={handleClose}>
+              <section className="alerta">
+                <Icon className="error" icon="pajamas:error" />
+                <h1>Delete product</h1>
+                <p id="text-alert">Are you sure to delete {article.name} the product?</p>
+                <div className="alert-delete">
+                  <button onClick={() => deleteFunction(article.id)} className="bttn btn-primary">Delete</button>
+                  <button onClick={handleClose} className="bttn btn-outline">Cancel</button>
+                </div>
+                
+                {/*<Link> className="bttn btn-primary" to="/register">
+              Register now
+              </Link>*/}
+              </section>
+            </Modal>
+          ) : (
+            <></>
+        )}
             <div className="product-detail">
               <Stepper
                 productData={article}
@@ -243,6 +301,7 @@ export default function ProductDetail({
             </div>
           </div>
         ))}
+        
     </>
   );
 }

@@ -19,7 +19,7 @@ const routes = {
     pastRecord: '/pastRecord',
     detailsOrderPast: '/detailsOrderPast',
     reception: '/reception',
-    upcomingRecord: '/upcomingRecord',
+    pendingRecord: '/pendingRecord',
     order: (orderId) => (orderId ? `/order/:${orderId}` : '/order/:id'),
     restaurants: '/restaurants',
     suppliers: '/suppliers',

@@ -24,11 +24,11 @@ export default function MenuPrimary() {
             <Icon className="icon-active2" icon="teenyicons:basket-solid" />
             <p> {t("menuPrimary.order")} </p>
           </NavLink>
-          <Nav.Link className="icons" href="/record">
+          <NavLink className="icons" to="/record">
             <Icon className="" icon="basil:invoice-outline" />
             <Icon className="icon-active3" icon="basil:invoice-solid" />
             <p> {t("menuPrimary.record")} </p>
-          </Nav.Link>
+          </NavLink>
           <Nav.Link className="icons" href="" id="my-intercom">
             <Icon className="" icon="solar:chat-round-dots-linear" />
             <Icon className="icon-active4" icon="solar:chat-round-bold" />
