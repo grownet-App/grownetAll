@@ -47,16 +47,16 @@ const Restaurants = () => {
   const onPressAdd = () => {
     //TODO,agregar restaurante
   }
-  const onPressSuppliers = () => {
-    navigation.navigate('suppliers')
-  }
+  // const onPressSuppliers = () => {
+  //   navigation.navigate('suppliers')
+  // }
 
   return (
     <SafeAreaView>
       <ScrollView contentContainerStyle={GlobalStyles.suppliers}>
         {restaurants.map((restaurant) => (
           <TouchableOpacity
-            onPress={() => onPressSuppliers}
+            // onPress={() => onPressSuppliers}
             key={restaurant.accountNumber}
           >
             <ImageBackground

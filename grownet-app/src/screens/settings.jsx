@@ -19,7 +19,7 @@ const Settings = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container2}>
-        <Text style={styles.TextHi}>Hi ✋</Text>
+        <Text style={styles.TextHi}>Hi 👋</Text>
         <Text style={styles.TextHelp}>¿How can we help you?</Text>
         <View style={styles.containerCard}>
           <Card style={styles.card}>
