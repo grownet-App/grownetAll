@@ -31,7 +31,7 @@ export default function Restaurants() {
       .catch((error) => {
         console.error("Error al obtener los restaurantes:", error);
       });
-  }, [token, setRestaurants, setSelectedRestaurant]);
+  }, [setRestaurants, setSelectedRestaurant]);
 
   const handleRestaurantSelect = (restaurant) => {
     setSelectedRestaurant(restaurant);
@@ -43,7 +43,6 @@ export default function Restaurants() {
         {" "}
         {t("restaurants.chooseRestaurant")}{" "}
       </h1>
-
       {restaurants.map((restaurant) => (
         <Link
           id="background-boton"
@@ -51,10 +50,10 @@ export default function Restaurants() {
           style={{ backgroundImage: `url(${backgroundRestaurants})` }}
           onClick={() => handleRestaurantSelect(restaurant)}
           to={"/suppliers"}
-          key={restaurant.account_number}
+          key={restaurant.accountNumber}
         >
-          <img src={urlImg + restaurant.image} alt={restaurant.account_name} />
-          <div className="text-categ" key={restaurant.account_number}>
+          <img src={urlImg + restaurant.image} alt={restaurant.accountName}/>
+          <div className="text-categ">
             <p>{restaurant.address}</p>
           </div>
         </Link>
