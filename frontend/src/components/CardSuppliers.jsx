@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { availableSuppliers, selectedCategory } from "../config/urls.config";
+import { availableSuppliers } from "../config/urls.config";
 import useOrderStore from "../store/useOrderStore";
 import useTokenStore from "../store/useTokenStore";
 
@@ -50,7 +50,7 @@ export default function Suppliers() {
           <>
             <Link
               onClick={() => handleSupplierSelect(supplier)}
-              key={supplier.idproveedor}
+              key={supplier.id}
               id="suppliers-categ"
               to="/products"
             >
@@ -62,24 +62,6 @@ export default function Suppliers() {
             </Link>
           </>
         ))}
-      {suppliers.map((supplier) => (
-        <>
-          {/*<Link
-          className="bttn-categ"
-          onClick={() => handleSupplierSelect(supplier)}
-          key={supplier.idproveedor}
-          id="suppliers-categ"
-          to="/products"
-        >
-         <img src={urlImg + supplier.image} alt={supplier.name} id="logo-suppliers"/>
-          <img
-            src={img_suppliers}
-            alt="logo-restaurant"
-            className="img-suppliers"
-          ></img>
-      </Link>*/}
-        </>
-      ))}
     </section>
   );
 }
