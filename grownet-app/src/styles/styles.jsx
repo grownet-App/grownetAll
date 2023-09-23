@@ -275,10 +275,10 @@ export const ProductsStyles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     marginVertical: 10,
-    marginHorizontal: 30,
     flexDirection: 'row',
     borderRadius: 20,
     height: 140,
+    width: '85%',
   },
   containerImage: {
     width: 150,
@@ -341,10 +341,91 @@ export const ProductsStyles = StyleSheet.create({
 })
 
 export const OrdersDetailStyles = StyleSheet.create({
-  containerDetails: {},
-  cardInvoices: {},
-  taxFont: {},
-  productDetail: {},
-  totalDetail: {},
-  btnPrimary: {},
+  containerDetails: {
+    width: '85%',
+    backgroundColor: '#e9f4ff',
+    padding: 24,
+    borderRadius: 20,
+  },
+
+  taxFont: {
+    fontSize: 20,
+    color: '#04444f',
+    fontWeight: 'bold',
+    borderBottomWidth: 1,
+    borderStyle: 'dashed',
+    borderBottomColor: '#04444f',
+    paddingBottom: 5,
+  },
+  productDetail: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 5,
+  },
+  totalDetail: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#bbfacf',
+    borderRadius: 10,
+    padding: 15,
+    marginTop: 10,
+    fontWeight: 'bold',
+  },
+  btnPrimary: {
+    alignItems: 'center',
+    backgroundColor: '#026cd2',
+    paddingHorizontal: 35,
+    paddingVertical: 12,
+    borderRadius: 30,
+    marginTop: 32,
+  },
+  Paymenttext: {
+    color: '#04444f',
+  },
+  CurrentValuetext: {
+    color: '#04444f',
+    fontWeight: 'bold',
+  },
+  ContinueText: { color: '#ffff', fontWeight: 'bold' },
+})
+
+export const OrderSuccessfulStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 50,
+  },
+  image: {
+    width: 307,
+    height: 359,
+  },
+  containerImage: {
+    alignItems: 'center',
+  },
+  textSuccessful: {
+    color: '#026cd2',
+    fontWeight: 900,
+    fontSize: 30,
+  },
+  btnPrimary: {
+    backgroundColor: '#026cd2',
+    paddingHorizontal: 35,
+    paddingVertical: 12,
+    borderRadius: 30,
+    marginTop: 32,
+    width: 145,
+    height: 42,
+  },
+  btnPrimary2: {
+    backgroundColor: '#ffff',
+    paddingHorizontal: 35,
+    paddingVertical: 12,
+    borderRadius: 30,
+    marginTop: 32,
+    borderColor: '#0d6efd',
+    borderWidth: 1,
+    width: 145,
+    height: 42,
+  },
 })

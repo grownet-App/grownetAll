@@ -13,7 +13,8 @@ import useTokenStore from '../store/useTokenStore'
 import Restauranst from '../screens/buyingProcess/restaurants'
 import { goBack } from './rootNavigation'
 import Products from '../screens/buyingProcess/products'
-import Orders from '../screens/buyingProcess/ordersDetail'
+import OrdersDetail from '../screens/buyingProcess/ordersDetail'
+import OrderInformation from '../screens/buyingProcess/orderInformation'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -64,7 +65,7 @@ function OrderStack() {
   return (
     //TODO. PONER RUTA DE RESTAURANTES
     <Stack.Navigator
-      initialRouteName="ordersDetail"
+      initialRouteName="orderInformation"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#026CD2',
@@ -134,7 +135,7 @@ function OrderStack() {
       />
       <Stack.Screen
         name="ordersDetail"
-        component={Orders}
+        component={OrdersDetail}
         options={{
           headerShown: true,
 
@@ -150,6 +151,13 @@ function OrderStack() {
             fontSize: 24,
           },
           headerLeft: () => headerLeft(),
+        }}
+      />
+      <Stack.Screen
+        name="orderInformation"
+        component={OrderInformation}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
@@ -174,7 +182,7 @@ function MyStack1() {
           headerRight: () => headerRight(),
         }}
       />
-      <Stack.Screen name="ordersDetail" component={Orders} />
+      <Stack.Screen name="ordersDetail" component={OrdersDetail} />
     </Stack.Navigator>
   )
 }
