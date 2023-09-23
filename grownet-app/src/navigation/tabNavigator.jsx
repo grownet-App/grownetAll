@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import Suppliers from '../screens/buyingProcess/suppliers'
 import Settings from '../screens/settings'
@@ -5,17 +6,51 @@ import Records from '../screens/records'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import Chat from '../screens/chat'
-import { FontAwesome5, FontAwesome, AntDesign } from '@expo/vector-icons'
+import { FontAwesome5, FontAwesome } from '@expo/vector-icons'
 import { Button } from 'react-native-paper'
-import Orders from '../screens/buyingProcess/orders'
 import { TouchableOpacity, StatusBar } from 'react-native'
 import useTokenStore from '../store/useTokenStore'
 import Restauranst from '../screens/buyingProcess/restaurants'
 import { goBack } from './rootNavigation'
 import Products from '../screens/buyingProcess/products'
+import Orders from '../screens/buyingProcess/ordersDetail'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
+
+const headerLeft = () => (
+  <TouchableOpacity style={{ marginHorizontal: 28 }} onPress={() => goBack()}>
+    <FontAwesome
+      name="arrow-left"
+      size={24}
+      color="#04444F"
+      style={{ position: 'relative' }}
+    />
+  </TouchableOpacity>
+)
+const headerRight = () => (
+  <Button
+    /* eslint-disable no-alert */
+    onPress={() => alert('This is a button!')}
+    title="Info"
+    color="#fff"
+  />
+)
+const tabBarIconProps =
+  (name) =>
+  ({ color, size }) => {
+    name === 'Settings'
+      ? (name = 'cogs')
+      : name === 'orders'
+      ? (name = 'shopping-basket')
+      : name === 'records'
+      ? (name = 'receipt')
+      : name === 'chat'
+      ? (name = 'comments')
+      : ''
+
+    return <FontAwesome5 name={name} size={size} color={color} />
+  }
 
 function OrderStack() {
   const { setToken } = useTokenStore()
@@ -29,7 +64,7 @@ function OrderStack() {
   return (
     //TODO. PONER RUTA DE RESTAURANTES
     <Stack.Navigator
-      initialRouteName="products"
+      initialRouteName="ordersDetail"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#026CD2',
@@ -38,38 +73,6 @@ function OrderStack() {
         },
       }}
     >
-      <Stack.Screen
-        name="products"
-        component={Products}
-        options={{
-          headerShown: true,
-
-          title: 'Make your order',
-          headerStyle: {
-            backgroundColor: '#f2f2f2',
-            height: StatusBar.currentHeight + 60,
-          },
-          headerTintColor: '#04444F',
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
-            fontSize: 24,
-          },
-          headerLeft: () => (
-            <TouchableOpacity
-              style={{ marginHorizontal: 28 }}
-              onPress={() => goBack()}
-            >
-              <FontAwesome
-                name="arrow-left"
-                size={24}
-                color="#04444F"
-                style={{ position: 'relative' }}
-              />
-            </TouchableOpacity>
-          ),
-        }}
-      />
       <Stack.Screen
         name="restaurants"
         component={Restauranst}
@@ -106,19 +109,47 @@ function OrderStack() {
             fontFamily: 'PoppinsBold',
             fontSize: 28,
           },
-          headerLeft: () => (
-            <TouchableOpacity
-              style={{ marginHorizontal: 28 }}
-              onPress={() => goBack()}
-            >
-              <FontAwesome
-                name="arrow-left"
-                size={24}
-                color="#04444F"
-                style={{ position: 'relative' }}
-              />
-            </TouchableOpacity>
-          ),
+          headerLeft: () => headerLeft(),
+        }}
+      />
+      <Stack.Screen
+        name="products"
+        component={Products}
+        options={{
+          headerShown: true,
+
+          title: 'Make your order',
+          headerStyle: {
+            backgroundColor: '#f2f2f2',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsBold',
+            fontSize: 24,
+          },
+          headerLeft: () => headerLeft(),
+        }}
+      />
+      <Stack.Screen
+        name="ordersDetail"
+        component={Orders}
+        options={{
+          headerShown: true,
+
+          title: 'Order detail',
+          headerStyle: {
+            backgroundColor: '#f2f2f2',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsBold',
+            fontSize: 24,
+          },
+          headerLeft: () => headerLeft(),
         }}
       />
     </Stack.Navigator>
@@ -139,23 +170,11 @@ function MyStack1() {
         component={Records}
         options={{
           headerBackTitleVisible: false,
-          headerLeft: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="#fff"
-            />
-          ),
-          headerRight: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="#fff"
-            />
-          ),
+          headerLeft: () => headerLeft(),
+          headerRight: () => headerRight(),
         }}
       />
-      <Stack.Screen name="orders" component={Orders} />
+      <Stack.Screen name="ordersDetail" component={Orders} />
     </Stack.Navigator>
   )
 }
@@ -174,20 +193,8 @@ function MyStack3() {
         component={Chat}
         options={{
           headerBackTitleVisible: false,
-          headerLeft: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="#fff"
-            />
-          ),
-          headerRight: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="#fff"
-            />
-          ),
+          headerLeft: () => headerLeft(),
+          headerRight: () => headerRight(),
         }}
       />
     </Stack.Navigator>
@@ -206,9 +213,7 @@ const TabNavigator = () => {
         name="settings"
         component={Settings}
         options={{
-          tabBarIcon: ({ color, size }) => {
-            return <FontAwesome5 name="cogs" size={size} color={color} />
-          },
+          tabBarIcon: tabBarIconProps('Settings'),
           headerShown: true,
           title: 'Settings',
           headerTitleAlign: 'center',
@@ -228,11 +233,7 @@ const TabNavigator = () => {
         name="orders"
         component={OrderStack}
         options={{
-          tabBarIcon: ({ color, size }) => {
-            return (
-              <FontAwesome5 name="shopping-basket" size={size} color={color} />
-            )
-          },
+          tabBarIcon: tabBarIconProps('orders'),
           headerShown: false,
         }}
       />
@@ -241,9 +242,7 @@ const TabNavigator = () => {
         name="records"
         component={MyStack1}
         options={{
-          tabBarIcon: ({ color, size }) => {
-            return <FontAwesome5 name="receipt" size={size} color={color} />
-          },
+          tabBarIcon: tabBarIconProps('records'),
           headerShown: false,
         }}
       />
@@ -251,9 +250,7 @@ const TabNavigator = () => {
         name="chat"
         component={MyStack3}
         options={{
-          tabBarIcon: ({ color, size }) => {
-            return <FontAwesome name="comments" size={size} color={color} />
-          },
+          tabBarIcon: tabBarIconProps('comments'),
           headerShown: false,
         }}
       />

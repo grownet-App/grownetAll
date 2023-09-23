@@ -82,7 +82,8 @@ export const GlobalStyles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: 'bold',
   },
-  //carousel styles
+})
+export const CarouselStyles = StyleSheet.create({
   slide: {
     marginTop: '30%',
     alignItems: 'center',
@@ -98,7 +99,9 @@ export const GlobalStyles = StyleSheet.create({
   paginatioCarousel: {
     marginBottom: 33,
   },
+})
 
+export const OtpStyles = StyleSheet.create({
   //OTP styles
   tinyLogoOtp: {
     width: 250,
@@ -177,6 +180,9 @@ export const GlobalStyles = StyleSheet.create({
 
     marginLeft: 5,
   },
+})
+
+export const SuppliersStyles = StyleSheet.create({
   // suppliers styles
   suppliers: {
     display: 'flex',
@@ -193,8 +199,18 @@ export const GlobalStyles = StyleSheet.create({
     borderRadius: 21,
     marginBottom: 10,
   },
+})
+
+export const RestaurantStyles = StyleSheet.create({
   // restaurants  styles
 
+  restaurants: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 16,
+  },
   TextDirectionRestaurant: {
     color: '#FFFFFF',
     fontSize: 15,
@@ -230,23 +246,105 @@ export const GlobalStyles = StyleSheet.create({
     color: '#ffff',
     paddingRight: 10,
   },
+})
 
+export const ProductsStyles = StyleSheet.create({
   //MAKE YOUR ORDER
-  containerSeachr: {
+
+  //SEARCH BAR
+  containerSearch: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignContent: 'center',
-    width: '100%',
+    marginHorizontal: 30,
+    height: 50,
   },
 
   BgInput: {
     flex: 1,
-    width: '80%',
-    borderColor: 'black',
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     borderRadius: 51,
+    paddingLeft: 20,
+
+    fontSize: 20,
   },
   iconSearch: {
     position: 'absolute',
+    right: 30,
+    top: 15,
   },
+  //PRODUCT CARD
+  container: {
+    backgroundColor: 'white',
+    marginVertical: 10,
+    marginHorizontal: 30,
+    flexDirection: 'row',
+    borderRadius: 20,
+    height: 140,
+  },
+  containerImage: {
+    width: 150,
+    height: 100,
+  },
+  ImageCardProduct: {
+    flex: 1,
+    width: null,
+    height: null,
+    alignItems: 'center',
+  },
+  containName: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  count: {
+    flexDirection: 'row',
+    borderWidth: 1.5,
+    borderColor: '#f2f2f2',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginRight: 5,
+    width: 80,
+    height: 45,
+    borderRadius: 51,
+  },
+  button: {
+    backgroundColor: 'transparent',
+    width: 20,
+    fontSize: 25,
+    color: '#62c471',
+    fontWeight: 'bold',
+  },
+  button_: {
+    backgroundColor: 'transparent',
+    width: 20,
+    fontSize: 25,
+    color: '#62c471',
+    fontWeight: 'bold',
+
+    textAlign: 'center',
+  },
+  containerSelect: {
+    flexDirection: 'row',
+    marginTop: 10,
+    marginRight: 10,
+  },
+  containerDrop: {
+    width: 80,
+  },
+  textName: {
+    color: '#04444f',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  textPrice: {
+    color: '#0d6efd',
+    fontWeight: 'bold',
+  },
+})
+
+export const OrdersDetailStyles = StyleSheet.create({
+  containerDetails: {},
+  cardInvoices: {},
+  taxFont: {},
+  productDetail: {},
+  totalDetail: {},
+  btnPrimary: {},
 })

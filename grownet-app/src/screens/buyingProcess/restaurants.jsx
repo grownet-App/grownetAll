@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import React, { useEffect } from 'react'
 import { availableRestaurants } from '../../config/urls.config'
-import { GlobalStyles } from '../../styles/styles'
+import { RestaurantStyles } from '../../styles/styles'
 import axios from 'axios'
 import useTokenStore from '../../store/useTokenStore'
 import useOrderStore from '../../store/UseOrderStore'
@@ -47,20 +47,20 @@ const Restaurants = () => {
   const onPressAdd = () => {
     //TODO,agregar restaurante
   }
-  // const onPressSuppliers = () => {
-  //   navigation.navigate('suppliers')
-  // }
+  const onPressSuppliers = () => {
+    navigation.navigate('suppliers')
+  }
 
   return (
     <SafeAreaView>
-      <ScrollView contentContainerStyle={GlobalStyles.suppliers}>
+      <ScrollView contentContainerStyle={RestaurantStyles.restaurants}>
         {restaurants.map((restaurant) => (
           <TouchableOpacity
-            // onPress={() => onPressSuppliers}
+            onPress={() => onPressSuppliers}
             key={restaurant.accountNumber}
           >
             <ImageBackground
-              style={GlobalStyles.RestaurantBg}
+              style={RestaurantStyles.RestaurantBg}
               source={{ uri: BgRestaurant }}
             >
               <Image
@@ -68,7 +68,7 @@ const Restaurants = () => {
                 alt={restaurant.accountName}
                 style={{ width: 160, height: 160 }}
               />
-              <Text style={GlobalStyles.TextDirectionRestaurant}>
+              <Text style={RestaurantStyles.TextDirectionRestaurant}>
                 {restaurant.address}
               </Text>
             </ImageBackground>
@@ -76,16 +76,18 @@ const Restaurants = () => {
         ))}
         <TouchableOpacity
           onPress={onPressAdd}
-          style={GlobalStyles.buttonAddCont}
+          style={RestaurantStyles.buttonAddCont}
         >
-          <View style={GlobalStyles.containButtonAdd}>
+          <View style={RestaurantStyles.containButtonAdd}>
             <Ionicons
               name="add-circle-outline"
               size={34}
               color="#ffff"
               style={{ padding: 10 }}
             />
-            <Text style={GlobalStyles.textAddRestaurant}>Add restaurant</Text>
+            <Text style={RestaurantStyles.textAddRestaurant}>
+              Add restaurant
+            </Text>
           </View>
         </TouchableOpacity>
       </ScrollView>

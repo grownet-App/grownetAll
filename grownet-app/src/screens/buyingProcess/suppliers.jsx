@@ -1,13 +1,7 @@
-import {
-  SafeAreaView,
-  ScrollView,
-  ImageBackground,
-  Image,
-  Text,
-} from 'react-native'
+import { SafeAreaView, ScrollView, ImageBackground, Text } from 'react-native'
 import React, { useEffect } from 'react'
 import { ApiSuppliers } from '../../config/urls.config'
-import { GlobalStyles } from '../../styles/styles'
+import { SuppliersStyles } from '../../styles/styles'
 import axios from 'axios'
 import useOrderStore from '../../store/UseOrderStore'
 import useTokenStore from '../../store/useTokenStore'
@@ -53,7 +47,7 @@ const Suppliers = () => {
   )
   return (
     <SafeAreaView>
-      <ScrollView contentContainerStyle={GlobalStyles.suppliers}>
+      <ScrollView contentContainerStyle={SuppliersStyles.suppliers}>
         {filteredSuppliers.map((supplier) => {
           const imageUrl = `${urlImg}${supplier.image}?random=${Math.random()}`
           console.log('url de la imagen:', imageUrl)
@@ -61,10 +55,10 @@ const Suppliers = () => {
           return (
             <ImageBackground
               resizeMode="cover"
-              style={GlobalStyles.suppliersBg}
+              style={SuppliersStyles.suppliersBg}
               key={supplier.id}
               source={{
-                uri: imageUrl,
+                uri: 'https://cultivovital.com/wp-content/uploads/2020/11/pimiento-rojo-png-2.png',
                 cache: 'reload',
               }}
             >
