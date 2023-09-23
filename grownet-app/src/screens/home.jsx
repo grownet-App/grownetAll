@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native'
-import { CarouselStyles, GlobalStyles } from '../styles/styles'
+import { CarouselStyles, GlobalStyles, OtpStyles } from '../styles/styles'
 import { useNavigation } from '@react-navigation/native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 
@@ -68,7 +68,7 @@ const Home = () => {
           style={GlobalStyles.btnSecundary}
           onPress={() => navigation.navigate('login')}
         >
-          <Text style={GlobalStyles.textRegister}>Register</Text>
+          <Text style={OtpStyles.textRegister}>Register</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={GlobalStyles.btnWhite}
