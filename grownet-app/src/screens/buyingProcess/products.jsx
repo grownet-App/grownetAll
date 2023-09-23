@@ -1,12 +1,13 @@
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+import ProductCards from '../../components/buyingProcess/productCards'
 import ProductSearcher from '../../components/buyingProcess/productSearch'
 
 const Products = () => {
   return (
     <View>
       <ProductSearcher />
+      <ProductCards />
     </View>
   )
 }

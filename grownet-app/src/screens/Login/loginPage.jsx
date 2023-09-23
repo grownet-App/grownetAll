@@ -1,19 +1,12 @@
+import React from 'react'
 import { StatusBar } from 'expo-status-bar'
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  Image,
-  TouchableOpacity,
-  Alert,
-} from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import PhoneInput from 'react-native-phone-number-input'
 import { useState } from 'react'
 import axios from 'axios'
 import { GlobalStyles } from '../../styles/styles'
-import { onlyCountries, validationApiUrl } from '../../config/urls.config'
+import { validationApiUrl } from '../../config/urls.config'
 const LoginPage = () => {
   const navigation = useNavigation()
   const [phoneNumber, setPhoneNumber] = useState('')
@@ -26,8 +19,8 @@ const LoginPage = () => {
 
     const state = {
       form: {
-        countrie: parseInt(country),
-        telephone: parseInt(phoneNumber),
+        countrie: parseInt(country, 10),
+        telephone: parseInt(phoneNumber, 10),
       },
       error: false,
       errorMsg: '',

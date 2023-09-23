@@ -1,17 +1,15 @@
+import React, { useRef, useState } from 'react'
 import {
   View,
   Text,
-  StyleSheet,
   Dimensions,
   Image,
-  Button,
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native'
-import { GlobalStyles } from '../styles/styles'
+import { CarouselStyles, GlobalStyles } from '../styles/styles'
 import { useNavigation } from '@react-navigation/native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
-import { useRef, useState } from 'react'
 
 const Home = () => {
   const [index, setIndex] = useState(0)
@@ -27,8 +25,8 @@ const Home = () => {
 
   const renderItem = ({ item }) => {
     return (
-      <View style={GlobalStyles.slide}>
-        <Image source={item.source} style={GlobalStyles.image} />
+      <View style={CarouselStyles.slide}>
+        <Image source={item.source} style={CarouselStyles.image} />
       </View>
     )
   }
@@ -44,11 +42,11 @@ const Home = () => {
         autoplayInterval={5000}
         loop={true}
         layout="default"
-        onSnapToItem={(index) => setIndex(index)}
+        onSnapToItem={(currentIndex) => setIndex(currentIndex)}
         useScrollView={true}
         ref={isCarousel}
       />
-      <View style={GlobalStyles.paginatioCarousel}>
+      <View style={CarouselStyles.paginatioCarousel}>
         <Pagination
           dotsLength={images.length}
           activeDotIndex={index}
@@ -65,7 +63,7 @@ const Home = () => {
           tappableDots={true}
         />
       </View>
-      <View style={GlobalStyles.containerButtton}>
+      <View style={CarouselStyles.containerButtton}>
         <TouchableOpacity
           style={GlobalStyles.btnSecundary}
           onPress={() => navigation.navigate('login')}

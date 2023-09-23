@@ -1,28 +1,24 @@
 import {
-  StyleSheet,
   Text,
   TextInput,
   Image,
   TouchableOpacity,
-  Alert,
   View,
   SafeAreaView,
 } from 'react-native'
-import React, { Component, useRef, useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { GlobalStyles } from '../../styles/styles'
+import React, { useRef, useState } from 'react'
+import { OtpStyles } from '../../styles/styles'
 import { useRoute } from '@react-navigation/native'
 import { otpApiUrl } from '../../config/urls.config'
 import axios from 'axios'
 import useTokenStore from '../../store/useTokenStore'
 
 const Otp = () => {
-  const navigation = useNavigation()
   const pin1Ref = useRef()
   const pin2Ref = useRef()
   const pin3Ref = useRef()
   const pin4Ref = useRef()
-  const refBtn = useRef()
+
   const [pin1, setPin1] = useState('')
   const [pin2, setPin2] = useState('')
   const [pin3, setPin3] = useState('')
@@ -50,20 +46,20 @@ const Otp = () => {
   }
 
   return (
-    <SafeAreaView style={GlobalStyles.containerOtpPage}>
+    <SafeAreaView style={OtpStyles.containerOtpPage}>
       <Image
-        style={GlobalStyles.tinyLogoOtp}
+        style={OtpStyles.tinyLogoOtp}
         source={require('../../../assets/logo.png')}
       />
-      <Text style={GlobalStyles.textOtp1}>Enter your verification code</Text>
-      <Text style={GlobalStyles.textOtp2}>
+      <Text style={OtpStyles.textOtp1}>Enter your verification code</Text>
+      <Text style={OtpStyles.textOtp2}>
         An 4 digit code has been sent to your phone
       </Text>
-      <View style={GlobalStyles.containerOTP}>
-        <View style={GlobalStyles.textInputView}>
+      <View style={OtpStyles.containerOTP}>
+        <View style={OtpStyles.textInputView}>
           <TextInput
             ref={pin1Ref}
-            style={GlobalStyles.textInput}
+            style={OtpStyles.textInput}
             keyboardType={'number-pad'}
             maxLength={1}
             onChangeText={(text) => {
@@ -72,10 +68,10 @@ const Otp = () => {
             }}
           />
         </View>
-        <View style={GlobalStyles.textInputView}>
+        <View style={OtpStyles.textInputView}>
           <TextInput
             ref={pin2Ref}
-            style={GlobalStyles.textInput}
+            style={OtpStyles.textInput}
             keyboardType={'number-pad'}
             maxLength={1}
             onChangeText={(text) => {
@@ -84,10 +80,10 @@ const Otp = () => {
             }}
           />
         </View>
-        <View style={GlobalStyles.textInputView}>
+        <View style={OtpStyles.textInputView}>
           <TextInput
             ref={pin3Ref}
-            style={GlobalStyles.textInput}
+            style={OtpStyles.textInput}
             keyboardType={'number-pad'}
             maxLength={1}
             onChangeText={(text) => {
@@ -96,10 +92,10 @@ const Otp = () => {
             }}
           />
         </View>
-        <View style={GlobalStyles.textInputView}>
+        <View style={OtpStyles.textInputView}>
           <TextInput
             ref={pin4Ref}
-            style={GlobalStyles.textInput}
+            style={OtpStyles.textInput}
             keyboardType={'number-pad'}
             maxLength={1}
             onChangeText={(text) => {
@@ -111,14 +107,14 @@ const Otp = () => {
       </View>
       <TouchableOpacity
         onPress={enviarOTP}
-        style={GlobalStyles.ContainerTextVerify}
+        style={OtpStyles.ContainerTextVerify}
       >
-        <Text style={GlobalStyles.TextVerify}>Verify & Proceed</Text>
+        <Text style={OtpStyles.TextVerify}>Verify & Proceed</Text>
       </TouchableOpacity>
-      <View style={GlobalStyles.ContainerdidntCode}>
-        <Text style={GlobalStyles.didntCode}>Didn't you receive the code?</Text>
+      <View style={OtpStyles.ContainerdidntCode}>
+        <Text style={OtpStyles.didntCode}>Didn't you receive the code?</Text>
         <TouchableOpacity>
-          <Text style={GlobalStyles.sendCode}>Send again</Text>
+          <Text style={OtpStyles.sendCode}>Send again</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

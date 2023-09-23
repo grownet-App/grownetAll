@@ -14,6 +14,8 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'react/jsx-uses-react': 'off',
+    'no-unused-vars': ['warn', { varsIgnorePattern: '^React$' }],
+    'react-native/no-inline-styles': 'off',
   },
 
   overrides: [
