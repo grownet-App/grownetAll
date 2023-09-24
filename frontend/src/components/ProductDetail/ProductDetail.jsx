@@ -41,42 +41,24 @@ const handleClose = () => setShow(false);
     updateTotalToPay(newTotalToPay);
   };
 
-  // ACTUALIZAR VOLUMEN DE ARTICULOS
-  const handleVolumeChange = (productId, event) => {
-    const newVolume = event.target.value;
-    let newPriceWithTax;
-
-    setArticles((prevArticles) =>
-      prevArticles.map((article) => {
+  // ACTUALIZAR UOMTOPAY DE ARTICULOS
+  const handleUomChange = (productId, newUomToPay) => {
+     const updatedArticlesToPay = articles.map((article) => {
         if (article.id === productId) {
-          let updatedPrice;
-          if (newVolume === "Box") {
-            updatedPrice = article.price_box;
-          } else if (newVolume === "Kg") {
-            updatedPrice = article.price_kg;
-          } else {
-            updatedPrice = article.price_unit;
-          }
-          newPriceWithTax = updatedPrice + updatedPrice * article.tax
-          const updatedArticle = {
+          const selectedPrice = article.prices.find(
+            (price) => price.nameUoms === newUomToPay
+          );
+          return {
             ...article,
-            volume: newVolume,
-            priceWithTax: newPriceWithTax,
+            uomToPay: newUomToPay,
+            priceWithTax: selectedPrice.priceWithTax,
           };
-          return updatedArticle;
         }
         return article;
-      })
-    );
-    const updatedArticlesToPay = articlesToPay.map((article) => {
-      if (article.id === productId) {
-        return { ...article, volume: newVolume , priceWithTax: newPriceWithTax};
-      }
-      return article;
-    });
-
-    setArticlesToPay(updatedArticlesToPay);
-  };
+      });
+      setArticles(updatedArticlesToPay);
+      useOrderStore.setState({ articlesToPay: updatedArticlesToPay });
+    };
 
   // ELIMINAR ARTICULOS DEL CARRITO
   const alertDelete = (productId) =>{
@@ -143,12 +125,12 @@ const handleClose = () => setShow(false);
     price_box,
     price_kg,
     amount,
-    volume
+    uomToPay
   ) => {
     let price;
-    if (volume === "Box") {
+    if (uomToPay === "Box") {
       price = price_box;
-    } else if (volume === "Kg") {
+    } else if (uomToPay === "Kg") {
       price = price_kg;
     } else {
       price = price_unit;
@@ -164,7 +146,7 @@ const handleClose = () => setShow(false);
         article.price_box,
         article.price_kg,
         article.amount,
-        article.volume
+        article.uomToPay
       );
       return total + itemNet;
     }, 0);
@@ -178,12 +160,12 @@ const handleClose = () => setShow(false);
     price_kg,
     tax,
     amount,
-    volume
+    uomToPay
   ) => {
     let price;
-    if (volume === "Box") {
+    if (uomToPay === "Box") {
       price = price_box;
-    } else if (volume === "Kg") {
+    } else if (uomToPay === "Kg") {
       price = price_kg;
     } else {
       price = price_unit;
@@ -200,7 +182,7 @@ const handleClose = () => setShow(false);
         article.price_kg,
         article.tax,
         article.amount,
-        article.volume
+        article.uomToPay
       );
       return total + itemTaxes;
     }, 0);
@@ -210,9 +192,9 @@ const handleClose = () => setShow(false);
   // CALCULAR TOTAL A PAGAR
   const calculateItemToPay = (article, amount) => {
     let updatedPrice;
-    if (article.volume === "Box") {
+    if (article.uomToPay === "Box") {
       updatedPrice = article.price_box;
-    } else if (article.volume === "Kg") {
+    } else if (article.uomToPay === "Kg") {
       updatedPrice = article.price_kg;
     } else {
       updatedPrice = article.price_unit;
@@ -290,13 +272,15 @@ const handleClose = () => setShow(false);
                 onAmountChange={handleAmountChange}
               />
               <Form.Select
-                aria-label="Select Volume"
-                value={article.volume}
-                onChange={(event) => handleVolumeChange(article.id, event)}
+                aria-label="Select UomToPay"
+                value={article.uomToPay}
+                onChange={(event) => handleUomChange(article.id, event.target.value)}
               >
-                <option value="Unit">Unit</option>
-                <option value="Box">Box</option>
-                <option value="Kg">Kg</option>
+                {article.prices.map((price) => (
+                  <option key={price.nameUoms} value={price.nameUoms}>
+                    {price.nameUoms}
+                  </option>
+                ))}
               </Form.Select>
             </div>
           </div>
