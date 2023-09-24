@@ -8,11 +8,13 @@ import Stepper from "../Stepper/Stepper";
 export default function ProductCard({
   productData,
   onAmountChange,
-  onVolumeChange,
+  onUomChange,
 }) {
-  const { id, name, image, priceWithTax, volume } = productData;
+  const { id, name, image, prices, priceWithTax, uomToPay } = productData;
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
   const isFavorite = favorites.includes(id, name, image);
+  const urlImg =
+  "https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/";
 
   const handleToggleFavorite = () => {
     if (isFavorite) {
@@ -24,17 +26,17 @@ export default function ProductCard({
     }
   };
 
-  const handleVolumeChange = (event) => {
-    const newVolume = event.target.value;
-    onVolumeChange(id, newVolume);
-    console.log(`Selected volume for ${name}: ${newVolume}`);
+  const handleUomToPayChange = (event) => {
+    const newUomToPay = event.target.value;
+    onUomChange(id, newUomToPay);
+    console.log(`Selected uomtopay for ${name}: ${newUomToPay}`);
     console.log(`Selected price for ${name}: ${priceWithTax}`);
   };
 
   return (
     <section className="products">
       <div className="elements">
-        <img src={image} alt={"image " + name} />
+        <img src={ urlImg + image} alt={"image " + name} />
         <div>
           <div className="titlle-products">
             <h1>{name}</h1>
@@ -49,20 +51,22 @@ export default function ProductCard({
               ></Icon>
             </div>
           </div>
-          <p>GBP £{priceWithTax.toFixed(2)}</p>
+          <p>GBP £{priceWithTax}</p>
           <div className="product-amount">
             <Stepper
               productData={productData}
               onAmountChange={onAmountChange}
             />
             <Form.Select
-              aria-label="Select Volume"
-              value={volume}
-              onChange={handleVolumeChange}
+              aria-label="Select UomToPay"
+              value={uomToPay}
+              onChange={handleUomToPayChange}
             >
-              <option value="Unit">Unit</option>
-              <option value="Box">Box</option>
-              <option value="Kg">Kg</option>
+              {prices.map((price) => (
+                <option key={price.nameUoms} value={price.nameUoms}>
+                  {price.nameUoms}
+                </option>
+              ))}
             </Form.Select>
           </div>
         </div>

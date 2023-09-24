@@ -6,7 +6,7 @@ import ProductCard from "./ProductDetail/ProductCard";
 export default function Favorites({
   productsData,
   onAmountChange,
-  onVolumeChange,
+  onUomChange,
 }) {
   const { t } = useTranslation();
   const { favorites } = useFavoritesStore();
@@ -27,7 +27,7 @@ export default function Favorites({
             key={product.id}
             productData={product}
             onAmountChange={onAmountChange}
-            onVolumeChange={onVolumeChange}
+            onUomChange={onUomChange}
           />
         ))}
       </div>

@@ -10,7 +10,7 @@ const defaultProducts = [
       amount: 0,
       category: "Vegetable",
       tax: 0.13,
-      volume: "Unit",
+      uom: "Unit",
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ const defaultProducts = [
       amount: 0,
       category: "Fruit",
       tax: 0.21,
-      volume: "Unit",
+      uom: "Unit",
     },
     {
       id: 3,
@@ -35,7 +35,7 @@ const defaultProducts = [
       amount: 0,
       category: "Vegetable",
       tax: 0.05,
-      volume: "Unit",
+      uom: "Unit",
     },
     {
       id: 4,
@@ -48,7 +48,7 @@ const defaultProducts = [
       amount: 0,
       category: "Fruit",
       tax: 0.1,
-      volume: "Unit",
+      uom: "Unit",
     },
     {
       id: 5,
@@ -60,7 +60,7 @@ const defaultProducts = [
       amount: 0,
       category: "Frozen",
       tax: 0.04,
-      volume: "Unit",
+      uom: "Unit",
     },
     {
       id: 6,
@@ -73,7 +73,7 @@ const defaultProducts = [
       amount: 0,
       category: "Bread",
       tax: 0.23,
-      volume: "Unit",
+      uom: "Unit",
     },
     {
       id: 7,
@@ -85,7 +85,7 @@ const defaultProducts = [
       amount: 0,
       category: "Vegetable",
       tax: 0.2,
-      volume: "Unit",
+      uom: "Unit",
     },
     {
       id: 8,
@@ -98,7 +98,7 @@ const defaultProducts = [
       amount: 0,
       category: "Vegetable",
       tax: 0.06,
-      volume: "Unit",
+      uom: "Unit",
     },
     {
       id: 9,
@@ -111,7 +111,7 @@ const defaultProducts = [
       amount: 0,
       category: "Fruit",
       tax: 0.2,
-      volume: "Unit",
+      uom: "Unit",
     },
     {
       id: 10,
@@ -124,7 +124,7 @@ const defaultProducts = [
       amount: 0,
       category: "Fruit",
       tax: 0.23,
-      volume: "Unit",
+      uom: "Unit",
     },
   ];
   export default defaultProducts;

@@ -44,8 +44,8 @@ const ProductCards = () => {
     // Lógica para cambiar la cantidad del producto con ID 'productId'
   }
 
-  const handleVolumeChange = () => {
-    // Lógica para cambiar el volumen del producto con ID 'productId'
+  const handleUomChange = () => {
+    // Lógica para cambiar el uomn del producto con ID 'productId'
   }
 
   return (

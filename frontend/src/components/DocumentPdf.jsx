@@ -218,7 +218,7 @@ export default function DocumentPdf({
               <Text style={styles.tableCell}>Product name</Text>
             </View>
             <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Quantity</Text>
+              <Text style={styles.tableCell}>Uom</Text>
             </View>  
             <View style={styles.tableCol}>
               <Text style={styles.tableCell}>UOM</Text>
@@ -239,7 +239,7 @@ export default function DocumentPdf({
             <Text style={styles.tableCell}>{article.amount}</Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>{article.volume}</Text>
+            <Text style={styles.tableCell}>{article.uom}</Text>
           </View>
           <View style={styles.tableCol}>
             <Text style={styles.tableCell}>£{article.totalItemToPay}</Text>
