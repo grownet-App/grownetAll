@@ -45,6 +45,9 @@ function AuthNavigator() {
         </>
       ) : (
         <>
+          {/* //TODO, quitar, solo para pruebas de maquetacion */}
+
+          {/* //----------------------------// */}
           <Stack.Screen
             name="home"
             component={Home}
