@@ -59,7 +59,7 @@ export default function Products(props) {
   ];
   const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
-  const { articlesToPay, totalNet, totalTaxes, totalToPay, selectedSupplier } = useOrderStore();
+  const { articlesToPay, uomToPay, setUomToPay, totalNet, totalTaxes, totalToPay, selectedSupplier } = useOrderStore();
 
   useEffect(() => {
     if (articlesToPay.length > 0) {
@@ -81,9 +81,11 @@ export default function Products(props) {
           const productsWithTax = defaultProducts.map((product) => ({
             ...product,
             amount: 0,
+            uomToPay: product.prices[0].nameUoms,
             prices: product.prices.map((price) => ({
               ...price,
               priceWithTax: /* TODO CUANDO CAMBIE A WORTH CAMBIE A NUMBER ACTIVARLO: price.worth + */ price.worth * product.tax,
+            
             })),
           }));
           useOrderStore.setState({ articlesToPay: productsWithTax });

@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import React from "react";
+import React, { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import "../../css/products.css";
 import { useFavoritesStore } from "../../store/useFavoritesStore";
@@ -15,7 +15,7 @@ export default function ProductCard({
   const isFavorite = favorites.includes(id, name, image);
   const urlImg =
   "https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/";
-const selectedUom = prices.find((price) => price.nameUoms === uomToPay);
+  const selectedUom = prices.find((price) => price.nameUoms === uomToPay);
 
   const handleToggleFavorite = () => {
     if (isFavorite) {
@@ -40,7 +40,7 @@ const selectedUom = prices.find((price) => price.nameUoms === uomToPay);
         <img src={ urlImg + image} alt={"image " + name} />
         <div>
           <div className="titlle-products">
-            <h1>{name} - {selectedUom ? selectedUom.name : prices[0].name} </h1>
+            <h1>{name} - {selectedUom.name} </h1>
             <div className="pr">
               <Icon
                 className="icono"
@@ -52,7 +52,7 @@ const selectedUom = prices.find((price) => price.nameUoms === uomToPay);
               ></Icon>
             </div>
           </div>
-          <p>GBP £{priceWithTax ? priceWithTax : prices[0].priceWithTax }</p>
+          <p>GBP £{selectedUom.priceWithTax}</p>
           <div className="product-amount">
             <Stepper
               productData={productData}

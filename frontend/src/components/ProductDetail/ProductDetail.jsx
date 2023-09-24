@@ -192,16 +192,10 @@ const handleClose = () => setShow(false);
 
   // CALCULAR TOTAL A PAGAR
   const calculateItemToPay = (article, amount) => {
-    let updatedPrice;
-    if (article.uomToPay === "Box") {
-      updatedPrice = article.price_box;
-    } else if (article.uomToPay === "Kg") {
-      updatedPrice = article.price_kg;
-    } else {
-      updatedPrice = article.price_unit;
-    }
-    const priceWithTax = updatedPrice + updatedPrice * article.tax;
-    const total = priceWithTax * amount;
+    const selectedPrice = article.prices.find(
+      (price) => price.nameUoms === article.uomToPay
+    );
+    const total = selectedPrice.priceWithTax * amount;
     const totalItemToPay = parseFloat(total.toFixed(2));
 
     if ("totalItemToPay" in article) {
