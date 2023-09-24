@@ -58,6 +58,7 @@ const handleClose = () => setShow(false);
       });
       setArticles(updatedArticlesToPay);
       useOrderStore.setState({ articlesToPay: updatedArticlesToPay });
+      console.log('ESTO ARTICULOS PASARON', updatedArticlesToPay)
     };
 
   // ELIMINAR ARTICULOS DEL CARRITO

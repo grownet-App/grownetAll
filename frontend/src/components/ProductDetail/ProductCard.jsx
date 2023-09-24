@@ -15,6 +15,7 @@ export default function ProductCard({
   const isFavorite = favorites.includes(id, name, image);
   const urlImg =
   "https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/";
+const selectedUom = prices.find((price) => price.nameUoms === uomToPay);
 
   const handleToggleFavorite = () => {
     if (isFavorite) {
@@ -39,7 +40,7 @@ export default function ProductCard({
         <img src={ urlImg + image} alt={"image " + name} />
         <div>
           <div className="titlle-products">
-            <h1>{name}</h1>
+            <h1>{name} - {selectedUom ? selectedUom.name : prices[0].name} </h1>
             <div className="pr">
               <Icon
                 className="icono"
@@ -51,7 +52,7 @@ export default function ProductCard({
               ></Icon>
             </div>
           </div>
-          <p>GBP £{priceWithTax}</p>
+          <p>GBP £{priceWithTax ? priceWithTax : prices[0].priceWithTax }</p>
           <div className="product-amount">
             <Stepper
               productData={productData}
