@@ -37,6 +37,7 @@ export default function Suppliers() {
       {suppliers
         .filter(
           (supplier) =>
+            supplier.name === "FRESH 4 U PRODUCE" ||
             supplier.name === "eurofrutta" ||
             supplier.name === "HG WALTER" ||
             supplier.name === "County Suppplies" ||
