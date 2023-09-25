@@ -27,11 +27,9 @@ export default function OrderDetails(props) {
 
   return (
     <section className="details">
-      <div className="tittle-detail">
-        <Link to="/products">
-          <Icon src="google.com" icon="ic:round-arrow-back" className="arrow" />
-        </Link>
-        <h1 className="tittle-orderDetail">{t("orderDetails.orderDetail")}</h1>
+      <div className="tittle-page">
+      <Link to="/products"> <Icon src="google.com" icon="ic:round-arrow-back" id="arrow-icon" /></Link>
+      <h1>{t("orderDetails.orderDetail")}</h1>
       </div>
       <div className="card-invoices">
         <ProductDetail

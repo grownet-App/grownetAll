@@ -14,6 +14,10 @@
     display: flex;
     align-items: center;
     position: relative;
+    margin-top: 1.2rem;
+    margin-bottom: 1rem;
+    font-size: 25px;
+    font-weight: 600;
 }
 .products .arrow{
     font-size: 1.5rem;
@@ -21,12 +25,7 @@
     right: 15rem;
     top: 1.5rem;
 }
-.tittle-products{
-    margin-top: 1.2rem;
-    margin-bottom: 1rem;
-    font-size: 25px;
-    font-weight: 700;
-}
+
 /*Tarjeta producto*/
 .elements{
     box-shadow: rgba(7, 33, 58, 0.12) 0px 0px 24px;
