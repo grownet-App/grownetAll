@@ -49,7 +49,7 @@ import { supplierProducts } from "../../config/urls.config";
 
 export default function Products(props) {
   const { t } = useTranslation();
-  const { token } = useTokenStore();
+  const { token, countryCode } = useTokenStore();
   const [showFavorites, setShowFavorites] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [products, setProducts] = useState([]);
@@ -59,16 +59,16 @@ export default function Products(props) {
   ];
   const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
-  const { articlesToPay, uomToPay, setUomToPay, totalNet, totalTaxes, totalToPay, selectedSupplier } = useOrderStore();
+  const { articlesToPay, uomToPay, setUomToPay, totalNet, totalTaxes, totalToPay, selectedSupplier, selectedRestaurant } = useOrderStore();
 
-  useEffect(() => {
+useEffect(() => {
     if (articlesToPay.length > 0) {
       setArticles(articlesToPay);
       setProducts(articlesToPay);
       console.log("TRAJO ALGO DEL STORAGE", articlesToPay);
     } else {
       axios
-        .get(supplierProducts + `${selectedSupplier.id}`, {
+        .get(`${supplierProducts}${selectedSupplier.id}/${countryCode}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -84,7 +84,7 @@ export default function Products(props) {
             uomToPay: product.prices[0].nameUoms,
             prices: product.prices.map((price) => ({
               ...price,
-              priceWithTax: /* TODO CUANDO CAMBIE A WORTH CAMBIE A NUMBER ACTIVARLO: price.worth + */ price.worth * product.tax,
+              priceWithTax: price.price + price.price * product.tax,
             
             })),
           }));
