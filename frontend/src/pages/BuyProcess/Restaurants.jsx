@@ -27,7 +27,6 @@ export default function Restaurants() {
       .then((response) => {
         setSelectedRestaurant(null);
         setRestaurants(response.data.customersChef);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error al obtener los restaurantes:", error);
@@ -53,7 +52,7 @@ export default function Restaurants() {
           to={"/suppliers"}
           key={restaurant.accountNumber}
         >
-          <img src={urlImg + restaurant.image} alt={restaurant.accountName}/>
+          <img src={urlImg + restaurant.image} alt={restaurant.accountName} />
           <div className="text-categ">
             <p>{restaurant.address}</p>
           </div>

@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -7,12 +8,11 @@ import Favorites from "../../components/Favorites";
 import ProductCard from "../../components/ProductDetail/ProductCard";
 import ProductSearcher from "../../components/ProductSearcher/ProductSearcher";
 import ProductsFind from "../../components/ProductSearcher/ProductsFind";
+import { supplierProducts } from "../../config/urls.config";
 import "../../css/products.css";
 import data from "../../data";
 import useOrderStore from "../../store/useOrderStore";
-import axios from "axios";
 import useTokenStore from "../../store/useTokenStore";
-import { supplierProducts } from "../../config/urls.config";
 
 // TODO LLAMADO A TODAS LAS CATEGORIAS PARA EL FILTER
 /* useEffect(() => {
@@ -59,9 +59,9 @@ export default function Products(props) {
   ];
   const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
-  const { articlesToPay, uomToPay, setUomToPay, totalNet, totalTaxes, totalToPay, selectedSupplier, selectedRestaurant } = useOrderStore();
+  const { articlesToPay, selectedSupplier } = useOrderStore();
 
-useEffect(() => {
+  useEffect(() => {
     if (articlesToPay.length > 0) {
       setArticles(articlesToPay);
       setProducts(articlesToPay);
@@ -76,7 +76,7 @@ useEffect(() => {
         .then((response) => {
           // Muestra los productos en la consola
           console.log("Productos del proveedor:", response.data);
-          console.log('NEW SELECTED SUPPLIER ID', selectedSupplier.id);
+          console.log("NEW SELECTED SUPPLIER ID", selectedSupplier.id);
           const defaultProducts = response.data.products;
           const productsWithTax = defaultProducts.map((product) => ({
             ...product,
@@ -85,7 +85,6 @@ useEffect(() => {
             prices: product.prices.map((price) => ({
               ...price,
               priceWithTax: price.price + price.price * product.tax,
-            
             })),
           }));
           useOrderStore.setState({ articlesToPay: productsWithTax });

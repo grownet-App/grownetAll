@@ -10,8 +10,8 @@ import { onlyCountries, validationApiUrl } from "../../config/urls.config";
 import "../../css/login.css";
 import "../../css/otp.css";
 import logo_blancov2 from "../../img/logo_blancov2.svg";
-import CodeOtp from "./CodeOtp";
 import useTokenStore from "../../store/useTokenStore";
+import CodeOtp from "./CodeOtp";
 
 function Login() {
   const { t, i18n } = useTranslation();
@@ -82,7 +82,6 @@ function Login() {
           handleShow(false);
           setShowAlert(false);
           setPhoneNumber(PhoneNumber);
-          console.log("RESPONSE DE LOGIN", response.data);
         } else {
           setShowAlert(true);
           handleShow(false);

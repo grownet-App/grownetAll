@@ -30,8 +30,6 @@ export default function Suppliers() {
     setSelectedSupplier(supplier);
   };
 
-  console.log("suppliers:", suppliers)
-
   return (
     <section className="suppliers">
       {suppliers

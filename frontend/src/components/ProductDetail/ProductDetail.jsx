@@ -1,9 +1,8 @@
-import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
-import { Form, Modal } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import useOrderStore from "../../store/useOrderStore";
-import Stepper from "../Stepper/Stepper";
 import DeleteProduct from "../DeleteProduct";
+import Stepper from "../Stepper/Stepper";
 
 export default function ProductDetail({
   updateTotalToPay,
@@ -13,7 +12,6 @@ export default function ProductDetail({
   const { articlesToPay, setArticlesToPay } = useOrderStore();
   // ACTUALIZAR CANTIDAD DE ARTICULOS
   const [articles, setArticles] = useState(articlesToPay);
-const handleClose = () => setShow(false);
   useEffect(() => {
     setArticles(articlesToPay);
   }, [articles]);
@@ -40,28 +38,25 @@ const handleClose = () => setShow(false);
 
   // ACTUALIZAR UOMTOPAY DE ARTICULOS
   const handleUomChange = (productId, newUomToPay) => {
-     const updatedArticlesToPay = articles.map((article) => {
-        if (article.id === productId) {
-          const selectedPrice = article.prices.find(
-            (price) => price.nameUoms === newUomToPay
-          );
-          return {
-            ...article,
-            uomToPay: newUomToPay,
-            priceWithTax: selectedPrice.priceWithTax,
-          };
-        }
-        return article;
-      });
-      setArticles(updatedArticlesToPay);
-      useOrderStore.setState({ articlesToPay: updatedArticlesToPay });
-      console.log('ESTO ARTICULOS PASARON', updatedArticlesToPay)
-    };
-
-  
+    const updatedArticlesToPay = articles.map((article) => {
+      if (article.id === productId) {
+        const selectedPrice = article.prices.find(
+          (price) => price.nameUoms === newUomToPay
+        );
+        return {
+          ...article,
+          uomToPay: newUomToPay,
+          priceWithTax: selectedPrice.priceWithTax,
+        };
+      }
+      return article;
+    });
+    setArticles(updatedArticlesToPay);
+    useOrderStore.setState({ articlesToPay: updatedArticlesToPay });
+    console.log("ESTO ARTICULOS PASARON", updatedArticlesToPay);
+  };
 
   const handleTrashClick = (productId) => {
-
     setArticles((prevArticles) =>
       prevArticles.map((article) =>
         article.id === productId
@@ -69,7 +64,7 @@ const handleClose = () => setShow(false);
           : article
       )
     );
-    
+
     const updatedArticlesToPay = articlesToPay.map((article) =>
       article.id === productId
         ? { ...article, amount: 0, totalItemToPay: 0 }
@@ -82,14 +77,8 @@ const handleClose = () => setShow(false);
   };
 
   // CALCULAR EL NETO
-  const calculateItemNet = (
-    prices,
-    amount,
-    uomToPay
-  ) => {
-    const selectedPrice = prices.find(
-      (price) => price.nameUoms === uomToPay
-    );
+  const calculateItemNet = (prices, amount, uomToPay) => {
+    const selectedPrice = prices.find((price) => price.nameUoms === uomToPay);
     const net = selectedPrice.price * amount;
     console.log("ESTE ES EL NET", net);
     return parseFloat(net.toFixed(2));
@@ -108,15 +97,8 @@ const handleClose = () => setShow(false);
   };
 
   // CALCULAR TAXES
-  const calculateItemTaxes = (
-    prices,
-    tax,
-    amount,
-    uomToPay
-  ) => {
-    const selectedPrice = prices.find(
-      (price) => price.nameUoms === uomToPay
-    );
+  const calculateItemTaxes = (prices, tax, amount, uomToPay) => {
+    const selectedPrice = prices.find((price) => price.nameUoms === uomToPay);
     const taxes = selectedPrice.price * tax * amount;
     return parseFloat(taxes.toFixed(2));
   };
@@ -159,7 +141,6 @@ const handleClose = () => setShow(false);
   };
 
   useEffect(() => {
-    
     const newTotalTaxes = calculateTotalTaxes(articles);
     updateTotalTaxes(newTotalTaxes);
 
@@ -180,10 +161,18 @@ const handleClose = () => setShow(false);
               <h3>{article.name}</h3>
               <div className="product-detail">
                 <h3>£{calculateItemToPay(article, article.amount)}</h3>
-                <DeleteProduct articles={articles} setArticles={setArticles} article={article} articlesToPay={articlesToPay} setArticlesToPay={setArticlesToPay} calculateTotalToPay={calculateTotalToPay} updateTotalToPay={updateTotalToPay} />
+                <DeleteProduct
+                  articles={articles}
+                  setArticles={setArticles}
+                  article={article}
+                  articlesToPay={articlesToPay}
+                  setArticlesToPay={setArticlesToPay}
+                  calculateTotalToPay={calculateTotalToPay}
+                  updateTotalToPay={updateTotalToPay}
+                />
               </div>
             </div>
-           <div className="product-detail">
+            <div className="product-detail">
               <Stepper
                 productData={article}
                 onAmountChange={handleAmountChange}
@@ -191,7 +180,9 @@ const handleClose = () => setShow(false);
               <Form.Select
                 aria-label="Select UomToPay"
                 value={article.uomToPay}
-                onChange={(event) => handleUomChange(article.id, event.target.value)}
+                onChange={(event) =>
+                  handleUomChange(article.id, event.target.value)
+                }
               >
                 {article.prices.map((price) => (
                   <option key={price.nameUoms} value={price.nameUoms}>
