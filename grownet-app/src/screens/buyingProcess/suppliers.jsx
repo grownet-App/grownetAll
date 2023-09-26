@@ -58,7 +58,7 @@ const Suppliers = () => {
               style={SuppliersStyles.suppliersBg}
               key={supplier.id}
               source={{
-                uri: 'https://cultivovital.com/wp-content/uploads/2020/11/pimiento-rojo-png-2.png',
+                uri: imageUrl,
                 cache: 'reload',
               }}
             >

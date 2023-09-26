@@ -384,11 +384,11 @@ export default function OrderInformation() {
   };
   return (
     <section className="details">
-      <div className="tittle-detail">
+      <div className="tittle-page">
         <Link to="/details">
-          <Icon src="google.com" icon="ic:round-arrow-back" className="arrow" />
+          <Icon src="google.com" icon="ic:round-arrow-back" id="arrow-icon" />
         </Link>
-        <h1 className="tittle-orderDetail">
+        <h1>
           {t("deliveryDetail.orderDetail")}
         </h1>
       </div>

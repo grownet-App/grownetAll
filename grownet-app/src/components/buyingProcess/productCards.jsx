@@ -50,7 +50,10 @@ const ProductCards = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView style={{ marginBottom: 110, marginTop: 10 }}>
+      <ScrollView
+        style={{ marginBottom: 200, marginTop: 10 }}
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
         {data.products.map((product) => (
           <View
             key={product.id}
@@ -94,7 +97,7 @@ const ProductCards = () => {
                     >
                       <Text
                         onPress={decrementCount}
-                        style={ProductsStyles.button_}
+                        style={ProductsStyles.button2}
                       >
                         -
                       </Text>

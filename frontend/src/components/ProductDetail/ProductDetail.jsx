@@ -1,8 +1,9 @@
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
-import {Form, Modal} from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import useOrderStore from "../../store/useOrderStore";
 import Stepper from "../Stepper/Stepper";
+import DeleteProduct from "../DeleteProduct";
 
 export default function ProductDetail({
   updateTotalToPay,
@@ -10,10 +11,6 @@ export default function ProductDetail({
   updateTotalNet,
 }) {
   const { articlesToPay, setArticlesToPay } = useOrderStore();
-
-  const [show, setShow] = useState(false);
-  
-  console.log(show)
   // ACTUALIZAR CANTIDAD DE ARTICULOS
   const [articles, setArticles] = useState(articlesToPay);
 const handleClose = () => setShow(false);
@@ -61,47 +58,14 @@ const handleClose = () => setShow(false);
       console.log('ESTO ARTICULOS PASARON', updatedArticlesToPay)
     };
 
-  // ELIMINAR ARTICULOS DEL CARRITO
-  const alertDelete = (productId) =>{
-    setShow(true);
-  }
-  const deleteFunction = (productId) =>{
-    const filterTask = articles.filter(article => article.id != productId)
-    if (show==true) {
-      setArticles(filterTask);
-    handleClose();
-    }
-    
-    
-    const updatedArticlesToPay = articlesToPay.map((article) =>
-      article.id === productId
-        ? { ...article, amount: 0, totalItemToPay: 0 }
-        : article
-    );
-    setArticlesToPay(updatedArticlesToPay);
-
-    const newTotalToPay = calculateTotalToPay(updatedArticlesToPay);
-    updateTotalToPay(newTotalToPay);
-
-    
-  }
+  
 
   const handleTrashClick = (productId) => {
-    
-    /*setArticles((prevArticles) =>
-      prevArticles.map((article) => {
-        if(article.id === productId){
-          console.log("hola")
-          setShow(true);
-        }
-        
-      })
-      );*/
 
     setArticles((prevArticles) =>
       prevArticles.map((article) =>
         article.id === productId
-          ? { ...article, amount: 0, totalItemToPay: 0 } 
+          ? { ...article, amount: 0, totalItemToPay: 0 }
           : article
       )
     );
@@ -216,33 +180,10 @@ const handleClose = () => setShow(false);
               <h3>{article.name}</h3>
               <div className="product-detail">
                 <h3>£{calculateItemToPay(article, article.amount)}</h3>
-                <Icon
-                  id="trash"
-                  icon="ph:trash"
-                  onClick={alertDelete}
-                />
+                <DeleteProduct articles={articles} setArticles={setArticles} article={article} articlesToPay={articlesToPay} setArticlesToPay={setArticlesToPay} calculateTotalToPay={calculateTotalToPay} updateTotalToPay={updateTotalToPay} />
               </div>
             </div>
-            {show ? (
-            <Modal show={show} onHide={handleClose}>
-              <section className="alerta">
-                <Icon className="error" icon="pajamas:error" />
-                <h1>Delete product</h1>
-                <p id="text-alert">Are you sure to delete {article.name} the product?</p>
-                <div className="alert-delete">
-                  <button onClick={() => deleteFunction(article.id)} className="bttn btn-primary">Delete</button>
-                  <button onClick={handleClose} className="bttn btn-outline">Cancel</button>
-                </div>
-                
-                {/*<Link> className="bttn btn-primary" to="/register">
-              Register now
-              </Link>*/}
-              </section>
-            </Modal>
-          ) : (
-            <></>
-        )}
-            <div className="product-detail">
+           <div className="product-detail">
               <Stepper
                 productData={article}
                 onAmountChange={handleAmountChange}
@@ -261,7 +202,6 @@ const handleClose = () => setShow(false);
             </div>
           </div>
         ))}
-        
     </>
   );
 }
