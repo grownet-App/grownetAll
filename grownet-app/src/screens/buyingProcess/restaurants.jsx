@@ -42,7 +42,7 @@ const Restaurants = () => {
 
   console.log('RESTAURANTES:', restaurants)
   const urlImg =
-    'https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/'
+    'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
 
   const onPressAdd = () => {
     //TODO,agregar restaurante
