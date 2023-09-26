@@ -104,11 +104,8 @@ const handleClose = () => setShow(false);
           ? { ...article, amount: 0, totalItemToPay: 0 } 
           : article
       )
-     
-      
-  
     );
-
+    
     const updatedArticlesToPay = articlesToPay.map((article) =>
       article.id === productId
         ? { ...article, amount: 0, totalItemToPay: 0 }
@@ -122,30 +119,22 @@ const handleClose = () => setShow(false);
 
   // CALCULAR EL NETO
   const calculateItemNet = (
-    price_unit,
-    price_box,
-    price_kg,
+    prices,
     amount,
     uomToPay
   ) => {
-    let price;
-    if (uomToPay === "Box") {
-      price = price_box;
-    } else if (uomToPay === "Kg") {
-      price = price_kg;
-    } else {
-      price = price_unit;
-    }
-    const net = price * amount;
+    const selectedPrice = prices.find(
+      (price) => price.nameUoms === uomToPay
+    );
+    const net = selectedPrice.price * amount;
+    console.log("ESTE ES EL NET", net);
     return parseFloat(net.toFixed(2));
   };
 
   const calculateTotalNet = (articles) => {
     const totalNet = articles.reduce((total, article) => {
       const itemNet = calculateItemNet(
-        article.price_unit,
-        article.price_box,
-        article.price_kg,
+        article.prices,
         article.amount,
         article.uomToPay
       );
@@ -176,6 +165,7 @@ const handleClose = () => setShow(false);
   };
 
   const calculateTotalTaxes = (articles) => {
+    console.log("ARTICLES DE TOTAL TAXES",articles)
     const totalTaxes = articles.reduce((total, article) => {
       const itemTaxes = calculateItemTaxes(
         article.price_unit,
@@ -215,6 +205,7 @@ const handleClose = () => setShow(false);
   };
 
   useEffect(() => {
+    
     const newTotalTaxes = calculateTotalTaxes(articles);
     updateTotalTaxes(newTotalTaxes);
 
