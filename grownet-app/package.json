@@ -35,7 +35,8 @@
     "react-native-web": "~0.18.10",
     "zustand": "^4.4.1",
     "zustand-persist": "^0.4.0",
-    "@react-native-community/datetimepicker": "6.7.3"
+    "@react-native-community/datetimepicker": "6.7.3",
+    "expo-blur": "~12.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
