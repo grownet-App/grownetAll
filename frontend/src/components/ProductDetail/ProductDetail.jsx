@@ -19,7 +19,7 @@ export default function ProductDetail({
 const handleClose = () => setShow(false);
   useEffect(() => {
     setArticles(articlesToPay);
-  }, []);
+  }, [articles]);
 
   const handleAmountChange = (productId, newAmount) => {
     setArticles((prevArticles) =>
@@ -145,32 +145,22 @@ const handleClose = () => setShow(false);
 
   // CALCULAR TAXES
   const calculateItemTaxes = (
-    price_unit,
-    price_box,
-    price_kg,
+    prices,
     tax,
     amount,
     uomToPay
   ) => {
-    let price;
-    if (uomToPay === "Box") {
-      price = price_box;
-    } else if (uomToPay === "Kg") {
-      price = price_kg;
-    } else {
-      price = price_unit;
-    }
-    const taxes = price * tax * amount;
+    const selectedPrice = prices.find(
+      (price) => price.nameUoms === uomToPay
+    );
+    const taxes = selectedPrice.price * tax * amount;
     return parseFloat(taxes.toFixed(2));
   };
 
   const calculateTotalTaxes = (articles) => {
-    console.log("ARTICLES DE TOTAL TAXES",articles)
     const totalTaxes = articles.reduce((total, article) => {
       const itemTaxes = calculateItemTaxes(
-        article.price_unit,
-        article.price_box,
-        article.price_kg,
+        article.prices,
         article.tax,
         article.amount,
         article.uomToPay

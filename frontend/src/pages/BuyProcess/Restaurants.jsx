@@ -27,6 +27,7 @@ export default function Restaurants() {
       .then((response) => {
         setSelectedRestaurant(null);
         setRestaurants(response.data.customersChef);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error al obtener los restaurantes:", error);
