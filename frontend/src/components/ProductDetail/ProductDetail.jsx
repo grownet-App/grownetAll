@@ -1,9 +1,8 @@
-import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
-import { Form, Modal } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import useOrderStore from "../../store/useOrderStore";
-import Stepper from "../Stepper/Stepper";
 import DeleteProduct from "../DeleteProduct";
+import Stepper from "../Stepper/Stepper";
 
 export default function ProductDetail({
   updateTotalToPay,
@@ -13,6 +12,9 @@ export default function ProductDetail({
   const { articlesToPay, setArticlesToPay } = useOrderStore();
   // ACTUALIZAR CANTIDAD DE ARTICULOS
   const [articles, setArticles] = useState(articlesToPay);
+  useEffect(() => {
+    setArticles(articlesToPay);
+  }, [articles]);
 
   const handleAmountChange = (productId, newAmount) => {
     setArticles((prevArticles) =>
@@ -34,47 +36,27 @@ export default function ProductDetail({
     updateTotalToPay(newTotalToPay);
   };
 
-  // ACTUALIZAR VOLUMEN DE ARTICULOS
-  const handleVolumeChange = (productId, event) => {
-    const newVolume = event.target.value;
-    let newPriceWithTax;
-
-    setArticles((prevArticles) =>
-      prevArticles.map((article) => {
-        if (article.id === productId) {
-          let updatedPrice;
-          if (newVolume === "Box") {
-            updatedPrice = article.price_box;
-          } else if (newVolume === "Kg") {
-            updatedPrice = article.price_kg;
-          } else {
-            updatedPrice = article.price_unit;
-          }
-          newPriceWithTax = updatedPrice + updatedPrice * article.tax;
-          const updatedArticle = {
-            ...article,
-            volume: newVolume,
-            priceWithTax: newPriceWithTax,
-          };
-          return updatedArticle;
-        }
-        return article;
-      })
-    );
-    const updatedArticlesToPay = articlesToPay.map((article) => {
+  // ACTUALIZAR UOMTOPAY DE ARTICULOS
+  const handleUomChange = (productId, newUomToPay) => {
+    const updatedArticlesToPay = articles.map((article) => {
       if (article.id === productId) {
-        return { ...article, volume: newVolume, priceWithTax: newPriceWithTax };
+        const selectedPrice = article.prices.find(
+          (price) => price.nameUoms === newUomToPay
+        );
+        return {
+          ...article,
+          uomToPay: newUomToPay,
+          priceWithTax: selectedPrice.priceWithTax,
+        };
       }
       return article;
     });
-
-    setArticlesToPay(updatedArticlesToPay);
+    setArticles(updatedArticlesToPay);
+    useOrderStore.setState({ articlesToPay: updatedArticlesToPay });
+    console.log("ESTO ARTICULOS PASARON", updatedArticlesToPay);
   };
 
-  
-
   const handleTrashClick = (productId) => {
-
     setArticles((prevArticles) =>
       prevArticles.map((article) =>
         article.id === productId
@@ -95,33 +77,19 @@ export default function ProductDetail({
   };
 
   // CALCULAR EL NETO
-  const calculateItemNet = (
-    price_unit,
-    price_box,
-    price_kg,
-    amount,
-    volume
-  ) => {
-    let price;
-    if (volume === "Box") {
-      price = price_box;
-    } else if (volume === "Kg") {
-      price = price_kg;
-    } else {
-      price = price_unit;
-    }
-    const net = price * amount;
+  const calculateItemNet = (prices, amount, uomToPay) => {
+    const selectedPrice = prices.find((price) => price.nameUoms === uomToPay);
+    const net = selectedPrice.price * amount;
+    console.log("ESTE ES EL NET", net);
     return parseFloat(net.toFixed(2));
   };
 
   const calculateTotalNet = (articles) => {
     const totalNet = articles.reduce((total, article) => {
       const itemNet = calculateItemNet(
-        article.price_unit,
-        article.price_box,
-        article.price_kg,
+        article.prices,
         article.amount,
-        article.volume
+        article.uomToPay
       );
       return total + itemNet;
     }, 0);
@@ -129,35 +97,19 @@ export default function ProductDetail({
   };
 
   // CALCULAR TAXES
-  const calculateItemTaxes = (
-    price_unit,
-    price_box,
-    price_kg,
-    tax,
-    amount,
-    volume
-  ) => {
-    let price;
-    if (volume === "Box") {
-      price = price_box;
-    } else if (volume === "Kg") {
-      price = price_kg;
-    } else {
-      price = price_unit;
-    }
-    const taxes = price * tax * amount;
+  const calculateItemTaxes = (prices, tax, amount, uomToPay) => {
+    const selectedPrice = prices.find((price) => price.nameUoms === uomToPay);
+    const taxes = selectedPrice.price * tax * amount;
     return parseFloat(taxes.toFixed(2));
   };
 
   const calculateTotalTaxes = (articles) => {
     const totalTaxes = articles.reduce((total, article) => {
       const itemTaxes = calculateItemTaxes(
-        article.price_unit,
-        article.price_box,
-        article.price_kg,
+        article.prices,
         article.tax,
         article.amount,
-        article.volume
+        article.uomToPay
       );
       return total + itemTaxes;
     }, 0);
@@ -166,16 +118,10 @@ export default function ProductDetail({
 
   // CALCULAR TOTAL A PAGAR
   const calculateItemToPay = (article, amount) => {
-    let updatedPrice;
-    if (article.volume === "Box") {
-      updatedPrice = article.price_box;
-    } else if (article.volume === "Kg") {
-      updatedPrice = article.price_kg;
-    } else {
-      updatedPrice = article.price_unit;
-    }
-    const priceWithTax = updatedPrice + updatedPrice * article.tax;
-    const total = priceWithTax * amount;
+    const selectedPrice = article.prices.find(
+      (price) => price.nameUoms === article.uomToPay
+    );
+    const total = selectedPrice.priceWithTax * amount;
     const totalItemToPay = parseFloat(total.toFixed(2));
 
     if ("totalItemToPay" in article) {
@@ -215,22 +161,34 @@ export default function ProductDetail({
               <h3>{article.name}</h3>
               <div className="product-detail">
                 <h3>£{calculateItemToPay(article, article.amount)}</h3>
-                <DeleteProduct articles={articles} setArticles={setArticles} article={article} articlesToPay={articlesToPay} setArticlesToPay={setArticlesToPay} calculateTotalToPay={calculateTotalToPay} updateTotalToPay={updateTotalToPay} />
+                <DeleteProduct
+                  articles={articles}
+                  setArticles={setArticles}
+                  article={article}
+                  articlesToPay={articlesToPay}
+                  setArticlesToPay={setArticlesToPay}
+                  calculateTotalToPay={calculateTotalToPay}
+                  updateTotalToPay={updateTotalToPay}
+                />
               </div>
             </div>
-           <div className="product-detail">
+            <div className="product-detail">
               <Stepper
                 productData={article}
                 onAmountChange={handleAmountChange}
               />
               <Form.Select
-                aria-label="Select Volume"
-                value={article.volume}
-                onChange={(event) => handleVolumeChange(article.id, event)}
+                aria-label="Select UomToPay"
+                value={article.uomToPay}
+                onChange={(event) =>
+                  handleUomChange(article.id, event.target.value)
+                }
               >
-                <option value="Unit">Unit</option>
-                <option value="Box">Box</option>
-                <option value="Kg">Kg</option>
+                {article.prices.map((price) => (
+                  <option key={price.nameUoms} value={price.nameUoms}>
+                    {price.nameUoms}
+                  </option>
+                ))}
               </Form.Select>
             </div>
           </div>

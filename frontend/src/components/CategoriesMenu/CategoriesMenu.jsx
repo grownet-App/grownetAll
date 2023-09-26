@@ -77,7 +77,7 @@ export default function CategoriesMenu({
               {category === "All" && (
                 <Icon icon="fluent-emoji:basket" className="fav" />
               )}
-              {categoriesApi.map((arrayCateg) => (
+              {allCategories2.map((arrayCateg) => (
                 <>
                   {category === arrayCateg.name && (
                     <>

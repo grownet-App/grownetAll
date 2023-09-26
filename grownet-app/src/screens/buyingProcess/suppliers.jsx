@@ -30,7 +30,7 @@ const Suppliers = () => {
   }, [token, setSuppliers, setSelectedSupplier])
 
   const urlImg =
-    'https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/'
+    'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
 
   const specialSuppliers = [
     'eurofrutta',
@@ -58,7 +58,7 @@ const Suppliers = () => {
               style={SuppliersStyles.suppliersBg}
               key={supplier.id}
               source={{
-                uri: 'https://cultivovital.com/wp-content/uploads/2020/11/pimiento-rojo-png-2.png',
+                uri: imageUrl,
                 cache: 'reload',
               }}
             >

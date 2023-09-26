@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import useProductStore from "../../store/useProductStore";
 import ProductCard from "../ProductDetail/ProductCard";
 
-function ProductsFind({ onAmountChange, onVolumeChange }) {
+function ProductsFind({ onAmountChange, onUomChange }) {
   const { t } = useTranslation();
   const filteredProducts = useProductStore((state) => state.filteredProducts);
 
@@ -19,7 +19,7 @@ function ProductsFind({ onAmountChange, onVolumeChange }) {
             key={product.id}
             productData={product}
             onAmountChange={onAmountChange}
-            onVolumeChange={onVolumeChange}
+            onUomChange={onUomChange}
           >
           </ProductCard>
         ))}

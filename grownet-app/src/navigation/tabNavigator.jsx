@@ -13,7 +13,8 @@ import useTokenStore from '../store/useTokenStore'
 import Restauranst from '../screens/buyingProcess/restaurants'
 import { goBack } from './rootNavigation'
 import Products from '../screens/buyingProcess/products'
-import OrdersDetail from '../screens/buyingProcess/ordersDetail'
+import OrderDetail from '../screens/buyingProcess/orderDetail'
+import OrderSuccessful from '../screens/buyingProcess/orderSuccessful'
 import OrderInformation from '../screens/buyingProcess/orderInformation'
 
 const Tab = createBottomTabNavigator()
@@ -37,21 +38,6 @@ const headerRight = () => (
     color="#fff"
   />
 )
-const tabBarIconProps =
-  (name) =>
-  ({ color, size }) => {
-    name === 'Settings'
-      ? (name = 'cogs')
-      : name === 'orders'
-      ? (name = 'shopping-basket')
-      : name === 'records'
-      ? (name = 'receipt')
-      : name === 'chat'
-      ? (name = 'comments')
-      : ''
-
-    return <FontAwesome5 name={name} size={size} color={color} />
-  }
 
 function OrderStack() {
   const { setToken } = useTokenStore()
@@ -65,7 +51,7 @@ function OrderStack() {
   return (
     //TODO. PONER RUTA DE RESTAURANTES
     <Stack.Navigator
-      initialRouteName="orderInformation"
+      initialRouteName="products"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#026CD2',
@@ -135,7 +121,7 @@ function OrderStack() {
       />
       <Stack.Screen
         name="ordersDetail"
-        component={OrdersDetail}
+        component={OrderDetail}
         options={{
           headerShown: true,
 
@@ -156,6 +142,26 @@ function OrderStack() {
       <Stack.Screen
         name="orderInformation"
         component={OrderInformation}
+        options={{
+          headerShown: true,
+
+          title: 'Order detail',
+          headerStyle: {
+            backgroundColor: '#f2f2f2',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsBold',
+            fontSize: 24,
+          },
+          headerLeft: () => headerLeft(),
+        }}
+      />
+      <Stack.Screen
+        name="orderSuccessful"
+        component={OrderSuccessful}
         options={{
           headerShown: false,
         }}
@@ -182,7 +188,7 @@ function MyStack1() {
           headerRight: () => headerRight(),
         }}
       />
-      <Stack.Screen name="ordersDetail" component={OrdersDetail} />
+      <Stack.Screen name="ordersDetail" component={OrderDetail} />
     </Stack.Navigator>
   )
 }
@@ -209,6 +215,21 @@ function MyStack3() {
   )
 }
 
+const tabBarIconProps =
+  (name) =>
+  ({ color, size }) => {
+    name === 'Settings'
+      ? (name = 'cogs')
+      : name === 'orders'
+      ? (name = 'shopping-basket')
+      : name === 'records'
+      ? (name = 'receipt')
+      : name === 'chat'
+      ? (name = 'comments')
+      : ''
+
+    return <FontAwesome5 name={name} size={size} color={color} />
+  }
 const TabNavigator = () => {
   return (
     <Tab.Navigator

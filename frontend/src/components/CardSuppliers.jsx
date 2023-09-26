@@ -9,7 +9,7 @@ export default function Suppliers() {
   const { suppliers, setSuppliers, setSelectedSupplier } = useOrderStore();
   const { token } = useTokenStore();
   const urlImg =
-    "https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/";
+    "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/";
   useEffect(() => {
     axios
       .get(availableSuppliers, {
@@ -30,13 +30,12 @@ export default function Suppliers() {
     setSelectedSupplier(supplier);
   };
 
-  console.log("suppliers:", suppliers)
-
   return (
     <section className="suppliers">
       {suppliers
         .filter(
           (supplier) =>
+            supplier.name === "FRESH 4 U PRODUCE" ||
             supplier.name === "eurofrutta" ||
             supplier.name === "HG WALTER" ||
             supplier.name === "County Suppplies" ||

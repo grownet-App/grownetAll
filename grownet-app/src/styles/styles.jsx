@@ -263,7 +263,6 @@ export const ProductsStyles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 51,
     paddingLeft: 20,
-
     fontSize: 20,
   },
   iconSearch: {
@@ -299,7 +298,7 @@ export const ProductsStyles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: '#f2f2f2',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     marginRight: 5,
     width: 80,
     height: 45,
@@ -312,14 +311,14 @@ export const ProductsStyles = StyleSheet.create({
     color: '#62c471',
     fontWeight: 'bold',
   },
-  button_: {
+  button2: {
     backgroundColor: 'transparent',
     width: 20,
     fontSize: 25,
     color: '#62c471',
     fontWeight: 'bold',
-
     textAlign: 'center',
+    marginLeft: 5,
   },
   containerSelect: {
     flexDirection: 'row',
@@ -337,6 +336,16 @@ export const ProductsStyles = StyleSheet.create({
   textPrice: {
     color: '#0d6efd',
     fontWeight: 'bold',
+  },
+  //PRODUCT CATEGORIES
+  contenImage: {
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    width: 120,
+    height: 120,
+    borderRadius: 25,
+    margin: 10,
+    alignItems: 'center',
   },
 })
 
@@ -389,6 +398,52 @@ export const OrdersDetailStyles = StyleSheet.create({
   ContinueText: { color: '#ffff', fontWeight: 'bold' },
 })
 
+export const OrderInformationStyles = StyleSheet.create({
+  PrimaryTex: {
+    color: '#04444f',
+    fontSize: 20,
+    marginLeft: 20,
+    marginTop: 20,
+  },
+  containerInputs: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  input: {
+    width: '90%',
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    fontSize: 15,
+    color: '#a9a9a9',
+  },
+  inputRequirements: {
+    backgroundColor: 'white',
+    width: '90%',
+    borderRadius: 10,
+    fontSize: 15,
+    padding: 10,
+  },
+  containerButton: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  btnPrimary: {
+    alignItems: 'center',
+    backgroundColor: '#026cd2',
+    paddingHorizontal: 35,
+    paddingVertical: 12,
+    borderRadius: 30,
+    marginTop: 20,
+    width: '80%',
+  },
+  ContinueText: {
+    color: '#ffff',
+    fontWeight: 'bold',
+  },
+})
+
 export const OrderSuccessfulStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -410,22 +465,35 @@ export const OrderSuccessfulStyles = StyleSheet.create({
   },
   btnPrimary: {
     backgroundColor: '#026cd2',
-    paddingHorizontal: 35,
+
     paddingVertical: 12,
     borderRadius: 30,
     marginTop: 32,
-    width: 145,
+    width: 160,
     height: 42,
   },
   btnPrimary2: {
     backgroundColor: '#ffff',
-    paddingHorizontal: 35,
     paddingVertical: 12,
     borderRadius: 30,
     marginTop: 32,
     borderColor: '#0d6efd',
     borderWidth: 1,
-    width: 145,
-    height: 42,
+    width: 160,
+  },
+  ContinueText: {
+    color: '#ffff',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  ContinueText2: {
+    color: '#0d6efd',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  containerButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '90%',
   },
 })

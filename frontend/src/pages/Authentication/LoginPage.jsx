@@ -10,6 +10,7 @@ import { onlyCountries, validationApiUrl } from "../../config/urls.config";
 import "../../css/login.css";
 import "../../css/otp.css";
 import logo_blancov2 from "../../img/logo_blancov2.svg";
+import useTokenStore from "../../store/useTokenStore";
 import CodeOtp from "./CodeOtp";
 
 function Login() {
@@ -23,6 +24,7 @@ function Login() {
   const [show, setShow] = useState(false);
   //TODO ELIMINAR ESTE OTP CODE, ES SOLO PARA VER EL CODIGO EN PANTALLA
   const [otpCode, setOtpCode] = useState("");
+  const { setCountryCode } = useTokenStore();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -43,6 +45,7 @@ function Login() {
   const handleChange = (value, selectedCountry) => {
     setPhoneNumber(value);
     setCountry(selectedCountry.dialCode);
+    setCountryCode(selectedCountry.dialCode);
     setValid(validatePhoneNumber(value));
     const selectedLang = selectedCountry.countryCode;
     i18n.changeLanguage(selectedLang);

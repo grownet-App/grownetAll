@@ -44,13 +44,16 @@ const ProductCards = () => {
     // Lógica para cambiar la cantidad del producto con ID 'productId'
   }
 
-  const handleVolumeChange = () => {
-    // Lógica para cambiar el volumen del producto con ID 'productId'
+  const handleUomChange = () => {
+    // Lógica para cambiar el uomn del producto con ID 'productId'
   }
 
   return (
     <SafeAreaView>
-      <ScrollView style={{ marginBottom: 110, marginTop: 10 }}>
+      <ScrollView
+        style={{ marginBottom: 200, marginTop: 10 }}
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
         {data.products.map((product) => (
           <View
             key={product.id}
@@ -94,7 +97,7 @@ const ProductCards = () => {
                     >
                       <Text
                         onPress={decrementCount}
-                        style={ProductsStyles.button_}
+                        style={ProductsStyles.button2}
                       >
                         -
                       </Text>

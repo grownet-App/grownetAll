@@ -16,10 +16,14 @@ export default function Stepper({ productData, onAmountChange }) {
         onClick={() => {
           if (amount > 0) {
             setAmount(amount - 1);
+            console.log("aca esta")
+          }
+          if(amount <=1 ){
+            console.log("aca esta2")
           }
         }}
       >
-        -
+        - 
       </button>
       <input
         type="number"

@@ -12,7 +12,7 @@ import useTokenStore from "../../store/useTokenStore";
 export default function Restaurants() {
   const { t } = useTranslation();
   const urlImg =
-    "https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/";
+    "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/";
   const { token } = useTokenStore();
   const { restaurants, setRestaurants, setSelectedRestaurant } =
     useOrderStore();
@@ -52,7 +52,7 @@ export default function Restaurants() {
           to={"/suppliers"}
           key={restaurant.accountNumber}
         >
-          <img src={urlImg + restaurant.image} alt={restaurant.accountName}/>
+          <img src={urlImg + restaurant.image} alt={restaurant.accountName} />
           <div className="text-categ">
             <p>{restaurant.address}</p>
           </div>
