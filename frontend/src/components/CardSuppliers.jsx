@@ -1,33 +1,22 @@
-import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { availableSuppliers } from "../config/urls.config";
 import useOrderStore from "../store/useOrderStore";
-import useTokenStore from "../store/useTokenStore";
 
 export default function Suppliers() {
-  const { suppliers, setSuppliers, setSelectedSupplier } = useOrderStore();
-  const { token } = useTokenStore();
+  const {
+    suppliers,
+    setSelectedSupplier,
+    selectedSupplier: currentSelectedSupplier,
+    setArticlesToPay,
+  } = useOrderStore();
   const urlImg =
     "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/";
-  useEffect(() => {
-    axios
-      .get(availableSuppliers, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setSelectedSupplier(null);
-        setSuppliers(response.data.suppliers);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los proveedores:", error);
-      });
-  }, []);
 
   const handleSupplierSelect = (supplier) => {
     setSelectedSupplier(supplier);
+    if (currentSelectedSupplier?.id !== supplier.id) {
+      setArticlesToPay([]);
+    }
   };
 
   return (
