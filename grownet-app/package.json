@@ -34,7 +34,8 @@
     "react-native-snap-carousel": "^4.0.0-beta.6",
     "react-native-web": "~0.18.10",
     "zustand": "^4.4.1",
-    "zustand-persist": "^0.4.0"
+    "zustand-persist": "^0.4.0",
+    "@react-native-community/datetimepicker": "6.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
