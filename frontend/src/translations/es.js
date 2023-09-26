@@ -30,7 +30,7 @@ const esTranslations = {
     addSuppliers: '¡Contáctanos para agregar proveedores!',
   },
   menuPrimary: {
-    settings: 'Configuración',
+    settings: 'Ajustes',
     order: 'Ordenar',
     record: 'Historial',
     chat: 'Chat',
@@ -84,6 +84,19 @@ const esTranslations = {
     date: "Fecha",
     amount: "Monto",
     viewDetails: "Ver detalles",
+  },
+  pendingRecord: {
+    title: "Detalles del pedido",
+    tabProducts: "Productos",
+    tabReception: "Recepción",
+    check: "Verifica tus productos",
+    openDispute: "Abrir disputa",
+    confirmOrder: "Confirmar pedido",
+    supplierDetail: "Detalles del proveedor",
+    detailsItem: "Detalles de los productos",
+    paymentDetails: "Detalles de pago",
+    currentValue: "Total",
+    tax: "Impuesto (IVA)"
   },
   settings: {
     title: 'Configuración',

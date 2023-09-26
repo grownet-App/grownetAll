@@ -85,6 +85,19 @@ const ptTranslations = {
     amount: "Valor",
     viewDetails: "Ver detalhes",
   },
+  pendingRecord: {
+    title: "Detalhes do pedido",
+    tabProducts: "Produtos",
+    tabReception: "Receção",
+    check: "Verifique seus produtos",
+    openDispute: "Abrir disputa",
+    confirmOrder: "Confirmar pedido",
+    supplierDetail: "Detalhes do fornecedor",
+    detailsItem: "Detalhes dos produtos",
+    paymentDetails: "Detalhes de pagamento",
+    currentValue: "Total",
+    tax: "Imposto (IVA)"
+  },
   settings: {
     title: 'Configurações',
     hi: 'Olá',

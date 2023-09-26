@@ -74,6 +74,7 @@
 #check-products{
     padding-top: 0px;
     margin-bottom: 10px;
+    text-align: left;
 }
 .warning-record{
     /*background-color: var(--color-dark-blue);
@@ -92,8 +93,10 @@
 }
 .card-pending-record button{
     margin-top: 1rem;
-    margin-left: 20%;
 }
 .calification-reception{
     text-align: right;
+}
+.card-pending-record{
+    text-align: center;
 }

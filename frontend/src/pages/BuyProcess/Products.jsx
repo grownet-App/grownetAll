@@ -59,7 +59,6 @@ export default function Products(props) {
   const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
   const { articlesToPay, totalNet, totalTaxes, totalToPay, selectedSupplier } = useOrderStore();
-
   useEffect(() => {
     if (selectedSupplier) {
       // Verifica que haya un proveedor seleccionado

@@ -85,6 +85,19 @@ const enTranslations = {
     amount: "Amount",
     viewDetails: "View details",
   },
+  pendingRecord: {
+    title: "Order details",
+    tabProducts: "Products",
+    tabReception: "Reception",
+    check: "Check your products",
+    openDispute: "Open dispute",
+    confirmOrder: "Confirm order",
+    supplierDetail: "Supplier details",
+    detailsItem: "Detail items",
+    paymentDetails: "Payment details",
+    currentValue: "Current value",
+    tax: "Tax"
+  },
   settings: {
     title: "Settings",
     hi: "Hi",

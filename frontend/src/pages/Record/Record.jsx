@@ -59,20 +59,20 @@ export default function Record() {
               <div className="card-record">
                 <div className="information-past">
                   <div className="">
-                    <h4>#Order:</h4>
+                    <h4>{t("record.orderNumber")}</h4>
                     <p>57896547</p>
                   </div>
                   <div>
-                    <h4>Date</h4>
+                    <h4>{t("record.date")}</h4>
                     <p>29/07/2023</p>
                   </div>
                 </div>
                 <div className="information-past o2" id="o2">
                   <div>
-                    <h4>Amount</h4>
+                    <h4>{t("record.amount")}</h4>
                     <p>£200</p>
                   </div>
-                  <Link className="bttn btn-primary" to={"/pendingRecord"}>View details</Link>
+                  <Link className="bttn btn-primary" to={"/pendingRecord"}>{t("record.viewDetails")}</Link>
                 </div>
               </div>
             </section>

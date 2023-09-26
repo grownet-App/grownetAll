@@ -1,5 +1,8 @@
 import { Icon } from "@iconify/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { allCategories } from "../../config/urls.config";
+import axios from "axios";
+import useTokenStore from "../../store/useTokenStore";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import banana_img from "../../img/banana_img.png";
@@ -28,7 +31,26 @@ export default function CategoriesMenu({
     { id: 6, name: "Mushrooms", image: mushrooms_img },
   ];
 
-  const [allCategories, setAllCategories] = useState(categoriesImg);
+  const [allCategories2, setAllCategories2] = useState(categoriesImg);
+
+  const { token } = useTokenStore();
+  useEffect(() => {
+    axios
+      .get(allCategories, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setCategoriesApi(response.data.categories);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los datos de la API:", error);
+      });
+  }, [token]);
+  console.log(categories)
+  const [categoriesApi, setCategoriesApi] = useState();
 
   return (
     <section className="menu-categories me-auto">
@@ -55,10 +77,11 @@ export default function CategoriesMenu({
               {category === "All" && (
                 <Icon icon="fluent-emoji:basket" className="fav" />
               )}
-              {allCategories.map((arrayCateg) => (
+              {categoriesApi.map((arrayCateg) => (
                 <>
                   {category === arrayCateg.name && (
                     <>
+                    <p>{arrayCateg.name}</p>
                       <img src={arrayCateg.image} alt={arrayCateg.name} />
                     </>
                   )}

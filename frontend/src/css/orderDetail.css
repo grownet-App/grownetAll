@@ -11,18 +11,21 @@
 .tittle-page{
     display: flex;
     align-items: center; 
-    margin-top: .5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 .tittle-page h1{
     font-size: 25px;
     font-weight: 600;
-    padding-left: 1.5rem;
-    margin-bottom: 0;
-   
+    margin: 0;
 }
 #arrow-icon{
     color: var(--color-dark-blue);
     font-size: 1.5rem;
+    position: absolute;
+    right: 0px;
+    left: 10%;
+    top: 37px
 }
 .underline{
     font-size: 20px;

@@ -12,7 +12,7 @@ export const availableRestaurants = 'https://ec2-18-191-177-149.us-east-2.comput
 
 export const availableSuppliers = 'https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/suppliers/all'
 
-export const allCategories = 'https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/categoriesProducts/all'
+export const allCategories = 'https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/categories/all'
 
 export const selectedCategory = 'https://ec2-18-191-177-149.us-east-2.compute.amazonaws.com/grownet/api/categoriesProducts/products/{id}'
 
