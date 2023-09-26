@@ -1,13 +1,35 @@
 import { Icon } from "@iconify/react";
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import CardSuppliers from "../../components/CardSuppliers.jsx";
 import MenuPrimary from "../../components/Menu/MenuPrimary";
+import { availableSuppliers } from "../../config/urls.config";
 import "../../css/suppliers.css";
+import useOrderStore from "../../store/useOrderStore.jsx";
+import useTokenStore from "../../store/useTokenStore.jsx";
 
 export default function Suppliers() {
   const { t } = useTranslation();
+  const { token } = useTokenStore();
+  const { setSuppliers } = useOrderStore();
+
+  useEffect(() => {
+    axios
+      .get(availableSuppliers, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setSuppliers(response.data.suppliers);
+        console.log("response", response.data.suppliers);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los proveedores:", error);
+      });
+  }, []);
 
   return (
     <section className="suppliers">
