@@ -51,7 +51,7 @@ const ProductCards = () => {
   return (
     <SafeAreaView>
       <ScrollView
-        style={{ marginBottom: 200, marginTop: 10 }}
+        style={{ marginBottom: 0, marginTop: 10 }}
         contentContainerStyle={{ flexGrow: 1 }}
       >
         {data.products.map((product) => (
