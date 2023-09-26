@@ -346,6 +346,34 @@ export const ProductsStyles = StyleSheet.create({
     borderRadius: 25,
     margin: 10,
     alignItems: 'center',
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  bgContinue: {
+    alignItems: 'center',
+    backgroundColor: '#026cd2',
+    paddingHorizontal: 35,
+    paddingVertical: 12,
+    borderRadius: 30,
+    marginTop: 20,
+    width: '50%',
+  },
+  ContinueText: {
+    color: '#ffff',
+    fontWeight: 'bold',
+  },
+  containerButton: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  fixedContainer: {
+    position: 'absolute',
+    bottom: 10,
+    left: 0,
+    zIndex: 1,
   },
 })
 
