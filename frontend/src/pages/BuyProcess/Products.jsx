@@ -72,11 +72,14 @@ export default function Products(props) {
           },
         })
         .then((response) => {
+          console.log("Este es account number" , selectedSupplier.id)
           // Muestra los productos en la consola
           console.log("Productos del proveedor:", response.data);
           console.log("NEW SELECTED SUPPLIER ID", selectedSupplier.id);
           const defaultProducts = response.data.products;
-          const productsWithTax = defaultProducts.map((product) => ({
+          const productsWithTax = defaultProducts
+          .filter((product) => product.prices.some((price) => price.nameUoms))
+          .map((product) => ({
             ...product,
             amount: 0,
             uomToPay: product.prices[0].nameUoms,
@@ -94,7 +97,7 @@ export default function Products(props) {
         .catch((error) => {
           console.error("Error al obtener los productos del proveedor:", error);
         });
-    }
+  }
   }, [selectedSupplier]);
   const toggleShowFavorites = () => {
     setShowFavorites(!showFavorites);
@@ -104,13 +107,13 @@ export default function Products(props) {
   const allCategoriesProduct = [
      "All" , ...new Set(articles.map((article) => article.nameCategorie)),
   ];
-  console.log(allCategoriesProduct)
+  //console.log(allCategoriesProduct)
   
 
   const filterCategory = (category) => {
     console.log(category)
     if (category === "All") {
-      setProducts(articles);
+      setArticles(products);
       setShowFavorites(false);
       return;
     }
@@ -198,12 +201,12 @@ export default function Products(props) {
         </>
       )}
       <div className="space-CatgMenu"></div>
-      {/*<CategoriesMenu
+      {<CategoriesMenu
         showFavorites={showFavorites}
         toggleShowFavorites={toggleShowFavorites}
         categories={allCategoriesProduct}
         filterCategory={filterCategory}
-              />*/}
+              />}
     </section>
   );
 }
