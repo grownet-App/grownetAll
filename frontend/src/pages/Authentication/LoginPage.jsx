@@ -65,7 +65,7 @@ function Login() {
     e.preventDefault();
     const state = {
       form: {
-        countrie: parseCountry,
+        country: parseCountry,
         telephone: numero,
       },
       error: false,
@@ -103,7 +103,7 @@ function Login() {
           {showOtp ? (
             <CodeOtp
               idUsuario={numero}
-              countrie={country}
+              country={country}
               onResendCode={resendCode}
               code={otpCode}
             ></CodeOtp>
