@@ -53,15 +53,20 @@ export default function Products(props) {
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [products, setProducts] = useState([]);
   const [articles, setArticles] = useState(products);
-  const { articlesToPay, selectedSupplier } = useOrderStore();
+  const { articlesToPay, selectedSupplier, selectedRestaurant } = useOrderStore();
   useEffect(() => {
     if (articlesToPay.length > 0) {
       setArticles(articlesToPay);
       setProducts(articlesToPay);
       console.log("TRAJO ALGO DEL STORAGE", articlesToPay);
     } else {
+      const requestBody = {
+        id : selectedSupplier.id,
+        country: countryCode,
+        accountNumber: selectedRestaurant.accountNumber,
+      }
       axios
-        .get(`${supplierProducts}${selectedSupplier.id}/${countryCode}`, {
+        .post(`${supplierProducts}`, requestBody, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -193,12 +198,12 @@ export default function Products(props) {
         </>
       )}
       <div className="space-CatgMenu"></div>
-      {<CategoriesMenu
+      {/*<CategoriesMenu
         showFavorites={showFavorites}
         toggleShowFavorites={toggleShowFavorites}
         categories={allCategoriesProduct}
         filterCategory={filterCategory}
-      />}
+              />*/}
     </section>
   );
 }

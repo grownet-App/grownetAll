@@ -77,16 +77,17 @@ export default function CategoriesMenu({
               {category === "All" && (
                 <Icon icon="fluent-emoji:basket" className="fav" />
               )}
-              {categoriesApi.map((arrayCateg) => (
+              
+              {/*allCategories2.map((apiCateg) => (
                 <>
-                  {category === arrayCateg.name && (
+                  {category === apiCateg.name && (
                     <>
-                    <p>{arrayCateg.name}</p>
-                      <img src={arrayCateg.image} alt={arrayCateg.name} />
+                    <p>{apiCateg.name}</p>
+                      <img src={apiCateg.image} alt={apiCateg.name} />
                     </>
                   )}
                 </>
-              ))}
+                  ))*/}
 
               <h6>{category}</h6>
             </button>
