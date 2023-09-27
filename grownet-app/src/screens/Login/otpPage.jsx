@@ -32,7 +32,7 @@ const Otp = () => {
 
     const formData = route.params
 
-    const apiUrl = `${otpApiUrl}?countrie=${formData.countrie}&telephone=${formData.telephone}&code=${otp}`
+    const apiUrl = `${otpApiUrl}?country=${formData.country}&telephone=${formData.telephone}&code=${otp}`
 
     try {
       const response = await axios.post(apiUrl)

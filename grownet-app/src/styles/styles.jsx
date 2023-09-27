@@ -304,6 +304,17 @@ export const ProductsStyles = StyleSheet.create({
     height: 45,
     borderRadius: 51,
   },
+  countOrderD: {
+    flexDirection: 'row',
+    borderWidth: 1.5,
+    borderColor: '#f2f2f2',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    marginRight: 5,
+    width: 100,
+    height: 45,
+    borderRadius: 51,
+  },
   button: {
     backgroundColor: 'transparent',
     width: 20,
@@ -372,6 +383,30 @@ export const ProductsStyles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     marginBottom: 20,
+  },
+  //PRODUCT DETAIL
+
+  containerDetail: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  containSelect: {
+    backgroundColor: 'white',
+    borderRadius: 51,
+    marginRight: 5,
+    width: 100,
+    height: 45,
+  },
+
+  textOrder: {
+    color: '#04444f',
+    fontSize: 20,
+    marginBottom: 5,
+  },
+  rowPrice: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 90,
   },
 })
 

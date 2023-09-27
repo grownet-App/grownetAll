@@ -11,10 +11,11 @@ import Carousel from 'react-native-snap-carousel'
 import { ProductsStyles } from '../../styles/styles'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Iconify } from 'react-native-iconify'
+import { BlurView } from 'expo-blur'
 
 const { width } = Dimensions.get('window')
 
-function ProductsCategories() {
+function ProductsCategories({ blurIntensity }) {
   const isCarousel = useRef(null)
 
   const images = [
@@ -49,7 +50,10 @@ function ProductsCategories() {
 
   return (
     <SafeAreaView style={ProductsStyles.fixedContainer}>
-      <View>
+      <BlurView
+        intensity={blurIntensity}
+        tint={blurIntensity === 100 ? 'light' : undefined}
+      >
         <Carousel
           data={images}
           renderItem={renderItem}
@@ -70,7 +74,7 @@ function ProductsCategories() {
             <Text style={ProductsStyles.ContinueText}>Continue</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </BlurView>
     </SafeAreaView>
   )
 }

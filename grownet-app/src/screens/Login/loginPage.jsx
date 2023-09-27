@@ -19,7 +19,7 @@ const LoginPage = () => {
 
     const state = {
       form: {
-        countrie: parseInt(country, 10),
+        country: parseInt(country, 10),
         telephone: parseInt(phoneNumber, 10),
       },
       error: false,
