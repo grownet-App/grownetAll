@@ -52,11 +52,6 @@ export default function Products(props) {
   const [showFavorites, setShowFavorites] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [products, setProducts] = useState([]);
-  const allCategories = [
-    "All",
-    ...new Set(data.map((article) => article.category)),
-  ];
-  const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
   const { articlesToPay, selectedSupplier } = useOrderStore();
   useEffect(() => {
@@ -99,14 +94,23 @@ export default function Products(props) {
   const toggleShowFavorites = () => {
     setShowFavorites(!showFavorites);
   };
+  //Filtro categorias
+  
+  const allCategoriesProduct = [
+     "All" , ...new Set(articles.map((article) => article.nameCategorie)),
+  ];
+  console.log(allCategoriesProduct)
+  
+
   const filterCategory = (category) => {
+    console.log(category)
     if (category === "All") {
-      setArticles(products);
+      setProducts(articles);
       setShowFavorites(false);
       return;
     }
-    const filteredData = products.filter(
-      (article) => article.category === category
+    const filteredData = articles.filter(
+      (article) => article.nameCategorie === category
     );
     setArticles(filteredData);
     console.log(filteredData);
@@ -189,12 +193,12 @@ export default function Products(props) {
         </>
       )}
       <div className="space-CatgMenu"></div>
-      <CategoriesMenu
+      {<CategoriesMenu
         showFavorites={showFavorites}
         toggleShowFavorites={toggleShowFavorites}
-        categories={categories}
+        categories={allCategoriesProduct}
         filterCategory={filterCategory}
-      />
+      />}
     </section>
   );
 }

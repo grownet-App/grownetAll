@@ -42,14 +42,14 @@ export default function CategoriesMenu({
         },
       })
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setCategoriesApi(response.data.categories);
       })
       .catch((error) => {
         console.error("Error al obtener los datos de la API:", error);
       });
   }, [token]);
-  console.log(categories)
+  //console.log(categories)
   const [categoriesApi, setCategoriesApi] = useState();
 
   return (
@@ -77,7 +77,7 @@ export default function CategoriesMenu({
               {category === "All" && (
                 <Icon icon="fluent-emoji:basket" className="fav" />
               )}
-              {allCategories2.map((arrayCateg) => (
+              {categoriesApi.map((arrayCateg) => (
                 <>
                   {category === arrayCateg.name && (
                     <>
