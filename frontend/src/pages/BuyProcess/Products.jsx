@@ -77,6 +77,7 @@ export default function Products(props) {
           },
         })
         .then((response) => {
+          console.log("Este es account number" , selectedSupplier.id)
           // Muestra los productos en la consola
           console.log("Productos del proveedor:", response.data);
           console.log("NEW SELECTED SUPPLIER ID", selectedSupplier.id);

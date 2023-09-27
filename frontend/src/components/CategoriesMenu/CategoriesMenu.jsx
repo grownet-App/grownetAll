@@ -81,7 +81,6 @@ export default function CategoriesMenu({
                 <>
                   {category === arrayCateg.name && (
                     <>
-                    <p>{arrayCateg.name}</p>
                       <img src={arrayCateg.image} alt={arrayCateg.name} />
                     </>
                   )}
