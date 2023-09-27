@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import data from './data.json'
 import { ProductsStyles } from '../../styles/styles'
 import { Dropdown } from 'react-native-element-dropdown'
+import SelectQuantity from './selectQuantity'
 
 //dropdown
 const dataDropdown = [
@@ -21,20 +22,9 @@ const dataDropdown = [
   { label: 'Kg', value: '3' },
 ]
 
-const ProductCards = () => {
+const ProductCards = ({ setBlurIntensity }) => {
   const [value, setValue] = useState(null)
   const [isFocus, setIsFocus] = useState(false)
-
-  const [count, setCount] = useState(0)
-  const incrementCount = () => {
-    setCount(count + 1)
-  }
-
-  const decrementCount = () => {
-    if (count > 0) {
-      setCount(count - 1)
-    }
-  }
 
   const handleToggleFavorite = () => {
     // Lógica para cambiar el estado de favorito del producto con ID 'productId'
@@ -48,12 +38,25 @@ const ProductCards = () => {
     // Lógica para cambiar el uomn del producto con ID 'productId'
   }
 
+  const handleScroll = (event) => {
+    const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent
+
+    const offsetY = contentOffset.y
+    const contentHeight = contentSize.height
+    const screenHeight = layoutMeasurement.height
+
+    const maxScroll = contentHeight - screenHeight
+
+    if (offsetY >= maxScroll - 5) {
+      setBlurIntensity(0)
+    } else {
+      setBlurIntensity(100)
+    }
+  }
+
   return (
-    <SafeAreaView>
-      <ScrollView
-        style={{ marginBottom: 0, marginTop: 10 }}
-        contentContainerStyle={{ flexGrow: 1 }}
-      >
+    <SafeAreaView style={ProductsStyles.containerCards}>
+      <ScrollView onScroll={handleScroll}>
         {data.products.map((product) => (
           <View
             key={product.id}
@@ -89,42 +92,7 @@ const ProductCards = () => {
                   </TouchableOpacity>
                 </View>
                 <View style={ProductsStyles.containerSelect}>
-                  <View style={ProductsStyles.count}>
-                    <TouchableOpacity
-                      onPress={() =>
-                        onAmountChange(product.id, product.amount + 1)
-                      }
-                    >
-                      <Text
-                        onPress={decrementCount}
-                        style={ProductsStyles.button2}
-                      >
-                        -
-                      </Text>
-                    </TouchableOpacity>
-
-                    <Text
-                      style={{
-                        fontSize: 20,
-                        color: '#04444f',
-                      }}
-                    >
-                      {count}
-                    </Text>
-
-                    <TouchableOpacity
-                      onPress={() =>
-                        onAmountChange(product.id, product.amount - 1)
-                      }
-                    >
-                      <Text
-                        onPress={incrementCount}
-                        style={ProductsStyles.button}
-                      >
-                        +
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
+                  <SelectQuantity />
                   <View style={ProductsStyles.containerDrop}>
                     <Dropdown
                       style={[
@@ -153,6 +121,7 @@ const ProductCards = () => {
             </View>
           </View>
         ))}
+        <View style={styles.extraSpace} />
       </ScrollView>
     </SafeAreaView>
   )
@@ -167,7 +136,9 @@ const styles = StyleSheet.create({
     borderRadius: 51,
     paddingHorizontal: 8,
   },
-
+  extraSpace: {
+    height: 225,
+  },
   label: {
     position: 'absolute',
     backgroundColor: 'white',
