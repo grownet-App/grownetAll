@@ -39,10 +39,10 @@ export default function CodeOtp(props) {
     e.preventDefault();
     let id = props.idUsuario;
     let otpNumber = otp.join("");
-    let countrie = props.countrie;
+    let country = props.country;
     const state = {
       form: {
-        countrie: countrie,
+        country: country,
         telephone: id,
         code: otpNumber,
       },
