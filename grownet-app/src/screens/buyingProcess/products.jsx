@@ -6,7 +6,7 @@ import ProductsCategories from '../../components/buyingProcess/productCategories
 
 const Products = () => {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, position: 'relative' }}>
       <ProductSearcher />
       <ProductCards />
       <ProductsCategories />

@@ -337,7 +337,12 @@ export const ProductsStyles = StyleSheet.create({
     color: '#0d6efd',
     fontWeight: 'bold',
   },
+
+  containerCards: { flex: 1, marginTop: 10 },
   //PRODUCT CATEGORIES
+  fixedContainer: {
+    overflow: 'hidden',
+  },
   contenImage: {
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -346,12 +351,10 @@ export const ProductsStyles = StyleSheet.create({
     borderRadius: 25,
     margin: 10,
     alignItems: 'center',
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
+    shadowColor: '#144D56',
     elevation: 4,
   },
+
   bgContinue: {
     alignItems: 'center',
     backgroundColor: '#026cd2',
@@ -368,12 +371,7 @@ export const ProductsStyles = StyleSheet.create({
   containerButton: {
     width: '100%',
     alignItems: 'center',
-  },
-  fixedContainer: {
-    position: 'absolute',
-    bottom: 10,
-    left: 0,
-    zIndex: 1,
+    marginBottom: 20,
   },
 })
 
