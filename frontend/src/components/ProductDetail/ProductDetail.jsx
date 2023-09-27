@@ -9,6 +9,7 @@ export default function ProductDetail({
   updateTotalTaxes,
   updateTotalNet,
 }) {
+  const counter = 1;
   const { articlesToPay, setArticlesToPay } = useOrderStore();
   // ACTUALIZAR CANTIDAD DE ARTICULOS
   const [articles, setArticles] = useState(articlesToPay);
@@ -175,7 +176,7 @@ export default function ProductDetail({
             <div className="product-detail">
               <Stepper
                 productData={article}
-                onAmountChange={handleAmountChange}
+                onAmountChange={handleAmountChange} counter={counter}
               />
               <Form.Select
                 aria-label="Select UomToPay"

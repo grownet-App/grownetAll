@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./stepper.css";
 
-export default function Stepper({ productData, onAmountChange }) {
+export default function Stepper({ productData, onAmountChange, counter }) {
   const [amount, setAmount] = useState(productData.amount);
   const { id } = productData;
-
   useEffect(() => {
     onAmountChange(id, amount);
   }, [amount]);
-
   return (
     <div className="counter">
       <button
         id="decrement"
         onClick={() => {
-          if (amount > 0) {
+          if (amount > counter) {
             setAmount(amount - 1);
             console.log("aca esta")
           }

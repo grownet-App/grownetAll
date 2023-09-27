@@ -10,6 +10,7 @@ export default function ProductCard({
   onAmountChange,
   onUomChange,
 }) {
+  const counter = 0;
   const { id, name, image, prices, priceWithTax, uomToPay } = productData;
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
   const isFavorite = favorites.includes(id, name, image);
@@ -56,7 +57,7 @@ export default function ProductCard({
           <div className="product-amount">
             <Stepper
               productData={productData}
-              onAmountChange={onAmountChange}
+              onAmountChange={onAmountChange} counter={counter}
             />
             <Form.Select
               aria-label="Select UomToPay"
