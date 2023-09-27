@@ -58,15 +58,20 @@ export default function Products(props) {
   ];
   const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
-  const { articlesToPay, selectedSupplier } = useOrderStore();
+  const { articlesToPay, selectedSupplier, selectedRestaurant } = useOrderStore();
   useEffect(() => {
     if (articlesToPay.length > 0) {
       setArticles(articlesToPay);
       setProducts(articlesToPay);
       console.log("TRAJO ALGO DEL STORAGE", articlesToPay);
     } else {
+      const requestBody = {
+        id : selectedSupplier.id,
+        country: countryCode,
+        accountNumber: selectedRestaurant.accountNumber,
+      }
       axios
-        .get(`${supplierProducts}${selectedSupplier.id}/${countryCode}`, {
+        .post(`${supplierProducts}`, requestBody, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -76,7 +81,9 @@ export default function Products(props) {
           console.log("Productos del proveedor:", response.data);
           console.log("NEW SELECTED SUPPLIER ID", selectedSupplier.id);
           const defaultProducts = response.data.products;
-          const productsWithTax = defaultProducts.map((product) => ({
+          const productsWithTax = defaultProducts
+          .filter((product) => product.prices.some((price) => price.nameUoms))
+          .map((product) => ({
             ...product,
             amount: 0,
             uomToPay: product.prices[0].nameUoms,

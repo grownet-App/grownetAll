@@ -14,4 +14,4 @@ export const allCategories = 'https://ec2-13-58-203-20.us-east-2.compute.amazona
 
 export const selectedCategory = 'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/categoriesProducts/products/{id}'
 
-export const supplierProducts = 'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/products/products/'
+export const supplierProducts = 'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/products/supplier'
