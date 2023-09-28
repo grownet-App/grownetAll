@@ -32,7 +32,7 @@ export default function CategoriesMenu({
   ];
 
   const [allCategories2, setAllCategories2] = useState(categoriesImg);*/
-  const [categoriesApi, setCategoriesApi] = useState();
+  const [categories, setCategories] = useState();
   
   const urlImg =
     "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/";
@@ -47,12 +47,12 @@ export default function CategoriesMenu({
       })
       .then((response) => {
         //console.log(response.data);
-        setCategoriesApi(response.data.categories);
+        setCategories(response.data.categories);
       })
       .catch((error) => {
         console.error("Error al obtener los datos de la API:", error);
       });
-  }, [token, setCategoriesApi]);
+  }, []);
   
   return (
     <section className="menu-categories me-auto">
@@ -69,11 +69,13 @@ export default function CategoriesMenu({
               <h6>{t("categoriesMenu.favorites")}</h6>
             </button>
           )}
-
+          
           {categoriesProduct.map(category => (
             <button type="button" className="card-products" key={category} onClick={() => filterCategory(category)}>
-
-              {/*categoriesApi.map(categoryApi => (
+               {category === "All" && (
+                <Icon icon="fluent-emoji:basket" className="fav" />
+              )}
+              {categories?.map(categoryApi => (
                 <>
                 {category === categoryApi.name &&(
                   <>
@@ -82,7 +84,7 @@ export default function CategoriesMenu({
                 )}
                 </>
                 
-                ))*/}
+                ))}
 
               <h6>{category}</h6>
             </button>
