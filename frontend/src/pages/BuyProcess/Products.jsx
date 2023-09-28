@@ -87,7 +87,7 @@ export default function Products(props) {
             uomToPay: product.prices[0].nameUoms,
             prices: product.prices.map((price) => ({
               ...price,
-              priceWithTax: price.price + price.price * product.tax,
+              priceWithTax: (price.price + price.price * product.tax).toFixed(2),
             })),
           }));
           useOrderStore.setState({ articlesToPay: productsWithTax });
