@@ -17,11 +17,11 @@ import "./categoriesMenu.css";
 export default function CategoriesMenu({
   showFavorites,
   toggleShowFavorites,
-  categories,
+  categoriesProduct,
   filterCategory,
 }) {
   const { t } = useTranslation();
-  const categoriesImg = [
+  /*const categoriesImg = [
     { id: 1, name: "Vegetable", image: broccoli_img },
     { id: 2, name: "Fruit", image: banana_img },
     { id: 3, name: "Bread", image: bread_img },
@@ -31,7 +31,11 @@ export default function CategoriesMenu({
     { id: 6, name: "Mushrooms", image: mushrooms_img },
   ];
 
-  const [allCategories2, setAllCategories2] = useState(categoriesImg);
+  const [allCategories2, setAllCategories2] = useState(categoriesImg);*/
+  const [categoriesApi, setCategoriesApi] = useState();
+  
+  const urlImg =
+    "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/";
 
   const { token } = useTokenStore();
   useEffect(() => {
@@ -48,10 +52,8 @@ export default function CategoriesMenu({
       .catch((error) => {
         console.error("Error al obtener los datos de la API:", error);
       });
-  }, [token]);
-  //console.log(categories)
-  const [categoriesApi, setCategoriesApi] = useState();
-
+  }, [token, setCategoriesApi]);
+  
   return (
     <section className="menu-categories me-auto">
       <div className="contenido">
@@ -67,6 +69,24 @@ export default function CategoriesMenu({
               <h6>{t("categoriesMenu.favorites")}</h6>
             </button>
           )}
+
+          {categoriesProduct.map(category => (
+            <button type="button" className="card-products" key={category} onClick={() => filterCategory(category)}>
+
+              {/*categoriesApi.map(categoryApi => (
+                <>
+                {category === categoryApi.name &&(
+                  <>
+                  <img src={urlImg + categoryApi.image}/>
+                  </>
+                )}
+                </>
+                
+                ))*/}
+
+              <h6>{category}</h6>
+            </button>
+          ))}
           
         </div>
       </div>

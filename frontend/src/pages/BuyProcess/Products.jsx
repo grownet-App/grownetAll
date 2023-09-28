@@ -50,10 +50,12 @@ export default function Products(props) {
   const { t } = useTranslation();
   const { token, countryCode } = useTokenStore();
   const [showFavorites, setShowFavorites] = useState(false);
+  const [showCategory, setShowCategory] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [products, setProducts] = useState([]);
   const [articles, setArticles] = useState(products);
   const { articlesToPay, selectedSupplier, selectedRestaurant } = useOrderStore();
+ 
   useEffect(() => {
     if (articlesToPay.length > 0) {
       setArticles(articlesToPay);
@@ -99,30 +101,11 @@ export default function Products(props) {
         });
   }
   }, [selectedSupplier]);
+
   const toggleShowFavorites = () => {
     setShowFavorites(!showFavorites);
   };
-  //Filtro categorias
-  
-  const allCategoriesProduct = [
-     "All" , ...new Set(articles.map((article) => article.nameCategorie)),
-  ];
-  //console.log(allCategoriesProduct)
-  
-
-  const filterCategory = (category) => {
-    console.log(category)
-    if (category === "All") {
-      setArticles(products);
-      setShowFavorites(false);
-      return;
-    }
-    const filteredData = articles.filter(
-      (article) => article.nameCategorie === category
-    );
-    setArticles(filteredData);
-    console.log(filteredData);
-  };
+  console.log("Estos son articulos a pagar " , articlesToPay)
   // CAMBIO DE CANTIDAD DE ARTICULOS
   const handleAmountChange = (productId, newAmount) => {
     setArticles((prevArticles) =>
@@ -157,6 +140,19 @@ export default function Products(props) {
 
   console.log("THIS IS THE SELECTEDSUPPLIER", selectedSupplier);
 
+  //Filtro
+  const productsCategory = ["All" , ...new Set(articles.map(article => article.nameCategorie))];
+
+  const[ onlyCategory, setOnlyCategory ] = useState(productsCategory)
+
+  const filterCategories = (category) => {
+    if (category === "All") {
+      setArticles(products)
+      return
+    }
+    const filterData6 = articles.filter(article => article.nameCategorie === category)
+    setArticles(filterData6)   
+  }
   return (
     <section className="products">
       <div className="tittle-products">
@@ -203,10 +199,8 @@ export default function Products(props) {
       <div className="space-CatgMenu"></div>
       {<CategoriesMenu
         showFavorites={showFavorites}
-        toggleShowFavorites={toggleShowFavorites}
-        categories={allCategoriesProduct}
-        filterCategory={filterCategory}
-              />}
+        toggleShowFavorites={toggleShowFavorites} categoriesProduct={productsCategory} filterCategory={filterCategories}
+      />}
     </section>
   );
 }
