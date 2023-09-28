@@ -67,31 +67,7 @@ export default function CategoriesMenu({
               <h6>{t("categoriesMenu.favorites")}</h6>
             </button>
           )}
-          {categories.map((category) => (
-            <button
-              type="button"
-              className="card-products"
-              onClick={() => filterCategory(category)}
-              key={category}
-            >
-              {category === "All" && (
-                <Icon icon="fluent-emoji:basket" className="fav" />
-              )}
-              
-              {/*allCategories2.map((apiCateg) => (
-                <>
-                  {category === apiCateg.name && (
-                    <>
-                    <p>{apiCateg.name}</p>
-                      <img src={apiCateg.image} alt={apiCateg.name} />
-                    </>
-                  )}
-                </>
-                  ))*/}
-
-              <h6>{category}</h6>
-            </button>
-          ))}
+          
         </div>
       </div>
       <Link className="bttn btn-primary" to="/details">

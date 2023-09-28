@@ -304,6 +304,17 @@ export const ProductsStyles = StyleSheet.create({
     height: 45,
     borderRadius: 51,
   },
+  countOrderD: {
+    flexDirection: 'row',
+    borderWidth: 1.5,
+    borderColor: '#f2f2f2',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    marginRight: 5,
+    width: 100,
+    height: 45,
+    borderRadius: 51,
+  },
   button: {
     backgroundColor: 'transparent',
     width: 20,
@@ -337,7 +348,12 @@ export const ProductsStyles = StyleSheet.create({
     color: '#0d6efd',
     fontWeight: 'bold',
   },
+
+  containerCards: { flex: 1, marginTop: 10 },
   //PRODUCT CATEGORIES
+  fixedContainer: {
+    overflow: 'hidden',
+  },
   contenImage: {
     justifyContent: 'center',
     backgroundColor: 'white',
@@ -346,12 +362,10 @@ export const ProductsStyles = StyleSheet.create({
     borderRadius: 25,
     margin: 10,
     alignItems: 'center',
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
+    shadowColor: '#144D56',
     elevation: 4,
   },
+
   bgContinue: {
     alignItems: 'center',
     backgroundColor: '#026cd2',
@@ -368,12 +382,31 @@ export const ProductsStyles = StyleSheet.create({
   containerButton: {
     width: '100%',
     alignItems: 'center',
+    marginBottom: 20,
   },
-  fixedContainer: {
-    position: 'absolute',
-    bottom: 10,
-    left: 0,
-    zIndex: 1,
+  //PRODUCT DETAIL
+
+  containerDetail: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  containSelect: {
+    backgroundColor: 'white',
+    borderRadius: 51,
+    marginRight: 5,
+    width: 100,
+    height: 45,
+  },
+
+  textOrder: {
+    color: '#04444f',
+    fontSize: 20,
+    marginBottom: 5,
+  },
+  rowPrice: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 90,
   },
 })
 
