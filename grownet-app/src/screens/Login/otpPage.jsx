@@ -10,7 +10,7 @@ import React, { useRef, useState } from 'react'
 import { OtpStyles } from '../../styles/styles'
 import { useRoute } from '@react-navigation/native'
 import { otpApiUrl } from '../../config/urls.config'
-import axios from 'axios'
+import axios from '../../../axiosConfig.'
 import useTokenStore from '../../store/useTokenStore'
 
 const Otp = () => {
@@ -31,11 +31,11 @@ const Otp = () => {
     let otp = pin1 + pin2 + pin3 + pin4
 
     const formData = route.params
-
-    const apiUrl = `${otpApiUrl}?country=${formData.country}&telephone=${formData.telephone}&code=${otp}`
-
+    console.log('formOTP:', formData)
     try {
-      const response = await axios.post(apiUrl)
+      const response = await axios.post(
+        `${otpApiUrl}?country=${formData.country}&telephone=${formData.telephone}&code=${otp}`,
+      )
       console.log('Respuesta de la API:', response.data)
       const token = response.data.token
       setToken(token)
@@ -51,6 +51,7 @@ const Otp = () => {
         style={OtpStyles.tinyLogoOtp}
         source={require('../../../assets/logo.png')}
       />
+
       <Text style={OtpStyles.textOtp1}>Enter your verification code</Text>
       <Text style={OtpStyles.textOtp2}>
         An 4 digit code has been sent to your phone

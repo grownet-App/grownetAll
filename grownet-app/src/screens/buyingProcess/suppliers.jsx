@@ -62,7 +62,7 @@ const Suppliers = () => {
                 cache: 'reload',
               }}
             >
-              <Text> {supplier.name}</Text>
+              <Text style={{ color: 'black' }}> {supplier.name}</Text>
             </ImageBackground>
           )
         })}
