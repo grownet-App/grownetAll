@@ -20,8 +20,7 @@ function ProductsFind({ onAmountChange, onUomChange }) {
             productData={product}
             onAmountChange={onAmountChange}
             onUomChange={onUomChange}
-          >
-          </ProductCard>
+          ></ProductCard>
         ))}
       </div>
     </div>

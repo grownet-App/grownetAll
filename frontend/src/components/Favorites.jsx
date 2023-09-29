@@ -1,18 +1,20 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useFavoritesStore } from "../store/useFavoritesStore";
+import useOrderStore from "../store/useOrderStore";
 import ProductCard from "./ProductDetail/ProductCard";
 
 export default function Favorites({
-  productsData,
   onAmountChange,
   onUomChange,
 }) {
   const { t } = useTranslation();
   const { favorites } = useFavoritesStore();
+  const { articlesToPay } = useOrderStore();
 
-  const favoriteProducts = productsData.filter((product) =>
-    favorites.includes(product.id)
+
+  const favoriteProducts = articlesToPay.filter((product) =>
+    favorites.includes(product.id) 
   );
 
   return (

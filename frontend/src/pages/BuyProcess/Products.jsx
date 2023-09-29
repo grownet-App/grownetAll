@@ -10,55 +10,21 @@ import ProductSearcher from "../../components/ProductSearcher/ProductSearcher";
 import ProductsFind from "../../components/ProductSearcher/ProductsFind";
 import { supplierProducts } from "../../config/urls.config";
 import "../../css/products.css";
-import data from "../../data";
 import useOrderStore from "../../store/useOrderStore";
 import useTokenStore from "../../store/useTokenStore";
 
-// TODO LLAMADO A TODAS LAS CATEGORIAS PARA EL FILTER
-/* useEffect(() => {
-  axios
-    .get(allCategories, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.error("Error al obtener los datos de la API:", error);
-    });
-}, [token]); */
-
-//TODO MODIFICARLO PARA LLAMAR SOLO LA CATEGORIA SELECCIONADA
-/* 
-  useEffect(() => {
-    axios
-      .get(selectedCategory, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener los datos de la API:", error);
-      });
-  }, [token]); */
 export default function Products(props) {
   const { t } = useTranslation();
   const { token, countryCode } = useTokenStore();
   const [showFavorites, setShowFavorites] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [products, setProducts] = useState([]);
-  const allCategories = [
-    "All",
-    ...new Set(data.map((article) => article.category)),
-  ];
-  const [categories, setCategories] = useState(allCategories);
   const [articles, setArticles] = useState(products);
-  const { articlesToPay, selectedSupplier, selectedRestaurant } = useOrderStore();
+  const { articlesToPay, selectedSupplier, selectedRestaurant } =
+    useOrderStore();
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [resetInput, setResetInput] = useState(0);
+
   useEffect(() => {
     if (articlesToPay.length > 0) {
       setArticles(articlesToPay);
@@ -66,10 +32,10 @@ export default function Products(props) {
       console.log("TRAJO ALGO DEL STORAGE", articlesToPay);
     } else {
       const requestBody = {
-        id : selectedSupplier.id,
+        id: selectedSupplier.id,
         country: countryCode,
         accountNumber: selectedRestaurant.accountNumber,
-      }
+      };
       axios
         .post(`${supplierProducts}`, requestBody, {
           headers: {
@@ -77,22 +43,23 @@ export default function Products(props) {
           },
         })
         .then((response) => {
-          console.log("Este es account number" , selectedSupplier.id)
           // Muestra los productos en la consola
           console.log("Productos del proveedor:", response.data);
           console.log("NEW SELECTED SUPPLIER ID", selectedSupplier.id);
           const defaultProducts = response.data.products;
           const productsWithTax = defaultProducts
-          .filter((product) => product.prices.some((price) => price.nameUoms))
-          .map((product) => ({
-            ...product,
-            amount: 0,
-            uomToPay: product.prices[0].nameUoms,
-            prices: product.prices.map((price) => ({
-              ...price,
-              priceWithTax: (price.price + price.price * product.tax).toFixed(2),
-            })),
-          }));
+            .filter((product) => product.prices.some((price) => price.nameUoms))
+            .map((product) => ({
+              ...product,
+              amount: 0,
+              uomToPay: product.prices[0].nameUoms,
+              prices: product.prices.map((price) => ({
+                ...price,
+                priceWithTax: (price.price + price.price * product.tax).toFixed(
+                  2
+                ),
+              })),
+            }));
           useOrderStore.setState({ articlesToPay: productsWithTax });
           setArticles(productsWithTax);
           setProducts(productsWithTax);
@@ -104,21 +71,17 @@ export default function Products(props) {
         });
     }
   }, [selectedSupplier]);
+
+  const resetInputSearcher = () => {
+    setResetInput((prevKey) => prevKey + 1);
+  };
+
   const toggleShowFavorites = () => {
     setShowFavorites(!showFavorites);
+    setSelectedCategory("All");
+    resetInputSearcher();
   };
-  const filterCategory = (category) => {
-    if (category === "All") {
-      setArticles(products);
-      setShowFavorites(false);
-      return;
-    }
-    const filteredData = products.filter(
-      (article) => article.category === category
-    );
-    setArticles(filteredData);
-    console.log(filteredData);
-  };
+  console.log("Estos son articulos a pagar ", articlesToPay);
   // CAMBIO DE CANTIDAD DE ARTICULOS
   const handleAmountChange = (productId, newAmount) => {
     setArticles((prevArticles) =>
@@ -151,7 +114,17 @@ export default function Products(props) {
     useOrderStore.setState({ articlesToPay: updatedArticlesToPay });
   };
 
-  console.log("THIS IS THE SELECTEDSUPPLIER", selectedSupplier);
+  // FILTRO
+  const productsCategory =
+    selectedCategory === "All"
+      ? ["All", ...new Set(articles.map((article) => article.nameCategorie))]
+      : ["All", selectedCategory];
+
+  const filterCategories = (category) => {
+    setSelectedCategory(category);
+    setShowFavorites(false);
+    resetInputSearcher();
+  };
 
   return (
     <section className="products">
@@ -162,13 +135,12 @@ export default function Products(props) {
         <h1 className="tittle-products">{t("products.title")}</h1>
       </div>
       <ProductSearcher
-        products={products}
+        products={articlesToPay}
         setShowSearchResults={setShowSearchResults}
-        showSearchResults={showSearchResults}
+        resetInput={resetInput}
       />
       {showSearchResults ? (
         <ProductsFind
-          productsData={products}
           onAmountChange={handleAmountChange}
           onUomChange={handleUomChange}
         />
@@ -176,33 +148,41 @@ export default function Products(props) {
         <>
           {showFavorites ? (
             <Favorites
-              productsData={products}
               onAmountChange={handleAmountChange}
               onUomChange={handleUomChange}
             />
           ) : (
             <>
-              {articles.map((article) => (
-                <>
-                  <ProductCard
-                    key={article.id}
-                    productData={article}
-                    onAmountChange={handleAmountChange}
-                    onUomChange={handleUomChange}
-                  ></ProductCard>
-                </>
-              ))}
+              {articles
+                .filter((article) => {
+                  if (selectedCategory === "All") {
+                    return true;
+                  }
+                  return article.nameCategorie === selectedCategory;
+                })
+                .map((article) => (
+                  <>
+                    <ProductCard
+                      key={article.id}
+                      productData={article}
+                      onAmountChange={handleAmountChange}
+                      onUomChange={handleUomChange}
+                    ></ProductCard>
+                  </>
+                ))}
             </>
           )}
         </>
       )}
       <div className="space-CatgMenu"></div>
-      <CategoriesMenu
-        showFavorites={showFavorites}
-        toggleShowFavorites={toggleShowFavorites}
-        categories={categories}
-        filterCategory={filterCategory}
-      />
+      {
+        <CategoriesMenu
+          showFavorites={showFavorites}
+          toggleShowFavorites={toggleShowFavorites}
+          categoriesProduct={productsCategory}
+          filterCategory={filterCategories}
+        />
+      }
     </section>
   );
 }
