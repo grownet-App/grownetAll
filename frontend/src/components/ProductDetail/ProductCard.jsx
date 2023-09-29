@@ -44,7 +44,7 @@ export default function ProductCard({
             <h1>{name} - {selectedUom.name} </h1>
             <div className="pr">
               <Icon
-                className="icono"
+                className="fav-icon"
                 icon={isFavorite ? "ph:heart-fill" : "ph:heart"}
                 onClick={handleToggleFavorite}
                 color="#62C471"
