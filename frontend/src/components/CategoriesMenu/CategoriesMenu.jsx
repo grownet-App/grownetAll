@@ -1,17 +1,10 @@
 import { Icon } from "@iconify/react";
-import React, { useState, useEffect } from "react";
-import { allCategories } from "../../config/urls.config";
 import axios from "axios";
-import useTokenStore from "../../store/useTokenStore";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import banana_img from "../../img/banana_img.png";
-import bread_img from "../../img/bread_img.png";
-import broccoli_img from "../../img/broccoli_img.png";
-import frozen_img from "../../img/frozen_img.png";
-import meat_img from "../../img/meat_img.png";
-import mushrooms_img from "../../img/mushrooms_img.png";
-import prepared_img from "../../img/prepared_img.png";
+import { allCategories } from "../../config/urls.config";
+import useTokenStore from "../../store/useTokenStore";
 import "./categoriesMenu.css";
 
 export default function CategoriesMenu({
@@ -21,17 +14,6 @@ export default function CategoriesMenu({
   filterCategory,
 }) {
   const { t } = useTranslation();
-  /*const categoriesImg = [
-    { id: 1, name: "Vegetable", image: broccoli_img },
-    { id: 2, name: "Fruit", image: banana_img },
-    { id: 3, name: "Bread", image: bread_img },
-    { id: 4, name: "Frozen", image: frozen_img },
-    { id: 5, name: "Meat", image: meat_img },
-    { id: 5, name: "Prepared", image: prepared_img },
-    { id: 6, name: "Mushrooms", image: mushrooms_img },
-  ];
-
-  const [allCategories2, setAllCategories2] = useState(categoriesImg);*/
   const [categories, setCategories] = useState();
   
   const urlImg =
@@ -71,7 +53,10 @@ export default function CategoriesMenu({
           )}
           
           {categoriesProduct.map(category => (
-            <button type="button" className="card-products" key={category} onClick={() => filterCategory(category)}>
+            <button 
+            type="button" 
+            className="card-products" key={category} 
+            onClick={() => filterCategory(category)}>
                {category === "All" && (
                 <Icon icon="fluent-emoji:basket" className="fav" />
               )}
@@ -79,7 +64,7 @@ export default function CategoriesMenu({
                 <>
                 {category === categoryApi.name &&(
                   <>
-                  <img src={urlImg + categoryApi.image}/>
+                  <img alt={categoryApi.name} src={urlImg + categoryApi.image}/>
                   </>
                 )}
                 </>
