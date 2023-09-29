@@ -17,19 +17,16 @@ function ProductSearcher({
   const setSearchResults = useProductStore((state) => state.setSearchResults);
   const [searchButtonIcon, setSearchButtonIcon] = useState(searchIcon);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (showSearchResults) {
-      handleReset();
+  const handleInputChange = (e) => {
+    const query = e.target.value;
+    setInput(query);
+    
+    if (query === "") {
+      setShowSearchResults(false);
+      setSearchResults([]);
+      setSearchButtonIcon(searchIcon);
     } else {
-      filterProducts(input);
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      filterProducts(input);
+      filterProducts(query);
     }
   };
 
@@ -52,16 +49,15 @@ function ProductSearcher({
 
   return (
     <div className="flex-container">
-      <form onSubmit={handleSubmit} className="search-form">
+      <form className="search-form">
         <input
           type="text"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInputChange}
           placeholder={t("productSearcher.placeholder")}
           className="search-input"
-          onKeyDown={handleKeyDown}
         />
-        <button type="submit" className="search-button">
+        <button type="submit" onClick={handleReset} className="search-button">
           <Icon icon={searchButtonIcon} />
         </button>
       </form>
