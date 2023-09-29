@@ -46,6 +46,12 @@
     align-items: center;
     justify-content: space-between;
   }
+  .product-selectUom{
+    font-size: 16px !important;
+    color: #868686 !important;
+    margin-bottom: 0 !important;
+    font-weight: 400 !important;
+  }
   .heart-icon{
     width: 2rem;
     height: 2rem;
