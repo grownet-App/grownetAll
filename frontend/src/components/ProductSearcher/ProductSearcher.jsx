@@ -10,12 +10,20 @@ import "./productSearcher.css";
 function ProductSearcher({ products, setShowSearchResults, resetInput }) {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
-  const setSearchResults = useProductStore((state) => state.setSearchResults);
+  const setFilteredProducts = useProductStore(
+    (state) => state.setFilteredProducts
+  );
   const [searchButtonIcon, setSearchButtonIcon] = useState(searchIcon);
 
   useEffect(() => {
     handleReset();
   }, [resetInput]);
+
+  useEffect(() => {
+    if (input !== "") {
+      filterProducts(input);
+    }
+  }, [products]);
 
   const handleInputChange = (e) => {
     const query = e.target.value;
@@ -23,7 +31,7 @@ function ProductSearcher({ products, setShowSearchResults, resetInput }) {
 
     if (query === "") {
       setShowSearchResults(false);
-      setSearchResults([]);
+      setFilteredProducts([]);
       setSearchButtonIcon(searchIcon);
     } else {
       filterProducts(query);
@@ -33,7 +41,7 @@ function ProductSearcher({ products, setShowSearchResults, resetInput }) {
   const handleReset = () => {
     setShowSearchResults(false);
     setInput("");
-    setSearchResults([]);
+    setFilteredProducts([]);
     setSearchButtonIcon(searchIcon);
   };
 
@@ -43,7 +51,7 @@ function ProductSearcher({ products, setShowSearchResults, resetInput }) {
     );
     console.log("Haz filtrado", filtered);
     setShowSearchResults(true);
-    setSearchResults(filtered);
+    setFilteredProducts(filtered);
     setSearchButtonIcon(closeCircleOutline);
   };
 
