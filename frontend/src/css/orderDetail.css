@@ -136,6 +136,18 @@
         width: 70%;
     }
 }
+@media screen and (min-width: 900px) {
+    .tittle-page{
+        position: relative;
+    }
+    #arrow-icon{
+        color: var(--color-dark-blue);
+        font-size: 1.5rem;
+        position: absolute;
+        left: -60px;
+        top: 20px;
+    }
+}
 @media screen and (max-width: 365px) {
     .card-invoices{
         width: 95%;

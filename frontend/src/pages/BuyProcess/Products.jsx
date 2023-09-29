@@ -77,6 +77,7 @@ export default function Products(props) {
           },
         })
         .then((response) => {
+          console.log("Este es account number" , selectedSupplier.id)
           // Muestra los productos en la consola
           console.log("Productos del proveedor:", response.data);
           console.log("NEW SELECTED SUPPLIER ID", selectedSupplier.id);
@@ -89,7 +90,7 @@ export default function Products(props) {
             uomToPay: product.prices[0].nameUoms,
             prices: product.prices.map((price) => ({
               ...price,
-              priceWithTax: price.price + price.price * product.tax,
+              priceWithTax: (price.price + price.price * product.tax).toFixed(2),
             })),
           }));
           useOrderStore.setState({ articlesToPay: productsWithTax });

@@ -16,9 +16,6 @@ export default function Stepper({ productData, onAmountChange, counter }) {
             setAmount(amount - 1);
             console.log("aca esta")
           }
-          if(amount <=1 ){
-            console.log("aca esta2")
-          }
         }}
       >
         - 
