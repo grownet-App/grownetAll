@@ -23,6 +23,7 @@ export default function Products(props) {
   const { articlesToPay, selectedSupplier, selectedRestaurant } =
     useOrderStore();
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [resetInput, setResetInput] = useState(0);
 
   useEffect(() => {
     if (articlesToPay.length > 0) {
@@ -71,9 +72,14 @@ export default function Products(props) {
     }
   }, [selectedSupplier]);
 
+  const resetInputSearcher = () => {
+    setResetInput((prevKey) => prevKey + 1);
+  };
+
   const toggleShowFavorites = () => {
     setShowFavorites(!showFavorites);
     setSelectedCategory("All");
+    resetInputSearcher();
   };
   console.log("Estos son articulos a pagar ", articlesToPay);
   // CAMBIO DE CANTIDAD DE ARTICULOS
@@ -117,6 +123,7 @@ export default function Products(props) {
   const filterCategories = (category) => {
     setSelectedCategory(category);
     setShowFavorites(false);
+    resetInputSearcher();
   };
 
   return (
@@ -128,13 +135,12 @@ export default function Products(props) {
         <h1 className="tittle-products">{t("products.title")}</h1>
       </div>
       <ProductSearcher
-        products={products}
+        products={articlesToPay}
         setShowSearchResults={setShowSearchResults}
-        showSearchResults={showSearchResults}
+        resetInput={resetInput}
       />
       {showSearchResults ? (
         <ProductsFind
-          productsData={products}
           onAmountChange={handleAmountChange}
           onUomChange={handleUomChange}
         />
