@@ -23,6 +23,7 @@ import SettingsRestaurants from "../pages/Settings/SettingsRestaurants";
 import SettingsSuppliers from "../pages/Settings/SettingsSuppliers";
 import TermsAndConditions from "../pages/TermsAndConditions";
 import EditRestaurant from "../pages/Settings/EditRestaurant";
+import PruebaCateg from "../components/PruebaCateg"
 import PublicRoute from "./PublicRoute";
 
 export default function AppRouter() {
@@ -70,18 +71,10 @@ export default function AppRouter() {
       </Route>
       <Route exact path={routes.settings} element={<PublicRoute />}>
         <Route exact path={routes.settings} element={<Settings />} />
-      </Route>
-      <Route exact path={routes.settingsRestaurants} element={<PublicRoute />}>
-        <Route exact path={routes.settingsRestaurants} element={<SettingsRestaurants />}/>
-      </Route>
-      <Route exact path={routes.settingsSuppliers} element={<PublicRoute />}>
-        <Route exact path={routes.settingsSuppliers} element={<SettingsSuppliers />}/>
-      </Route>
-      <Route exact path={routes.editRestaurant} element={<PublicRoute />}>
-        <Route exact path={routes.editRestaurant} element={<EditRestaurant />}/>
-      </Route>
-      <Route exact path={routes.FAQ} element={<PublicRoute />}>
-        <Route exact path={routes.FAQ} element={<FAQ />} />
+        <Route exact path="faq" element={<FAQ/>}/>
+        <Route exact path="termsAndCoditions" element={<TermsAndConditions/>}/>
+        <Route exact path="editRestaurants" element={<SettingsRestaurants/>}/>
+        <Route exact path="editSuppliers" element={<SettingsSuppliers/>}/>
       </Route>
       <Route exact path={routes.record} element={<PublicRoute />}>
         <Route exact path={routes.record} element={<Record />} />
@@ -93,7 +86,7 @@ export default function AppRouter() {
         <Route exact path={routes.pendingRecord} element={<PendingRecord />}/>
       </Route>
       <Route exact path={routes.detailsOrderPastupcomingRecord} element={<PublicRoute />}>
-        <Route exact path={routes.detailsOrderPast} element={<DetailOrderPast />}/>
+      <Route exact path={routes.detailsOrderPast} element={<DetailOrderPast />}/>
       </Route>
       <Route exact path={routes.reception} element={<PublicRoute />}>
         <Route exact path={routes.reception} element={<Reception />} />

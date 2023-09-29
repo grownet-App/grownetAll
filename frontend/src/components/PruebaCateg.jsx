@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { allCategories } from "../config/urls.config";
 import axios from "axios";
 import useTokenStore from "../store/useTokenStore";
+import { Link } from "react-router-dom";
 export default function PruebaCateg() {
   const { token } = useTokenStore();
   useEffect(() => {
@@ -22,10 +23,8 @@ export default function PruebaCateg() {
   const [categoriesApi, setCategoriesApi] = useState();
 
   return (
-    <section className="menu-categories me-auto">
-      {categoriesApi.map((categ) => (
-        <p>{categ.name}</p>
-      ))}
+    <section className="">
+      <Link to="gatos">Gatos</Link>
     </section>
   );
 }
