@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native'
-import React, { useDeferredValue, useState } from 'react'
+import React, { useState } from 'react'
 import ProductCards from '../../components/buyingProcess/productCards'
 import ProductSearcher from '../../components/buyingProcess/productSearch'
 import ProductsCategories from '../../components/buyingProcess/productCategories'

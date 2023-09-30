@@ -46,11 +46,7 @@ function AuthNavigator() {
       ) : (
         <>
           {/* //TODO, quitar, solo para pruebas de maquetacion */}
-          <Stack.Screen
-            name="TabNavigator"
-            component={TabNavigator}
-            options={{ headerShown: false }}
-          />
+
           {/* //----------------------------// */}
           <Stack.Screen
             name="home"
