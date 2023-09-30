@@ -1,25 +1,46 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import PhoneInput from 'react-native-phone-number-input'
 import { useState } from 'react'
-import axios from 'axios'
+import axios from '../../../axiosConfig.'
 import { GlobalStyles } from '../../styles/styles'
-import { validationApiUrl } from '../../config/urls.config'
+import { validationApiUrl, onlyCountries } from '../../config/urls.config'
+
 const LoginPage = () => {
   const navigation = useNavigation()
   const [phoneNumber, setPhoneNumber] = useState('')
   const [phoneDos, setPhoneDos] = useState('')
-  let country
+  const [countries, setCountries] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(onlyCountries)
+
+        const countriesData = response.data.countries
+        const countryNames = countriesData.map((country) =>
+          country.short_name.toUpperCase(),
+        )
+
+        setCountries(countryNames)
+      } catch (error) {
+        console.error('Error obteniendo los paises disponibles:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
   const handleChange = async () => {
     let countrySplit = phoneDos.split(phoneNumber)
     let countryCod = countrySplit[0]
-    country = countryCod.split('+')[1]
+    let countryP = countryCod.split('+')[1]
 
     const state = {
       form: {
-        country: parseInt(country, 10),
+        country: parseInt(countryP, 10),
         telephone: parseInt(phoneNumber, 10),
       },
       error: false,
@@ -48,27 +69,31 @@ const LoginPage = () => {
   return (
     <View style={styles.container}>
       <Image
-        style={styles.tinyLogo}
+        style={styles.tinyLogo2}
         source={require('../../../assets/logo.png')}
+        resizeMode="contain"
       />
+
       <Text style={styles.p}>Enter your mobile number:</Text>
       <View style={{ borderRadius: 50, overflow: 'hidden' }}>
-        <PhoneInput
-          countryPickerProps={{
-            countryCodes: ['CO', 'ES', 'PT', 'GB'],
-          }}
-          defaultCode="GB"
-          defaultValue={phoneNumber}
-          onChangeText={(text) => {
-            setPhoneNumber(text)
-          }}
-          countryCode={(info) => {
-            setPhoneDos(info)
-          }}
-          onChangeFormattedText={(text) => {
-            setPhoneDos(text)
-          }}
-        />
+        {countries.length > 0 ? (
+          <PhoneInput
+            countryPickerProps={{
+              countryCodes: countries,
+            }}
+            defaultCode={'GB'}
+            defaultValue={phoneNumber}
+            onChangeText={(text) => {
+              setPhoneNumber(text)
+            }}
+            countryCode={(info) => {
+              setPhoneDos(info)
+            }}
+            onChangeFormattedText={(text) => {
+              setPhoneDos(text)
+            }}
+          />
+        ) : null}
       </View>
       <TouchableOpacity
         style={GlobalStyles.containerButtonLets}
@@ -106,11 +131,11 @@ const styles = StyleSheet.create({
   p: {
     color: 'white',
     fontSize: 16,
-    marginBottom: 36,
+    marginBottom: 25,
   },
-  tinyLogo: {
-    width: 150,
-    height: 150,
+  tinyLogo2: {
+    width: 240,
+    height: 196,
     marginBottom: 30,
   },
   textInput: {

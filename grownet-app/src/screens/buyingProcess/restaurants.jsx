@@ -10,10 +10,9 @@ import {
 import React, { useEffect } from 'react'
 import { availableRestaurants } from '../../config/urls.config'
 import { RestaurantStyles } from '../../styles/styles'
-import axios from 'axios'
+import axios from '../../../axiosConfig.'
 import useTokenStore from '../../store/useTokenStore'
 import useOrderStore from '../../store/UseOrderStore'
-import BgRestaurant from '../../../assets/img/backgroundRestaurants.png'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 
@@ -54,26 +53,42 @@ const Restaurants = () => {
   return (
     <SafeAreaView>
       <ScrollView contentContainerStyle={RestaurantStyles.restaurants}>
-        {restaurants.map((restaurant) => (
-          <TouchableOpacity
-            onPress={() => onPressSuppliers}
-            key={restaurant.accountNumber}
-          >
-            <ImageBackground
-              style={RestaurantStyles.RestaurantBg}
-              source={{ uri: BgRestaurant }}
+        {restaurants.map((restaurant) => {
+          const imageUrl = `${urlImg}${restaurant.image}`
+          console.log('imagen:', imageUrl)
+
+          return (
+            <TouchableOpacity
+              onPress={() => onPressSuppliers()}
+              key={restaurant.accountNumber}
             >
-              <Image
-                source={{ uri: urlImg + restaurant.image }}
-                alt={restaurant.accountName}
-                style={{ width: 160, height: 160 }}
-              />
-              <Text style={RestaurantStyles.TextDirectionRestaurant}>
-                {restaurant.address}
-              </Text>
-            </ImageBackground>
-          </TouchableOpacity>
-        ))}
+              <ImageBackground
+                style={RestaurantStyles.RestaurantBg}
+                source={require('../../../assets/img/backgroundRestaurants.png')}
+              >
+                <Image
+                  source={{
+                    uri: imageUrl,
+                  }}
+                  style={{ width: 160, height: 160 }}
+                  onError={(error) => {
+                    console.log('Error cargando la imagen', error)
+                  }}
+                  onLoad={() => {
+                    console.log('Imagen cargada correctamente!')
+                  }}
+                />
+                <Text
+                  style={RestaurantStyles.TextDirectionRestaurant}
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                >
+                  {restaurant.address}
+                </Text>
+              </ImageBackground>
+            </TouchableOpacity>
+          )
+        })}
         <TouchableOpacity
           onPress={onPressAdd}
           style={RestaurantStyles.buttonAddCont}
