@@ -7,6 +7,7 @@ import { useState } from 'react'
 import axios from '../../../axiosConfig.'
 import { GlobalStyles } from '../../styles/styles'
 import { validationApiUrl, onlyCountries } from '../../config/urls.config'
+
 const LoginPage = () => {
   const navigation = useNavigation()
   const [phoneNumber, setPhoneNumber] = useState('')
@@ -17,6 +18,7 @@ const LoginPage = () => {
     async function fetchData() {
       try {
         const response = await axios.get(onlyCountries)
+
         const countriesData = response.data.countries
         const countryNames = countriesData.map((country) =>
           country.short_name.toUpperCase(),

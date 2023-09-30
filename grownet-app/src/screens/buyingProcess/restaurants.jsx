@@ -41,7 +41,7 @@ const Restaurants = () => {
 
   console.log('RESTAURANTES:', restaurants)
   const urlImg =
-    'http://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
+    'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
 
   const onPressAdd = () => {
     //TODO,agregar restaurante
@@ -68,14 +68,11 @@ const Restaurants = () => {
               >
                 <Image
                   source={{
-                    uri: 'https://concepto.de/wp-content/uploads/2018/02/http-y-https-e1547501523497.jpg',
+                    uri: imageUrl,
                   }}
                   style={{ width: 160, height: 160 }}
                   onError={(error) => {
                     console.log('Error cargando la imagen', error)
-                    alert(
-                      'No se pudo cargar la imagen. Inténtalo de nuevo más tarde.',
-                    )
                   }}
                   onLoad={() => {
                     console.log('Imagen cargada correctamente!')

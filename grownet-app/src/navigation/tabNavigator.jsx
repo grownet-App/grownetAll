@@ -11,7 +11,6 @@ import { Button } from 'react-native-paper'
 import { TouchableOpacity, StatusBar } from 'react-native'
 import useTokenStore from '../store/useTokenStore'
 import Restauranst from '../screens/buyingProcess/restaurants'
-import { goBack } from './rootNavigation'
 import Products from '../screens/buyingProcess/products'
 import OrderDetail from '../screens/buyingProcess/orderDetail'
 import OrderSuccessful from '../screens/buyingProcess/orderSuccessful'
@@ -21,7 +20,7 @@ import { useNavigation } from '@react-navigation/native'
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 
-const headerLeft = () => {
+const HeaderLeft = () => {
   const navigation = useNavigation()
 
   const goBack = () => {
@@ -106,7 +105,7 @@ function OrderStack() {
             fontFamily: 'PoppinsBold',
             fontSize: 28,
           },
-          headerLeft: () => headerLeft(),
+          headerLeft: () => HeaderLeft(),
         }}
       />
       <Stack.Screen
@@ -126,7 +125,7 @@ function OrderStack() {
             fontFamily: 'PoppinsBold',
             fontSize: 24,
           },
-          headerLeft: () => headerLeft(),
+          headerLeft: () => HeaderLeft(),
         }}
       />
       <Stack.Screen
@@ -146,7 +145,7 @@ function OrderStack() {
             fontFamily: 'PoppinsBold',
             fontSize: 24,
           },
-          headerLeft: () => headerLeft(),
+          headerLeft: () => HeaderLeft(),
         }}
       />
       <Stack.Screen
@@ -166,7 +165,7 @@ function OrderStack() {
             fontFamily: 'PoppinsBold',
             fontSize: 24,
           },
-          headerLeft: () => headerLeft(),
+          headerLeft: () => HeaderLeft(),
         }}
       />
       <Stack.Screen
@@ -194,7 +193,7 @@ function MyStack1() {
         component={Records}
         options={{
           headerBackTitleVisible: false,
-          headerLeft: () => headerLeft(),
+          headerLeft: () => HeaderLeft(),
           headerRight: () => headerRight(),
         }}
       />
@@ -217,7 +216,7 @@ function MyStack3() {
         component={Chat}
         options={{
           headerBackTitleVisible: false,
-          headerLeft: () => headerLeft(),
+          headerLeft: () => HeaderLeft(),
           headerRight: () => headerRight(),
         }}
       />

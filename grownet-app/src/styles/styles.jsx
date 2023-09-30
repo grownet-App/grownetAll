@@ -1,22 +1,12 @@
 import { StyleSheet, Platform } from 'react-native'
 
 export const GlobalStyles = StyleSheet.create({
-  btnPrimary: {
-    padding: 35,
-    backgroundColor: '#026CD2',
-    borderRadius: 16,
-    width: '100%',
-    fontWeight: 500,
-    alignItems: 'center',
-    color: 'white',
-  },
   btnSecundary: {
     backgroundColor: '#04444F',
     paddingHorizontal: 35,
     paddingVertical: 12,
     borderRadius: 30,
     margin: 0.5,
-    fontWeight: 500,
     alignItems: 'center',
   },
   btnWhite: {
@@ -25,12 +15,11 @@ export const GlobalStyles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 30,
     marginVertical: 16,
-    fontWeight: 500,
     alignItems: 'center',
   },
   cardSuppliers: {
     backgroundColor: '#1D446A',
-    fontWeight: 500,
+    fontWeight: '500',
   },
   container: {
     flex: 2,
@@ -42,7 +31,7 @@ export const GlobalStyles = StyleSheet.create({
 
   linkWhite: {
     color: 'white',
-    fontWeight: 400,
+    fontWeight: '400',
     fontSize: 18,
     paddingVertical: 50,
   },
@@ -65,7 +54,7 @@ export const GlobalStyles = StyleSheet.create({
 
   textBtnW: {
     color: '#04444F',
-    fontWeight: 500,
+    fontWeight: '900',
     fontSize: 18,
     textAlign: 'center',
   },
@@ -75,7 +64,6 @@ export const GlobalStyles = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 30,
     marginVertical: 28,
-    fontWeight: 500,
     alignItems: 'center',
   },
   buttonLets: {
@@ -523,7 +511,7 @@ export const OrderSuccessfulStyles = StyleSheet.create({
   },
   textSuccessful: {
     color: '#026cd2',
-    fontWeight: 900,
+    fontWeight: '900',
     fontSize: 30,
   },
   btnPrimary: {
