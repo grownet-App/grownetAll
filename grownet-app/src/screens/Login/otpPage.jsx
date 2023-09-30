@@ -31,7 +31,7 @@ const Otp = () => {
     let otp = pin1 + pin2 + pin3 + pin4
 
     const formData = route.params
-    console.log('formOTP:', formData)
+
     try {
       const response = await axios.post(
         `${otpApiUrl}?country=${formData.country}&telephone=${formData.telephone}&code=${otp}`,

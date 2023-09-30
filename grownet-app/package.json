@@ -19,9 +19,10 @@
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
     "@react-navigation/stack": "^6.3.17",
-    "axios": "^1.5.0",
+    "axios": "^1.5.1",
     "eslint-plugin-react-native": "^4.1.0",
     "expo": "~48.0.18",
+    "expo-blur": "~12.2.2",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -37,8 +38,7 @@
     "react-native-svg": "13.4.0",
     "react-native-web": "~0.18.10",
     "zustand": "^4.4.1",
-    "zustand-persist": "^0.4.0",
-    "expo-blur": "~12.2.2"
+    "zustand-persist": "^0.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

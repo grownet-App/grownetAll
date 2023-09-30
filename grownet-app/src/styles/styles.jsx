@@ -214,15 +214,17 @@ export const RestaurantStyles = StyleSheet.create({
   TextDirectionRestaurant: {
     color: '#FFFFFF',
     fontSize: 15,
+    flex: 1,
   },
   RestaurantBg: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     width: 322,
     height: 150,
     backgroundColor: '#04444f',
     marginVertical: 10,
+    marginHorizontal: 5,
     borderRadius: 21,
     overflow: 'hidden',
     padding: 10,

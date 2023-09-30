@@ -2,7 +2,7 @@ import { SafeAreaView, ScrollView, ImageBackground, Text } from 'react-native'
 import React, { useEffect } from 'react'
 import { ApiSuppliers } from '../../config/urls.config'
 import { SuppliersStyles } from '../../styles/styles'
-import axios from 'axios'
+import axios from '../../../axiosConfig.'
 import useOrderStore from '../../store/UseOrderStore'
 import useTokenStore from '../../store/useTokenStore'
 
@@ -30,7 +30,7 @@ const Suppliers = () => {
   }, [token, setSuppliers, setSelectedSupplier])
 
   const urlImg =
-    'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
+    'http://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
 
   const specialSuppliers = [
     'eurofrutta',
