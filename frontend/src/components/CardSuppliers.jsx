@@ -21,35 +21,22 @@ export default function Suppliers() {
 
   return (
     <section className="suppliers">
-      {suppliers
-        .filter(
-          (supplier) =>
-            supplier.name === "FoodPoint" ||
-            supplier.name === "eurofrutta" ||
-            supplier.name === "HG WALTER" ||
-            supplier.name === "County Suppplies" ||
-            supplier.name === "The Menu Partners" ||
-            supplier.name === "IMS" ||
-            supplier.name === "Smithfield Butchers" ||
-            supplier.name === "Direct Meats" ||
-            supplier.name === "Big K"
-        )
-        .map((supplier) => (
-          <>
-            <Link
-              onClick={() => handleSupplierSelect(supplier)}
-              key={supplier.id}
-              id="suppliers-categ"
-              to="/products"
-            >
-              <img
-                src={urlImg + supplier.image}
-                alt={supplier.name}
-                id="img-suppliers"
-              />
-            </Link>
-          </>
-        ))}
+      {suppliers.map((supplier) => (
+        <>
+          <Link
+            onClick={() => handleSupplierSelect(supplier)}
+            key={supplier.id}
+            id="suppliers-categ"
+            to="/products"
+          >
+            <img
+              src={urlImg + supplier.image}
+              alt={supplier.name}
+              id="img-suppliers"
+            />
+          </Link>
+        </>
+      ))}
     </section>
   );
 }

@@ -24,7 +24,6 @@ export default function Suppliers() {
       })
       .then((response) => {
         setSuppliers(response.data.suppliers);
-        console.log("response", response.data.suppliers);
       })
       .catch((error) => {
         console.error("Error al obtener los proveedores:", error);
@@ -40,7 +39,6 @@ export default function Suppliers() {
         <h1 className="tittle-restaurants"> {t("suppliers.title")} </h1>
       </div>
       <CardSuppliers></CardSuppliers>
-
       <Link className="bttn btn-primary" id="my-intercom">
         <Icon className="icon-plus" icon="simple-line-icons:plus" />
         {t("suppliers.addSuppliers")}
