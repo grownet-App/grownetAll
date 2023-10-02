@@ -11,25 +11,34 @@ import { Button } from 'react-native-paper'
 import { TouchableOpacity, StatusBar } from 'react-native'
 import useTokenStore from '../store/useTokenStore'
 import Restauranst from '../screens/buyingProcess/restaurants'
-import { goBack } from './rootNavigation'
 import Products from '../screens/buyingProcess/products'
 import OrderDetail from '../screens/buyingProcess/orderDetail'
 import OrderSuccessful from '../screens/buyingProcess/orderSuccessful'
 import OrderInformation from '../screens/buyingProcess/orderInformation'
+import { useNavigation } from '@react-navigation/native'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 
-const headerLeft = () => (
-  <TouchableOpacity style={{ marginHorizontal: 28 }} onPress={() => goBack()}>
-    <FontAwesome
-      name="arrow-left"
-      size={24}
-      color="#04444F"
-      style={{ position: 'relative' }}
-    />
-  </TouchableOpacity>
-)
+const HeaderLeft = () => {
+  const navigation = useNavigation()
+
+  const goBack = () => {
+    navigation.goBack()
+  }
+
+  return (
+    <TouchableOpacity style={{ marginHorizontal: 28 }} onPress={goBack}>
+      <FontAwesome
+        name="arrow-left"
+        size={24}
+        color="#04444F"
+        style={{ position: 'relative' }}
+      />
+    </TouchableOpacity>
+  )
+}
+
 const headerRight = () => (
   <Button
     /* eslint-disable no-alert */
@@ -51,7 +60,7 @@ function OrderStack() {
   return (
     //TODO. PONER RUTA DE RESTAURANTES
     <Stack.Navigator
-      initialRouteName="ordersDetail"
+      initialRouteName="restaurants"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#026CD2',
@@ -96,7 +105,7 @@ function OrderStack() {
             fontFamily: 'PoppinsBold',
             fontSize: 28,
           },
-          headerLeft: () => headerLeft(),
+          headerLeft: () => HeaderLeft(),
         }}
       />
       <Stack.Screen
@@ -116,7 +125,7 @@ function OrderStack() {
             fontFamily: 'PoppinsBold',
             fontSize: 24,
           },
-          headerLeft: () => headerLeft(),
+          headerLeft: () => HeaderLeft(),
         }}
       />
       <Stack.Screen
@@ -136,7 +145,7 @@ function OrderStack() {
             fontFamily: 'PoppinsBold',
             fontSize: 24,
           },
-          headerLeft: () => headerLeft(),
+          headerLeft: () => HeaderLeft(),
         }}
       />
       <Stack.Screen
@@ -156,7 +165,7 @@ function OrderStack() {
             fontFamily: 'PoppinsBold',
             fontSize: 24,
           },
-          headerLeft: () => headerLeft(),
+          headerLeft: () => HeaderLeft(),
         }}
       />
       <Stack.Screen
@@ -184,7 +193,7 @@ function MyStack1() {
         component={Records}
         options={{
           headerBackTitleVisible: false,
-          headerLeft: () => headerLeft(),
+          headerLeft: () => HeaderLeft(),
           headerRight: () => headerRight(),
         }}
       />
@@ -207,7 +216,7 @@ function MyStack3() {
         component={Chat}
         options={{
           headerBackTitleVisible: false,
-          headerLeft: () => headerLeft(),
+          headerLeft: () => HeaderLeft(),
           headerRight: () => headerRight(),
         }}
       />

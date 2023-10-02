@@ -403,6 +403,7 @@ export default function OrderInformation() {
           />
           <h3>{t("deliveryDetail.deliver")}</h3>
           <DatePicker
+            onFocus={(e) => e.target.readOnly = true}
             selected={dateToPicker}
             onChange={handleChangeDate}
             minDate={tomorrow}

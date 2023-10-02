@@ -46,6 +46,12 @@
     align-items: center;
     justify-content: space-between;
   }
+  .product-selectUom{
+    font-size: 16px !important;
+    color: #868686 !important;
+    margin-bottom: 0 !important;
+    font-weight: 400 !important;
+  }
   .heart-icon{
     width: 2rem;
     height: 2rem;
@@ -59,7 +65,8 @@
   }
   .elements h1{
     margin-bottom: 0px;
-    font-size: 22px;
+    font-size: 18px;
+    font-weight: 500;
   }
   .product-amount{
     display: flex;
@@ -123,17 +130,16 @@
     border-color: var(--color-green) !important;
   }
   /*Favoritos*/
-.pr{
+/*.pr{
   position: relative;
-}
+}*/
 .img-product{
   box-shadow: rgba(7, 33, 58, 0.2) 0px 0px 24px;
   border-radius: 15px;
   width: 100%;
 }
-.icono{
-top: -15px;
-right: 8px;
+
+.fav-icon{
 background-color: white;
 border-radius: 100%;
 width: 1.8rem;

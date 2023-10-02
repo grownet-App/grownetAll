@@ -1,42 +1,47 @@
-import closeCircleOutline from "@iconify/icons-eva/close-circle-outline";
+import closeOutline from '@iconify/icons-eva/close-outline';
 import searchIcon from "@iconify/icons-heroicons-outline/search";
 import { Icon } from "@iconify/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //TODO ORGANIZAR LOS ICONS PARA EL SEARCHER
 import { useTranslation } from "react-i18next";
 import useProductStore from "../../store/useProductStore";
 import "./productSearcher.css";
 
-function ProductSearcher({
-  products,
-  setShowSearchResults,
-  showSearchResults,
-}) {
+function ProductSearcher({ products, setShowSearchResults, resetInput }) {
   const { t } = useTranslation();
   const [input, setInput] = useState("");
-  const setSearchResults = useProductStore((state) => state.setSearchResults);
+  const setFilteredProducts = useProductStore(
+    (state) => state.setFilteredProducts
+  );
   const [searchButtonIcon, setSearchButtonIcon] = useState(searchIcon);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (showSearchResults) {
-      handleReset();
-    } else {
+  useEffect(() => {
+    handleReset();
+  }, [resetInput]);
+
+  useEffect(() => {
+    if (input !== "") {
       filterProducts(input);
     }
-  };
+  }, [products]);
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      filterProducts(input);
+  const handleInputChange = (e) => {
+    const query = e.target.value;
+    setInput(query);
+
+    if (query === "") {
+      setShowSearchResults(false);
+      setFilteredProducts([]);
+      setSearchButtonIcon(searchIcon);
+    } else {
+      filterProducts(query);
     }
   };
 
   const handleReset = () => {
     setShowSearchResults(false);
     setInput("");
-    setSearchResults([]);
+    setFilteredProducts([]);
     setSearchButtonIcon(searchIcon);
   };
 
@@ -46,22 +51,21 @@ function ProductSearcher({
     );
     console.log("Haz filtrado", filtered);
     setShowSearchResults(true);
-    setSearchResults(filtered);
-    setSearchButtonIcon(closeCircleOutline);
+    setFilteredProducts(filtered);
+    setSearchButtonIcon(closeOutline);
   };
 
   return (
     <div className="flex-container">
-      <form onSubmit={handleSubmit} className="search-form">
+      <form className="search-form">
         <input
           type="text"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={handleInputChange}
           placeholder={t("productSearcher.placeholder")}
           className="search-input"
-          onKeyDown={handleKeyDown}
         />
-        <button type="submit" className="search-button">
+        <button type="button" onClick={handleReset} className="search-button">
           <Icon icon={searchButtonIcon} />
         </button>
       </form>

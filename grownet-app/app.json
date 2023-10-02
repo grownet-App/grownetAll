@@ -7,8 +7,8 @@
     "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/logo.png",
-      "resizeMode": "center",
+      "image": "./assets/logo2.png",
+      "resizeMode": "contain",
       "backgroundColor": "#026CD2"
     },
     "assetBundlePatterns": ["**/*"],
@@ -24,7 +24,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "fastRefresh": true
+    }
   }
 }

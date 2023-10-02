@@ -41,10 +41,14 @@ export default function ProductCard({
         <img src={ urlImg + image} alt={"image " + name} />
         <div>
           <div className="titlle-products">
-            <h1>{name} - {selectedUom.name} </h1>
+            <div>
+              <h1>{name}</h1>
+              <p className="product-selectUom">{selectedUom.name} </p>
+            </div>
+            
             <div className="pr">
               <Icon
-                className="icono"
+                className="fav-icon"
                 icon={isFavorite ? "ph:heart-fill" : "ph:heart"}
                 onClick={handleToggleFavorite}
                 color="#62C471"
