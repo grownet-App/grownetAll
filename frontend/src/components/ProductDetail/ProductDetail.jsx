@@ -54,7 +54,6 @@ export default function ProductDetail({
     });
     setArticles(updatedArticlesToPay);
     useOrderStore.setState({ articlesToPay: updatedArticlesToPay });
-    console.log("ESTO ARTICULOS PASARON", updatedArticlesToPay);
   };
 
   const handleTrashClick = (productId) => {
@@ -81,7 +80,6 @@ export default function ProductDetail({
   const calculateItemNet = (prices, amount, uomToPay) => {
     const selectedPrice = prices.find((price) => price.nameUoms === uomToPay);
     const net = selectedPrice.price * amount;
-    console.log("ESTE ES EL NET", net);
     return parseFloat(net.toFixed(2));
   };
 
