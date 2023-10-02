@@ -40,7 +40,7 @@ export default function Suppliers() {
               onClick={() => handleSupplierSelect(supplier)}
               key={supplier.id}
               id="suppliers-categ"
-              to="/products"
+              to="products"
             >
               <img
                 src={urlImg + supplier.image}

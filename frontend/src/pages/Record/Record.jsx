@@ -48,7 +48,7 @@ export default function Record() {
                   <h4>{t("record.amount")}</h4>
                   <p>£200</p>
                 </div>
-                <Link to={"/pastRecord"} className="bttn btn-primary">
+                <Link to={"pastRecord"} className="bttn btn-primary">
                   {t("record.viewDetails")}
                 </Link>
               </div>
@@ -72,7 +72,7 @@ export default function Record() {
                     <h4>{t("record.amount")}</h4>
                     <p>£200</p>
                   </div>
-                  <Link className="bttn btn-primary" to={"/pendingRecord"}>{t("record.viewDetails")}</Link>
+                  <Link className="bttn btn-primary" to={"pendingRecord"}>{t("record.viewDetails")}</Link>
                 </div>
               </div>
             </section>
