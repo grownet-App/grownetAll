@@ -423,23 +423,6 @@ export default function OrderInformation() {
       });
   };
 
-  // LLAMAR LAS ORDENES DE LA BASE DE DATOS
-  const getOrders = (e) => {
-    e.preventDefault();
-    axios
-      .get(allStorageOrders, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log("Respuesta exitosa al llamar las ordenes", response);
-      })
-      .catch((error) => {
-        console.log("Error al llamar las ordenes", error);
-      });
-  };
-
   return (
     <section className="details">
       <div className="tittle-page">
@@ -483,9 +466,6 @@ export default function OrderInformation() {
         />
         <button className="bttn btn-secundary" onClick={sendOrder}>
           Almacenar orden
-        </button>
-        <button className="bttn btn-secundary" onClick={getOrders}>
-          Ver ordenes
         </button>
       </form>
     </section>

@@ -6,9 +6,37 @@ import { Link } from "react-router-dom";
 import MenuPrimary from "../../components/Menu/MenuPrimary";
 import "../../components/ProductSearcher/productSearcher.css";
 import "../../css/record.css";
+import axios from "axios";
+import { allStorageOrders } from "../../config/urls.config";
+import useTokenStore from "../../store/useTokenStore";
+import useRecordStore from "../../store/useRecordStore";
+import { format } from "date-fns";
 
 export default function Record() {
   const { t } = useTranslation();
+  const { token } = useTokenStore();
+  const { pendingOrders, setPendingOrders } = useRecordStore();
+
+    // LLAMAR LAS ORDENES PENDIENTES DE LA BASE DE DATOS
+    const getOrders = (e) => {
+      e.preventDefault();
+      axios
+        .get(allStorageOrders, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setPendingOrders(response.data.orders.map((order) => ({
+            ...order,
+            created_date: format(new Date(order.created_date), "dd/MM/yyyy"),
+          })));
+          console.log("Respuesta exitosa al llamar las ordenes", pendingOrders);
+        })
+        .catch((error) => {
+          console.log("Error al llamar las ordenes", error);
+        });
+    };
 
   return (
     <>
@@ -55,29 +83,32 @@ export default function Record() {
             </div>
           </Tab>
           <Tab eventKey="pending" title={t("record.currentOrders")}>
-            <section className="">
-              <div className="card-record">
+            {pendingOrders.map((order) => (
+              <div className="card-record" key={order.reference}>
                 <div className="information-past">
                   <div className="">
                     <h4>{t("record.orderNumber")}</h4>
-                    <p>57896547</p>
+                    <p>{order.reference}</p>
                   </div>
                   <div>
                     <h4>{t("record.date")}</h4>
-                    <p>29/07/2023</p>
+                    <p>{order.created_date}</p>
                   </div>
                 </div>
                 <div className="information-past o2" id="o2">
                   <div>
                     <h4>{t("record.amount")}</h4>
-                    <p>£200</p>
+                    <p>£{order.total}</p>
                   </div>
                   <Link className="bttn btn-primary" to={"/pendingRecord"}>{t("record.viewDetails")}</Link>
                 </div>
               </div>
-            </section>
+            ))}
           </Tab>
         </Tabs>
+        <button className="bttn btn-secundary" onClick={getOrders}>
+          Ver ordenes
+        </button>
 
         <div className="space-menu"></div>
       </section>
