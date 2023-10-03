@@ -1,42 +1,42 @@
 import { Icon } from "@iconify/react";
-import React from "react";
+import axios from "axios";
+import { format } from "date-fns";
+import React, { useEffect } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import MenuPrimary from "../../components/Menu/MenuPrimary";
 import "../../components/ProductSearcher/productSearcher.css";
-import "../../css/record.css";
-import axios from "axios";
 import { allStorageOrders } from "../../config/urls.config";
-import useTokenStore from "../../store/useTokenStore";
+import "../../css/record.css";
 import useRecordStore from "../../store/useRecordStore";
-import { format } from "date-fns";
+import useTokenStore from "../../store/useTokenStore";
 
 export default function Record() {
   const { t } = useTranslation();
   const { token } = useTokenStore();
   const { pendingOrders, setPendingOrders } = useRecordStore();
 
+  useEffect(() => {
     // LLAMAR LAS ORDENES PENDIENTES DE LA BASE DE DATOS
-    const getOrders = (e) => {
-      e.preventDefault();
-      axios
-        .get(allStorageOrders, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          setPendingOrders(response.data.orders.map((order) => ({
+    axios
+      .get(allStorageOrders, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setPendingOrders(
+          response.data.orders.map((order) => ({
             ...order,
             created_date: format(new Date(order.created_date), "dd/MM/yyyy"),
-          })));
-          console.log("Respuesta exitosa al llamar las ordenes", pendingOrders);
-        })
-        .catch((error) => {
-          console.log("Error al llamar las ordenes", error);
-        });
-    };
+          }))
+        );
+      })
+      .catch((error) => {
+        console.log("Error al llamar las ordenes", error);
+      });
+  }, []);
 
   return (
     <>
@@ -100,15 +100,14 @@ export default function Record() {
                     <h4>{t("record.amount")}</h4>
                     <p>£{order.total}</p>
                   </div>
-                  <Link className="bttn btn-primary" to={"/pendingRecord"}>{t("record.viewDetails")}</Link>
+                  <Link className="bttn btn-primary" to={"/pendingRecord"}>
+                    {t("record.viewDetails")}
+                  </Link>
                 </div>
               </div>
             ))}
           </Tab>
         </Tabs>
-        <button className="bttn btn-secundary" onClick={getOrders}>
-          Ver ordenes
-        </button>
 
         <div className="space-menu"></div>
       </section>
