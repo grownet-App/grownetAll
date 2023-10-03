@@ -23,7 +23,7 @@ export default function Suppliers() {
     <section className="suppliers">
       {suppliers.map((supplier) => (
         <section key={supplier.id} id="suppliers-categ">
-          <Link onClick={() => handleSupplierSelect(supplier)} to="/products">
+          <Link onClick={() => handleSupplierSelect(supplier)} to="products">
             <img
               src={urlImg + supplier.image}
               alt={supplier.name}

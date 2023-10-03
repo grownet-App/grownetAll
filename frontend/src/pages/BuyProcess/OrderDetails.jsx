@@ -55,7 +55,7 @@ export default function OrderDetails(props) {
       </div>
       <Link 
         className={`bttn btn-primary ${ totalToPay === 0 ? 'disabled' : ''}`} 
-        to={totalToPay===0 ? '#' : '/orderInformation'}>
+        to={totalToPay===0 ? '#' : '/suppliers/orderInformation'}>
         {t("orderDetails.continue")}
       </Link>
     </section>

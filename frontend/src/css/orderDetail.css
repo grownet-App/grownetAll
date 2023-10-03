@@ -106,6 +106,10 @@
 .data-shipping input{
     margin-bottom: 10px;
 }
+.data-shipping{
+    margin: 1rem;
+    margin-top: 0;
+}
 .react-datepicker{
     font-family: var(--poppins) !important;
     border: none !important;
