@@ -11,6 +11,7 @@ const useOrderStore = create((set) => ({
   totalTaxes: 0,
   totalToPay: 0,
   uomToPay: null,
+  idUomToPay: null,
   deliveryData: null,
   specialRequirements: null,
   setRestaurants: (restaurants) => set({ restaurants: restaurants }),
@@ -22,7 +23,6 @@ const useOrderStore = create((set) => ({
   setTotalNet: (newNet) => set({ totalNet: newNet }),
   setTotalTaxes: (newTaxes) => set({ totalTaxes: newTaxes }),
   setTotalToPay: (newTotal) => set({ totalToPay: newTotal }),
-  setUomToPay: (uom) => set({ uomToPay: uom }),
   setDeliveryData: (deliveryData) => set({ deliveryData: deliveryData }),
   setSpecialRequirements: (specialRequirements) => set ({specialRequirements: specialRequirements})
 }));

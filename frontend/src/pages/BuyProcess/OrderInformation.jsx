@@ -10,14 +10,17 @@ import {
   View,
   pdf,
 } from "@react-pdf/renderer";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
+import { allStorageOrders, createStorageOrder } from "../../config/urls.config";
 import "../../css/orderDetail.css";
 import fav_icon from "../../img/fav_icon.png";
 import useOrderStore from "../../store/useOrderStore";
+import useTokenStore from "../../store/useTokenStore";
 
 Font.register({
   family: "Poppins",
@@ -325,6 +328,7 @@ export default function OrderInformation() {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const [dateToPicker, setDateToPicker] = useState();
+  const { token } = useTokenStore();
 
   const handleChangeDate = (date) => {
     setDateToPicker(date);
@@ -382,15 +386,67 @@ export default function OrderInformation() {
       }
     );
   };
+  console.log('SEARCHING THE ID:',articlesToPay)
+
+  // ALMACENAR ORDEN EN LA BASE DE DATOS
+  const sendOrder = (e) => {
+    e.preventDefault();
+    const filteredJsonProducts = articlesToPay.filter((article) => article.amount > 0);
+    const jsonProducts = filteredJsonProducts.map((article) => ({
+        amount: article.amount,
+        id_presentations: article.idUomToPay,
+        price: article.totalItemToPay,
+    }));
+    const jsonOrderData = {
+      date_delivery: deliveryData,
+      address_delivery: selectedRestaurant.address,
+      accountNumber_customers: selectedRestaurant.accountNumber,
+      observation: specialRequirements,
+      total: totalToPay,
+      net: totalNet,
+      total_tax: totalTaxes,
+      products: jsonProducts,
+    };
+
+    console.log("ESTE ES EL JSON:", jsonOrderData);
+    axios
+      .post(createStorageOrder, jsonOrderData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log("Respuesta exitosa al crear la orden", response);
+      })
+      .catch((error) => {
+        console.log("Error al crear la orden", error);
+      });
+  };
+
+  // LLAMAR LAS ORDENES DE LA BASE DE DATOS
+  const getOrders = (e) => {
+    e.preventDefault();
+    axios
+      .get(allStorageOrders, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log("Respuesta exitosa al llamar las ordenes", response);
+      })
+      .catch((error) => {
+        console.log("Error al llamar las ordenes", error);
+      });
+  };
+
   return (
     <section className="details">
       <div className="tittle-page">
         <Link to="/details">
           <Icon src="google.com" icon="ic:round-arrow-back" id="arrow-icon" />
         </Link>
-        <h1>
-          {t("deliveryDetail.orderDetail")}
-        </h1>
+        <h1>{t("deliveryDetail.orderDetail")}</h1>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="data-shipping">
@@ -403,7 +459,7 @@ export default function OrderInformation() {
           />
           <h3>{t("deliveryDetail.deliver")}</h3>
           <DatePicker
-            onFocus={(e) => e.target.readOnly = true}
+            onFocus={(e) => (e.target.readOnly = true)}
             selected={dateToPicker}
             onChange={handleChangeDate}
             minDate={tomorrow}
@@ -420,12 +476,17 @@ export default function OrderInformation() {
             cols="50"
           ></textarea>
         </div>
-        {/* TODO REVISAR QUE ESTE BOTÓN TRADUZCA LA INFO Y NO ROMPA EL CODIGO */}
         <input
           type="submit"
           className="bttn btn-primary"
           value={t("deliveryDetail.continue")}
         />
+        <button className="bttn btn-secundary" onClick={sendOrder}>
+          Almacenar orden
+        </button>
+        <button className="bttn btn-secundary" onClick={getOrders}>
+          Ver ordenes
+        </button>
       </form>
     </section>
   );
