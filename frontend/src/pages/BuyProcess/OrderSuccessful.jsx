@@ -57,9 +57,6 @@ export default function OrderSuccessful() {
     }
   };
 
-  //TODO ELIMINAR ESTE CLG
-  console.log("ESTOS SON LOS ARTICULOS A PAGAR:", articlesToPay);
-
   return (
     <section className="order-succesful">
       {/* TODO ELIMINAR ESTO CUANDO ESTÉ ORGANIZADO EL TOTAL DE PRODUCTS A PAGAR */}

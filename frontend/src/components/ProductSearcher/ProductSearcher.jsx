@@ -49,7 +49,6 @@ function ProductSearcher({ products, setShowSearchResults, resetInput }) {
     const filtered = products.filter((product) =>
       product.name.toLowerCase().includes(query.toLowerCase())
     );
-    console.log("Haz filtrado", filtered);
     setShowSearchResults(true);
     setFilteredProducts(filtered);
     setSearchButtonIcon(closeOutline);

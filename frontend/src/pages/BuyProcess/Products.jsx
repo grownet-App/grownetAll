@@ -29,7 +29,6 @@ export default function Products(props) {
     if (articlesToPay.length > 0) {
       setArticles(articlesToPay);
       setProducts(articlesToPay);
-      console.log("TRAJO ALGO DEL STORAGE", articlesToPay);
     } else {
       const requestBody = {
         id: selectedSupplier.id,
@@ -43,9 +42,6 @@ export default function Products(props) {
           },
         })
         .then((response) => {
-          // Muestra los productos en la consola
-          console.log("Productos del proveedor:", response.data);
-          console.log("NEW SELECTED SUPPLIER ID", selectedSupplier.id);
           const defaultProducts = response.data.products;
           const productsWithTax = defaultProducts
             .filter((product) => product.prices.some((price) => price.nameUoms))
@@ -63,8 +59,6 @@ export default function Products(props) {
           useOrderStore.setState({ articlesToPay: productsWithTax });
           setArticles(productsWithTax);
           setProducts(productsWithTax);
-          console.log("NO TRAJO NADA DEL STORAGE");
-          console.log("PRODUCTOS CON TAX", productsWithTax);
         })
         .catch((error) => {
           console.error("Error al obtener los productos del proveedor:", error);
@@ -81,7 +75,6 @@ export default function Products(props) {
     setSelectedCategory("All");
     resetInputSearcher();
   };
-  console.log("Estos son articulos a pagar ", articlesToPay);
   // CAMBIO DE CANTIDAD DE ARTICULOS
   const handleAmountChange = (productId, newAmount) => {
     setArticles((prevArticles) =>
@@ -161,14 +154,14 @@ export default function Products(props) {
                   return article.nameCategorie === selectedCategory;
                 })
                 .map((article) => (
-                  <>
+                  <section key={article.id}>
                     <ProductCard
                       key={article.id}
                       productData={article}
                       onAmountChange={handleAmountChange}
                       onUomChange={handleUomChange}
                     ></ProductCard>
-                  </>
+                  </section>
                 ))}
             </>
           )}

@@ -384,7 +384,7 @@ export default function OrderInformation() {
         console.log(result);
       },
       (error) => {
-        console.log("no se envio nada de corre", error);
+        console.log("no se envio nada de correo", error);
       }
     );
   };
