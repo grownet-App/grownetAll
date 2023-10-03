@@ -243,7 +243,10 @@ export const PdfDocument = ({
             <Text style={styles.tableCell}>UOM</Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>Items price</Text>
+            <Text style={styles.tableCell}>Item price</Text>
+          </View>
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>Total items price</Text>
           </View>
         </View>
         {data
@@ -261,6 +264,9 @@ export const PdfDocument = ({
               </View>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>{article.uomToPay}</Text>
+              </View>
+              <View style={styles.tableCol}>
+                <Text style={styles.tableCell}>£hola</Text>
               </View>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>£{article.totalItemToPay}</Text>
