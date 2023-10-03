@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   tableCol: {
-    width: "20%",
+    width: "16.7%",
   },
   tableCell: {
     margin: "auto",
@@ -266,7 +266,7 @@ export const PdfDocument = ({
                 <Text style={styles.tableCell}>{article.uomToPay}</Text>
               </View>
               <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>£hola</Text>
+                <Text style={styles.tableCell}>£{article.totalItemToPay/article.amount}</Text>
               </View>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>£{article.totalItemToPay}</Text>
