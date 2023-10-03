@@ -54,7 +54,7 @@ export const GlobalStyles = StyleSheet.create({
 
   textBtnW: {
     color: '#04444F',
-    fontWeight: '900',
+    fontWeight: 'bold',
     fontSize: 18,
     textAlign: 'center',
   },
@@ -173,19 +173,37 @@ export const OtpStyles = StyleSheet.create({
 export const SuppliersStyles = StyleSheet.create({
   // suppliers styles
   suppliers: {
-    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 16,
+    marginTop: 5,
+    marginBottom: 16,
   },
 
   suppliersBg: {
-    width: 322,
-    height: 125,
+    width: 350,
+    height: 150,
     marginVertical: 10,
     borderRadius: 21,
     marginBottom: 10,
+  },
+  buttonAddCont: {
+    marginTop: 10,
+    backgroundColor: '#026cd2',
+    paddingHorizontal: 10,
+    borderRadius: 50,
+    width: '80%',
+  },
+  containButtonAdd: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  textAddRestaurant: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    color: '#ffff',
+    paddingRight: 10,
   },
 })
 

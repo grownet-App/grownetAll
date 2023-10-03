@@ -39,14 +39,14 @@ const Restaurants = () => {
     fetchData()
   }, [token, setRestaurants, setSelectedRestaurant])
 
-  console.log('RESTAURANTES:', restaurants)
   const urlImg =
-    'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
+    'http://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
 
   const onPressAdd = () => {
     //TODO,agregar restaurante
   }
-  const onPressSuppliers = () => {
+  const onPressSuppliers = (restaurant) => {
+    setSelectedRestaurant(restaurant)
     navigation.navigate('suppliers')
   }
 
@@ -55,11 +55,10 @@ const Restaurants = () => {
       <ScrollView contentContainerStyle={RestaurantStyles.restaurants}>
         {restaurants.map((restaurant) => {
           const imageUrl = `${urlImg}${restaurant.image}`
-          console.log('imagen:', imageUrl)
 
           return (
             <TouchableOpacity
-              onPress={() => onPressSuppliers()}
+              onPress={() => onPressSuppliers(restaurant)}
               key={restaurant.accountNumber}
             >
               <ImageBackground

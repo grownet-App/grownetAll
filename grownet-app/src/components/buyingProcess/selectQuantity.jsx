@@ -1,46 +1,45 @@
+import React, { useState, useEffect } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
 import { ProductsStyles } from '../../styles/styles'
 
-const SelectQuantity = ({ widthOrder }) => {
-  const [count, setCount] = useState(0)
-  const incrementCount = () => {
-    setCount(count + 1)
-  }
+const SelectQuantity = ({
+  widthOrder,
+  productData,
+  onAmountChange,
+  counter,
+}) => {
+  const [amount, setAmount] = useState(productData.amount)
+  const { id } = productData
 
-  const decrementCount = () => {
-    if (count > 0) {
-      setCount(count - 1)
+  const decrementAmount = () => {
+    if (amount > counter) {
+      setAmount(amount - 1)
+      onAmountChange(id, amount - 1)
+      console.log('aca esta')
     }
   }
 
-  const onAmountChange = () => {
-    // Lógica para cambiar la cantidad del producto con ID 'productId'
+  const incrementAmount = () => {
+    setAmount(amount + 1)
+    onAmountChange(id, amount + 1)
   }
+
+  useEffect(() => {
+    onAmountChange(id, amount)
+  }, [amount, id, onAmountChange])
 
   return (
     <View
       style={widthOrder ? ProductsStyles.countOrderD : ProductsStyles.count}
     >
-      <TouchableOpacity onPress={() => onAmountChange('')}>
-        <Text onPress={decrementCount} style={ProductsStyles.button2}>
-          -
-        </Text>
+      <TouchableOpacity onPress={decrementAmount}>
+        <Text style={ProductsStyles.button2}>-</Text>
       </TouchableOpacity>
 
-      <Text
-        style={{
-          fontSize: 20,
-          color: '#04444f',
-        }}
-      >
-        {count}
-      </Text>
+      <Text style={{ fontSize: 20, color: '#04444f' }}>{amount}</Text>
 
-      <TouchableOpacity onPress={() => onAmountChange('')}>
-        <Text onPress={incrementCount} style={ProductsStyles.button}>
-          +
-        </Text>
+      <TouchableOpacity onPress={incrementAmount}>
+        <Text style={ProductsStyles.button}>+</Text>
       </TouchableOpacity>
     </View>
   )

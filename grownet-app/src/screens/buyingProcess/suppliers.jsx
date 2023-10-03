@@ -1,14 +1,37 @@
-import { SafeAreaView, ScrollView, ImageBackground, Text } from 'react-native'
+import {
+  SafeAreaView,
+  ScrollView,
+  ImageBackground,
+  Text,
+  TouchableOpacity,
+} from 'react-native'
 import React, { useEffect } from 'react'
 import { ApiSuppliers } from '../../config/urls.config'
 import { SuppliersStyles } from '../../styles/styles'
 import axios from '../../../axiosConfig.'
 import useOrderStore from '../../store/UseOrderStore'
 import useTokenStore from '../../store/useTokenStore'
+import { View } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
 
 const Suppliers = () => {
-  const { suppliers, setSuppliers, setSelectedSupplier } = useOrderStore()
+  const navigation = useNavigation()
   const { token } = useTokenStore()
+  const {
+    suppliers,
+    setSuppliers,
+    setSelectedSupplier,
+    selectedSupplier: currentSelectedSupplier,
+    setArticlesToPay,
+  } = useOrderStore()
+
+  const handleSupplierSelect = (supplier) => {
+    setSelectedSupplier(supplier)
+    if (currentSelectedSupplier?.id !== supplier.id) {
+      setArticlesToPay([])
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +41,7 @@ const Suppliers = () => {
             Authorization: `Bearer ${token}`,
           },
         })
-        console.log('response', response.data.suppliers)
+
         setSelectedSupplier(null)
         setSuppliers(response.data.suppliers)
       } catch (error) {
@@ -33,6 +56,7 @@ const Suppliers = () => {
     'http://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
 
   const specialSuppliers = [
+    'FoodPoint',
     'eurofrutta',
     'HG WALTER',
     'County Suppplies',
@@ -45,27 +69,55 @@ const Suppliers = () => {
   const filteredSuppliers = suppliers.filter((supplier) =>
     specialSuppliers.includes(supplier.name),
   )
+
+  const onPressAdd = () => {
+    //TODO,add suppliers
+  }
+
   return (
     <SafeAreaView>
-      <ScrollView contentContainerStyle={SuppliersStyles.suppliers}>
-        {filteredSuppliers.map((supplier) => {
-          const imageUrl = `${urlImg}${supplier.image}?random=${Math.random()}`
-          console.log('url de la imagen:', imageUrl)
+      <ScrollView>
+        <View style={SuppliersStyles.suppliers}>
+          {filteredSuppliers.map((supplier) => {
+            const imageUrl = `${urlImg}${supplier.image}`
 
-          return (
-            <ImageBackground
-              resizeMode="cover"
-              style={SuppliersStyles.suppliersBg}
-              key={supplier.id}
-              source={{
-                uri: imageUrl,
-                cache: 'reload',
-              }}
-            >
-              <Text style={{ color: 'black' }}> {supplier.name}</Text>
-            </ImageBackground>
-          )
-        })}
+            return (
+              <TouchableOpacity
+                key={supplier.id}
+                onPress={() => {
+                  handleSupplierSelect(supplier)
+                  navigation.navigate('products')
+                }}
+              >
+                <ImageBackground
+                  resizeMode="cover"
+                  style={SuppliersStyles.suppliersBg}
+                  key={supplier.id}
+                  source={{
+                    uri: imageUrl,
+                    cache: 'reload',
+                  }}
+                />
+              </TouchableOpacity>
+            )
+          })}
+          <TouchableOpacity
+            onPress={onPressAdd}
+            style={SuppliersStyles.buttonAddCont}
+          >
+            <View style={SuppliersStyles.containButtonAdd}>
+              <Ionicons
+                name="add-circle-outline"
+                size={34}
+                color="#ffff"
+                style={{ padding: 10 }}
+              />
+              <Text style={SuppliersStyles.textAddRestaurant}>
+                Contact us to add suppliers!
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   )

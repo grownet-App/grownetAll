@@ -50,10 +50,7 @@ function ProductsCategories({ blurIntensity }) {
 
   return (
     <SafeAreaView style={ProductsStyles.fixedContainer}>
-      <BlurView
-        intensity={blurIntensity}
-        tint={blurIntensity === 100 ? 'light' : undefined}
-      >
+      <BlurView intensity={blurIntensity}>
         <Carousel
           data={images}
           renderItem={renderItem}
