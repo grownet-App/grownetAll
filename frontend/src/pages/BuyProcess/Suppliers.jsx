@@ -13,17 +13,21 @@ import useTokenStore from "../../store/useTokenStore.jsx";
 export default function Suppliers() {
   const { t } = useTranslation();
   const { token } = useTokenStore();
-  const { setSuppliers } = useOrderStore();
+  const { setSuppliers, selectedRestaurant } = useOrderStore();
 
   useEffect(() => {
+    const requestBody = {
+      accountNumber: selectedRestaurant.accountNumber,
+    };
     axios
-      .get(availableSuppliers, {
+      .post(`${availableSuppliers}`, requestBody, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        setSuppliers(response.data.suppliers);
+        console.log(response.data.supplier)
+        setSuppliers(response.data.supplier);
       })
       .catch((error) => {
         console.error("Error al obtener los proveedores:", error);

@@ -8,7 +8,7 @@ export const onlyCountries = 'https://ec2-13-58-203-20.us-east-2.compute.amazona
 
 export const availableRestaurants = 'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/customers/chef'
 
-export const availableSuppliers = 'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/suppliers/all'
+export const availableSuppliers = 'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/suppliers/customer'
 
 export const allCategories = 'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/categories/all'
 
