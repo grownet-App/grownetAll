@@ -65,7 +65,7 @@ export default function PendingRecord() {
                     </div>
                     <div className="calification-reception">
                      <Form.Check id="flexCheck"/> 
-                     <Link to="/reception" className="warning-record">{t("pendingRecord.openDispute")}</Link>  
+                     <Link to="/record/reception" className="warning-record">{t("pendingRecord.openDispute")}</Link>  
                     </div>
                   </div>   
                 </div>

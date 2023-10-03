@@ -5,8 +5,6 @@ const routes = {
     register: '/register',
     addRestaurants: '/addRestaurants',
     firstView: '/firstView',
-    details: '/details',
-    orderInformation: '/orderInformation',
     orderSuccessful: '/orderSuccessful',
     settings: '/settings',
     record: '/record',

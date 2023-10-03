@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import routes from "../helpers/routes";
 import LoginPage from "../pages/Authentication/LoginPage";
 import RegisterPage from "../pages/Authentication/RegisterPage";
@@ -54,12 +54,8 @@ export default function AppRouter() {
       <Route exact path={routes.suppliers} element={<PublicRoute />}>
         <Route path={routes.suppliers} element={<Suppliers />} />
         <Route exact path="products" element={<Products/>}/>
-      </Route>
-      <Route exact path={routes.details} element={<PublicRoute />}>
-        <Route path={routes.details} element={<OrderDetails />} />
-      </Route>
-      <Route exact path={routes.orderInformation} element={<PublicRoute />}>
-        <Route path={routes.orderInformation} element={<OrderInformation />} />
+        <Route exact path="details" element={<OrderDetails/>}/>
+        <Route exact path="orderInformation" element={<OrderInformation/>}/>
       </Route>
       <Route exact path={routes.orderSuccessful} element={<PublicRoute />}>
         <Route path={routes.orderSuccessful} element={<OrderSuccessful />} />
@@ -76,9 +72,7 @@ export default function AppRouter() {
         <Route exact path="pendingRecord" element={<PendingRecord/>}>
         </Route>  
         <Route exact path="pastRecord" element={<PastRecord/>}/>
-      </Route>
-      <Route exact path={routes.reception} element={<PublicRoute />}>
-        <Route exact path={routes.reception} element={<Reception />} />
+        <Route exact path="reception" element={<Reception/>}/>
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
