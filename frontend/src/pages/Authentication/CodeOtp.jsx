@@ -13,7 +13,7 @@ export default function CodeOtp(props) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { onResendCode, code } = props;
-  const [seconds, setSeconds] = useState(10);
+  const [seconds, setSeconds] = useState(20);
   const [show, setShow] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -80,7 +80,7 @@ export default function CodeOtp(props) {
   const handleResendCode = (e) => {
     onResendCode(e);
     setOtp(new Array(4).fill(""));
-    setSeconds(10);
+    setSeconds(20);
     setShow(false);
   };
 

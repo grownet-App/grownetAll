@@ -1,4 +1,4 @@
-import closeCircleOutline from "@iconify/icons-eva/close-circle-outline";
+import closeOutline from '@iconify/icons-eva/close-outline';
 import searchIcon from "@iconify/icons-heroicons-outline/search";
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
@@ -49,10 +49,9 @@ function ProductSearcher({ products, setShowSearchResults, resetInput }) {
     const filtered = products.filter((product) =>
       product.name.toLowerCase().includes(query.toLowerCase())
     );
-    console.log("Haz filtrado", filtered);
     setShowSearchResults(true);
     setFilteredProducts(filtered);
-    setSearchButtonIcon(closeCircleOutline);
+    setSearchButtonIcon(closeOutline);
   };
 
   return (

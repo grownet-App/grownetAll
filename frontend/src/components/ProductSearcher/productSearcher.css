@@ -9,7 +9,6 @@
     display: flex;
     background-color: #F2F2F2;
     align-items: center;
-
     height: 2.75rem;
     border-radius: 1.875rem;
     height: 50px;
@@ -31,8 +30,9 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 22px;
     margin-right: 10px;
+    color: var(--color-dark-blue);
   }
   
   .search-icon {
