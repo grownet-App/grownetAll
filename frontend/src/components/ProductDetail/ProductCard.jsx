@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import React, { useEffect } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import "../../css/products.css";
 import { useFavoritesStore } from "../../store/useFavoritesStore";
@@ -15,7 +15,7 @@ export default function ProductCard({
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
   const isFavorite = favorites.includes(id, name, image);
   const urlImg =
-  "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/";
+    "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/";
   const selectedUom = prices.find((price) => price.nameUoms === uomToPay);
 
   const handleToggleFavorite = () => {
@@ -31,21 +31,19 @@ export default function ProductCard({
   const handleUomToPayChange = (event) => {
     const newUomToPay = event.target.value;
     onUomChange(id, newUomToPay);
-    console.log(`Selected uomtopay for ${name}: ${newUomToPay}`);
-    console.log(`Selected price for ${name}: ${priceWithTax}`);
   };
 
   return (
     <section className="products">
       <div className="elements">
-        <img src={ urlImg + image} alt={"image " + name} />
+        <img src={urlImg + image} alt={"image " + name} />
         <div>
           <div className="titlle-products">
             <div>
               <h1>{name}</h1>
               <p className="product-selectUom">{selectedUom.name} </p>
             </div>
-            
+
             <div className="pr">
               <Icon
                 className="fav-icon"
@@ -61,7 +59,8 @@ export default function ProductCard({
           <div className="product-amount">
             <Stepper
               productData={productData}
-              onAmountChange={onAmountChange} counter={counter}
+              onAmountChange={onAmountChange}
+              counter={counter}
             />
             <Form.Select
               aria-label="Select UomToPay"
@@ -69,7 +68,7 @@ export default function ProductCard({
               onChange={handleUomToPayChange}
             >
               {prices.map((price) => (
-                <option key={price.nameUoms} value={price.nameUoms}>
+                <option key={price.id} value={price.nameUoms}>
                   {price.nameUoms}
                 </option>
               ))}

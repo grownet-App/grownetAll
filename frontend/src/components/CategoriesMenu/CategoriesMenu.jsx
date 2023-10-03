@@ -15,7 +15,7 @@ export default function CategoriesMenu({
 }) {
   const { t } = useTranslation();
   const [categories, setCategories] = useState();
-  
+
   const urlImg =
     "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/";
 
@@ -28,14 +28,13 @@ export default function CategoriesMenu({
         },
       })
       .then((response) => {
-        //console.log(response.data);
         setCategories(response.data.categories);
       })
       .catch((error) => {
         console.error("Error al obtener los datos de la API:", error);
       });
   }, []);
-  
+
   return (
     <section className="menu-categories me-auto">
       <div className="contenido">
@@ -51,30 +50,37 @@ export default function CategoriesMenu({
               <h6>{t("categoriesMenu.favorites")}</h6>
             </button>
           )}
-          
-          {categoriesProduct.map(category => (
-            <button 
-            type="button" 
-            className="card-products" key={category} 
-            onClick={() => filterCategory(category)}>
-               {category === "All" && (
+
+          {categoriesProduct.map((category) => (
+            <button
+              type="button"
+              className="card-products"
+              key={category}
+              onClick={() => filterCategory(category)}
+            >
+              {category === "All" && (
                 <Icon icon="fluent-emoji:basket" className="fav" />
               )}
-              {categories?.map(categoryApi => (
-                <>
-                {category === categoryApi.name &&(
-                  <>
-                  <img alt={categoryApi.name} src={urlImg + categoryApi.image}/>
-                  </>
-                )}
-                </>
-                
-                ))}
+              {categories?.map(
+                (categoryApi) => (
+                  (
+                    <section key={categoryApi.id}>
+                      {category === categoryApi.name && (
+                        <>
+                          <img
+                            alt={categoryApi.name}
+                            src={urlImg + categoryApi.image}
+                          />
+                        </>
+                      )}
+                    </section>
+                  )
+                )
+              )}
 
               <h6>{category}</h6>
             </button>
           ))}
-          
         </div>
       </div>
       <Link className="bttn btn-primary" to="/details">

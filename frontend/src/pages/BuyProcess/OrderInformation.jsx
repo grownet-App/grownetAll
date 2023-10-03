@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   tableCol: {
-    width: "20%",
+    width: "16.7%",
   },
   tableCell: {
     margin: "auto",
@@ -243,7 +243,10 @@ export const PdfDocument = ({
             <Text style={styles.tableCell}>UOM</Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>Items price</Text>
+            <Text style={styles.tableCell}>Item price</Text>
+          </View>
+          <View style={styles.tableCol}>
+            <Text style={styles.tableCell}>Total items price</Text>
           </View>
         </View>
         {data
@@ -261,6 +264,9 @@ export const PdfDocument = ({
               </View>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>{article.uomToPay}</Text>
+              </View>
+              <View style={styles.tableCol}>
+                <Text style={styles.tableCell}>£{article.totalItemToPay/article.amount}</Text>
               </View>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>£{article.totalItemToPay}</Text>
@@ -378,7 +384,7 @@ export default function OrderInformation() {
         console.log(result);
       },
       (error) => {
-        console.log("no se envio nada de corre", error);
+        console.log("no se envio nada de correo", error);
       }
     );
   };
