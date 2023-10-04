@@ -1,13 +1,12 @@
-import React from "react";
-import { Tabs, Tab, Form } from "react-bootstrap";
-import "../../../css/pedingRecord.css";
-import MenuPrimary from "../../../components/Menu/MenuPrimary";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { use } from "i18next";
+import { Icon } from "@iconify/react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Form, Tab, Tabs } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import MenuPrimary from "../../../components/Menu/MenuPrimary";
 import { selectedStorageOrder } from "../../../config/urls.config";
-import { useEffect, useState } from "react";
+import "../../../css/pedingRecord.css";
 import useRecordStore from "../../../store/useRecordStore";
 import useTokenStore from "../../../store/useTokenStore";
 
@@ -36,7 +35,13 @@ export default function PendingRecord() {
     <>
     {detailsToShow && (
       <section className="pending-record">
-        <h1>{t("pendingRecord.title")}</h1>
+        <div className="tittle-page">
+          <Link to="/record">
+            {" "}
+            <Icon src="google.com" icon="ic:round-arrow-back" id="arrow-icon" />
+          </Link>
+          <h1>{t("pendingRecord.title")}</h1>
+        </div>
         <Tabs defaultActiveKey="reception" id="uncontrolled-tab-example" className="mb-3">
           <Tab eventKey="home" title={t("pendingRecord.tabProducts")}>
             <div className="card-invoices">
@@ -50,7 +55,7 @@ export default function PendingRecord() {
               {detailsToShow.products?.map((product) => (
                 <div>
                   <div className="product-detail">
-                    <h3>{product.name}</h3>
+                    <h3 id="name-pendingRecord">{product.name}</h3>
                     <h3>£{product.price}</h3>
                   </div>
                   <p>{product.quantity} {product.uom}</p>
@@ -80,7 +85,7 @@ export default function PendingRecord() {
                       </div>
                       <div className="calification-reception">
                         <Form.Check id="flexCheck"/> 
-                        <Link to="/reception" className="warning-record">{t("pendingRecord.openDispute")}</Link>  
+                        <Link to="/record/reception" className="warning-record">{t("pendingRecord.openDispute")}</Link>  
                       </div>
                     </div>   
                   </div>
@@ -91,9 +96,10 @@ export default function PendingRecord() {
             </div>
           </Tab>
         </Tabs>
+        <div className="menu-space"></div>
       </section>
     )}
-      <div className="menu-space"></div>
+      
       <MenuPrimary />
     </>
   );

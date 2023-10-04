@@ -17,11 +17,22 @@
     border-style: none none dashed none;
     text-align: left;
 }
+.pending-record #arrow-icon{
+    color: var(--color-dark-blue);
+    font-size: 1.5rem;
+    position: absolute;
+    right: 0px;
+    left: 30px;
+    top: 50px
+}
 .pending-record h3{
     margin-bottom: 0px;
     font-size: 18px;
     padding-top: 2px;
     margin-bottom: 0px;
+}
+#name-pendingRecord{
+   margin-right: 2rem !important; 
 }
 .pending-record p{
     font-size: 17px;
@@ -29,6 +40,9 @@
     margin-bottom: 0px;
     margin-top: 0px;
     text-align: left;
+}
+.pending-record .menu-space{
+    margin-bottom: 8rem  !important;
 }
 /*Tab*/
 .pending-record .nav-link{
@@ -77,13 +91,6 @@
     text-align: left;
 }
 .warning-record{
-    /*background-color: var(--color-dark-blue);
-    border-radius: 15px;
-    color: white;
-    text-decoration: none;
-    font-weight: 400;
-    padding: 8px 10px;
-    font-size: 15px;*/
     color: #A4A4A4;
     text-decoration: none;
     font-weight: 400;
@@ -99,4 +106,16 @@
 }
 .card-pending-record{
     text-align: center;
+}
+@media screen and (min-width: 800px) {
+    .pending-record .tittle-page{
+        position: relative;
+    }
+    .pending-record #arrow-icon{
+        color: var(--color-dark-blue);
+        font-size: 1.5rem;
+        position: absolute;
+        left: -60px;
+        top: 33px;
+    }
 }

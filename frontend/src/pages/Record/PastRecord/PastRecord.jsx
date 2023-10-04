@@ -7,7 +7,7 @@ export default function PastRecord() {
   return (
     <>
       <section className="pending-record">
-        <h1>Order details</h1>
+        <h1>{t("pendingRecord.title")}</h1>
         <div className="card-invoices">
           <h2 id="tax-tittle">{t("pendingRecord.supplierDetail")}</h2>
           <div className="product-detail">
@@ -18,7 +18,7 @@ export default function PastRecord() {
           <h2 id="tax-tittle">{t("pendingRecord.detailsItem")}</h2>
           <div>
             <div className="product-detail">
-              <h3>Broccoli</h3>
+              <h3 id="name-pendingRecord" >Broccoli</h3>
               <h3>£5698</h3>
             </div>
             <p>50 Box/Boxes</p>
@@ -47,6 +47,7 @@ export default function PastRecord() {
             <h2>£569 </h2>
           </div>
         </div>
+        <div className="menu-space"></div>
       </section>
       <MenuPrimary />
     </>
