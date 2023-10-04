@@ -35,7 +35,7 @@ export default function CodeOtp(props) {
     return () => clearInterval(interval);
   }, [seconds]);
 
-  const enviarData = (e) => {
+  const sendData = (e) => {
     e.preventDefault();
     let id = props.idUsuario;
     let otpNumber = otp.join("");
@@ -116,7 +116,7 @@ export default function CodeOtp(props) {
           {" "}
           {t("codeOtp.yourOtpCodeIs")} {code}
         </p>
-        <button className="bttn btn-secundary" onClick={enviarData}>
+        <button className="bttn btn-secundary" onClick={sendData}>
           {t("codeOtp.verifyAndProceed")}
         </button>
         {show ? (

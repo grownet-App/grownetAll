@@ -10,14 +10,17 @@ import {
   View,
   pdf,
 } from "@react-pdf/renderer";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
+import { createStorageOrder } from "../../config/urls.config";
 import "../../css/orderDetail.css";
 import fav_icon from "../../img/fav_icon.png";
 import useOrderStore from "../../store/useOrderStore";
+import useTokenStore from "../../store/useTokenStore";
 
 Font.register({
   family: "Poppins",
@@ -186,6 +189,7 @@ export const PdfDocument = ({
   data,
   selectedSupplier,
   deliveryData,
+  orderNumber,
   specialRequirements,
   totalNet,
   totalTaxes,
@@ -217,7 +221,7 @@ export const PdfDocument = ({
           </View>
           <View style={styles.section}>
             <Text style={styles.text}>Order number</Text>
-            <Text style={styles.tittle}>0234684GF</Text>
+            <Text style={styles.tittle}>{orderNumber}</Text>
             <Text style={styles.text}>Delivery address</Text>
             <Text style={styles.tittle}>{selectedRestaurant.address} </Text>
           </View>
@@ -327,10 +331,13 @@ export default function OrderInformation() {
     totalNet,
     totalTaxes,
     totalToPay,
+    orderNumber,
+    setOrderNumber,
   } = useOrderStore();
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const [dateToPicker, setDateToPicker] = useState();
+  const { token } = useTokenStore();
 
   const handleChangeDate = (date) => {
     setDateToPicker(date);
@@ -345,14 +352,56 @@ export default function OrderInformation() {
     setData(articlesToPay);
   }, []);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // OBTENER NUMERO DE ORDEN
+  const getOrderNumber = async () => {
+    const filteredJsonProducts = articlesToPay.filter(
+      (article) => article.amount > 0
+    );
+    const jsonProducts = filteredJsonProducts.map((article) => ({
+      quantity: article.amount,
+      id_presentations: article.idUomToPay,
+      price: article.totalItemToPay,
+    }));
+    const jsonOrderData = {
+      id_suppliers: selectedSupplier.id,
+      date_delivery: deliveryData,
+      address_delivery: selectedRestaurant.address,
+      accountNumber_customers: selectedRestaurant.accountNumber,
+      observation: specialRequirements,
+      total: totalToPay,
+      net: totalNet,
+      total_tax: totalTaxes,
+      products: jsonProducts,
+    };
+
+    console.log("ESTE ES EL JSON:", jsonOrderData);
+    try {
+      const response = await axios.post(createStorageOrder, jsonOrderData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const newOrderNumber = response.data.reference;
+      setOrderNumber(newOrderNumber);
+      console.log(
+        "Respuesta exitosa al crear la orden",
+        response.data.reference
+      );
+      return newOrderNumber;
+    } catch (error) {
+      console.log("Error al crear la orden", error);
+    }
+  };
+
+  // ENVIAR CORREO
+  const sendEmail = async (newOrderNumber) => {
     const pdfBlob = await pdf(
       <PdfDocument
         selectedRestaurant={selectedRestaurant}
         selectedSupplier={selectedSupplier}
         specialRequirements={specialRequirements}
         deliveryData={deliveryData}
+        orderNumber={newOrderNumber}
         data={data}
         totalNet={totalNet}
         totalTaxes={totalTaxes}
@@ -374,12 +423,14 @@ export default function OrderInformation() {
       restaurant: selectedRestaurant.account_name,
       address: selectedRestaurant.address,
       date: deliveryData,
+      orderNumber: newOrderNumber,
       message: specialRequirements,
       file: pdfBase64,
       supplier: selectedSupplier.name,
     };
     emailjs.send(serviceId, templateId, emailParams, userId).then(
       (result) => {
+        setSpecialRequirements("");
         navigate("/orderSuccessful");
         console.log(result);
       },
@@ -388,15 +439,28 @@ export default function OrderInformation() {
       }
     );
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const newOrderNumber = await getOrderNumber();
+      if (newOrderNumber) {
+        await sendEmail(newOrderNumber);
+      } else {
+        console.log("No se obtuvo numero de orden");
+      }
+    } catch (error) {
+      console.log("Error enviando el correo", error);
+    }
+  };
+
   return (
     <section className="details">
       <div className="tittle-page">
         <Link to="/details">
           <Icon src="google.com" icon="ic:round-arrow-back" id="arrow-icon" />
         </Link>
-        <h1>
-          {t("deliveryDetail.orderDetail")}
-        </h1>
+        <h1>{t("deliveryDetail.orderDetail")}</h1>
       </div>
       <form onSubmit={handleSubmit}>
         <div className="data-shipping">
@@ -409,7 +473,7 @@ export default function OrderInformation() {
           />
           <h3>{t("deliveryDetail.deliver")}</h3>
           <DatePicker
-            onFocus={(e) => e.target.readOnly = true}
+            onFocus={(e) => (e.target.readOnly = true)}
             selected={dateToPicker}
             onChange={handleChangeDate}
             minDate={tomorrow}
@@ -426,7 +490,6 @@ export default function OrderInformation() {
             cols="50"
           ></textarea>
         </div>
-        {/* TODO REVISAR QUE ESTE BOTÓN TRADUZCA LA INFO Y NO ROMPA EL CODIGO */}
         <input
           type="submit"
           className="bttn btn-primary"

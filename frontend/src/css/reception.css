@@ -13,6 +13,14 @@
     display: flex;
     margin-bottom: 1rem;
 }
+.reception #arrow-icon{
+    color: var(--color-dark-blue);
+    font-size: 1.5rem;
+    position: absolute;
+    right: 0px;
+    left: 30px;
+    top: 58px
+}
 #error-icon{
     font-size: 60px;
     margin-right: 1rem;
@@ -103,4 +111,16 @@ input[type="file"]::file-selector-button {
 .form-check-input:checked{
     background-color: var(--color-green) !important;
     border-color: var(--color-green) !important;
+}
+@media screen and (min-width: 800px) {
+    .reception .tittle-page{
+        position: relative;
+    }
+    .reception #arrow-icon{
+        color: var(--color-dark-blue);
+        font-size: 1.5rem;
+        position: absolute;
+        left: -60px;
+        top: 42px;
+    }
 }

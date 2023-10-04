@@ -11,7 +11,7 @@ export default function ProductCard({
   onUomChange,
 }) {
   const counter = 0;
-  const { id, name, image, prices, priceWithTax, uomToPay } = productData;
+  const { id, name, image, prices, priceWithTax, uomToPay, idUomToPay } = productData;
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
   const isFavorite = favorites.includes(id, name, image);
   const urlImg =

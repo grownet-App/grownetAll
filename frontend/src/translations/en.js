@@ -98,6 +98,21 @@ const enTranslations = {
     currentValue: "Current value",
     tax: "Tax"
   },
+  reception:{
+    title: "What went wrong?",
+    wrong: "Wrong quantity",
+    defective: "Defective",
+    other: "Other",
+    comments: "Leave your comments here:",
+    enterQuantity: "Enter quantity delivered:",
+    addComent: "Add a comment:",
+    sendNextOrder: "Send with next order",
+    crediteNote: "Credit note",
+    send: "Send",
+    defectiveQuantity: "Enter defective quantity:",
+    attachPhoto: "Attach photo:",
+    customUpload: "Custom Upload",
+  },
   settings: {
     title: "Settings",
     hi: "Hi",
