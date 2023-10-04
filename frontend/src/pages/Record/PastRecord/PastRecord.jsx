@@ -18,7 +18,7 @@ export default function PastRecord() {
           <h2 id="tax-tittle">{t("pendingRecord.detailsItem")}</h2>
           <div>
             <div className="product-detail">
-              <h3>Broccoli</h3>
+              <h3 id="name-pendingRecord" >Broccoli</h3>
               <h3>£5698</h3>
             </div>
             <p>50 Box/Boxes</p>

@@ -31,6 +31,9 @@
     padding-top: 2px;
     margin-bottom: 0px;
 }
+#name-pendingRecord{
+   margin-right: 2rem !important; 
+}
 .pending-record p{
     font-size: 17px;
     color: #868686;
@@ -88,13 +91,6 @@
     text-align: left;
 }
 .warning-record{
-    /*background-color: var(--color-dark-blue);
-    border-radius: 15px;
-    color: white;
-    text-decoration: none;
-    font-weight: 400;
-    padding: 8px 10px;
-    font-size: 15px;*/
     color: #A4A4A4;
     text-decoration: none;
     font-weight: 400;

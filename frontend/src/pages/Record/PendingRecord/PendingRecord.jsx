@@ -55,7 +55,7 @@ export default function PendingRecord() {
               {detailsToShow.products?.map((product) => (
                 <div>
                   <div className="product-detail">
-                    <h3>{product.name}</h3>
+                    <h3 id="name-pendingRecord">{product.name}</h3>
                     <h3>£{product.price}</h3>
                   </div>
                   <p>{product.quantity} {product.uom}</p>
