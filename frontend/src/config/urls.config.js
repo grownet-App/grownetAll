@@ -22,4 +22,4 @@ export const supplierProducts = 'https://ec2-13-58-203-20.us-east-2.compute.amaz
 // ORDERS RECORD
 export const createStorageOrder = 'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/orders/create'
 export const allStorageOrders = 'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/orders/all'
-export const selectedStorageOrder = 'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/orders/{reference}'
+export const selectedStorageOrder = 'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/orders'

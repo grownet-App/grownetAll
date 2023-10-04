@@ -15,7 +15,7 @@ import useTokenStore from "../../store/useTokenStore";
 export default function Record() {
   const { t } = useTranslation();
   const { token } = useTokenStore();
-  const { pendingOrders, setPendingOrders } = useRecordStore();
+  const { pendingOrders, setPendingOrders, selectedPendingOrder, setSelectedPendingOrder } = useRecordStore();
 
   useEffect(() => {
     // LLAMAR LAS ORDENES PENDIENTES DE LA BASE DE DATOS
@@ -37,6 +37,10 @@ export default function Record() {
         console.log("Error al llamar las ordenes", error);
       });
   }, []);
+
+  const handlePendingOrderSelect = (orderReference) => {
+    setSelectedPendingOrder(orderReference);
+  };
 
   return (
     <>
@@ -100,7 +104,7 @@ export default function Record() {
                     <h4>{t("record.amount")}</h4>
                     <p>£{order.total}</p>
                   </div>
-                  <Link className="bttn btn-primary" to={"/pendingRecord"}>
+                  <Link className="bttn btn-primary" onClick={()=> handlePendingOrderSelect(order.reference)} to={'/pendingRecord'}>
                     {t("record.viewDetails")}
                   </Link>
                 </div>
@@ -108,7 +112,6 @@ export default function Record() {
             ))}
           </Tab>
         </Tabs>
-
         <div className="space-menu"></div>
       </section>
       <MenuPrimary />

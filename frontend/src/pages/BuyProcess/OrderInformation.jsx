@@ -393,11 +393,12 @@ export default function OrderInformation() {
     e.preventDefault();
     const filteredJsonProducts = articlesToPay.filter((article) => article.amount > 0);
     const jsonProducts = filteredJsonProducts.map((article) => ({
-        amount: article.amount,
+        quantity: article.amount,
         id_presentations: article.idUomToPay,
         price: article.totalItemToPay,
     }));
     const jsonOrderData = {
+      id_suppliers: selectedSupplier.id,
       date_delivery: deliveryData,
       address_delivery: selectedRestaurant.address,
       accountNumber_customers: selectedRestaurant.accountNumber,
