@@ -104,7 +104,7 @@ export default function Record() {
                     <h4>{t("record.amount")}</h4>
                     <p>£{order.total}</p>
                   </div>
-                  <Link className="bttn btn-primary" onClick={()=> handlePendingOrderSelect(order.reference)} to={'/pendingRecord'}>
+                  <Link className="bttn btn-primary" onClick={()=> handlePendingOrderSelect(order.reference)} to={'pendingRecord'}>
                     {t("record.viewDetails")}
                   </Link>
                 </div>
