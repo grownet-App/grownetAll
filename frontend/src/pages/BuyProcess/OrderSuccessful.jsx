@@ -16,6 +16,7 @@ export default function OrderSuccessful() {
     selectedRestaurant,
     selectedSupplier,
     articlesToPay,
+    orderNumber,
     totalNet,
     totalTaxes,
     totalToPay,
@@ -45,6 +46,7 @@ export default function OrderSuccessful() {
           selectedSupplier={selectedSupplier}
           specialRequirements={specialRequirements}
           deliveryData={deliveryData}
+          orderNumber={orderNumber}
           data={articlesData}
           totalNet={totalNet}
           totalTaxes={totalTaxes}
