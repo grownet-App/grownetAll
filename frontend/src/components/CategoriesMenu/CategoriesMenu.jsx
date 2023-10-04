@@ -83,7 +83,7 @@ export default function CategoriesMenu({
           ))}
         </div>
       </div>
-      <Link className="bttn btn-primary" to="/details">
+      <Link className="bttn btn-primary" to="/suppliers/details">
         {t("categoriesMenu.continue")}
       </Link>
     </section>

@@ -47,6 +47,7 @@ export default function ProductDetail({
         return {
           ...article,
           uomToPay: newUomToPay,
+          idUomToPay: selectedPrice.id,
           priceWithTax: selectedPrice.priceWithTax,
         };
       }

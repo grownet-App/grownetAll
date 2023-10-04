@@ -7,6 +7,7 @@ export default function DocumentPdf({
   selectedRestaurant,
   selectedSupplier,
   deliveryData,
+  orderNumber,
   specialRequirements,
   totalNet,
   totalTaxes,
@@ -198,7 +199,7 @@ export default function DocumentPdf({
           </View>
           <View style={styles.section}>
             <Text style={styles.text}>Order number</Text>
-            <Text style={styles.tittle}>0234684GF</Text>
+            <Text style={styles.tittle}>#{orderNumber}</Text>
             <Text style={styles.text}>Delivery address</Text>
             <Text style={styles.tittle}>{selectedRestaurant.address} </Text>
           </View>

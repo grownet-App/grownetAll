@@ -23,31 +23,23 @@ a.icons.active{
    color: var(--color-dark-blue) !important;
    display: block;
 }   
-.icon-active{
-    display: block;
-} 
-.navbar-nav .nav-link.active, .navbar-nav .nav-link.show .a.icons.active{
-    color: var(--color-dark-blue) !important;
-    .icon-active{
-        display: block;
-    }
-    .icon-active2{
-        display: block;
-    }
-    .icon-active3{
-        display: block;
-    }
-    .icon-active4{
-        display: block;
-    }
+a.icons.active .icon-active {
+    display: block !important;
 }
+a.icons.active .icon-active2 {
+    display: block !important;
+}
+a.icons.active .icon-active3 {
+    display: block !important;
+}
+
 .icon-active{
     position: absolute;
     color: #AAFFBB;
     z-index: -1;
     display: none;
-    bottom: 51px;
-    left: 18px;
+    bottom: 47px;
+    left: 12px;
 }
 .icon-active2{
     position: absolute;
@@ -55,15 +47,15 @@ a.icons.active{
     color: #AAFFBB;
     z-index: -1;
     display: none;
-    bottom: 51px;
-    left: 14px;
+    bottom: 47px;
+    left: 19px;
 }
 .icon-active3{
     position: absolute;
     color: #AAFFBB;
     z-index: -1;
     display: none;
-    bottom: 51px;
+    bottom: 47px;
     left: 15px;
 }
 .icon-active4{
@@ -71,7 +63,7 @@ a.icons.active{
     color: #AAFFBB;
     z-index: -1;
     display: none;
-    bottom: 51px;
+    bottom: 47px;
     left: 8px;
 }
 .me-auto p{

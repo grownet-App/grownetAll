@@ -96,7 +96,7 @@ const esTranslations = {
     detailsItem: "Detalles de los productos",
     paymentDetails: "Detalles de pago",
     currentValue: "Total",
-    tax: "Impuesto (IVA)"
+    tax: "Impuestos",
   },
   settings: {
     title: 'Configuración',

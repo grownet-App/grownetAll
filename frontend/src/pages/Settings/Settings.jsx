@@ -73,11 +73,11 @@ export default function Settings() {
           </Accordion.Item>
         </Accordion>
         <div className="settings-options">
-          <Link className="bttn" id="setting-button" to="/FAQ">
+          <Link className="bttn" id="setting-button" to="faq">
             <h2>{t("settings.faq")}</h2>
             <Icon className="icon-arrow" icon="ep:arrow-right-bold" />
           </Link>
-          <Link className="bttn" id="setting-button" to="/tAndC">
+          <Link className="bttn" id="setting-button" to="termsAndCoditions">
             <h2>{t("settings.termsAndConditions")}</h2>
             <Icon className="icon-arrow" icon="ep:arrow-right-bold" />
           </Link>

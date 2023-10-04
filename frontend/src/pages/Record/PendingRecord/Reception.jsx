@@ -38,9 +38,6 @@ export default function Reception() {
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
         <Nav variant="pills" className="flex-column">
           <Nav.Item>
-            <Nav.Link eventKey="first">Missing product</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
             <Nav.Link eventKey="second">Wrong quantity</Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -52,23 +49,6 @@ export default function Reception() {
         </Nav>
         <h4>Leave your comments here</h4>
         <Tab.Content>
-          <Tab.Pane eventKey="first">
-            <form className="wrong-reception" controlId="kindOfStand">
-            <div className="wrong-product">
-                <h3>Add a comment:</h3>
-                <textarea type="text"></textarea>
-            </div>
-            <div className="wrong-product">
-                <h3>Attach photo:</h3>
-                <label class="custom-file-upload">
-                    <input type="file"/>
-                    <Icon id="upload-icon" icon="tabler:upload"/>  Custom Upload
-                </label>
-            </div>
-            
-            <button type="submit" className="bttn btn-primary">Send</button>
-            </form>
-          </Tab.Pane>
           <Tab.Pane eventKey="second">
           <form className="wrong-reception" controlId="kindOfStand">
             <div className="wrong-product">
