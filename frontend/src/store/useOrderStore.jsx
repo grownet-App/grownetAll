@@ -14,6 +14,7 @@ const useOrderStore = create((set) => ({
   idUomToPay: null,
   deliveryData: null,
   specialRequirements: null,
+  orderNumber: null,
   setRestaurants: (restaurants) => set({ restaurants: restaurants }),
   setSelectedRestaurant: (restaurant) =>
     set({ selectedRestaurant: restaurant }),
@@ -24,7 +25,9 @@ const useOrderStore = create((set) => ({
   setTotalTaxes: (newTaxes) => set({ totalTaxes: newTaxes }),
   setTotalToPay: (newTotal) => set({ totalToPay: newTotal }),
   setDeliveryData: (deliveryData) => set({ deliveryData: deliveryData }),
-  setSpecialRequirements: (specialRequirements) => set ({specialRequirements: specialRequirements})
+  setSpecialRequirements: (specialRequirements) =>
+    set({ specialRequirements: specialRequirements }),
+  setOrderNumber: (orderNumber) => set({ orderNumber: orderNumber }),
 }));
 
 export default useOrderStore;

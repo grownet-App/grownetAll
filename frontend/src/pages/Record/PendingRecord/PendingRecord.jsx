@@ -24,7 +24,6 @@ export default function PendingRecord() {
       },
     })
     .then((response) => {
-      console.log('Esta es la Respuesta',response.data.order);
       setDetailsToShow(response.data.order);
     })
     .catch((error) => {
@@ -44,7 +43,6 @@ export default function PendingRecord() {
               <h2 id="tax-tittle">{t("pendingRecord.supplierDetail")}</h2>
               <div className="product-detail">
                 <h3>{detailsToShow.nameSuppliers}</h3>
-                {console.log('ESTO LLEGA AL DIV',detailsToShow)}
                 <h3>#{detailsToShow.reference}</h3>
               </div>
               <p>{detailsToShow.created_date}</p>
@@ -73,18 +71,21 @@ export default function PendingRecord() {
             <div className="pending-record">
               <form className="card-pending-record">
                 <h1>{t("pendingRecord.check")}</h1>
-                <div className="product-check">
-                  <div className="product-detail" id="check-products">
-                    <div>
-                      <h3>Broccoli</h3>
-                      <p>50 Boxes</p>
-                    </div>
-                    <div className="calification-reception">
-                     <Form.Check id="flexCheck"/> 
-                     <Link to="/reception" className="warning-record">{t("pendingRecord.openDispute")}</Link>  
-                    </div>
-                  </div>   
-                </div>
+                {detailsToShow.products?.map((product) => (
+                  <div className="product-check">
+                    <div className="product-detail" id="check-products">
+                      <div>
+                        <h3>{product.name}</h3>
+                        <p>{product.quantity} {product.uom}</p>
+                      </div>
+                      <div className="calification-reception">
+                        <Form.Check id="flexCheck"/> 
+                        <Link to="/reception" className="warning-record">{t("pendingRecord.openDispute")}</Link>  
+                      </div>
+                    </div>   
+                  </div>
+                ))  
+                }
                 <button className="bttn btn-primary">{t("pendingRecord.confirmOrder")}</button>
               </form>
             </div>
