@@ -11,5 +11,7 @@ export default ({ config }) => ({
     restaurantsUrl: process.env.EXPO_PUBLIC_RESTAURANTS_URL,
     suppliersProducts: process.env.EXPO_PUBLIC_SUPPLIERS_PRODUCTS,
     selectedCategory: process.env.EXPO_PUBLIC_SELECTED_CATEGORY,
+    allCategories: process.env.EXPO_PUBLIC_ALL_CATEGORIES,
+    urlImage: process.env.EXPO_PUBLIC_IMAGE_URL,
   },
 })

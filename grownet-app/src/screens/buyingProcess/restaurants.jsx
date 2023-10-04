@@ -15,6 +15,7 @@ import useTokenStore from '../../store/useTokenStore'
 import useOrderStore from '../../store/UseOrderStore'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import Constants from 'expo-constants'
 
 const Restaurants = () => {
   const navigation = useNavigation()
@@ -39,8 +40,7 @@ const Restaurants = () => {
     fetchData()
   }, [token, setRestaurants, setSelectedRestaurant])
 
-  const urlImg =
-    'http://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
+  const urlImg = Constants.expoConfig.extra.urlImage
 
   const onPressAdd = () => {
     //TODO,agregar restaurante

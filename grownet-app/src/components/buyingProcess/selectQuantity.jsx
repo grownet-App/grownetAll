@@ -11,6 +11,10 @@ const SelectQuantity = ({
   const [amount, setAmount] = useState(productData.amount)
   const { id } = productData
 
+  useEffect(() => {
+    onAmountChange(id, amount)
+  }, [amount])
+
   const decrementAmount = () => {
     if (amount > counter) {
       setAmount(amount - 1)
@@ -24,10 +28,6 @@ const SelectQuantity = ({
     onAmountChange(id, amount + 1)
   }
 
-  useEffect(() => {
-    onAmountChange(id, amount)
-  }, [amount, id, onAmountChange])
-
   return (
     <View
       style={widthOrder ? ProductsStyles.countOrderD : ProductsStyles.count}
@@ -36,7 +36,7 @@ const SelectQuantity = ({
         <Text style={ProductsStyles.button2}>-</Text>
       </TouchableOpacity>
 
-      <Text style={{ fontSize: 20, color: '#04444f' }}>{amount}</Text>
+      <Text style={ProductsStyles.countSelect}>{amount}</Text>
 
       <TouchableOpacity onPress={incrementAmount}>
         <Text style={ProductsStyles.button}>+</Text>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
 import axios from '../../../axiosConfig.'
 import CategoriesMenu from '../../components/buyingProcess/productCategories'
-import Favorites from '../../components/buyingProcess/productCards'
+import Favorites from '../../components/buyingProcess/favorites'
 import ProductCard from '../../components/buyingProcess/productCards'
 import ProductSearcher from '../../components/buyingProcess/productSearch'
 import ProductsFind from '../../components/buyingProcess/ProductsFind'
@@ -24,17 +24,17 @@ export default function Products() {
   const [resetInput, setResetInput] = useState(0)
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchProducts = async () => {
       if (articlesToPay.length > 0) {
         setArticles(articlesToPay)
         setProducts(articlesToPay)
-        console.log('TRAJO ALGO DEL STORAGE', articlesToPay)
       } else {
         const requestBody = {
           id: selectedSupplier.id,
           country: countryCode,
           accountNumber: selectedRestaurant.accountNumber,
         }
+        console.log('id de supplier:', selectedSupplier.id)
         try {
           const response = await axios.post(
             `${supplierProducts}`,
@@ -45,8 +45,6 @@ export default function Products() {
               },
             },
           )
-          console.log('Productos del proveedor:', response.data)
-          console.log('NEW SELECTED SUPPLIER ID', selectedSupplier.id)
           const defaultProducts = response.data.products
           const productsWithTax = defaultProducts
             .filter((product) => product.prices.some((price) => price.nameUoms))
@@ -64,22 +62,13 @@ export default function Products() {
           useOrderStore.setState({ articlesToPay: productsWithTax })
           setArticles(productsWithTax)
           setProducts(productsWithTax)
-          console.log('NO TRAJO NADA DEL STORAGE')
-          console.log('PRODUCTOS CON TAX', productsWithTax)
         } catch (error) {
           console.error('Error al obtener los productos del proveedor:', error)
         }
       }
     }
-
-    fetchData()
-  }, [
-    selectedSupplier.id,
-    articlesToPay,
-    countryCode,
-    selectedRestaurant.accountNumber,
-    token,
-  ])
+    fetchProducts()
+  }, [])
 
   const resetInputSearcher = () => {
     setResetInput((prevKey) => prevKey + 1)
@@ -147,64 +136,55 @@ export default function Products() {
       setBlurIntensity(30)
     }
   }
-  console.log('articulos:', articles)
+
   return (
     <View style={styles.container}>
       <ProductSearcher
-      // products={articlesToPay}
-      // setShowSearchResults={setShowSearchResults}
-      // resetInput={resetInput}
+        products={articlesToPay}
+        setShowSearchResults={setShowSearchResults}
+        resetInput={resetInput}
       />
       {showSearchResults ? (
-        // <ProductsFind
-        //   onAmountChange={handleAmountChange}
-        //   onUomChange={handleUomChange}
-        // />
-        <View>
-          <Text>aqui products find</Text>{' '}
-        </View>
+        <ProductsFind
+          onAmountChange={handleAmountChange}
+          onUomChange={handleUomChange}
+        />
       ) : (
         <>
           {showFavorites ? (
-            // <Favorites
-            // // onAmountChange={handleAmountChange}
-            // // onUomChange={handleUomChange}
-            // />
-            <View>
-              <Text>aqui favorits</Text>
-            </View>
+            <Favorites
+              onAmountChange={handleAmountChange}
+              onUomChange={handleUomChange}
+            />
           ) : (
-            <>
-              {articles
-                // .filter((article) => {
-                //   if (selectedCategory === 'All') {
-                //     return true
-                //   }
-                //   return article.nameCategorie === selectedCategory
-                // })
-                .map((article) => (
-                  <SafeAreaView style={ProductsStyles.containerCards}>
-                    <ScrollView onScroll={handleScroll}>
-                      <ProductCard
-                        key={article.id}
-                        productData={article}
-                        onAmountChange={handleAmountChange}
-                        onUomChange={handleUomChange}
-                      />
-                    </ScrollView>
-                    <View style={styles.extraSpace} />
-                  </SafeAreaView>
-                ))}
-            </>
+            <SafeAreaView style={ProductsStyles.containerCards}>
+              <ScrollView onScroll={handleScroll}>
+                {articles
+                  .filter((article) => {
+                    if (selectedCategory === 'All') {
+                      return true
+                    }
+                    return article.nameCategorie === selectedCategory
+                  })
+                  .map((article) => (
+                    <ProductCard
+                      key={article.id}
+                      productData={article}
+                      onAmountChange={handleAmountChange}
+                      onUomChange={handleUomChange}
+                    />
+                  ))}
+              </ScrollView>
+            </SafeAreaView>
           )}
         </>
       )}
       <View style={styles.viewCategories} />
       <CategoriesMenu
-        // showFavorites={showFavorites}
-        // toggleShowFavorites={toggleShowFavorites}
-        // categoriesProduct={productsCategory}
-        // filterCategory={filterCategories}
+        showFavorites={showFavorites}
+        toggleShowFavorites={toggleShowFavorites}
+        categoriesProduct={productsCategory}
+        filterCategory={filterCategories}
         blurIntensity={blurIntensity}
       />
     </View>
@@ -235,40 +215,4 @@ const styles = StyleSheet.create({
     bottom: 10,
     zIndex: 1,
   },
-  extraSpace: {
-    height: 225,
-  },
 })
-
-// import { StyleSheet, View } from 'react-native'
-// import React, { useState } from 'react'
-// import ProductCards from '../../components/buyingProcess/productCards'
-// import ProductSearcher from '../../components/buyingProcess/productSearch'
-// import ProductsCategories from '../../components/buyingProcess/productCategories'
-
-// const Products = () => {
-//   const [blurIntensity, setBlurIntensity] = useState(30)
-
-//   return (
-//     <View style={styles.container}>
-//       <ProductSearcher />
-//       <ProductCards setBlurIntensity={setBlurIntensity} />
-//       <View style={styles.viewCategories}>
-//         <ProductsCategories blurIntensity={blurIntensity} />
-//       </View>
-//     </View>
-//   )
-// }
-
-// export default Products
-// export const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     position: 'relative',
-//   },
-//   viewCategories: {
-//     position: 'absolute',
-//     bottom: 0,
-//     zIndex: 1,
-//   },
-// })

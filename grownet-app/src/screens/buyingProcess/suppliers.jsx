@@ -14,6 +14,7 @@ import useTokenStore from '../../store/useTokenStore'
 import { View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import Constants from 'expo-constants'
 
 const Suppliers = () => {
   const navigation = useNavigation()
@@ -52,8 +53,7 @@ const Suppliers = () => {
     fetchData()
   }, [token, setSuppliers, setSelectedSupplier])
 
-  const urlImg =
-    'http://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
+  const urlImg = Constants.expoConfig.extra.urlImage
 
   const specialSuppliers = [
     'FoodPoint',

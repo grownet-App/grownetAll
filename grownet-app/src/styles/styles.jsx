@@ -293,8 +293,8 @@ export const ProductsStyles = StyleSheet.create({
   },
   ImageCardProduct: {
     flex: 1,
-    width: null,
-    height: null,
+    width: '100%',
+    height: '100%',
     alignItems: 'center',
   },
   containName: {
@@ -329,6 +329,11 @@ export const ProductsStyles = StyleSheet.create({
     fontSize: 25,
     color: '#62c471',
     fontWeight: 'bold',
+  },
+  countSelect: {
+    fontSize: 20,
+    color: '#04444f',
+    marginRight: 5,
   },
   button2: {
     backgroundColor: 'transparent',

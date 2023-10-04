@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   View,
   Dimensions,
@@ -12,38 +12,81 @@ import { ProductsStyles } from '../../styles/styles'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Iconify } from 'react-native-iconify'
 import { BlurView } from 'expo-blur'
+import useTokenStore from '../../store/useTokenStore'
+import { allCategories } from '../../config/urls.config'
+import axios from '../../../axiosConfig.'
+import Constants from 'expo-constants'
 
 const { width } = Dimensions.get('window')
 
-function ProductsCategories({ blurIntensity }) {
+function ProductsCategories({
+  blurIntensity,
+  showFavorites,
+  toggleShowFavorites,
+  categoriesProduct,
+  filterCategory,
+}) {
   const isCarousel = useRef(null)
+  const [categories, setCategories] = useState()
+  const { token } = useTokenStore()
 
-  const images = [
-    {
-      Iconify: <Iconify icon="fluent-emoji:basket" size={70} color="#62c471" />,
-      name: 'All',
-    },
-    { source: require('../../../assets/img/banana_img.png'), name: 'Fruit' },
-    { source: require('../../../assets/img/bread_img.png'), name: 'Bread' },
-    {
-      source: require('../../../assets/img/broccoli_img.png'),
-      name: 'Vegetables',
-    },
-    { source: require('../../../assets/img/frozen_img.png'), name: 'Frozen' },
-    { icon: 'favorite', name: 'Favorites' },
-  ]
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(allCategories, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        setCategories(response.data.categories)
+      } catch (error) {
+        console.error('Error al obtener los datos de la API:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  const urlImg = Constants.expoConfig.extra.urlImage
 
   const renderItem = ({ item }) => {
     return (
       <View style={ProductsStyles.contenImage}>
-        {item.source ? (
-          <Image source={item.source} style={{ width: 70, height: 70 }} />
-        ) : item.icon ? (
-          <MaterialIcons name={item.icon} size={70} color="#62c471" />
+        <Iconify icon="fluent-emoji:basket" size={70} color="#62c471" />
+        {showFavorites ? (
+          <TouchableOpacity onPress={toggleShowFavorites}>
+            <MaterialIcons name="favorite" size={70} color="#62c471" />
+          </TouchableOpacity>
         ) : (
-          <View>{item.Iconify}</View>
+          <TouchableOpacity onPress={toggleShowFavorites}>
+            <Text>aqui Imagen</Text>
+          </TouchableOpacity>
         )}
-        <Text style={{ color: '#144D56' }}>{item.name}</Text>
+
+        {categoriesProduct.map((category) => (
+          <TouchableOpacity
+            style={''}
+            key={category}
+            onPress={() => filterCategory(category)}
+          >
+            {category === 'All' && (
+              <Iconify icon="fluent-emoji:basket" size={70} color="#62c471" />
+            )}
+            {categories?.map((categoryApi) => (
+              <View key={categoryApi.id}>
+                {category === categoryApi.name && (
+                  <>
+                    <Image
+                      style={{ width: 100, height: 100 }}
+                      source={{ uri: urlImg + categoryApi.image }}
+                    />
+                  </>
+                )}
+              </View>
+            ))}
+            <Text style={{ color: 'blue' }}>{category}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
     )
   }
@@ -52,7 +95,7 @@ function ProductsCategories({ blurIntensity }) {
     <SafeAreaView style={ProductsStyles.fixedContainer}>
       <BlurView intensity={blurIntensity}>
         <Carousel
-          data={images}
+          data={categories}
           renderItem={renderItem}
           sliderWidth={width}
           itemWidth={width / 3}

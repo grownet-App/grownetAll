@@ -2,30 +2,38 @@
 import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import data from './data.json'
 import { ProductsStyles } from '../../styles/styles'
 import { Dropdown } from 'react-native-element-dropdown'
 import SelectQuantity from './selectQuantity'
+import { useFavoritesStore } from '../../store/useFavoriteStore'
+import Constants from 'expo-constants'
 
 const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
-  const counter = 0
   const { id, name, image, prices, tax, uomToPay } = productData
-  const urlImg =
-    'http://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
-  const selectedUom = prices.find((price) => price.nameUoms === uomToPay)
 
   const [isFocus, setIsFocus] = useState(false)
+  const { favorites, addFavorite, removeFavorite } = useFavoritesStore()
+  const isFavorite = favorites.includes(id, name, image)
+  const counter = 0
+
+  const urlImg = Constants.expoConfig.extra.urlImage
+  const selectedUom = prices.find((price) => price.nameUoms === uomToPay)
 
   const handleToggleFavorite = () => {
-    // Lógica para cambiar el estado de favorito del producto con ID 'productId'
+    if (isFavorite) {
+      console.log('remove the ', id)
+      removeFavorite(id)
+    } else {
+      console.log('add the ', id)
+      addFavorite(id)
+    }
   }
 
-  const dataPriceDropdown = prices.map((price) => price)
+  const dataPriceDropdown = prices.map((price) => price.nameUoms)
+
   const handleUomToPayChange = (event) => {
     const newUomToPay = event.target.value
     onUomChange(id, newUomToPay)
-    console.log(`Selected uomtopay for ${name}: ${newUomToPay}`)
-    console.log(`Selected price for ${name}: ${tax}`)
   }
 
   return (
@@ -43,7 +51,7 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
             <View>
               <Text style={ProductsStyles.textName}>{selectedUom.name}</Text>
               <Text style={ProductsStyles.textPrice}>
-                GBP £{selectedUom.tax}
+                GBP £{selectedUom.priceWithTax}
               </Text>
             </View>
 
@@ -68,7 +76,7 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
                 containerStyle={{ borderRadius: 20, color: '#04444f' }}
                 placeholderStyle={styles.placeholderStyle}
                 selectedTextStyle={styles.selectedTextStyle}
-                data={dataPriceDropdown}
+                data={dataPriceDropdown.map((e) => e)}
                 maxHeight={200}
                 labelField="nameUoms"
                 valueField="amount"
@@ -76,10 +84,7 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
                 value={uomToPay}
                 onFocus={() => setIsFocus(true)}
                 onBlur={() => setIsFocus(false)}
-                onChange={(newValue) => {
-                  handleUomToPayChange(newValue)
-                  setIsFocus(false)
-                }}
+                onChange={handleUomToPayChange}
               />
             </View>
           </View>

@@ -8,10 +8,7 @@ function ProductsFind({ onAmountChange, onUomChange }) {
 
   return (
     <View style={styles.container}>
-      <Text>
-        {'productSearcher.findFirstPart'} {filteredProducts.length}
-        {'productSearcher.findSecondPart'}
-      </Text>
+      <Text>{filteredProducts.length}</Text>
       <View style={styles.favoriteItems}>
         {filteredProducts.map((product) => (
           <ProductCard
@@ -31,7 +28,7 @@ export default ProductsFind
 const styles = {
   container: {
     flex: 1,
-    padding: 10, // Ajusta el espaciado según tus necesidades
+    padding: 10,
   },
   favoriteItems: {
     // Estilos para el contenedor de productos
