@@ -16,13 +16,15 @@ function ProductSearcher({ products, setShowSearchResults, resetInput }) {
   }, [setFilteredProducts, setShowSearchResults])
   useEffect(() => {
     handleReset()
-  }, [resetInput, handleReset])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetInput])
 
   useEffect(() => {
     if (input !== '') {
       filterProducts(input)
     }
-  }, [products, filterProducts, input])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [products])
 
   const handleInputChange = (e) => {
     const query = e.target.value
