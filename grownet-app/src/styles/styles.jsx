@@ -215,7 +215,7 @@ export const RestaurantStyles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 16,
+    marginTop: 5,
   },
   TextDirectionRestaurant: {
     color: '#FFFFFF',
@@ -226,7 +226,7 @@ export const RestaurantStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: 322,
+    width: 350,
     height: 150,
     backgroundColor: '#04444f',
     marginVertical: 10,
@@ -241,6 +241,7 @@ export const RestaurantStyles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 50,
     width: 222,
+    marginBottom: 25,
   },
   containButtonAdd: {
     flex: 1,
@@ -284,18 +285,17 @@ export const ProductsStyles = StyleSheet.create({
     marginVertical: 10,
     flexDirection: 'row',
     borderRadius: 20,
-    height: 140,
+    height: 175,
     width: '85%',
   },
   containerImage: {
-    width: 150,
-    height: 100,
+    width: '40%',
+    height: '100%',
   },
   ImageCardProduct: {
     flex: 1,
     width: '100%',
     height: '100%',
-    alignItems: 'center',
   },
   containName: {
     flexDirection: 'row',
@@ -355,7 +355,12 @@ export const ProductsStyles = StyleSheet.create({
   textName: {
     color: '#04444f',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 15,
+    width: 120,
+  },
+  textName1: {
+    color: '#868686',
+    fontSize: 12,
   },
   textPrice: {
     color: '#0d6efd',
@@ -366,6 +371,8 @@ export const ProductsStyles = StyleSheet.create({
   //PRODUCT CATEGORIES
   fixedContainer: {
     overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
   },
   contenImage: {
     justifyContent: 'center',
@@ -378,7 +385,7 @@ export const ProductsStyles = StyleSheet.create({
     shadowColor: '#144D56',
     elevation: 4,
   },
-
+  text: { color: '#04444f', textAlign: 'center', fontWeight: 'bold' },
   bgContinue: {
     alignItems: 'center',
     backgroundColor: '#026cd2',

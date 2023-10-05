@@ -25,7 +25,32 @@ const Suppliers = () => {
     setSelectedSupplier,
     selectedSupplier: currentSelectedSupplier,
     setArticlesToPay,
+    selectedRestaurant,
   } = useOrderStore()
+
+  const urlImg = Constants.expoConfig.extra.urlImage
+
+  useEffect(() => {
+    async function fetchData() {
+      const requestBody = {
+        accountNumber: selectedRestaurant.accountNumber,
+      }
+
+      try {
+        const response = await axios.post(`${ApiSuppliers}`, requestBody, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
+        setSuppliers(response.data.supplier)
+      } catch (error) {
+        console.error('Error al obtener los proveedores:', error)
+      }
+    }
+
+    fetchData()
+  }, [selectedRestaurant.accountNumber, setSuppliers, token])
 
   const handleSupplierSelect = (supplier) => {
     setSelectedSupplier(supplier)
@@ -33,42 +58,6 @@ const Suppliers = () => {
       setArticlesToPay([])
     }
   }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(ApiSuppliers, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-
-        setSelectedSupplier(null)
-        setSuppliers(response.data.suppliers)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    fetchData()
-  }, [token, setSuppliers, setSelectedSupplier])
-
-  const urlImg = Constants.expoConfig.extra.urlImage
-
-  const specialSuppliers = [
-    'FoodPoint',
-    'eurofrutta',
-    'HG WALTER',
-    'County Suppplies',
-    'The Menu Partners',
-    'IMS',
-    'Smithfield Butchers',
-    'Direct Meats',
-    'Big K',
-  ]
-  const filteredSuppliers = suppliers.filter((supplier) =>
-    specialSuppliers.includes(supplier.name),
-  )
 
   const onPressAdd = () => {
     //TODO,add suppliers
@@ -78,7 +67,7 @@ const Suppliers = () => {
     <SafeAreaView>
       <ScrollView>
         <View style={SuppliersStyles.suppliers}>
-          {filteredSuppliers.map((supplier) => {
+          {suppliers.map((supplier) => {
             const imageUrl = `${urlImg}${supplier.image}`
 
             return (

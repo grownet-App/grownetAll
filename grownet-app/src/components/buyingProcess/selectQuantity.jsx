@@ -13,7 +13,7 @@ const SelectQuantity = ({
 
   useEffect(() => {
     onAmountChange(id, amount)
-  }, [amount])
+  }, [amount, id])
 
   const decrementAmount = () => {
     if (amount > counter) {

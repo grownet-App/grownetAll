@@ -45,57 +45,51 @@ function ProductsCategories({
     }
 
     fetchData()
-  }, [])
+  }, [token])
 
   const urlImg = Constants.expoConfig.extra.urlImage
+  const updatedCategories = [...categoriesProduct, 'FAVORITES']
 
   const renderItem = ({ item }) => {
     return (
       <View style={ProductsStyles.contenImage}>
-        <Iconify icon="fluent-emoji:basket" size={70} color="#62c471" />
-        {showFavorites ? (
-          <TouchableOpacity onPress={toggleShowFavorites}>
-            <MaterialIcons name="favorite" size={70} color="#62c471" />
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity onPress={toggleShowFavorites}>
-            <Text>aqui Imagen</Text>
-          </TouchableOpacity>
-        )}
-
-        {categoriesProduct.map((category) => (
-          <TouchableOpacity
-            style={''}
-            key={category}
-            onPress={() => filterCategory(category)}
-          >
-            {category === 'All' && (
-              <Iconify icon="fluent-emoji:basket" size={70} color="#62c471" />
-            )}
-            {categories?.map((categoryApi) => (
-              <View key={categoryApi.id}>
-                {category === categoryApi.name && (
-                  <>
-                    <Image
-                      style={{ width: 100, height: 100 }}
-                      source={{ uri: urlImg + categoryApi.image }}
-                    />
-                  </>
-                )}
-              </View>
-            ))}
-            <Text style={{ color: 'blue' }}>{category}</Text>
-          </TouchableOpacity>
-        ))}
+        <TouchableOpacity key={item} onPress={() => filterCategory(item)}>
+          {item === 'FAVORITES' && showFavorites ? (
+            <TouchableOpacity onPress={toggleShowFavorites}>
+              <Text>aqui Imagen</Text>
+            </TouchableOpacity>
+          ) : item === 'FAVORITES' ? (
+            <TouchableOpacity onPress={toggleShowFavorites}>
+              <MaterialIcons name="favorite" size={70} color="#62c471" />
+            </TouchableOpacity>
+          ) : null}
+          {item === 'All' && (
+            <Iconify icon="fluent-emoji:basket" size={70} color="#62c471" />
+          )}
+          {categories?.map((categoryApi) => (
+            <View key={categoryApi.id}>
+              {item === categoryApi.name && (
+                <>
+                  <Image
+                    style={{ width: 70, height: 70 }}
+                    source={{ uri: urlImg + categoryApi.image }}
+                  />
+                </>
+              )}
+            </View>
+          ))}
+          <Text style={ProductsStyles.text}>{item}</Text>
+        </TouchableOpacity>
       </View>
     )
   }
+  console.log('categoriasProducts:', updatedCategories)
 
   return (
     <SafeAreaView style={ProductsStyles.fixedContainer}>
       <BlurView intensity={blurIntensity}>
         <Carousel
-          data={categories}
+          data={updatedCategories}
           renderItem={renderItem}
           sliderWidth={width}
           itemWidth={width / 3}

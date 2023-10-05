@@ -49,7 +49,8 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
         <View style={{ marginTop: 20 }}>
           <View style={ProductsStyles.containName}>
             <View>
-              <Text style={ProductsStyles.textName}>{selectedUom.name}</Text>
+              <Text style={ProductsStyles.textName}>{name}</Text>
+              <Text style={ProductsStyles.textName1}>{selectedUom.name}</Text>
               <Text style={ProductsStyles.textPrice}>
                 GBP £{selectedUom.priceWithTax}
               </Text>
@@ -97,7 +98,7 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
 export default ProductCards
 const styles = StyleSheet.create({
   dropdown: {
-    height: 50,
+    height: 45,
     borderColor: '#f2f2f2',
     borderWidth: 1.5,
     borderRadius: 51,

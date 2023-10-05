@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
+import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
 import axios from '../../../axiosConfig.'
 import CategoriesMenu from '../../components/buyingProcess/productCategories'
 import Favorites from '../../components/buyingProcess/favorites'
@@ -68,7 +68,13 @@ export default function Products() {
       }
     }
     fetchProducts()
-  }, [])
+  }, [
+    selectedSupplier,
+    articlesToPay,
+    countryCode,
+    selectedRestaurant.accountNumber,
+    token,
+  ])
 
   const resetInputSearcher = () => {
     setResetInput((prevKey) => prevKey + 1)
@@ -174,6 +180,7 @@ export default function Products() {
                       onUomChange={handleUomChange}
                     />
                   ))}
+                <View style={{ height: 220 }} />
               </ScrollView>
             </SafeAreaView>
           )}
