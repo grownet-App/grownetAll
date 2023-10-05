@@ -45,7 +45,8 @@ function ProductsCategories({
     }
 
     fetchData()
-  }, [token])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const urlImg = Constants.expoConfig.extra.urlImage
   const updatedCategories = [...categoriesProduct, 'FAVORITES']

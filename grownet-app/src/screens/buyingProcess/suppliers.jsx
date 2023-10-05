@@ -50,7 +50,8 @@ const Suppliers = () => {
     }
 
     fetchData()
-  }, [selectedRestaurant.accountNumber, setSuppliers, token])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleSupplierSelect = (supplier) => {
     setSelectedSupplier(supplier)

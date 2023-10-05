@@ -13,7 +13,8 @@ const SelectQuantity = ({
 
   useEffect(() => {
     onAmountChange(id, amount)
-  }, [amount, id])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [amount])
 
   const decrementAmount = () => {
     if (amount > counter) {
