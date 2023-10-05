@@ -68,13 +68,8 @@ export default function Products() {
       }
     }
     fetchProducts()
-  }, [
-    selectedSupplier,
-    articlesToPay,
-    countryCode,
-    selectedRestaurant.accountNumber,
-    token,
-  ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSupplier])
 
   const resetInputSearcher = () => {
     setResetInput((prevKey) => prevKey + 1)
@@ -95,6 +90,7 @@ export default function Products() {
     const updatedArticlesToPay = articles.map((article) =>
       article.id === productId ? { ...article, amount: newAmount } : article,
     )
+
     useOrderStore.setState({ articlesToPay: updatedArticlesToPay })
   }
 
