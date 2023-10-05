@@ -9,6 +9,7 @@ import { create } from 'zustand'
 const useTokenStore = create(
   (set) => ({
     token: null,
+    countryCode: null,
     setToken: (newToken) => set({ token: newToken }),
     initializeToken: async () => {
       try {
@@ -23,6 +24,7 @@ const useTokenStore = create(
         console.error('Error al obtener el token de AsyncStorage:', error)
       }
     },
+    setCountryCode: (newCountryCode) => set({ countryCode: newCountryCode }),
   }),
 
   {

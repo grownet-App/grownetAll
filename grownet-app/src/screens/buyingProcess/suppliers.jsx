@@ -1,71 +1,112 @@
-import { SafeAreaView, ScrollView, ImageBackground, Text } from 'react-native'
+import {
+  SafeAreaView,
+  ScrollView,
+  ImageBackground,
+  Text,
+  TouchableOpacity,
+} from 'react-native'
 import React, { useEffect } from 'react'
 import { ApiSuppliers } from '../../config/urls.config'
 import { SuppliersStyles } from '../../styles/styles'
 import axios from '../../../axiosConfig.'
 import useOrderStore from '../../store/UseOrderStore'
 import useTokenStore from '../../store/useTokenStore'
+import { View } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import Constants from 'expo-constants'
 
 const Suppliers = () => {
-  const { suppliers, setSuppliers, setSelectedSupplier } = useOrderStore()
+  const navigation = useNavigation()
   const { token } = useTokenStore()
+  const {
+    suppliers,
+    setSuppliers,
+    setSelectedSupplier,
+    selectedSupplier: currentSelectedSupplier,
+    setArticlesToPay,
+    selectedRestaurant,
+  } = useOrderStore()
+
+  const urlImg = Constants.expoConfig.extra.urlImage
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData() {
+      const requestBody = {
+        accountNumber: selectedRestaurant.accountNumber,
+      }
+
       try {
-        const response = await axios.get(ApiSuppliers, {
+        const response = await axios.post(`${ApiSuppliers}`, requestBody, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
-        console.log('response', response.data.suppliers)
-        setSelectedSupplier(null)
-        setSuppliers(response.data.suppliers)
+
+        setSuppliers(response.data.supplier)
       } catch (error) {
-        console.log(error)
+        console.error('Error al obtener los proveedores:', error)
       }
     }
 
     fetchData()
-  }, [token, setSuppliers, setSelectedSupplier])
+  }, [selectedRestaurant.accountNumber, setSuppliers, token])
 
-  const urlImg =
-    'http://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
+  const handleSupplierSelect = (supplier) => {
+    setSelectedSupplier(supplier)
+    if (currentSelectedSupplier?.id !== supplier.id) {
+      setArticlesToPay([])
+    }
+  }
 
-  const specialSuppliers = [
-    'eurofrutta',
-    'HG WALTER',
-    'County Suppplies',
-    'The Menu Partners',
-    'IMS',
-    'Smithfield Butchers',
-    'Direct Meats',
-    'Big K',
-  ]
-  const filteredSuppliers = suppliers.filter((supplier) =>
-    specialSuppliers.includes(supplier.name),
-  )
+  const onPressAdd = () => {
+    //TODO,add suppliers
+  }
+
   return (
     <SafeAreaView>
-      <ScrollView contentContainerStyle={SuppliersStyles.suppliers}>
-        {filteredSuppliers.map((supplier) => {
-          const imageUrl = `${urlImg}${supplier.image}?random=${Math.random()}`
-          console.log('url de la imagen:', imageUrl)
+      <ScrollView>
+        <View style={SuppliersStyles.suppliers}>
+          {suppliers.map((supplier) => {
+            const imageUrl = `${urlImg}${supplier.image}`
 
-          return (
-            <ImageBackground
-              resizeMode="cover"
-              style={SuppliersStyles.suppliersBg}
-              key={supplier.id}
-              source={{
-                uri: imageUrl,
-                cache: 'reload',
-              }}
-            >
-              <Text style={{ color: 'black' }}> {supplier.name}</Text>
-            </ImageBackground>
-          )
-        })}
+            return (
+              <TouchableOpacity
+                key={supplier.id}
+                onPress={() => {
+                  handleSupplierSelect(supplier)
+                  navigation.navigate('products')
+                }}
+              >
+                <ImageBackground
+                  resizeMode="cover"
+                  style={SuppliersStyles.suppliersBg}
+                  key={supplier.id}
+                  source={{
+                    uri: imageUrl,
+                    cache: 'reload',
+                  }}
+                />
+              </TouchableOpacity>
+            )
+          })}
+          <TouchableOpacity
+            onPress={onPressAdd}
+            style={SuppliersStyles.buttonAddCont}
+          >
+            <View style={SuppliersStyles.containButtonAdd}>
+              <Ionicons
+                name="add-circle-outline"
+                size={34}
+                color="#ffff"
+                style={{ padding: 10 }}
+              />
+              <Text style={SuppliersStyles.textAddRestaurant}>
+                Contact us to add suppliers!
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   )

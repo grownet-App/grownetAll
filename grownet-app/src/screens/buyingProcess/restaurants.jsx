@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { availableRestaurants } from '../../config/urls.config'
 import { RestaurantStyles } from '../../styles/styles'
 import axios from '../../../axiosConfig.'
@@ -15,97 +15,107 @@ import useTokenStore from '../../store/useTokenStore'
 import useOrderStore from '../../store/UseOrderStore'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import Constants from 'expo-constants'
 
 const Restaurants = () => {
   const navigation = useNavigation()
   const { token } = useTokenStore()
   const { restaurants, setRestaurants, setSelectedRestaurant } = useOrderStore()
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData() {
       try {
         const response = await axios.get(availableRestaurants, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         })
+
         setSelectedRestaurant(null)
         setRestaurants(response.data.customersChef)
+
+        if (response.data.customersChef.length === 1) {
+          setSelectedRestaurant(response.data.customersChef[0])
+          navigation.navigate('suppliers')
+        }
       } catch (error) {
         console.error('Error al obtener los restaurantes:', error)
+      } finally {
+        setIsLoading(false)
       }
     }
 
     fetchData()
-  }, [token, setRestaurants, setSelectedRestaurant])
+  }, [setRestaurants, setSelectedRestaurant, token, navigation])
 
-  console.log('RESTAURANTES:', restaurants)
-  const urlImg =
-    'https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/'
+  const urlImg = Constants.expoConfig.extra.urlImage
 
   const onPressAdd = () => {
     //TODO,agregar restaurante
   }
-  const onPressSuppliers = () => {
+  const onPressSuppliers = (restaurant) => {
+    setSelectedRestaurant(restaurant)
     navigation.navigate('suppliers')
   }
 
   return (
     <SafeAreaView>
-      <ScrollView contentContainerStyle={RestaurantStyles.restaurants}>
-        {restaurants.map((restaurant) => {
-          const imageUrl = `${urlImg}${restaurant.image}`
-          console.log('imagen:', imageUrl)
+      {!isLoading && (
+        <ScrollView contentContainerStyle={RestaurantStyles.restaurants}>
+          {restaurants.map((restaurant) => {
+            const imageUrl = `${urlImg}${restaurant.image}`
 
-          return (
-            <TouchableOpacity
-              onPress={() => onPressSuppliers()}
-              key={restaurant.accountNumber}
-            >
-              <ImageBackground
-                style={RestaurantStyles.RestaurantBg}
-                source={require('../../../assets/img/backgroundRestaurants.png')}
+            return (
+              <TouchableOpacity
+                onPress={() => onPressSuppliers(restaurant)}
+                key={restaurant.accountNumber}
               >
-                <Image
-                  source={{
-                    uri: imageUrl,
-                  }}
-                  style={{ width: 160, height: 160 }}
-                  onError={(error) => {
-                    console.log('Error cargando la imagen', error)
-                  }}
-                  onLoad={() => {
-                    console.log('Imagen cargada correctamente!')
-                  }}
-                />
-                <Text
-                  style={RestaurantStyles.TextDirectionRestaurant}
-                  numberOfLines={2}
-                  ellipsizeMode="tail"
+                <ImageBackground
+                  style={RestaurantStyles.RestaurantBg}
+                  source={require('../../../assets/img/backgroundRestaurants.png')}
                 >
-                  {restaurant.address}
-                </Text>
-              </ImageBackground>
-            </TouchableOpacity>
-          )
-        })}
-        <TouchableOpacity
-          onPress={onPressAdd}
-          style={RestaurantStyles.buttonAddCont}
-        >
-          <View style={RestaurantStyles.containButtonAdd}>
-            <Ionicons
-              name="add-circle-outline"
-              size={34}
-              color="#ffff"
-              style={{ padding: 10 }}
-            />
-            <Text style={RestaurantStyles.textAddRestaurant}>
-              Add restaurant
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </ScrollView>
+                  <Image
+                    source={{
+                      uri: imageUrl,
+                    }}
+                    style={{ width: 160, height: 160 }}
+                    onError={(error) => {
+                      console.log('Error cargando la imagen', error)
+                    }}
+                    onLoad={() => {
+                      console.log('Imagen cargada correctamente!')
+                    }}
+                  />
+                  <Text
+                    style={RestaurantStyles.TextDirectionRestaurant}
+                    numberOfLines={2}
+                    ellipsizeMode="tail"
+                  >
+                    {restaurant.address}
+                  </Text>
+                </ImageBackground>
+              </TouchableOpacity>
+            )
+          })}
+          <TouchableOpacity
+            onPress={onPressAdd}
+            style={RestaurantStyles.buttonAddCont}
+          >
+            <View style={RestaurantStyles.containButtonAdd}>
+              <Ionicons
+                name="add-circle-outline"
+                size={34}
+                color="#ffff"
+                style={{ padding: 10 }}
+              />
+              <Text style={RestaurantStyles.textAddRestaurant}>
+                Add restaurant
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </ScrollView>
+      )}
     </SafeAreaView>
   )
 }

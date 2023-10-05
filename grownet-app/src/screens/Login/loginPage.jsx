@@ -7,12 +7,14 @@ import { useState } from 'react'
 import axios from '../../../axiosConfig.'
 import { GlobalStyles } from '../../styles/styles'
 import { validationApiUrl, onlyCountries } from '../../config/urls.config'
+import useTokenStore from '../../store/useTokenStore'
 
 const LoginPage = () => {
   const navigation = useNavigation()
   const [phoneNumber, setPhoneNumber] = useState('')
   const [phoneDos, setPhoneDos] = useState('')
   const [countries, setCountries] = useState([])
+  const { setCountryCode } = useTokenStore()
 
   useEffect(() => {
     async function fetchData() {
@@ -37,6 +39,7 @@ const LoginPage = () => {
     let countrySplit = phoneDos.split(phoneNumber)
     let countryCod = countrySplit[0]
     let countryP = countryCod.split('+')[1]
+    setCountryCode(countryP)
 
     const state = {
       form: {
@@ -50,7 +53,7 @@ const LoginPage = () => {
     try {
       const response = await axios.post(validationApiUrl, state.form)
       console.log('====================================')
-      console.log(response)
+      console.log('respuesta axios:', response)
       console.log('====================================')
       if (response.data.flag === 1) {
         navigation.navigate('otp', state.form)

@@ -13,3 +13,9 @@ export const onlyCountries = Constants.expoConfig.extra.countriesUrl
 export const ApiSuppliers = Constants.expoConfig.extra.suppliersUrl
 
 export const availableRestaurants = Constants.expoConfig.extra.restaurantsUrl
+
+export const supplierProducts = Constants.expoConfig.extra.suppliersProducts
+
+export const selectedCategory = Constants.expoConfig.extra.selectedCategory
+
+export const allCategories = Constants.expoConfig.extra.allCategories
