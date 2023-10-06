@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useTokenStore from "../store/useTokenStore";
 
-export const AuthContext = createContext();
+export const  AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
   const navigate = useNavigate();
