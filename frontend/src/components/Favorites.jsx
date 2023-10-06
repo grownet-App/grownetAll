@@ -4,17 +4,13 @@ import { useFavoritesStore } from "../store/useFavoritesStore";
 import useOrderStore from "../store/useOrderStore";
 import ProductCard from "./ProductDetail/ProductCard";
 
-export default function Favorites({
-  onAmountChange,
-  onUomChange,
-}) {
+export default function Favorites({ onAmountChange, onUomChange }) {
   const { t } = useTranslation();
   const { favorites } = useFavoritesStore();
   const { articlesToPay } = useOrderStore();
 
-
   const favoriteProducts = articlesToPay.filter((product) =>
-    favorites.includes(product.id) 
+    favorites.includes(product.id)
   );
 
   return (

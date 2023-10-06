@@ -49,21 +49,22 @@ function ProductsCategories({
   }, [])
 
   const urlImg = Constants.expoConfig.extra.urlImage
+
   const updatedCategories = [...categoriesProduct, 'FAVORITES']
 
   const renderItem = ({ item }) => {
     return (
       <View style={ProductsStyles.contenImage}>
+        {item === 'FAVORITES' && showFavorites ? (
+          <TouchableOpacity onPress={toggleShowFavorites}>
+            <Iconify icon="icon-park-solid:back" size={70} color="#62c471" />
+          </TouchableOpacity>
+        ) : item === 'FAVORITES' ? (
+          <TouchableOpacity onPress={toggleShowFavorites}>
+            <MaterialIcons name="favorite" size={70} color="#62c471" />
+          </TouchableOpacity>
+        ) : null}
         <TouchableOpacity key={item} onPress={() => filterCategory(item)}>
-          {item === 'FAVORITES' && showFavorites ? (
-            <TouchableOpacity onPress={toggleShowFavorites}>
-              <Text>aqui Imagen</Text>
-            </TouchableOpacity>
-          ) : item === 'FAVORITES' ? (
-            <TouchableOpacity onPress={toggleShowFavorites}>
-              <MaterialIcons name="favorite" size={70} color="#62c471" />
-            </TouchableOpacity>
-          ) : null}
           {item === 'All' && (
             <Iconify icon="fluent-emoji:basket" size={70} color="#62c471" />
           )}
@@ -84,7 +85,6 @@ function ProductsCategories({
       </View>
     )
   }
-  console.log('categoriasProducts:', updatedCategories)
 
   return (
     <SafeAreaView style={ProductsStyles.fixedContainer}>

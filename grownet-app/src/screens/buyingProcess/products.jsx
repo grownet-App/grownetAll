@@ -146,42 +146,44 @@ export default function Products() {
         setShowSearchResults={setShowSearchResults}
         resetInput={resetInput}
       />
-      {showSearchResults ? (
-        <ProductsFind
-          onAmountChange={handleAmountChange}
-          onUomChange={handleUomChange}
-        />
-      ) : (
-        <>
-          {showFavorites ? (
-            <Favorites
+      <SafeAreaView style={ProductsStyles.containerCards}>
+        <ScrollView onScroll={handleScroll}>
+          {showSearchResults ? (
+            <ProductsFind
               onAmountChange={handleAmountChange}
               onUomChange={handleUomChange}
             />
           ) : (
-            <SafeAreaView style={ProductsStyles.containerCards}>
-              <ScrollView onScroll={handleScroll}>
-                {articles
-                  .filter((article) => {
-                    if (selectedCategory === 'All') {
-                      return true
-                    }
-                    return article.nameCategorie === selectedCategory
-                  })
-                  .map((article) => (
-                    <ProductCard
-                      key={article.id}
-                      productData={article}
-                      onAmountChange={handleAmountChange}
-                      onUomChange={handleUomChange}
-                    />
-                  ))}
-                <View style={{ height: 220 }} />
-              </ScrollView>
-            </SafeAreaView>
+            <>
+              {showFavorites ? (
+                <Favorites
+                  onAmountChange={handleAmountChange}
+                  onUomChange={handleUomChange}
+                />
+              ) : (
+                <>
+                  {articles
+                    .filter((article) => {
+                      if (selectedCategory === 'All') {
+                        return true
+                      }
+                      return article.nameCategorie === selectedCategory
+                    })
+                    .map((article) => (
+                      <ProductCard
+                        key={article.id}
+                        productData={article}
+                        onAmountChange={handleAmountChange}
+                        onUomChange={handleUomChange}
+                      />
+                    ))}
+                </>
+              )}
+            </>
           )}
-        </>
-      )}
+          <View style={{ height: 220 }} />
+        </ScrollView>
+      </SafeAreaView>
       <View style={styles.viewCategories} />
       <CategoriesMenu
         showFavorites={showFavorites}

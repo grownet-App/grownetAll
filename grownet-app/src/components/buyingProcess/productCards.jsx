@@ -21,10 +21,10 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
 
   const handleToggleFavorite = () => {
     if (isFavorite) {
-      console.log('remove the ', id)
+      console.log('remove', id)
       removeFavorite(id)
     } else {
-      console.log('add the ', id)
+      console.log('add  ', id)
       addFavorite(id)
     }
   }
@@ -58,7 +58,7 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
 
             <TouchableOpacity onPress={handleToggleFavorite}>
               <Icon
-                name="heart-o"
+                name={isFavorite ? 'heart' : 'heart-o'}
                 size={24}
                 color="#62C471"
                 style={{ marginTop: 5 }}
