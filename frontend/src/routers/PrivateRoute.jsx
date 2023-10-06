@@ -5,7 +5,6 @@ import routes from '../helpers/routes';
 export default function PrivateRoute({ hasRole: role, ...rest }) {
 
     const location = useLocation();
-    console.log(location);
     const { hasRole, isLogged } = useAuth();
     //const user = { id: 1, role: 'admin' };
 
