@@ -8,9 +8,11 @@ import { otpApiUrl } from "../../config/urls.config";
 import "../../css/otp.css";
 import logo_blancov2 from "../../img/logo_blancov2.svg";
 import useTokenStore from "../../store/useTokenStore";
+import useAuth from "../../auth/useAuth";
 
 export default function CodeOtp(props) {
   const { t } = useTranslation();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const { onResendCode, code } = props;
   const [seconds, setSeconds] = useState(20);
@@ -56,7 +58,7 @@ export default function CodeOtp(props) {
         if (response.data.flag === 1) {
           handleShowError(false);
           setToken(response.data.token);
-          navigate("/restaurants");
+          login();
         } else {
           handleShowError(false);
           setShowAlert(true);

@@ -1,4 +1,3 @@
-export const loginApiUrl = 'http://localhost:5000/login'
 export const registerApiUrl = 'http://localhost:5000/register'
 
 // AUTHENTICATION

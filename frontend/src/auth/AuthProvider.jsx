@@ -1,39 +1,23 @@
-import axios from "axios";
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginApiUrl } from "../config/urls.config";
+import useTokenStore from "../store/useTokenStore";
+
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-  const history = useNavigate();
+  const navigate = useNavigate();
+  const { token } = useTokenStore();
   const [user, setUser] = useState(null);
-  const [message, setMessage] = useState("");
-  const login = async (userCredentials, fromLocation) => {
-    try {
-      const response = await axios.post(loginApiUrl, {
-        email: userCredentials.email,
-        password: userCredentials.password,
-        role: userCredentials.role,
-      });
-      const token = response.data.token;
-      console.log(response.data);
-      console.log(response);
-      setUser({
-        email: userCredentials.email,
-        password: userCredentials.password,
-      });
-      if (fromLocation) {
-        history(fromLocation);
-      }
-
-      //setMessage('Inicio de sesión exitoso');
-    } catch (error) {
-      console.log(error);
-      setMessage("Credenciales incorrectas");
-    }
+  const login = () => {
+    setUser({
+      token: token,
+    });
+    navigate("/restaurants");
   };
 
   const logout = () => setUser(null);
+
+  // TODO CUANDO SE TENGAN LOS ROLES, USAR ESTE CODIGO
   const isLogged = () => !!user;
   const hasRole = (role) => user?.role === role;
 
