@@ -1,21 +1,19 @@
-import Constants from 'expo-constants'
-
 export const loginApiUrl = 'http://localhost:5000/login'
 
 export const registerApiUrl = 'http://localhost:5000/register'
 
-export const otpApiUrl = Constants.expoConfig.extra.OtpUrl
+export const otpApiUrl = process.env.EXPO_PUBLIC_OTP
 
-export const validationApiUrl = Constants.expoConfig.extra.ValidationUrl
+export const validationApiUrl = process.env.EXPO_PUBLIC_AUTHENTICATE
 
-export const onlyCountries = Constants.expoConfig.extra.countriesUrl
+export const onlyCountries = process.env.EXPO_PUBLIC_COUNTRIES
 
-export const ApiSuppliers = Constants.expoConfig.extra.suppliersUrl
+export const ApiSuppliers = process.env.EXPO_PUBLIC_SUPPLIERS
 
-export const availableRestaurants = Constants.expoConfig.extra.restaurantsUrl
+export const availableRestaurants = process.env.EXPO_PUBLIC_RESTAURANTS
 
-export const supplierProducts = Constants.expoConfig.extra.suppliersProducts
+export const supplierProducts = process.env.EXPO_PUBLIC_SELECT_SUPPLIER_PRODUCTS
 
-export const selectedCategory = Constants.expoConfig.extra.selectedCategory
+export const selectedCategory = process.env.EXPO_PUBLIC_SELECT_CATEGORY
 
-export const allCategories = Constants.expoConfig.extra.allCategories
+export const allCategories = process.env.EXPO_PUBLIC_CATEGORIES

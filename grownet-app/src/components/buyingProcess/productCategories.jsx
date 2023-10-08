@@ -15,7 +15,6 @@ import { BlurView } from 'expo-blur'
 import useTokenStore from '../../store/useTokenStore'
 import { allCategories } from '../../config/urls.config'
 import axios from '../../../axiosConfig.'
-import Constants from 'expo-constants'
 
 const { width } = Dimensions.get('window')
 
@@ -48,22 +47,23 @@ function ProductsCategories({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const urlImg = Constants.expoConfig.extra.urlImage
+  const urlImg = process.env.EXPO_PUBLIC_BASE_IMG
+
   const updatedCategories = [...categoriesProduct, 'FAVORITES']
 
   const renderItem = ({ item }) => {
     return (
       <View style={ProductsStyles.contenImage}>
+        {item === 'FAVORITES' && showFavorites ? (
+          <TouchableOpacity onPress={toggleShowFavorites}>
+            <Iconify icon="icon-park-solid:back" size={70} color="#62c471" />
+          </TouchableOpacity>
+        ) : item === 'FAVORITES' ? (
+          <TouchableOpacity onPress={toggleShowFavorites}>
+            <MaterialIcons name="favorite" size={70} color="#62c471" />
+          </TouchableOpacity>
+        ) : null}
         <TouchableOpacity key={item} onPress={() => filterCategory(item)}>
-          {item === 'FAVORITES' && showFavorites ? (
-            <TouchableOpacity onPress={toggleShowFavorites}>
-              <Text>aqui Imagen</Text>
-            </TouchableOpacity>
-          ) : item === 'FAVORITES' ? (
-            <TouchableOpacity onPress={toggleShowFavorites}>
-              <MaterialIcons name="favorite" size={70} color="#62c471" />
-            </TouchableOpacity>
-          ) : null}
           {item === 'All' && (
             <Iconify icon="fluent-emoji:basket" size={70} color="#62c471" />
           )}
@@ -84,7 +84,6 @@ function ProductsCategories({
       </View>
     )
   }
-  console.log('categoriasProducts:', updatedCategories)
 
   return (
     <SafeAreaView style={ProductsStyles.fixedContainer}>

@@ -22,11 +22,10 @@ export const GlobalStyles = StyleSheet.create({
     fontWeight: '500',
   },
   container: {
-    flex: 2,
+    flex: 1,
     backgroundColor: '#026CD2',
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
   },
 
   linkWhite: {
@@ -83,9 +82,6 @@ export const CarouselStyles = StyleSheet.create({
   containerButtton: {
     marginBottom:
       Platform.OS === 'android' || Platform.OS === 'ios' ? '20%' : '40%',
-  },
-  paginatioCarousel: {
-    marginBottom: 33,
   },
 })
 

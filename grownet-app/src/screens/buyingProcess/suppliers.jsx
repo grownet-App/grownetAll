@@ -14,7 +14,6 @@ import useTokenStore from '../../store/useTokenStore'
 import { View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
-import Constants from 'expo-constants'
 
 const Suppliers = () => {
   const navigation = useNavigation()
@@ -28,7 +27,7 @@ const Suppliers = () => {
     selectedRestaurant,
   } = useOrderStore()
 
-  const urlImg = Constants.expoConfig.extra.urlImage
+  const urlImg = process.env.EXPO_PUBLIC_BASE_IMG
 
   useEffect(() => {
     async function fetchData() {

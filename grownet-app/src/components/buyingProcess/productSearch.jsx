@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, TextInput, TouchableOpacity } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { ProductsStyles } from '../../styles/styles'
@@ -9,11 +9,7 @@ function ProductSearcher({ products, setShowSearchResults, resetInput }) {
   const setFilteredProducts = useProductStore(
     (state) => state.setFilteredProducts,
   )
-  const handleReset = useCallback(() => {
-    setShowSearchResults(false)
-    setInput('')
-    setFilteredProducts([])
-  }, [setFilteredProducts, setShowSearchResults])
+
   useEffect(() => {
     handleReset()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,8 +22,7 @@ function ProductSearcher({ products, setShowSearchResults, resetInput }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products])
 
-  const handleInputChange = (e) => {
-    const query = e.target.value
+  const handleInputChange = (query) => {
     setInput(query)
 
     if (query === '') {
@@ -37,17 +32,19 @@ function ProductSearcher({ products, setShowSearchResults, resetInput }) {
       filterProducts(query)
     }
   }
+  const handleReset = () => {
+    setShowSearchResults(false)
+    setInput('')
+    setFilteredProducts([])
+  }
 
-  const filterProducts = useCallback(
-    (query) => {
-      const filtered = products.filter((product) =>
-        product.name.toLowerCase().includes(query.toLowerCase()),
-      )
-      setShowSearchResults(true)
-      setFilteredProducts(filtered)
-    },
-    [products, setShowSearchResults, setFilteredProducts],
-  )
+  const filterProducts = (query) => {
+    const filtered = products.filter((product) =>
+      product.name.toLowerCase().includes(query.toLowerCase()),
+    )
+    setShowSearchResults(true)
+    setFilteredProducts(filtered)
+  }
 
   return (
     <View style={ProductsStyles.containerSearch}>
