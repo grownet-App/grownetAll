@@ -20,10 +20,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["INTERNET", "CAMERA", "ACCESS_FINE_LOCATION"]
+      "permissions": ["INTERNET", "CAMERA", "ACCESS_FINE_LOCATION"],
+      "package": "com.heinera.grownetapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "754bf798-a12d-4cfe-abe6-381e31de8ed1"
+      }
     }
   }
 }

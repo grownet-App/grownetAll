@@ -15,7 +15,6 @@ import { BlurView } from 'expo-blur'
 import useTokenStore from '../../store/useTokenStore'
 import { allCategories } from '../../config/urls.config'
 import axios from '../../../axiosConfig.'
-import Constants from 'expo-constants'
 
 const { width } = Dimensions.get('window')
 
@@ -48,7 +47,7 @@ function ProductsCategories({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const urlImg = Constants.expoConfig.extra.urlImage
+  const urlImg = process.env.EXPO_PUBLIC_BASE_IMG
 
   const updatedCategories = [...categoriesProduct, 'FAVORITES']
 

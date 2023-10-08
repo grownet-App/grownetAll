@@ -1,7 +1,6 @@
 import axios from 'axios'
-import Constants from 'expo-constants'
 
-const BASE_URL = Constants.expoConfig.extra.BaseUrl
+const BASE_URL = process.env.EXPO_PUBLIC_BASE_URL
 
 axios.defaults.baseURL = BASE_URL
 
