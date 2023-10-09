@@ -68,7 +68,7 @@ const Home = () => {
           style={GlobalStyles.btnSecundary}
           onPress={() => navigation.navigate('login')}
         >
-          <Text style={OtpStyles.textRegister}>Register</Text>
+          <Text style={GlobalStyles.textButton}>Register</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={GlobalStyles.btnWhite}

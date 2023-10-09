@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native'
+import { Platform, StyleSheet } from 'react-native'
 
 export const GlobalStyles = StyleSheet.create({
   btnSecundary: {
@@ -17,6 +17,13 @@ export const GlobalStyles = StyleSheet.create({
     marginVertical: 16,
     alignItems: 'center',
   },
+  textButton: {
+    color: 'white',
+    fontWeight: '500',
+    fontSize: 16,
+    textAlign: 'center',
+    fontFamily: 'Poppins',
+  },
   cardSuppliers: {
     backgroundColor: '#1D446A',
     fontWeight: '500',
@@ -32,8 +39,9 @@ export const GlobalStyles = StyleSheet.create({
   linkWhite: {
     color: 'white',
     fontWeight: '400',
-    fontSize: 18,
+    fontSize: 16,
     paddingVertical: 50,
+    fontFamily: 'Poppins',
   },
   welcome: {
     color: 'white',
@@ -54,9 +62,10 @@ export const GlobalStyles = StyleSheet.create({
 
   textBtnW: {
     color: '#04444F',
-    fontWeight: 'bold',
-    fontSize: 18,
+    fontWeight: '500',
+    fontSize: 16,
     textAlign: 'center',
+    fontFamily: 'Poppins',
   },
   containerButtonLets: {
     backgroundColor: '#04444F',

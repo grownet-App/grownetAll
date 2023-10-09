@@ -120,7 +120,6 @@ const styles = StyleSheet.create({
   container2: {
     flex: 1,
     alignItems: 'center',
-
     justifyContent: 'space-between',
   },
   containerCard: {

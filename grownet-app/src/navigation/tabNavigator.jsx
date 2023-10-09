@@ -1,22 +1,21 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import Suppliers from '../screens/buyingProcess/suppliers'
-import Settings from '../screens/settings'
-import Records from '../screens/records'
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createStackNavigator } from '@react-navigation/stack'
-import Chat from '../screens/chat'
-import { FontAwesome5, FontAwesome } from '@expo/vector-icons'
-import { Button } from 'react-native-paper'
-import { TouchableOpacity, StatusBar } from 'react-native'
-import useTokenStore from '../store/useTokenStore'
-import Restauranst from '../screens/buyingProcess/restaurants'
-import Products from '../screens/buyingProcess/products'
-import OrderDetail from '../screens/buyingProcess/orderDetail'
-import OrderSuccessful from '../screens/buyingProcess/orderSuccessful'
-import OrderInformation from '../screens/buyingProcess/orderInformation'
 import { useNavigation } from '@react-navigation/native'
-
+import { createStackNavigator } from '@react-navigation/stack'
+import React from 'react'
+import { StatusBar, TouchableOpacity } from 'react-native'
+import { Button } from 'react-native-paper'
+import OrderDetail from '../screens/buyingProcess/orderDetail'
+import OrderInformation from '../screens/buyingProcess/orderInformation'
+import OrderSuccessful from '../screens/buyingProcess/orderSuccessful'
+import Products from '../screens/buyingProcess/products'
+import Restauranst from '../screens/buyingProcess/restaurants'
+import Suppliers from '../screens/buyingProcess/suppliers'
+import Chat from '../screens/chat'
+import Records from '../screens/records'
+import Settings from '../screens/settings'
+import useTokenStore from '../store/useTokenStore'
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 
@@ -29,7 +28,7 @@ const HeaderLeft = () => {
 
   return (
     <TouchableOpacity style={{ marginHorizontal: 28 }} onPress={goBack}>
-      <FontAwesome
+      <MaterialCommunityIcons
         name="arrow-left"
         size={24}
         color="#04444F"
@@ -44,7 +43,6 @@ const headerRight = () => (
     /* eslint-disable no-alert */
     onPress={() => alert('This is a button!')}
     title="Info"
-    color="#fff"
   />
 )
 
@@ -228,23 +226,23 @@ const tabBarIconProps =
   (name) =>
   ({ color, size }) => {
     name === 'Settings'
-      ? (name = 'cogs')
+      ? (name = 'md-settings-outline') //ajustes
       : name === 'orders'
-      ? (name = 'shopping-basket')
+      ? (name = 'cart-outline') //orders
       : name === 'records'
-      ? (name = 'receipt')
+      ? (name = 'receipt-outline') //historial
       : name === 'chat'
-      ? (name = 'comments')
+      ? (name = 'ios-chatbubble-ellipses-outline')
       : ''
 
-    return <FontAwesome5 name={name} size={size} color={color} />
+    return <Ionicons name={name} size={size} color={color} />
   }
 const TabNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName="orders"
       screenOptions={{
-        tabBarActiveTintColor: 'green',
+        tabBarActiveTintColor: '#04444F',
       }}
     >
       <Tab.Screen
@@ -268,7 +266,7 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="orders"
+        name="Order"
         component={OrderStack}
         options={{
           tabBarIcon: tabBarIconProps('orders'),
@@ -277,7 +275,7 @@ const TabNavigator = () => {
       />
 
       <Tab.Screen
-        name="records"
+        name="Record"
         component={MyStack1}
         options={{
           tabBarIcon: tabBarIconProps('records'),
@@ -288,7 +286,7 @@ const TabNavigator = () => {
         name="chat"
         component={MyStack3}
         options={{
-          tabBarIcon: tabBarIconProps('comments'),
+          tabBarIcon: tabBarIconProps('chat'),
           headerShown: false,
         }}
       />
