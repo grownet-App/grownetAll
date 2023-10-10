@@ -8,7 +8,7 @@ import SelectQuantity from './selectQuantity'
 import { useFavoritesStore } from '../../store/useFavoriteStore'
 
 const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
-  const { id, name, image, prices, tax, uomToPay } = productData
+  const { id, name, image, prices, uomToPay } = productData
 
   const [isFocus, setIsFocus] = useState(false)
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore()
@@ -28,13 +28,19 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
     }
   }
 
-  const dataPriceDropdown = prices.map((price) => price.nameUoms)
-
-  const handleUomToPayChange = (event) => {
-    const newUomToPay = event.target.value
-    onUomChange(id, newUomToPay)
+  function handleUomToPayChange(event) {
+    try {
+      const newUomToPay = event
+      onUomChange(id, newUomToPay)
+    } catch (error) {
+      console.error('Error al procesar la promesa:', error)
+    }
   }
 
+  const array = prices.map((e) => e.nameUoms)
+  const array1 = prices.map((e) => e.id)
+
+  console.log('prices:', prices)
   return (
     <View style={{ alignItems: 'center', width: '100%' }}>
       <View style={ProductsStyles.container}>
@@ -73,14 +79,14 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
             <View style={ProductsStyles.containerDrop}>
               <Dropdown
                 style={[styles.dropdown, isFocus && { borderColor: '#04444f' }]}
-                containerStyle={{ borderRadius: 20, color: '#04444f' }}
+                containerStyle={{ borderRadius: 20 }}
                 placeholderStyle={styles.placeholderStyle}
                 selectedTextStyle={styles.selectedTextStyle}
-                data={dataPriceDropdown.map((e) => e)}
+                data={array}
                 maxHeight={200}
-                labelField="nameUoms"
-                valueField="amount"
-                placeholder={!isFocus ? 'Unit' : '...'}
+                labelField={array}
+                valueField={array1}
+                placeholder={!isFocus ? uomToPay : '...'}
                 value={uomToPay}
                 onFocus={() => setIsFocus(true)}
                 onBlur={() => setIsFocus(false)}

@@ -49,16 +49,16 @@ function ProductsCategories({
 
   const urlImg = process.env.EXPO_PUBLIC_BASE_IMG
 
-  const updatedCategories = [...categoriesProduct, 'FAVORITES']
+  const updatedCategories = [...categoriesProduct, 'Favorites']
 
   const renderItem = ({ item }) => {
     return (
       <View style={ProductsStyles.contenImage}>
-        {item === 'FAVORITES' && showFavorites ? (
+        {item === 'Favorites' && showFavorites ? (
           <TouchableOpacity onPress={toggleShowFavorites}>
             <Iconify icon="icon-park-solid:back" size={70} color="#62c471" />
           </TouchableOpacity>
-        ) : item === 'FAVORITES' ? (
+        ) : item === 'Favorites' ? (
           <TouchableOpacity onPress={toggleShowFavorites}>
             <MaterialIcons name="favorite" size={70} color="#62c471" />
           </TouchableOpacity>
