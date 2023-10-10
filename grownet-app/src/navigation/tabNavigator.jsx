@@ -13,7 +13,7 @@ import Products from '../screens/buyingProcess/products'
 import Restauranst from '../screens/buyingProcess/restaurants'
 import Suppliers from '../screens/buyingProcess/suppliers'
 import Chat from '../screens/chat'
-import Records from '../screens/records'
+import Records from '../screens/Records'
 import Settings from '../screens/settings'
 import useTokenStore from '../store/useTokenStore'
 const Tab = createBottomTabNavigator()
@@ -75,14 +75,14 @@ function OrderStack() {
 
           title: 'Choose your restaurant',
           headerStyle: {
-            backgroundColor: '#f2f2f2',
+            backgroundColor: 'white',
             height: StatusBar.currentHeight + 60,
           },
           headerTintColor: '#04444F',
           headerTitleAlign: 'center',
           headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
-            fontSize: 28,
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
           },
         }}
       />
@@ -100,8 +100,8 @@ function OrderStack() {
           headerTintColor: '#04444F',
           headerTitleAlign: 'center',
           headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
-            fontSize: 28,
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
           },
           headerLeft: () => HeaderLeft(),
         }}
@@ -120,7 +120,7 @@ function OrderStack() {
           headerTintColor: '#04444F',
           headerTitleAlign: 'center',
           headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
+            fontFamily: 'PoppinsSemi',
             fontSize: 24,
           },
           headerLeft: () => HeaderLeft(),
@@ -140,7 +140,7 @@ function OrderStack() {
           headerTintColor: '#04444F',
           headerTitleAlign: 'center',
           headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
+            fontFamily: 'PoppinsSemi',
             fontSize: 24,
           },
           headerLeft: () => HeaderLeft(),
@@ -160,7 +160,7 @@ function OrderStack() {
           headerTintColor: '#04444F',
           headerTitleAlign: 'center',
           headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
+            fontFamily: 'PoppinsSemi',
             fontSize: 24,
           },
           headerLeft: () => HeaderLeft(),
@@ -190,9 +190,17 @@ function MyStack1() {
         name="recordsStack"
         component={Records}
         options={{
-          headerBackTitleVisible: false,
-          headerLeft: () => HeaderLeft(),
-          headerRight: () => headerRight(),
+          title: 'Your orders',
+          headerStyle: {
+            backgroundColor: 'white',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
+          },
         }}
       />
       <Stack.Screen name="ordersDetail" component={OrderDetail} />
@@ -258,9 +266,8 @@ const TabNavigator = () => {
             height: StatusBar.currentHeight + 60,
           },
           headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
-            fontSize: 28,
-            fontWeight: 'bold',
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
             color: '#026CD2',
           },
         }}

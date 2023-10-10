@@ -7,7 +7,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native'
-import { CarouselStyles, GlobalStyles, OtpStyles } from '../styles/styles'
+import { GlobalStyles } from '../styles/styles'
+import { CarouselStyle } from '../styles/loginStyle'
 import { useNavigation } from '@react-navigation/native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 
@@ -25,8 +26,8 @@ const Home = () => {
 
   const renderItem = ({ item }) => {
     return (
-      <View style={CarouselStyles.slide}>
-        <Image source={item.source} style={CarouselStyles.image} />
+      <View style={CarouselStyle.slide}>
+        <Image source={item.source} style={CarouselStyle.image} />
       </View>
     )
   }
@@ -46,7 +47,7 @@ const Home = () => {
         useScrollView={true}
         ref={isCarousel}
       />
-      <View style={CarouselStyles.paginatioCarousel}>
+      <View style={CarouselStyle.paginatioCarousel}>
         <Pagination
           dotsLength={images.length}
           activeDotIndex={index}
@@ -63,12 +64,12 @@ const Home = () => {
           tappableDots={true}
         />
       </View>
-      <View style={CarouselStyles.containerButtton}>
+      <View style={CarouselStyle.containerButtton}>
         <TouchableOpacity
           style={GlobalStyles.btnSecundary}
           onPress={() => navigation.navigate('login')}
         >
-          <Text style={GlobalStyles.textButton}>Register</Text>
+          <Text style={GlobalStyles.textBtnSecundary}>Register</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={GlobalStyles.btnWhite}
