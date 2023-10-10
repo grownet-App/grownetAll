@@ -12,7 +12,7 @@ import { availableRestaurants } from '../../config/urls.config'
 import { RestaurantStyles } from '../../styles/styles'
 import axios from '../../../axiosConfig.'
 import useTokenStore from '../../store/useTokenStore'
-import useOrderStore from '../../store/UseOrderStore'
+import useOrderStore from '../../store/useOrderStore'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 
