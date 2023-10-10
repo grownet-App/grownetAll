@@ -4,7 +4,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { ProductsStyles } from '../../styles/styles'
 import { Dropdown } from 'react-native-element-dropdown'
-import SelectQuantity from './SelectQuantity'
+import SelectQuantity from './selectQuantity'
 import { useFavoritesStore } from '../../store/useFavoriteStore'
 
 const ProductCards = ({ productData, onAmountChange, onUomChange }) => {

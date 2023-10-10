@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import useProductStore from '../../store/useProductStore'
-import ProductCard from '../../components/buyingProcess/ProductCards'
+import ProductCard from '../../components/buyingProcess/productCards'
 
 function ProductsFind({ onAmountChange, onUomChange }) {
   const filteredProducts = useProductStore((state) => state.filteredProducts)
