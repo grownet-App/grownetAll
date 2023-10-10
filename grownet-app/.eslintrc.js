@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parser: '@babel/eslint-parser',
-  extends: ['@react-native-community', 'plugin:prettier/recommended'],
+  extends: ['@react-native-community', 'plugin:prettier/recommended', 'eslint-config-antife'],
   plugins: ['prettier', 'react', 'react-native'],
   ignorePatterns: [
     'node_modules/',
