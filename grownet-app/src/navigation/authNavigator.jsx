@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { navigate } from './rootNavigation'
+import { navigate } from './RootNavigation'
 import useTokenStore from '../store/useTokenStore'
-import Home from '../screens/home'
-import Login from '../screens/Login/loginPage'
-import OTP from '../screens/Login/otpPage'
+import Home from '../screens/Home'
+import Login from '../screens/Login/LoginPage'
+import OTP from '../screens/Login/OtpPage'
 import { useFonts, Poppins_700Bold } from '@expo-google-fonts/poppins'
 import { createStackNavigator } from '@react-navigation/stack'
-import TabNavigator from './tabNavigator'
+import TabNavigator from './TabNavigator'
 
 const Stack = createStackNavigator()
 

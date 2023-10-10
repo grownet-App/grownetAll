@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { useFavoritesStore } from '../../store/useFavoriteStore'
-import useOrderStore from '../../store/UseOrderStore'
-import ProductCard from '../../components/buyingProcess/productCards'
+import useOrderStore from '../../store/useOrderStore'
+import ProductCard from './ProductCards'
 
 export default function Favorites({ onAmountChange, onUomChange }) {
   const { favorites } = useFavoritesStore()
