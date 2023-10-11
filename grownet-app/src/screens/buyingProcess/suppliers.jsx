@@ -60,7 +60,7 @@ const Suppliers = () => {
   }
 
   const onPressAdd = () => {
-    //TODO,add suppliers
+    // TODO,add suppliers
   }
 
   return (

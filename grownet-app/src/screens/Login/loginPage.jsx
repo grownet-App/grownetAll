@@ -36,9 +36,9 @@ const LoginPage = () => {
   }, [])
 
   const handleChange = async () => {
-    let countrySplit = phoneDos.split(phoneNumber)
-    let countryCod = countrySplit[0]
-    let countryP = countryCod.split('+')[1]
+    const countrySplit = phoneDos.split(phoneNumber)
+    const countryCod = countrySplit[0]
+    const countryP = countryCod.split('+')[1]
     setCountryCode(countryP)
 
     const state = {
@@ -57,7 +57,7 @@ const LoginPage = () => {
       console.log('====================================')
       if (response.data.flag === 1) {
         navigation.navigate('otp', state.form)
-        //TODO QUITAR ESTE CONSOLE LOG CUANDO YA LLEGUEN LOS MENSAJES POR TWILIO
+        // TODO QUITAR ESTE CONSOLE LOG CUANDO YA LLEGUEN LOS MENSAJES POR TWILIO
         console.log('Respuesta con CODIGO TWILIO:', response.data)
       } else {
         console.log('====================================')

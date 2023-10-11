@@ -6,7 +6,7 @@ import { Dropdown } from 'react-native-element-dropdown'
 import { ProductsStyles } from '../../styles/styles'
 import { AntDesign } from '@expo/vector-icons'
 
-//dropdown
+// dropdown
 const dataDropdown = [
   { label: 'Unit', value: '1' },
   { label: 'Box', value: '2' },

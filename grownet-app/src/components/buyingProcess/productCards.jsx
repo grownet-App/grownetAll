@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -29,17 +28,15 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
   }
 
   function handleUomToPayChange(event) {
+    console.log('newUomToPay:', event)
     try {
-      const newUomToPay = event
-      onUomChange(id, newUomToPay)
+      const { nameUoms } = event
+      onUomChange(id, nameUoms)
+      console.log('newUomToPay:', nameUoms)
     } catch (error) {
       console.error('Error al procesar la promesa:', error)
     }
   }
-
-  const array = prices.map((e) => e.nameUoms)
-  const array1 = prices.map((e) => e.id)
-
   console.log('prices:', prices)
   return (
     <View style={{ alignItems: 'center', width: '100%' }}>
@@ -82,10 +79,10 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
                 containerStyle={{ borderRadius: 20 }}
                 placeholderStyle={styles.placeholderStyle}
                 selectedTextStyle={styles.selectedTextStyle}
-                data={array}
+                data={prices}
                 maxHeight={200}
-                labelField={array}
-                valueField={array1}
+                labelField="nameUoms"
+                valueField="nameUoms"
                 placeholder={!isFocus ? uomToPay : '...'}
                 value={uomToPay}
                 onFocus={() => setIsFocus(true)}

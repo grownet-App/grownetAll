@@ -3,7 +3,7 @@ import { create } from 'zustand'
 const useOrderStore = create((set) => ({
   restaurants: [],
   selectedRestaurant: null,
-  //TODO AGREGAR SUPPLIERS DE LA BD CUANDO SE INTEGRE A RESTAURANTS
+  // TODO AGREGAR SUPPLIERS DE LA BD CUANDO SE INTEGRE A RESTAURANTS
   suppliers: [],
   selectedSupplier: null,
   articlesToPay: [],
