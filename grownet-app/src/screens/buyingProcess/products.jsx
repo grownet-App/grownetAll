@@ -34,7 +34,7 @@ export default function Products() {
           country: countryCode,
           accountNumber: selectedRestaurant.accountNumber,
         }
-        console.log('id de supplier:', selectedSupplier.id)
+
         try {
           const response = await axios.post(
             `${supplierProducts}`,
