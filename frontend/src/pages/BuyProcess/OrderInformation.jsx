@@ -457,7 +457,7 @@ export default function OrderInformation() {
   return (
     <section className="details">
       <div className="tittle-page">
-        <Link to="/details">
+        <Link to="/suppliers/details">
           <Icon src="google.com" icon="ic:round-arrow-back" id="arrow-icon" />
         </Link>
         <h1>{t("deliveryDetail.orderDetail")}</h1>
