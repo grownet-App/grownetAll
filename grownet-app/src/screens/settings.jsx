@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Button, Card, Text } from 'react-native-paper'
 import { Ionicons, AntDesign } from '@expo/vector-icons'
 import useTokenStore from '../store/useTokenStore'
-import { SettingsStyle } from '../styles/settingsStyle'
+import { SettingsStyle } from '../styles/SettingsStyle'
 
 const Settings = () => {
   const navigation = useNavigation()

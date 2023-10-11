@@ -1,15 +1,17 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import useProductStore from '../../store/useProductStore'
-import ProductCard from '../../components/buyingProcess/productCards'
+import ProductCard from './ProductCards'
 
 function ProductsFind({ onAmountChange, onUomChange }) {
   const filteredProducts = useProductStore((state) => state.filteredProducts)
 
   return (
-    <View style={styles.container}>
-      <Text>{filteredProducts.length}</Text>
-      <View style={styles.favoriteItems}>
+    <View>
+      <Text style={styles.StyleText}>
+        You have {filteredProducts.length} fount products:
+      </Text>
+      <View>
         {filteredProducts.map((product) => (
           <ProductCard
             key={product.id}
@@ -25,12 +27,10 @@ function ProductsFind({ onAmountChange, onUomChange }) {
 
 export default ProductsFind
 
-const styles = {
-  container: {
-    flex: 1,
-    padding: 10,
+const styles = StyleSheet.create({
+  StyleText: {
+    textAlign: 'center',
+    color: '#04444f',
+    fontSize: 15,
   },
-  favoriteItems: {
-    // Estilos para el contenedor de productos
-  },
-}
+})

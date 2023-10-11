@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
 import axios from '../../../axiosConfig.'
-import CategoriesMenu from '../../components/buyingProcess/productCategories'
-import Favorites from '../../components/buyingProcess/favorites'
-import ProductCard from '../../components/buyingProcess/productCards'
-import ProductSearcher from '../../components/buyingProcess/productSearch'
+import CategoriesMenu from '../../components/buyingProcess/ProductCategories'
+import Favorites from '../../components/buyingProcess/Favorites'
+import ProductCard from '../../components/buyingProcess/ProductCards'
+import ProductSearcher from '../../components/buyingProcess/ProductSearch'
 import ProductsFind from '../../components/buyingProcess/ProductsFind'
-import useOrderStore from '../../store/UseOrderStore'
+import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
 import { supplierProducts } from '../../config/urls.config'
-import { ProductsStyles } from '../../styles/styles'
+import { ProductsStyles } from '../../styles/Styles'
 
 export default function Products() {
   const [blurIntensity, setBlurIntensity] = useState(30)
@@ -146,42 +146,44 @@ export default function Products() {
         setShowSearchResults={setShowSearchResults}
         resetInput={resetInput}
       />
-      {showSearchResults ? (
-        <ProductsFind
-          onAmountChange={handleAmountChange}
-          onUomChange={handleUomChange}
-        />
-      ) : (
-        <>
-          {showFavorites ? (
-            <Favorites
+      <SafeAreaView style={ProductsStyles.containerCards}>
+        <ScrollView onScroll={handleScroll}>
+          {showSearchResults ? (
+            <ProductsFind
               onAmountChange={handleAmountChange}
               onUomChange={handleUomChange}
             />
           ) : (
-            <SafeAreaView style={ProductsStyles.containerCards}>
-              <ScrollView onScroll={handleScroll}>
-                {articles
-                  .filter((article) => {
-                    if (selectedCategory === 'All') {
-                      return true
-                    }
-                    return article.nameCategorie === selectedCategory
-                  })
-                  .map((article) => (
-                    <ProductCard
-                      key={article.id}
-                      productData={article}
-                      onAmountChange={handleAmountChange}
-                      onUomChange={handleUomChange}
-                    />
-                  ))}
-                <View style={{ height: 220 }} />
-              </ScrollView>
-            </SafeAreaView>
+            <>
+              {showFavorites ? (
+                <Favorites
+                  onAmountChange={handleAmountChange}
+                  onUomChange={handleUomChange}
+                />
+              ) : (
+                <>
+                  {articles
+                    .filter((article) => {
+                      if (selectedCategory === 'All') {
+                        return true
+                      }
+                      return article.nameCategorie === selectedCategory
+                    })
+                    .map((article) => (
+                      <ProductCard
+                        key={article.id}
+                        productData={article}
+                        onAmountChange={handleAmountChange}
+                        onUomChange={handleUomChange}
+                      />
+                    ))}
+                </>
+              )}
+            </>
           )}
-        </>
-      )}
+          <View style={{ height: 220 }} />
+        </ScrollView>
+      </SafeAreaView>
       <View style={styles.viewCategories} />
       <CategoriesMenu
         showFavorites={showFavorites}

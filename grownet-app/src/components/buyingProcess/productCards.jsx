@@ -2,11 +2,10 @@
 import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { ProductsStyles } from '../../styles/styles'
+import { ProductsStyles } from '../../styles/Styles'
 import { Dropdown } from 'react-native-element-dropdown'
-import SelectQuantity from './selectQuantity'
+import SelectQuantity from './SelectQuantity'
 import { useFavoritesStore } from '../../store/useFavoriteStore'
-import Constants from 'expo-constants'
 
 const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
   const { id, name, image, prices, tax, uomToPay } = productData
@@ -16,15 +15,15 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
   const isFavorite = favorites.includes(id, name, image)
   const counter = 0
 
-  const urlImg = Constants.expoConfig.extra.urlImage
+  const urlImg = process.env.EXPO_PUBLIC_BASE_IMG
   const selectedUom = prices.find((price) => price.nameUoms === uomToPay)
 
   const handleToggleFavorite = () => {
     if (isFavorite) {
-      console.log('remove the ', id)
+      console.log('remove', id)
       removeFavorite(id)
     } else {
-      console.log('add the ', id)
+      console.log('add  ', id)
       addFavorite(id)
     }
   }
@@ -58,7 +57,7 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
 
             <TouchableOpacity onPress={handleToggleFavorite}>
               <Icon
-                name="heart-o"
+                name={isFavorite ? 'heart' : 'heart-o'}
                 size={24}
                 color="#62C471"
                 style={{ marginTop: 5 }}

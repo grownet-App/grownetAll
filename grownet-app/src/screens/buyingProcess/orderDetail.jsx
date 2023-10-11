@@ -2,9 +2,9 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import useOrderStore from '../../store/UseOrderStore'
-import { OrdersDetailStyles } from '../../styles/styles'
-import ProductDetail from '../../components/buyingProcess/productDetail'
+import useOrderStore from '../../store/useOrderStore'
+import { OrdersDetailStyles } from '../../styles/Styles'
+import ProductDetail from '../../components/buyingProcess/ProductDetail'
 
 export default function OrderDetails() {
   const navigation = useNavigation()

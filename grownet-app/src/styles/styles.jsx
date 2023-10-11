@@ -43,18 +43,17 @@ export const GlobalStyles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 16,
     textAlign: 'center',
-    fontFamily: 'PoppinsRegular',
+    fontFamily: 'PoppinsSemi',
   },
   cardSuppliers: {
     backgroundColor: '#1D446A',
     fontWeight: '500',
   },
   container: {
-    flex: 2,
+    flex: 1,
     backgroundColor: '#026CD2',
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
   },
   linkWhite: {
     color: 'white',

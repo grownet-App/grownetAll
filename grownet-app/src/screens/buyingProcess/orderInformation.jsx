@@ -1,7 +1,7 @@
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { OrderInformationStyles } from '../../styles/styles'
+import { OrderInformationStyles } from '../../styles/Styles'
 
 const OrderInformation = () => {
   const [inputAddress, setInputAddress] = useState('')
