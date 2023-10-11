@@ -9,7 +9,7 @@ const SelectQuantity = ({
   counter,
 }) => {
   const [amount, setAmount] = useState(productData.amount)
-  console.log('amount', amount)
+
   const { id } = productData
 
   useEffect(() => {
