@@ -47,7 +47,8 @@ const Home = () => {
         useScrollView={true}
         ref={isCarousel}
       />
-      <View style={CarouselStyle.paginatioCarousel}>
+
+      <View>
         <Pagination
           dotsLength={images.length}
           activeDotIndex={index}

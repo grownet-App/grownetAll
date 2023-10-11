@@ -36,4 +36,18 @@ export const RecordStyle = StyleSheet.create({
   textCard: {
     alignItems: 'center',
   },
+  /*Tab*/
+  tabContainer: {
+    flexDirection: 'row',
+    margin: 15,
+    borderRadius: 25,
+    marginTop: 0,
+    backgroundColor: 'white',
+    borderRadius: 15,
+  },
+  btnTab: {
+    padding: 15,
+    alignItems: 'center',
+    borderRadius: 15,
+  },
 })

@@ -13,9 +13,11 @@ import Products from '../screens/buyingProcess/Products'
 import Restauranst from '../screens/buyingProcess/Restaurants'
 import Suppliers from '../screens/buyingProcess/Suppliers'
 import Chat from '../screens/Chat'
-import Records from '../screens/Records'
+import Records from '../screens/Record/Records'
+import PastRecord from '../screens/Record/PastRecord'
 import Settings from '../screens/Settings'
 import useTokenStore from '../store/useTokenStore'
+import PedingRecord from '../screens/Record/PedingRecord'
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 
@@ -203,6 +205,41 @@ function MyStack1() {
           },
         }}
       />
+      <Stack.Screen
+        name="pedingRecord"
+        component={PedingRecord}
+        options={{
+          title: 'Order details',
+          headerStyle: {
+            backgroundColor: 'white',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="pastRecord"
+        component={PastRecord}
+        options={{
+          title: 'Order details',
+          headerStyle: {
+            backgroundColor: 'white',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
+          },
+        }}
+      />
+
       <Stack.Screen name="ordersDetail" component={OrderDetail} />
     </Stack.Navigator>
   )

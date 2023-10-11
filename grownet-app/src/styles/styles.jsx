@@ -68,6 +68,12 @@ export const GlobalStyles = StyleSheet.create({
     marginBottom: 25,
     fontFamily: 'PoppinsRegular',
   },
+  cardInvoces: {
+    backgroundColor: '#E9F4FF',
+    padding: 25,
+    borderRadius: 20,
+    width: 330,
+  },
 })
 
 export const ProductsStyles = StyleSheet.create({

@@ -9,6 +9,7 @@ import {
   Poppins_700Bold,
   Poppins_400Regular,
   Poppins_600SemiBold,
+  Poppins_500Medium,
 } from '@expo-google-fonts/poppins'
 import { createStackNavigator } from '@react-navigation/stack'
 import TabNavigator from './TabNavigator'
@@ -19,6 +20,7 @@ function AuthNavigator() {
   const [fontsLoaded] = useFonts({
     PoppinsBold: Poppins_700Bold,
     PoppinsRegular: Poppins_400Regular,
+    PoppinsMedium: Poppins_500Medium,
     PoppinsSemi: Poppins_600SemiBold,
   })
 
