@@ -4,8 +4,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import SelectQuantity from './SelectQuantity'
 import { Dropdown } from 'react-native-element-dropdown'
 import { ProductsStyles } from '../../styles/styles'
-import { AntDesign } from '@expo/vector-icons'
 import useOrderStore from '../../store/useOrderStore'
+import DeleteProduct from './DeleteProduct'
 
 export default function ProductDetail({
   updateTotalToPay,
@@ -160,18 +160,15 @@ export default function ProductDetail({
                     <Text style={ProductsStyles.textOrder}>
                       £ {calculateItemToPay(article, article.amount)}
                     </Text>
-                    {/* <DeleteProduct
-                  articles={articles}
-                  setArticles={setArticles}
-                  article={article}
-                  articlesToPay={articlesToPay}
-                  setArticlesToPay={setArticlesToPay}
-                  calculateTotalToPay={calculateTotalToPay}
-                  updateTotalToPay={updateTotalToPay}
-                /> */}
-                    <TouchableOpacity>
-                      <AntDesign name="delete" size={24} color="red" />
-                    </TouchableOpacity>
+                    <DeleteProduct
+                      articles={articles}
+                      setArticles={setArticles}
+                      article={article}
+                      articlesToPay={articlesToPay}
+                      setArticlesToPay={setArticlesToPay}
+                      calculateTotalToPay={calculateTotalToPay}
+                      updateTotalToPay={updateTotalToPay}
+                    />
                   </View>
 
                   <Dropdown
