@@ -16,9 +16,7 @@ import useTokenStore from '../../store/useTokenStore'
 import { allCategories } from '../../config/urls.config'
 import axios from '../../../axiosConfig.'
 import { useNavigation } from '@react-navigation/native'
-
 const { width } = Dimensions.get('window')
-
 function ProductsCategories({
   blurIntensity,
   showFavorites,
@@ -30,7 +28,6 @@ function ProductsCategories({
   const isCarousel = useRef(null)
   const [categories, setCategories] = useState()
   const { token } = useTokenStore()
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -44,30 +41,26 @@ function ProductsCategories({
         console.error('Error al obtener los datos de la API:', error)
       }
     }
-
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
   const urlImg = process.env.EXPO_PUBLIC_BASE_IMG
-
   const updatedCategories = [...categoriesProduct, 'Favorites']
-
   const renderItem = ({ item }) => {
     return (
       <View style={ProductsStyles.contenImage}>
         {item === 'Favorites' && showFavorites ? (
           <TouchableOpacity onPress={toggleShowFavorites}>
-            <Iconify icon="icon-park-solid:back" size={70} color="#62c471" />
+            <Iconify icon="icon-park-solid:back" size={70} color="#62C471" />
           </TouchableOpacity>
         ) : item === 'Favorites' ? (
           <TouchableOpacity onPress={toggleShowFavorites}>
-            <MaterialIcons name="favorite" size={70} color="#62c471" />
+            <MaterialIcons name="favorite" size={70} color="#62C471" />
           </TouchableOpacity>
         ) : null}
         <TouchableOpacity key={item} onPress={() => filterCategory(item)}>
           {item === 'All' && (
-            <Iconify icon="fluent-emoji:basket" size={70} color="#62c471" />
+            <Iconify icon="fluent-emoji:basket" size={70} color="#62C471" />
           )}
           {categories?.map((categoryApi) => (
             <View key={categoryApi.id}>
@@ -106,7 +99,6 @@ function ProductsCategories({
           enableSnap={true}
           inactiveSlideOpacity={1}
         />
-
         <View style={ProductsStyles.containerButton}>
           <TouchableOpacity
             style={ProductsStyles.bgContinue}

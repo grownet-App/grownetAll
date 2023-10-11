@@ -11,7 +11,7 @@ const useOrderStore = create((set) => ({
   totalTaxes: 0,
   totalToPay: 0,
   uomToPay: null,
-  deliveryData: null,
+  deliveryData: new Date(),
   specialRequirements: null,
   setRestaurants: (restaurants) => set({ restaurants: restaurants }),
   setSelectedRestaurant: (restaurant) =>
