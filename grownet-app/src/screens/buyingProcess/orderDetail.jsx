@@ -35,9 +35,9 @@ export default function OrderDetails() {
     >
       <View style={OrdersDetailStyles.containerDetails}>
         <ProductDetail
-        // updateTotalToPay={updateTotalToPay}
-        // updateTotalTaxes={updateTotalTaxes}
-        // updateTotalNet={updateTotalNet}
+          updateTotalToPay={updateTotalToPay}
+          updateTotalTaxes={updateTotalTaxes}
+          updateTotalNet={updateTotalNet}
         />
         <View>
           <Text style={OrdersDetailStyles.taxFont}>Payment details</Text>
