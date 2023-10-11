@@ -58,7 +58,7 @@ function OrderStack() {
     }
   }
   return (
-    //TODO. PONER RUTA DE RESTAURANTES
+    // TODO. PONER RUTA DE RESTAURANTES
     <Stack.Navigator
       initialRouteName="restaurants"
       screenOptions={{

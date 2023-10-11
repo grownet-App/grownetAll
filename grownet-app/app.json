@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "grownet-app",
-    "slug": "grownet-app",
+    "slug": "grownet",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
@@ -28,8 +28,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "754bf798-a12d-4cfe-abe6-381e31de8ed1"
+        "projectId": "e59cca18-5f9e-45d9-a19d-233d060387cf"
       }
-    }
+    },
+    "owner": "grownetapp"
   }
 }

@@ -51,7 +51,7 @@ const Restaurants = () => {
   const urlImg = process.env.EXPO_PUBLIC_BASE_IMG
 
   const onPressAdd = () => {
-    //TODO,agregar restaurante
+    // TODO,agregar restaurante
   }
   const onPressSuppliers = (restaurant) => {
     setSelectedRestaurant(restaurant)

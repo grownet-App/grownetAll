@@ -28,7 +28,7 @@ const Otp = () => {
   const { setToken } = useTokenStore()
 
   const enviarOTP = async () => {
-    let otp = pin1 + pin2 + pin3 + pin4
+    const otp = pin1 + pin2 + pin3 + pin4
 
     const formData = route.params
 

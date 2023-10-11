@@ -86,7 +86,7 @@ export const CarouselStyles = StyleSheet.create({
 })
 
 export const OtpStyles = StyleSheet.create({
-  //OTP styles
+  // OTP styles
   tinyLogoOtp: {
     width: 250,
     height: 254,
@@ -254,9 +254,9 @@ export const RestaurantStyles = StyleSheet.create({
 })
 
 export const ProductsStyles = StyleSheet.create({
-  //MAKE YOUR ORDER
+  // MAKE YOUR ORDER
 
-  //SEARCH BAR
+  // SEARCH BAR
   containerSearch: {
     flexDirection: 'row',
     marginHorizontal: 30,
@@ -275,7 +275,7 @@ export const ProductsStyles = StyleSheet.create({
     right: 30,
     top: 15,
   },
-  //PRODUCT CARD
+  // PRODUCT CARD
   container: {
     backgroundColor: 'white',
     marginVertical: 10,
@@ -364,7 +364,7 @@ export const ProductsStyles = StyleSheet.create({
   },
 
   containerCards: { flex: 1, marginTop: 10 },
-  //PRODUCT CATEGORIES
+  // PRODUCT CATEGORIES
   fixedContainer: {
     overflow: 'hidden',
     position: 'absolute',
@@ -400,7 +400,7 @@ export const ProductsStyles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  //PRODUCT DETAIL
+  // PRODUCT DETAIL
 
   containerDetail: {
     flexDirection: 'row',

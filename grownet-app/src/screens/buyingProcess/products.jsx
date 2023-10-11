@@ -9,7 +9,7 @@ import ProductsFind from '../../components/buyingProcess/ProductsFind'
 import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
 import { supplierProducts } from '../../config/urls.config'
-import { ProductsStyles } from '../../styles/styles' 
+import { ProductsStyles } from '../../styles/styles'
 
 export default function Products() {
   const [blurIntensity, setBlurIntensity] = useState(30)

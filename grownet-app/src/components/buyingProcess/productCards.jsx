@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -8,7 +7,7 @@ import SelectQuantity from './SelectQuantity'
 import { useFavoritesStore } from '../../store/useFavoriteStore'
 
 const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
-  const { id, name, image, prices, tax, uomToPay } = productData
+  const { id, name, image, prices, uomToPay } = productData
 
   const [isFocus, setIsFocus] = useState(false)
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore()
@@ -28,13 +27,17 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
     }
   }
 
-  const dataPriceDropdown = prices.map((price) => price.nameUoms)
-
-  const handleUomToPayChange = (event) => {
-    const newUomToPay = event.target.value
-    onUomChange(id, newUomToPay)
+  function handleUomToPayChange(event) {
+    console.log('newUomToPay:', event)
+    try {
+      const { nameUoms } = event
+      onUomChange(id, nameUoms)
+      console.log('newUomToPay:', nameUoms)
+    } catch (error) {
+      console.error('Error al procesar la promesa:', error)
+    }
   }
-
+  console.log('prices:', prices)
   return (
     <View style={{ alignItems: 'center', width: '100%' }}>
       <View style={ProductsStyles.container}>
@@ -73,14 +76,14 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
             <View style={ProductsStyles.containerDrop}>
               <Dropdown
                 style={[styles.dropdown, isFocus && { borderColor: '#04444f' }]}
-                containerStyle={{ borderRadius: 20, color: '#04444f' }}
+                containerStyle={{ borderRadius: 20 }}
                 placeholderStyle={styles.placeholderStyle}
                 selectedTextStyle={styles.selectedTextStyle}
-                data={dataPriceDropdown.map((e) => e)}
+                data={prices}
                 maxHeight={200}
                 labelField="nameUoms"
-                valueField="amount"
-                placeholder={!isFocus ? 'Unit' : '...'}
+                valueField="nameUoms"
+                placeholder={!isFocus ? uomToPay : '...'}
                 value={uomToPay}
                 onFocus={() => setIsFocus(true)}
                 onBlur={() => setIsFocus(false)}
