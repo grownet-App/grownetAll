@@ -32,12 +32,11 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
     try {
       const { nameUoms } = event
       onUomChange(id, nameUoms)
-      console.log('newUomToPay:', nameUoms)
     } catch (error) {
       console.error('Error al procesar la promesa:', error)
     }
   }
-  console.log('prices:', prices)
+
   return (
     <View style={{ alignItems: 'center', width: '100%' }}>
       <View style={ProductsStyles.container}>

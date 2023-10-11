@@ -15,6 +15,7 @@ import { BlurView } from 'expo-blur'
 import useTokenStore from '../../store/useTokenStore'
 import { allCategories } from '../../config/urls.config'
 import axios from '../../../axiosConfig.'
+import { useNavigation } from '@react-navigation/native'
 
 const { width } = Dimensions.get('window')
 
@@ -25,6 +26,7 @@ function ProductsCategories({
   categoriesProduct,
   filterCategory,
 }) {
+  const navigation = useNavigation()
   const isCarousel = useRef(null)
   const [categories, setCategories] = useState()
   const { token } = useTokenStore()
@@ -84,7 +86,9 @@ function ProductsCategories({
       </View>
     )
   }
-
+  const handlePress = () => {
+    navigation.navigate('ordersDetail')
+  }
   return (
     <SafeAreaView style={ProductsStyles.fixedContainer}>
       <BlurView intensity={blurIntensity}>
@@ -104,7 +108,10 @@ function ProductsCategories({
         />
 
         <View style={ProductsStyles.containerButton}>
-          <TouchableOpacity style={ProductsStyles.bgContinue}>
+          <TouchableOpacity
+            style={ProductsStyles.bgContinue}
+            onPress={handlePress}
+          >
             <Text style={ProductsStyles.ContinueText}>Continue</Text>
           </TouchableOpacity>
         </View>
