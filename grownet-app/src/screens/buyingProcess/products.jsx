@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
 import axios from '../../../axiosConfig.'
-import CategoriesMenu from '../../components/buyingProcess/ProductCategories'
+import ProductCategories from '../../components/buyingProcess/ProductCategories'
 import Favorites from '../../components/buyingProcess/Favorites'
 import ProductCard from '../../components/buyingProcess/ProductCards'
 import ProductSearcher from '../../components/buyingProcess/ProductSearch'
@@ -185,7 +185,7 @@ export default function Products() {
         </ScrollView>
       </SafeAreaView>
       <View style={styles.viewCategories} />
-      <CategoriesMenu
+      <ProductCategories
         showFavorites={showFavorites}
         toggleShowFavorites={toggleShowFavorites}
         categoriesProduct={productsCategory}

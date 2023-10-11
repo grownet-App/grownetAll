@@ -1,20 +1,76 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
-import DateTimePicker from '@react-native-community/datetimepicker'
+import { View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import DatePickerAndroid from '@react-native-community/datetimepicker'
 import { OrderInformationStyles } from '../../styles/styles'
+import axios from '../../../axiosConfig.'
+import useOrderStore from '../../store/useOrderStore'
 
 const OrderInformation = () => {
-  const [inputAddress, setInputAddress] = useState('')
-  const [requirements, setInputRequirements] = useState('')
-  const [showDatePicker, setShowDatePicker] = useState(false) // Nuevo estado para mostrar/ocultar el DatePicker
-  const [selectedDate, setSelectedDate] = useState(new Date())
+  const {
+    selectedRestaurant,
+    articlesToPay,
+    deliveryData,
+    setDeliveryData,
+    specialRequirements,
+    selectedSupplier,
+    setSpecialRequirements,
+    totalNet,
+    totalTaxes,
+    totalToPay,
+    orderNumber,
+    setOrderNumber,
+  } = useOrderStore();
 
-  const onChangeDate = () => {
-    if (selectedDate !== undefined) {
-      setSelectedDate(selectedDate)
+  const [data, setData] = useState([]);
+  const [dateToPicker, setDateToPicker] = useState(new Date())
+
+  //TODO MOSTRAR OCULTAR CALENDARIO
+  const [showDatePicker, setShowDatePicker] = useState(false)
+
+  // TODO DIRECCIÓN
+  const [inputAddress, setInputAddress] = useState('')
+  // TODO REQUERIMIENTOS
+  const [requirements, setInputRequirements] = useState('')
+
+  // TODO FECHA SIGUIENTE
+  const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+  useEffect(() => {
+    setData(articlesToPay);
+    setDeliveryData(tomorrow); 
+  }, []);
+
+  const handleChangeDate = async (event, newDate) => {
+    if (event.type === 'set') {
+      setDeliveryData(newDate);
+    }
+    setShowDatePicker(false);
+    
+    /* try {
+      const { action, year, month, day } = await DatePickerAndroid.open({
+        date: dateToPicker,
+        minDate: new Date(), // Configura la fecha mínima según tus necesidades
+      });
+
+      if (action === DatePickerAndroid.dateSetAction) {
+        const formattedDate = `${day}/${month + 1}/${year}`;
+        setDateToPicker(new Date(year, month, day));
+        setDeliveryData(formattedDate);
+        console.log("SE FORMATEÓ LA FECHA",formattedDate);
+      }
+    } catch ({ code, message }) {
+      console.warn('Error al seleccionar la fecha', message);
+    } */
+  };
+  console.log("ESTA ES LA NUEVA FECHA", deliveryData.toLocaleDateString());
+
+ /*  const onChangeDate = () => {
+    if (dateToPicker !== undefined) {
+      setDateToPicker(dateToPicker)
       setShowDatePicker(false)
     }
-  }
+  } */
 
   return (
     <View>
@@ -31,16 +87,20 @@ const OrderInformation = () => {
       <Text style={OrderInformationStyles.PrimaryTex}>Deliver</Text>
       <View style={OrderInformationStyles.containerInputs}>
         <TextInput
-          value={selectedDate.toDateString()}
-          onFocus={() => setShowDatePicker(true)}
+          value={deliveryData.toLocaleDateString()}
+          onFocus={() => {
+            Keyboard.dismiss();
+            setShowDatePicker(true);
+          }}
           style={OrderInformationStyles.input}
         />
         {showDatePicker && (
-          <DateTimePicker
-            value={selectedDate}
+          <DatePickerAndroid
+            value={deliveryData}
             mode={'date'}
             display="default"
-            onChange={onChangeDate}
+            onChange={handleChangeDate}
+            minimumDate={tomorrow}
           />
         )}
       </View>
