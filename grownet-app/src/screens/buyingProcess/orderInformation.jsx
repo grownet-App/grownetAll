@@ -1,20 +1,44 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
-import DateTimePicker from '@react-native-community/datetimepicker'
+import { View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import DatePickerAndroid from '@react-native-community/datetimepicker'
 import { OrderInformationStyles } from '../../styles/styles'
+import axios from '../../../axiosConfig.'
+import useOrderStore from '../../store/useOrderStore'
+import { useNavigation } from '@react-navigation/native'
 
 const OrderInformation = () => {
-  const [inputAddress, setInputAddress] = useState('')
-  const [requirements, setInputRequirements] = useState('')
-  const [showDatePicker, setShowDatePicker] = useState(false) // Nuevo estado para mostrar/ocultar el DatePicker
-  const [selectedDate, setSelectedDate] = useState(new Date())
+  const {
+    selectedRestaurant,
+    articlesToPay,
+    deliveryData,
+    setDeliveryData,
+    specialRequirements,
+    selectedSupplier,
+    setSpecialRequirements,
+    totalNet,
+    totalTaxes,
+    totalToPay,
+    orderNumber,
+    setOrderNumber,
+  } = useOrderStore()
+  const [data, setData] = useState([])
+  const [showDatePicker, setShowDatePicker] = useState(false)
+  const navigation = useNavigation()
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
 
-  const onChangeDate = () => {
-    if (selectedDate !== undefined) {
-      setSelectedDate(selectedDate)
-      setShowDatePicker(false)
+  useEffect(() => {
+    setData(articlesToPay)
+    setDeliveryData(tomorrow)
+  }, [])
+
+  const handleChangeDate = async (event, newDate) => {
+    if (event.type === 'set') {
+      setDeliveryData(newDate)
     }
+    setShowDatePicker(false)
   }
+  console.log('ESTA ES LA NUEVA FECHA', deliveryData.toLocaleDateString())
 
   return (
     <View>
@@ -22,25 +46,27 @@ const OrderInformation = () => {
       <View style={OrderInformationStyles.containerInputs}>
         <TextInput
           style={OrderInformationStyles.input}
-          value={inputAddress}
-          onChangeText={(text) => setInputAddress(text)}
-          placeholder="To be confirmed on the day"
-          placeholderTextColor="#a9a9a9"
+          value={selectedRestaurant.address}
+          editable={false}
         />
       </View>
       <Text style={OrderInformationStyles.PrimaryTex}>Deliver</Text>
       <View style={OrderInformationStyles.containerInputs}>
         <TextInput
-          value={selectedDate.toDateString()}
-          onFocus={() => setShowDatePicker(true)}
+          value={deliveryData.toLocaleDateString()}
+          onFocus={() => {
+            Keyboard.dismiss()
+            setShowDatePicker(true)
+          }}
           style={OrderInformationStyles.input}
         />
         {showDatePicker && (
-          <DateTimePicker
-            value={selectedDate}
+          <DatePickerAndroid
+            value={deliveryData}
             mode={'date'}
             display="default"
-            onChange={onChangeDate}
+            onChange={handleChangeDate}
+            minimumDate={tomorrow}
           />
         )}
       </View>
@@ -49,8 +75,8 @@ const OrderInformation = () => {
       </Text>
       <View style={OrderInformationStyles.containerInputs}>
         <TextInput
-          value={requirements}
-          onChangeText={(text) => setInputRequirements(text)}
+          value={specialRequirements}
+          onChangeText={(text) => setSpecialRequirements(text)}
           style={OrderInformationStyles.inputRequirements}
           multiline={true}
           numberOfLines={8}
@@ -58,7 +84,11 @@ const OrderInformation = () => {
         />
       </View>
       <View style={OrderInformationStyles.containerButton}>
-        <TouchableOpacity style={OrderInformationStyles.btnPrimary}>
+        <TouchableOpacity 
+        onPress={()=> {
+          navigation.navigate('orderSuccessful')
+        }}
+        style={OrderInformationStyles.btnPrimary}>
           <Text style={OrderInformationStyles.ContinueText}>Continue</Text>
         </TouchableOpacity>
       </View>

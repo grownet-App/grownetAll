@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
 import axios from '../../../axiosConfig.'
-import CategoriesMenu from '../../components/buyingProcess/productCategories'
-import Favorites from '../../components/buyingProcess/favorites'
-import ProductCard from '../../components/buyingProcess/productCards'
-import ProductSearcher from '../../components/buyingProcess/productSearch'
+import ProductCategories from '../../components/buyingProcess/ProductCategories'
+import Favorites from '../../components/buyingProcess/Favorites'
+import ProductCard from '../../components/buyingProcess/ProductCards'
+import ProductSearcher from '../../components/buyingProcess/ProductSearch'
 import ProductsFind from '../../components/buyingProcess/ProductsFind'
-import useOrderStore from '../../store/UseOrderStore'
+import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
 import { supplierProducts } from '../../config/urls.config'
-import { ProductsStyles } from '../../styles/styles'
+import { ProductsStyles } from '../../styles/styles' 
 
 export default function Products() {
   const [blurIntensity, setBlurIntensity] = useState(30)
@@ -185,7 +185,7 @@ export default function Products() {
         </ScrollView>
       </SafeAreaView>
       <View style={styles.viewCategories} />
-      <CategoriesMenu
+      <ProductCategories
         showFavorites={showFavorites}
         toggleShowFavorites={toggleShowFavorites}
         categoriesProduct={productsCategory}
