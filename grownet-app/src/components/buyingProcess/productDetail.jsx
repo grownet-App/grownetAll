@@ -61,26 +61,6 @@ export default function ProductDetail({
     useOrderStore.setState({ articlesToPay: updatedArticlesToPay })
   }
 
-  const handleTrashClick = (productId) => {
-    setArticles((prevArticles) =>
-      prevArticles.map((article) =>
-        article.id === productId
-          ? { ...article, amount: 0, totalItemToPay: 0 }
-          : article,
-      ),
-    )
-
-    const updatedArticlesToPay = articlesToPay.map((article) =>
-      article.id === productId
-        ? { ...article, amount: 0, totalItemToPay: 0 }
-        : article,
-    )
-    setArticlesToPay(updatedArticlesToPay)
-
-    const newTotalToPay = calculateTotalToPay(updatedArticlesToPay)
-    updateTotalToPay(newTotalToPay)
-  }
-
   // CALCULAR EL NETO
   const calculateItemNet = (prices, amount, uomToPay) => {
     const selectedPrice = prices.find((price) => price.nameUoms === uomToPay)
