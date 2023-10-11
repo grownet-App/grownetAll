@@ -4,6 +4,7 @@ import DatePickerAndroid from '@react-native-community/datetimepicker'
 import { OrderInformationStyles } from '../../styles/styles'
 import axios from '../../../axiosConfig.'
 import useOrderStore from '../../store/useOrderStore'
+import { useNavigation } from '@react-navigation/native'
 
 const OrderInformation = () => {
   const {
@@ -22,6 +23,7 @@ const OrderInformation = () => {
   } = useOrderStore()
   const [data, setData] = useState([])
   const [showDatePicker, setShowDatePicker] = useState(false)
+  const navigation = useNavigation()
   const tomorrow = new Date()
   tomorrow.setDate(tomorrow.getDate() + 1)
 
@@ -82,7 +84,11 @@ const OrderInformation = () => {
         />
       </View>
       <View style={OrderInformationStyles.containerButton}>
-        <TouchableOpacity style={OrderInformationStyles.btnPrimary}>
+        <TouchableOpacity 
+        onPress={()=> {
+          navigation.navigate('orderSuccessful')
+        }}
+        style={OrderInformationStyles.btnPrimary}>
           <Text style={OrderInformationStyles.ContinueText}>Continue</Text>
         </TouchableOpacity>
       </View>
