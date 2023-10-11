@@ -19,58 +19,24 @@ const OrderInformation = () => {
     totalToPay,
     orderNumber,
     setOrderNumber,
-  } = useOrderStore();
-
-  const [data, setData] = useState([]);
-  const [dateToPicker, setDateToPicker] = useState(new Date())
-
-  //TODO MOSTRAR OCULTAR CALENDARIO
+  } = useOrderStore()
+  const [data, setData] = useState([])
   const [showDatePicker, setShowDatePicker] = useState(false)
-
-  // TODO DIRECCIÓN
-  const [inputAddress, setInputAddress] = useState('')
-  // TODO REQUERIMIENTOS
-  const [requirements, setInputRequirements] = useState('')
-
-  // TODO FECHA SIGUIENTE
-  const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
 
   useEffect(() => {
-    setData(articlesToPay);
-    setDeliveryData(tomorrow); 
-  }, []);
+    setData(articlesToPay)
+    setDeliveryData(tomorrow)
+  }, [])
 
   const handleChangeDate = async (event, newDate) => {
     if (event.type === 'set') {
-      setDeliveryData(newDate);
+      setDeliveryData(newDate)
     }
-    setShowDatePicker(false);
-    
-    /* try {
-      const { action, year, month, day } = await DatePickerAndroid.open({
-        date: dateToPicker,
-        minDate: new Date(), // Configura la fecha mínima según tus necesidades
-      });
-
-      if (action === DatePickerAndroid.dateSetAction) {
-        const formattedDate = `${day}/${month + 1}/${year}`;
-        setDateToPicker(new Date(year, month, day));
-        setDeliveryData(formattedDate);
-        console.log("SE FORMATEÓ LA FECHA",formattedDate);
-      }
-    } catch ({ code, message }) {
-      console.warn('Error al seleccionar la fecha', message);
-    } */
-  };
-  console.log("ESTA ES LA NUEVA FECHA", deliveryData.toLocaleDateString());
-
- /*  const onChangeDate = () => {
-    if (dateToPicker !== undefined) {
-      setDateToPicker(dateToPicker)
-      setShowDatePicker(false)
-    }
-  } */
+    setShowDatePicker(false)
+  }
+  console.log('ESTA ES LA NUEVA FECHA', deliveryData.toLocaleDateString())
 
   return (
     <View>
@@ -78,10 +44,8 @@ const OrderInformation = () => {
       <View style={OrderInformationStyles.containerInputs}>
         <TextInput
           style={OrderInformationStyles.input}
-          value={inputAddress}
-          onChangeText={(text) => setInputAddress(text)}
-          placeholder="To be confirmed on the day"
-          placeholderTextColor="#a9a9a9"
+          value={selectedRestaurant.address}
+          editable={false}
         />
       </View>
       <Text style={OrderInformationStyles.PrimaryTex}>Deliver</Text>
@@ -89,8 +53,8 @@ const OrderInformation = () => {
         <TextInput
           value={deliveryData.toLocaleDateString()}
           onFocus={() => {
-            Keyboard.dismiss();
-            setShowDatePicker(true);
+            Keyboard.dismiss()
+            setShowDatePicker(true)
           }}
           style={OrderInformationStyles.input}
         />
@@ -109,8 +73,8 @@ const OrderInformation = () => {
       </Text>
       <View style={OrderInformationStyles.containerInputs}>
         <TextInput
-          value={requirements}
-          onChangeText={(text) => setInputRequirements(text)}
+          value={specialRequirements}
+          onChangeText={(text) => setSpecialRequirements(text)}
           style={OrderInformationStyles.inputRequirements}
           multiline={true}
           numberOfLines={8}
