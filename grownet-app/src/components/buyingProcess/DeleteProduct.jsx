@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Modal, Text, View, Button, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { AntDesign } from '@expo/vector-icons'
-
+import { AntDesign, MaterialIcons } from '@expo/vector-icons'
+import { DeleteModalStyle } from '../../styles/DeleteModalStyle'
+import { GlobalStyles } from '../../styles/Styles'
 export default function DeleteProduct({
   article,
   setArticles,
@@ -42,57 +43,46 @@ export default function DeleteProduct({
   return (
     <>
       <TouchableOpacity>
-        <AntDesign name="delete" size={24} color="red" onPress={handleShow} />
+        <AntDesign
+          name="delete"
+          size={18}
+          color="#ee6055"
+          onPress={handleShow}
+        />
       </TouchableOpacity>
-
-      <Modal visible={show} animationType="slide" transparent={true}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Icon name="alert" size={30} color="#900" />
-
-            <Text style={styles.modalText}>Delete product</Text>
-
-            <Text>Are you sure to delete {article.name}?</Text>
-
-            <TouchableOpacity onPress={() => deleteFunction(article.id)}>
-              <Text>Delete</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleClose}>
-              <Text>Cancel</Text>
-            </TouchableOpacity>
+      <Modal visible={show} animationType="fade" transparent={true}>
+        <View style={DeleteModalStyle.modalBackground}>
+          <View style={DeleteModalStyle.centeredView}>
+            <View style={DeleteModalStyle.modalView}>
+              <MaterialIcons name="error-outline" size={45} color="#ee6055" />
+              <Text style={DeleteModalStyle.modalTittle}>Delete product</Text>
+              <Text style={DeleteModalStyle.modalText}>
+                Are you sure to delete{' '}
+                <Text style={DeleteModalStyle.textProduct}>
+                  {article.name}?
+                </Text>
+              </Text>
+              <View style={DeleteModalStyle.viewButtons}>
+                <TouchableOpacity
+                  style={[
+                    GlobalStyles.btnPrimary,
+                    DeleteModalStyle.spaceButton,
+                  ]}
+                  onPress={() => deleteFunction(article.id)}
+                >
+                  <Text style={GlobalStyles.textBtnSecundary}>Delete</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={handleClose}
+                  style={GlobalStyles.btnOutline}
+                >
+                  <Text style={GlobalStyles.textBtnOutline}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
         </View>
       </Modal>
     </>
   )
-}
-
-const styles = {
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
 }

@@ -1,24 +1,23 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import Suppliers from '../screens/buyingProcess/Suppliers'
-import Settings from '../screens/Settings'
-import Records from '../screens/Record/Records'
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createStackNavigator } from '@react-navigation/stack'
-import Chat from '../screens/Chat'
-import { FontAwesome5, FontAwesome } from '@expo/vector-icons'
-import { Button } from 'react-native-paper'
-import { TouchableOpacity, StatusBar } from 'react-native'
-import useTokenStore from '../store/useTokenStore'
-import Restauranst from '../screens/buyingProcess/Restaurants'
-import Products from '../screens/buyingProcess/Products'
-import OrderDetail from '../screens/buyingProcess/OrderDetail'
-import OrderSuccessful from '../screens/buyingProcess/OrderSuccessful'
-import OrderInformation from '../screens/buyingProcess/OrderInformation'
 import { useNavigation } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import React from 'react'
+import { StatusBar, TouchableOpacity } from 'react-native'
+import { Button } from 'react-native-paper'
+import Chat from '../screens/Chat'
 import PastRecord from '../screens/Record/PastRecord'
 import PedingRecord from '../screens/Record/PedingRecord'
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import Records from '../screens/Record/Records'
+import Settings from '../screens/Settings'
+import OrderDetail from '../screens/buyingProcess/OrderDetail'
+import OrderInformation from '../screens/buyingProcess/OrderInformation'
+import OrderSuccessful from '../screens/buyingProcess/OrderSuccessful'
+import Products from '../screens/buyingProcess/Products'
+import Restauranst from '../screens/buyingProcess/Restaurants'
+import Suppliers from '../screens/buyingProcess/Suppliers'
+import useTokenStore from '../store/useTokenStore'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -86,8 +85,8 @@ function OrderStack() {
           headerTintColor: '#04444F',
           headerTitleAlign: 'center',
           headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
-            fontSize: 28,
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
           },
         }}
       />
@@ -105,8 +104,8 @@ function OrderStack() {
           headerTintColor: '#04444F',
           headerTitleAlign: 'center',
           headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
-            fontSize: 28,
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
           },
           headerLeft: () => HeaderLeft(),
         }}
@@ -125,7 +124,7 @@ function OrderStack() {
           headerTintColor: '#04444F',
           headerTitleAlign: 'center',
           headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
+            fontFamily: 'PoppinsSemi',
             fontSize: 24,
           },
           headerLeft: () => HeaderLeft(),
@@ -145,7 +144,7 @@ function OrderStack() {
           headerTintColor: '#04444F',
           headerTitleAlign: 'center',
           headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
+            fontFamily: 'PoppinsSemi',
             fontSize: 24,
           },
           headerLeft: () => HeaderLeft(),
@@ -165,7 +164,7 @@ function OrderStack() {
           headerTintColor: '#04444F',
           headerTitleAlign: 'center',
           headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
+            fontFamily: 'PoppinsSemi',
             fontSize: 24,
           },
           headerLeft: () => HeaderLeft(),
@@ -289,7 +288,7 @@ const TabNavigator = () => {
     <Tab.Navigator
       initialRouteName="orders"
       screenOptions={{
-        tabBarActiveTintColor: 'green',
+        tabBarActiveTintColor: '#04444F',
       }}
     >
       <Tab.Screen
@@ -305,9 +304,8 @@ const TabNavigator = () => {
             height: StatusBar.currentHeight + 60,
           },
           headerTitleStyle: {
-            fontFamily: 'PoppinsBold',
-            fontSize: 28,
-            fontWeight: 'bold',
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
             color: '#026CD2',
           },
         }}
@@ -333,7 +331,7 @@ const TabNavigator = () => {
         name="chat"
         component={MyStack3}
         options={{
-          tabBarIcon: tabBarIconProps('comments'),
+          tabBarIcon: tabBarIconProps('chat'),
           headerShown: false,
         }}
       />

@@ -45,6 +45,23 @@ export const GlobalStyles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'PoppinsSemi',
   },
+  btnOutline: {
+    backgroundColor: 'white',
+    paddingHorizontal: 35,
+    paddingVertical: 12,
+    borderRadius: 30,
+    margin: 0.5,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#026cd2',
+  },
+  textBtnOutline: {
+    color: '#026cd2',
+    fontWeight: '500',
+    fontSize: 16,
+    textAlign: 'center',
+    fontFamily: 'PoppinsSemi',
+  },
   cardSuppliers: {
     backgroundColor: '#1D446A',
     fontWeight: '500',
