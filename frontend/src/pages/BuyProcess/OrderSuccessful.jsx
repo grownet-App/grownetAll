@@ -8,6 +8,7 @@ import "../../css/orderDetail.css";
 import img_succesful from "../../img/img_succesful.png";
 import useOrderStore from "../../store/useOrderStore";
 import { PdfDocument } from "./OrderInformation";
+import { set } from "date-fns";
 
 export default function OrderSuccessful() {
   const { t } = useTranslation();
@@ -21,6 +22,7 @@ export default function OrderSuccessful() {
     totalTaxes,
     totalToPay,
     specialRequirements,
+    setSpecialRequirements,
     deliveryData,
   } = useOrderStore();
   const currentDate = new Date();
@@ -61,16 +63,6 @@ export default function OrderSuccessful() {
 
   return (
     <section className="order-succesful">
-      {/* TODO ELIMINAR ESTO CUANDO ESTÉ ORGANIZADO EL TOTAL DE PRODUCTS A PAGAR */}
-      {/* <div>{formattedDate}</div>
-      <div> {selectedRestaurant.account_name} </div>
-      {articlesToPay.map((article) => (
-        <div> {article.totalItemToPay} </div> 
-      ))}
-      <div> {totalNet} </div>
-      <div> {totalTaxes} </div>
-      <div> {totalToPay} </div> */}
-
       <img src={img_succesful} alt="Succesfull" />
       <h1>{t("orderSuccessful.title")}</h1>
       <p>{t("orderSuccessful.message")}</p>
