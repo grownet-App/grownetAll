@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { availableRestaurants } from '../../config/urls.config'
-import { RestaurantStyle } from '../../styles/RestaurantsStyle'
+import { RestaurantStyles } from '../../styles/Styles'
 import axios from '../../../axiosConfig.'
 import useTokenStore from '../../store/useTokenStore'
 import useOrderStore from '../../store/useOrderStore'
@@ -61,7 +61,7 @@ const Restaurants = () => {
   return (
     <SafeAreaView>
       {!isLoading && (
-        <ScrollView contentContainerStyle={RestaurantStyle.restaurants}>
+        <ScrollView contentContainerStyle={RestaurantStyles.restaurants}>
           {restaurants.map((restaurant) => {
             const imageUrl = `${urlImg}${restaurant.image}`
 
@@ -71,7 +71,7 @@ const Restaurants = () => {
                 key={restaurant.accountNumber}
               >
                 <ImageBackground
-                  style={RestaurantStyle.RestaurantBg}
+                  style={RestaurantStyles.RestaurantBg}
                   source={require('../../../assets/img/backgroundRestaurants.png')}
                 >
                   <Image
@@ -87,7 +87,7 @@ const Restaurants = () => {
                     }}
                   />
                   <Text
-                    style={RestaurantStyle.TextDirectionRestaurant}
+                    style={RestaurantStyles.TextDirectionRestaurant}
                     numberOfLines={2}
                     ellipsizeMode="tail"
                   >
@@ -99,16 +99,16 @@ const Restaurants = () => {
           })}
           <TouchableOpacity
             onPress={onPressAdd}
-            style={RestaurantStyle.buttonAddCont}
+            style={RestaurantStyles.buttonAddCont}
           >
-            <View style={RestaurantStyle.containButtonAdd}>
+            <View style={RestaurantStyles.containButtonAdd}>
               <Ionicons
                 name="add-circle-outline"
                 size={34}
                 color="#ffff"
                 style={{ padding: 10 }}
               />
-              <Text style={RestaurantStyle.textAddRestaurant}>
+              <Text style={RestaurantStyles.textAddRestaurant}>
                 Add restaurant
               </Text>
             </View>

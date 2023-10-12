@@ -14,7 +14,7 @@
     "@expo-google-fonts/poppins": "^0.2.3",
     "@expo/webpack-config": "^19.0.0",
     "@react-native-async-storage/async-storage": "1.18.2",
-    "@react-native-community/datetimepicker": "7.2.0",
+    "@react-native-community/datetimepicker": "^7.2.0",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/native-stack": "^6.9.13",
@@ -48,6 +48,7 @@
     "@babel/eslint-parser": "^7.22.15",
     "@react-native-community/eslint-config": "^3.2.0",
     "eslint": "^8.49.0",
+    "eslint-config-antife": "^3.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "prettier": "^3.0.3"

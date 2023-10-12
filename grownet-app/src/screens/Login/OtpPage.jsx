@@ -7,8 +7,7 @@ import {
   SafeAreaView,
 } from 'react-native'
 import React, { useRef, useState } from 'react'
-import { GlobalStyles } from '../../styles/Styles'
-import { OtpStyle } from '../../styles/LoginStyle'
+import { OtpStyles } from '../../styles/Styles'
 import { useRoute } from '@react-navigation/native'
 import { otpApiUrl } from '../../config/urls.config'
 import axios from '../../../axiosConfig.'
@@ -47,21 +46,21 @@ const Otp = () => {
   }
 
   return (
-    <SafeAreaView style={OtpStyle.containerOtpPage}>
+    <SafeAreaView style={OtpStyles.containerOtpPage}>
       <Image
-        style={OtpStyle.tinyLogoOtp}
+        style={OtpStyles.tinyLogoOtp}
         source={require('../../../assets/logo.png')}
       />
 
-      <Text style={OtpStyle.textTittle}>Enter your verification code</Text>
-      <Text style={OtpStyle.textP}>
+      <Text style={OtpStyles.textOtp1}>Enter your verification code</Text>
+      <Text style={OtpStyles.textOtp2}>
         An 4 digit code has been sent to your phone
       </Text>
-      <View style={OtpStyle.containerOTP}>
-        <View style={OtpStyle.textInputView}>
+      <View style={OtpStyles.containerOTP}>
+        <View style={OtpStyles.textInputView}>
           <TextInput
             ref={pin1Ref}
-            style={OtpStyle.textInput}
+            style={OtpStyles.textInput}
             keyboardType={'number-pad'}
             maxLength={1}
             onChangeText={(text) => {
@@ -70,10 +69,10 @@ const Otp = () => {
             }}
           />
         </View>
-        <View style={OtpStyle.textInputView}>
+        <View style={OtpStyles.textInputView}>
           <TextInput
             ref={pin2Ref}
-            style={OtpStyle.textInput}
+            style={OtpStyles.textInput}
             keyboardType={'number-pad'}
             maxLength={1}
             onChangeText={(text) => {
@@ -82,10 +81,10 @@ const Otp = () => {
             }}
           />
         </View>
-        <View style={OtpStyle.textInputView}>
+        <View style={OtpStyles.textInputView}>
           <TextInput
             ref={pin3Ref}
-            style={OtpStyle.textInput}
+            style={OtpStyles.textInput}
             keyboardType={'number-pad'}
             maxLength={1}
             onChangeText={(text) => {
@@ -94,10 +93,10 @@ const Otp = () => {
             }}
           />
         </View>
-        <View style={OtpStyle.textInputView}>
+        <View style={OtpStyles.textInputView}>
           <TextInput
             ref={pin4Ref}
-            style={OtpStyle.textInput}
+            style={OtpStyles.textInput}
             keyboardType={'number-pad'}
             maxLength={1}
             onChangeText={(text) => {
@@ -107,13 +106,16 @@ const Otp = () => {
           />
         </View>
       </View>
-      <TouchableOpacity onPress={enviarOTP} style={GlobalStyles.btnSecundary}>
-        <Text style={GlobalStyles.textBtnSecundary}>Verify & Proceed</Text>
+      <TouchableOpacity
+        onPress={enviarOTP}
+        style={OtpStyles.ContainerTextVerify}
+      >
+        <Text style={OtpStyles.TextVerify}>Verify & Proceed</Text>
       </TouchableOpacity>
-      <View style={OtpStyle.ContainerdidntCode}>
-        <Text style={OtpStyle.textP}>Didn't you receive the code?</Text>
+      <View style={OtpStyles.ContainerdidntCode}>
+        <Text style={OtpStyles.didntCode}>Didn't you receive the code?</Text>
         <TouchableOpacity>
-          <Text style={OtpStyle.sendCode}>Send again</Text>
+          <Text style={OtpStyles.sendCode}>Send again</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

@@ -20,6 +20,10 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'no-unused-vars': ['warn', { varsIgnorePattern: '^React$' }],
     'react-native/no-inline-styles': 'off',
+    semi: 'off',
+    'intl-mobile/chain-warning': 'off',
+    'space-before-function-paren': 0,
+    indent: 'off',
   },
 
   overrides: [

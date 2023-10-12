@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import React, { useEffect } from 'react'
 import { ApiSuppliers } from '../../config/urls.config'
-import { SuppliersStyle } from '../../styles/SupplierStyle'
+import { SuppliersStyles } from '../../styles/Styles'
 import axios from '../../../axiosConfig.'
 import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
@@ -66,7 +66,7 @@ const Suppliers = () => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <View style={SuppliersStyle.suppliers}>
+        <View style={SuppliersStyles.suppliers}>
           {suppliers.map((supplier) => {
             const imageUrl = `${urlImg}${supplier.image}`
 
@@ -80,7 +80,7 @@ const Suppliers = () => {
               >
                 <ImageBackground
                   resizeMode="cover"
-                  style={SuppliersStyle.suppliersBg}
+                  style={SuppliersStyles.suppliersBg}
                   key={supplier.id}
                   source={{
                     uri: imageUrl,
@@ -92,17 +92,17 @@ const Suppliers = () => {
           })}
           <TouchableOpacity
             onPress={onPressAdd}
-            style={SuppliersStyle.buttonAddCont}
+            style={SuppliersStyles.buttonAddCont}
           >
-            <View style={SuppliersStyle.containButtonAdd}>
+            <View style={SuppliersStyles.containButtonAdd}>
               <Ionicons
                 name="add-circle-outline"
                 size={34}
                 color="#ffff"
                 style={{ padding: 10 }}
               />
-              <Text style={SuppliersStyle.textAddRestaurant}>
-                Contact us to add suppliers
+              <Text style={SuppliersStyles.textAddRestaurant}>
+                Contact us to add suppliers!
               </Text>
             </View>
           </TouchableOpacity>

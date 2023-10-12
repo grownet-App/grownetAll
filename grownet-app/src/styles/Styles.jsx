@@ -1,34 +1,13 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 export const GlobalStyles = StyleSheet.create({
-  boxShadow: {
-    shadowColor: '#3B3B3B',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 9,
-    elevation: 3,
-  },
-  btnPrimary: {
-    backgroundColor: '#026cd2',
+  btnSecundary: {
+    backgroundColor: '#04444F',
     paddingHorizontal: 35,
     paddingVertical: 12,
     borderRadius: 30,
     margin: 0.5,
     alignItems: 'center',
-  },
-  btnSecundary: {
-    backgroundColor: '#04444F',
-    paddingHorizontal: 35,
-    paddingVertical: 10,
-    borderRadius: 30,
-    margin: 0.5,
-    alignItems: 'center',
-  },
-  textBtnSecundary: {
-    color: 'white',
-    fontSize: 16,
-    textAlign: 'center',
-    fontFamily: 'PoppinsSemi',
   },
   btnWhite: {
     backgroundColor: 'white',
@@ -37,13 +16,6 @@ export const GlobalStyles = StyleSheet.create({
     borderRadius: 30,
     marginVertical: 16,
     alignItems: 'center',
-  },
-  textBtnW: {
-    color: '#04444F',
-    fontWeight: '500',
-    fontSize: 16,
-    textAlign: 'center',
-    fontFamily: 'PoppinsSemi',
   },
   cardSuppliers: {
     backgroundColor: '#1D446A',
@@ -55,24 +27,229 @@ export const GlobalStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   linkWhite: {
     color: 'white',
-    fontWeight: '500',
-    fontSize: 16,
+    fontWeight: '400',
+    fontSize: 18,
     paddingVertical: 50,
-    fontFamily: 'PoppinsRegular',
+  },
+  welcome: {
+    color: 'white',
+    fontSize: 36,
+    fontWeight: 'bold',
+    marginBottom: 12,
   },
   p: {
     color: 'white',
-    fontSize: 16,
-    marginBottom: 25,
-    fontFamily: 'PoppinsRegular',
+    fontSize: 24,
+    marginBottom: 36,
   },
-  cardInvoces: {
-    backgroundColor: '#E9F4FF',
-    padding: 25,
-    borderRadius: 20,
-    width: 330,
+  tinyLogo: {
+    width: 150,
+    height: 150,
+    marginBottom: 30,
+  },
+
+  textBtnW: {
+    color: '#04444F',
+    fontWeight: 'bold',
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  containerButtonLets: {
+    backgroundColor: '#04444F',
+    paddingHorizontal: 35,
+    paddingVertical: 12,
+    borderRadius: 30,
+    marginVertical: 28,
+    alignItems: 'center',
+  },
+  buttonLets: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+})
+export const CarouselStyles = StyleSheet.create({
+  slide: {
+    marginTop: '30%',
+    alignItems: 'center',
+  },
+  image: {
+    width: 250,
+    height: 250,
+  },
+  containerButtton: {
+    marginBottom:
+      Platform.OS === 'android' || Platform.OS === 'ios' ? '20%' : '40%',
+  },
+})
+
+export const OtpStyles = StyleSheet.create({
+  // OTP styles
+  tinyLogoOtp: {
+    width: 250,
+    height: 254,
+  },
+  textOtp1: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginTop: 30,
+  },
+  textOtp2: {
+    color: '#FFFFFF',
+    marginTop: 20,
+  },
+  containerOtpPage: {
+    flex: 1,
+    backgroundColor: '#026CD2',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  containerOTP: {
+    backgroundColor: '#026CD2',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    height: 100,
+    marginBottom: 50,
+  },
+  textInputView: {
+    borderWidth: 1,
+    borderRadius: 8,
+    backgroundColor: '#FFFFFF',
+    borderColor: '#FFFFFF',
+    textAlign: 'center',
+    justifyContent: 'center',
+    width: 55,
+    height: 60,
+    marginHorizontal: 12,
+  },
+  textInput: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  textRegister: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 18,
+    textAlign: 'center',
+  },
+  ContainerTextVerify: {
+    backgroundColor: '#04444F',
+    paddingHorizontal: 70,
+    paddingVertical: 10,
+    borderRadius: 50,
+    marginBottom: 80,
+  },
+  TextVerify: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+  ContainerdidntCode: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  didntCode: {
+    color: '#FFFFFF',
+  },
+  sendCode: {
+    color: '#85FE9D',
+    fontWeight: 'bold',
+
+    marginLeft: 5,
+  },
+})
+
+export const SuppliersStyles = StyleSheet.create({
+  // suppliers styles
+  suppliers: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: 5,
+    marginBottom: 16,
+  },
+
+  suppliersBg: {
+    width: 350,
+    height: 150,
+    marginVertical: 10,
+    borderRadius: 21,
+    marginBottom: 10,
+  },
+  buttonAddCont: {
+    marginTop: 10,
+    backgroundColor: '#026cd2',
+    paddingHorizontal: 10,
+    borderRadius: 50,
+    width: '80%',
+  },
+  containButtonAdd: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  textAddRestaurant: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    color: '#ffff',
+    paddingRight: 10,
+  },
+})
+
+export const RestaurantStyles = StyleSheet.create({
+  // restaurants  styles
+
+  restaurants: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
+  },
+  TextDirectionRestaurant: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    flex: 1,
+  },
+  RestaurantBg: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: 350,
+    height: 150,
+    backgroundColor: '#04444f',
+    marginVertical: 10,
+    marginHorizontal: 5,
+    borderRadius: 21,
+    overflow: 'hidden',
+    padding: 10,
+  },
+  buttonAddCont: {
+    marginTop: 10,
+    backgroundColor: '#026cd2',
+    paddingHorizontal: 10,
+    borderRadius: 50,
+    width: 222,
+    marginBottom: 25,
+  },
+  containButtonAdd: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  textAddRestaurant: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    color: '#ffff',
+    paddingRight: 10,
   },
 })
 
