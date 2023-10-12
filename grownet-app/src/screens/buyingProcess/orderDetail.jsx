@@ -63,7 +63,7 @@ export default function OrderDetails() {
       </View>
       <TouchableOpacity
         style={OrdersDetailStyles.btnPrimary}
-        onPress={() => navigation.navigate('')}
+        onPress={() => navigation.navigate('orderInformation')}
       >
         <Text style={OrdersDetailStyles.ContinueText}>Continue</Text>
       </TouchableOpacity>
