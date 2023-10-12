@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import SelectQuantity from './SelectQuantity'
 import { Dropdown } from 'react-native-element-dropdown'
-import { ProductsStyles } from '../../styles/styles'
+import { ProductsStyles } from '../../styles/Styles'
 import useOrderStore from '../../store/useOrderStore'
 import DeleteProduct from './DeleteProduct'
 

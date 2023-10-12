@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { ProductsStyles } from '../../styles/styles'
+import { ProductsStyles } from '../../styles/Styles'
 import { Dropdown } from 'react-native-element-dropdown'
 import SelectQuantity from './SelectQuantity'
 import { useFavoritesStore } from '../../store/useFavoriteStore'

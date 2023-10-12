@@ -3,7 +3,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import useOrderStore from '../../store/useOrderStore'
-import { OrdersDetailStyles } from '../../styles/styles'
+import { OrdersDetailStyles } from '../../styles/Styles'
 import ProductDetail from '../../components/buyingProcess/ProductDetail'
 
 export default function OrderDetails() {

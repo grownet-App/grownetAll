@@ -1,6 +1,6 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { OrderSuccessfulStyles } from '../../styles/styles'
+import { OrderSuccessfulStyles } from '../../styles/Styles'
 import { useNavigation } from '@react-navigation/native'
 
 const OrderSuccessful = () => {

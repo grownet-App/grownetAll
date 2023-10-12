@@ -7,7 +7,7 @@ import {
   SafeAreaView,
 } from 'react-native'
 import React, { useRef, useState } from 'react'
-import { OtpStyles } from '../../styles/styles'
+import { OtpStyles } from '../../styles/Styles'
 import { useRoute } from '@react-navigation/native'
 import { otpApiUrl } from '../../config/urls.config'
 import axios from '../../../axiosConfig.'

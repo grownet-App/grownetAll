@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, TextInput, TouchableOpacity } from 'react-native'
 import { Feather } from '@expo/vector-icons'
-import { ProductsStyles } from '../../styles/styles'
+import { ProductsStyles } from '../../styles/Styles'
 import useProductStore from '../../store/useProductStore'
 
 function ProductSearcher({ products, setShowSearchResults, resetInput }) {

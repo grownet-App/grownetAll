@@ -1,7 +1,7 @@
 import { View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import DatePickerAndroid from '@react-native-community/datetimepicker'
-import { OrderInformationStyles } from '../../styles/styles'
+import { OrderInformationStyles } from '../../styles/Styles'
 import axios from '../../../axiosConfig.'
 import useOrderStore from '../../store/useOrderStore'
 import { useNavigation } from '@react-navigation/native'
@@ -84,11 +84,12 @@ const OrderInformation = () => {
         />
       </View>
       <View style={OrderInformationStyles.containerButton}>
-        <TouchableOpacity 
-        onPress={()=> {
-          navigation.navigate('orderSuccessful')
-        }}
-        style={OrderInformationStyles.btnPrimary}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('orderSuccessful')
+          }}
+          style={OrderInformationStyles.btnPrimary}
+        >
           <Text style={OrderInformationStyles.ContinueText}>Continue</Text>
         </TouchableOpacity>
       </View>
