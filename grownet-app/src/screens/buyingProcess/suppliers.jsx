@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import React, { useEffect } from 'react'
 import { ApiSuppliers } from '../../config/urls.config'
-import { SuppliersStyles } from '../../styles/styles'
+import { SuppliersStyles } from '../../styles/Styles'
 import axios from '../../../axiosConfig.'
 import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'

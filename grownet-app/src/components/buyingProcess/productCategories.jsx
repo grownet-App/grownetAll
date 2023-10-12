@@ -8,7 +8,7 @@ import {
   Text,
 } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
-import { ProductsStyles } from '../../styles/styles'
+import { ProductsStyles } from '../../styles/Styles'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Iconify } from 'react-native-iconify'
 import { BlurView } from 'expo-blur'
@@ -106,14 +106,15 @@ function ProductsCategories({
         />
 
         <View style={ProductsStyles.containerButton}>
-          <TouchableOpacity 
-          onPress={()=> {
-            //TODO TEMPORALMENTE PARA TRABAJAR EN ORDERINFORMATION
-            navigation.navigate('orderInformation')
-          }}
-          style={ProductsStyles.bgContinue}>
+          <TouchableOpacity
+            onPress={() => {
+              //TODO TEMPORALMENTE PARA TRABAJAR EN ORDERINFORMATION
+              navigation.navigate('orderInformation')
+            }}
+            style={ProductsStyles.bgContinue}
+          >
             <Text style={ProductsStyles.ContinueText}>Continue</Text>
-          </TouchableOpacity> 
+          </TouchableOpacity>
         </View>
       </BlurView>
     </SafeAreaView>

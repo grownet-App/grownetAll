@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import PhoneInput from 'react-native-phone-number-input'
 import { useState } from 'react'
 import axios from '../../../axiosConfig.'
-import { GlobalStyles } from '../../styles/styles'
+import { GlobalStyles } from '../../styles/Styles'
 import { validationApiUrl, onlyCountries } from '../../config/urls.config'
 import useTokenStore from '../../store/useTokenStore'
 

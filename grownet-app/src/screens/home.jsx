@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native'
-import { CarouselStyles, GlobalStyles, OtpStyles } from '../styles/styles'
+import { CarouselStyles, GlobalStyles, OtpStyles } from '../styles/Styles'
 import { useNavigation } from '@react-navigation/native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 

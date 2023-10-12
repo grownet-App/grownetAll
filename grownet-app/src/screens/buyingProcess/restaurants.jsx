@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { availableRestaurants } from '../../config/urls.config'
-import { RestaurantStyles } from '../../styles/styles'
+import { RestaurantStyles } from '../../styles/Styles'
 import axios from '../../../axiosConfig.'
 import useTokenStore from '../../store/useTokenStore'
 import useOrderStore from '../../store/useOrderStore'
