@@ -40,6 +40,63 @@ const OrderInformation = () => {
   }
   console.log('ESTA ES LA NUEVA FECHA', deliveryData.toLocaleDateString())
 
+// OBTENER NUMERO DE ORDEN
+const getOrderNumber = async () => {
+  const filteredJsonProducts = articlesToPay.filter(
+    (article) => article.amount > 0
+  );
+  const jsonProducts = filteredJsonProducts.map((article) => ({
+    quantity: article.amount,
+    id_presentations: article.idUomToPay,
+    price: article.totalItemToPay,
+  }));
+  const jsonOrderData = {
+    id_suppliers: selectedSupplier.id,
+    date_delivery: deliveryData.toLocaleDateString(),
+    address_delivery: selectedRestaurant.address,
+    accountNumber_customers: selectedRestaurant.accountNumber,
+    observation: specialRequirements,
+    total: totalToPay,
+    net: totalNet,
+    total_tax: totalTaxes,
+    products: jsonProducts,
+  };
+
+  console.log("ESTE ES EL JSON:", jsonOrderData);
+  try {
+    const response = await axios.post(createStorageOrder, jsonOrderData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const newOrderNumber = response.data.reference;
+    setOrderNumber(newOrderNumber);
+    console.log(
+      "Respuesta exitosa al crear la orden",
+      response.data.reference
+    );
+    return newOrderNumber;
+  } catch (error) {
+    console.log("Error al crear la orden", error);
+  }
+};
+
+// ENVIAR FORMULARIO
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  try {
+    const newOrderNumber = await getOrderNumber();
+    if (newOrderNumber) {
+      navigation.navigate('orderSuccessful')
+      console.log(newOrderNumber);
+    } else {
+      console.log("No se obtuvo numero de orden");
+    }
+  } catch (error) {
+    console.log("Error enviando el correo", error);
+  }
+};
+
   return (
     <View>
       <Text style={OrderInformationStyles.PrimaryTex}>Address</Text>
@@ -85,9 +142,7 @@ const OrderInformation = () => {
       </View>
       <View style={OrderInformationStyles.containerButton}>
         <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('orderSuccessful')
-          }}
+          onPress={handleSubmit}
           style={OrderInformationStyles.btnPrimary}
         >
           <Text style={OrderInformationStyles.ContinueText}>Continue</Text>
