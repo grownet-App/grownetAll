@@ -1,13 +1,20 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useTokenStore from "../store/useTokenStore";
+import { useEffect } from "react";
 
 export const  AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
   const navigate = useNavigate();
-  const { token } = useTokenStore();
+  const { token, countryCode } = useTokenStore();
   const [user, setUser] = useState(null);
+  useEffect(() => {
+    if (token) {
+      login();
+    }
+  }, [token]);
+
   const login = () => {
     setUser({
       token: token,
@@ -15,7 +22,11 @@ export default function AuthProvider({ children }) {
     navigate("/restaurants");
   };
 
-  const logout = () => setUser(null);
+  const logout = () => {
+    useTokenStore.getState().setToken('');
+    useTokenStore.getState().setCountryCode(null);
+    setUser(null);
+  };
 
   // TODO CUANDO SE TENGAN LOS ROLES, USAR ESTE CODIGO
   const isLogged = () => !!user;

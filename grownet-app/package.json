@@ -38,6 +38,7 @@
     "react-native-screens": "~3.22.0",
     "react-native-snap-carousel": "^4.0.0-beta.6",
     "react-native-svg": "13.9.0",
+    "react-native-tab-view": "^3.5.2",
     "react-native-web": "~0.19.6",
     "zustand": "^4.4.1",
     "zustand-persist": "^0.4.0"
@@ -47,6 +48,7 @@
     "@babel/eslint-parser": "^7.22.15",
     "@react-native-community/eslint-config": "^3.2.0",
     "eslint": "^8.49.0",
+    "eslint-config-antife": "^3.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "prettier": "^3.0.3"
