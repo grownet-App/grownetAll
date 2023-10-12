@@ -8,7 +8,7 @@ import { StatusBar, TouchableOpacity } from 'react-native'
 import { Button } from 'react-native-paper'
 import Chat from '../screens/Chat'
 import PastRecord from '../screens/Record/PastRecord'
-import PedingRecord from '../screens/Record/PedingRecord'
+import PendingRecord from '../screens/Record/PendingRecord'
 import Records from '../screens/Record/Records'
 import Settings from '../screens/Settings'
 import OrderDetail from '../screens/buyingProcess/OrderDetail'
@@ -225,8 +225,8 @@ function MyStack1() {
         }}
       />
       <Stack.Screen
-        name="pedingRecord"
-        component={PedingRecord}
+        name="pendingRecord"
+        component={PendingRecord}
         options={{
           title: 'Order details',
           headerStyle: {

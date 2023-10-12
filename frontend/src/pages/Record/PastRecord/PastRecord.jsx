@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../css/pedingRecord.css";
+import "../../../css/pendingRecord.css";
 import MenuPrimary from "../../../components/Menu/MenuPrimary";
 import { useTranslation } from "react-i18next";
 export default function PastRecord() {

@@ -79,7 +79,7 @@ const enTranslations = {
     title: "Your orders",
     searchPlaceholder: "Search your orders",
     pastOrders: "Past orders",
-    currentOrders: "Peding orders",
+    currentOrders: "Pending orders",
     orderNumber: "#Order:",
     date: "Date",
     amount: "Amount",

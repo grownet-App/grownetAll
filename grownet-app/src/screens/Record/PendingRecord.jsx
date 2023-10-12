@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Button } from 'react-native'
 
-function PedingRecord() {
+function PendingRecord() {
   return (
     <View>
       <Text>Página de PendingRecord</Text>
@@ -9,4 +9,4 @@ function PedingRecord() {
   )
 }
 
-export default PedingRecord
+export default PendingRecord

@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import MenuPrimary from "../../../components/Menu/MenuPrimary";
 import { selectedStorageOrder } from "../../../config/urls.config";
-import "../../../css/pedingRecord.css";
+import "../../../css/pendingRecord.css";
 import useRecordStore from "../../../store/useRecordStore";
 import useTokenStore from "../../../store/useTokenStore";
 
