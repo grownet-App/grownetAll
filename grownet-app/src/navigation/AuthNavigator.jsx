@@ -4,7 +4,13 @@ import useTokenStore from '../store/useTokenStore'
 import Home from '../screens/Home'
 import Login from '../screens/Login/LoginPage'
 import OTP from '../screens/Login/OtpPage'
-import { useFonts, Poppins_700Bold } from '@expo-google-fonts/poppins'
+import {
+  useFonts,
+  Poppins_700Bold,
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+  Poppins_500Medium,
+} from '@expo-google-fonts/poppins'
 import { createStackNavigator } from '@react-navigation/stack'
 import TabNavigator from './TabNavigator'
 
@@ -13,6 +19,9 @@ const Stack = createStackNavigator()
 function AuthNavigator() {
   const [fontsLoaded] = useFonts({
     PoppinsBold: Poppins_700Bold,
+    PoppinsRegular: Poppins_400Regular,
+    PoppinsMedium: Poppins_500Medium,
+    PoppinsSemi: Poppins_600SemiBold,
   })
 
   const { token } = useTokenStore()
@@ -46,7 +55,6 @@ function AuthNavigator() {
       ) : (
         <>
           {/* //TODO, quitar, solo para pruebas de maquetacion */}
-
           {/* //----------------------------// */}
           <Stack.Screen
             name="home"

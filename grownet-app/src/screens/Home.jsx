@@ -7,7 +7,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native'
-import { CarouselStyles, GlobalStyles, OtpStyles } from '../styles/Styles'
+import { GlobalStyles } from '../styles/Styles'
+import { CarouselStyle } from '../styles/LoginStyle'
 import { useNavigation } from '@react-navigation/native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 
@@ -25,8 +26,8 @@ const Home = () => {
 
   const renderItem = ({ item }) => {
     return (
-      <View style={CarouselStyles.slide}>
-        <Image source={item.source} style={CarouselStyles.image} />
+      <View style={CarouselStyle.slide}>
+        <Image source={item.source} style={CarouselStyle.image} />
       </View>
     )
   }
@@ -64,12 +65,12 @@ const Home = () => {
           tappableDots={true}
         />
       </View>
-      <View style={CarouselStyles.containerButtton}>
+      <View style={CarouselStyle.containerButtton}>
         <TouchableOpacity
           style={GlobalStyles.btnSecundary}
           onPress={() => navigation.navigate('login')}
         >
-          <Text style={OtpStyles.textRegister}>Register</Text>
+          <Text style={GlobalStyles.textBtnSecundary}>Register</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={GlobalStyles.btnWhite}

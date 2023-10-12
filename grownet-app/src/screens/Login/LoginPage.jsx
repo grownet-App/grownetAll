@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { Text, View, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import PhoneInput from 'react-native-phone-number-input'
 import { useState } from 'react'
 import axios from '../../../axiosConfig.'
+import { LoginStyle } from '../../styles/LoginStyle'
 import { GlobalStyles } from '../../styles/Styles'
 import { validationApiUrl, onlyCountries } from '../../config/urls.config'
 import useTokenStore from '../../store/useTokenStore'
@@ -70,15 +71,15 @@ const LoginPage = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={LoginStyle.container}>
       <Image
-        style={styles.tinyLogo2}
+        style={LoginStyle.tinyLogo2}
         source={require('../../../assets/logo.png')}
         resizeMode="contain"
       />
 
-      <Text style={styles.p}>Enter your mobile number:</Text>
-      <View style={{ borderRadius: 50, overflow: 'hidden' }}>
+      <Text style={GlobalStyles.p}>Enter your mobile number:</Text>
+      <View style={LoginStyle.inputCountry}>
         {countries.length > 0 ? (
           <PhoneInput
             countryPickerProps={{
@@ -99,57 +100,14 @@ const LoginPage = () => {
         ) : null}
       </View>
       <TouchableOpacity
-        style={GlobalStyles.containerButtonLets}
+        style={GlobalStyles.btnSecundary}
         onPress={handleChange}
       >
-        <Text style={GlobalStyles.buttonLets}>Let’s Begin</Text>
+        <Text style={GlobalStyles.textBtnSecundary}>Let’s Begin</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  btnPrimary: {
-    padding: 16,
-    backgroundColor: 'white',
-    borderRadius: 16,
-    width: '80%',
-
-    alignItems: 'center',
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#026CD2',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 100,
-  },
-  welcome: {
-    color: 'white',
-    fontSize: 36,
-    fontWeight: 'bold',
-    marginBottom: 12,
-  },
-  p: {
-    color: 'white',
-    fontSize: 16,
-    marginBottom: 25,
-  },
-  tinyLogo2: {
-    width: 240,
-    height: 196,
-    marginBottom: 30,
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: 'white',
-    width: '80%',
-    padding: 16,
-    marginBottom: 24,
-    borderRadius: 30,
-    color: 'white',
-  },
-})
 
 export default LoginPage
