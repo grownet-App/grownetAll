@@ -350,6 +350,7 @@ export default function OrderInformation() {
 
   useEffect(() => {
     setData(articlesToPay);
+    setSpecialRequirements("");
   }, []);
 
   // OBTENER NUMERO DE ORDEN
@@ -430,7 +431,6 @@ export default function OrderInformation() {
     };
     emailjs.send(serviceId, templateId, emailParams, userId).then(
       (result) => {
-        setSpecialRequirements("");
         navigate("/orderSuccessful");
         console.log(result);
       },
