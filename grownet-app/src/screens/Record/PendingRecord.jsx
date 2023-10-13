@@ -1,11 +1,179 @@
-import React from 'react'
-import { View, Text, Button } from 'react-native'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Text, TouchableOpacity, View } from 'react-native'
+import { Button, Checkbox } from 'react-native-paper'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { PendingStyle } from '../../styles/PendingRecordStyle'
+import { RecordStyle } from '../../styles/RecordStyle'
+import { GlobalStyles } from '../../styles/Styles'
+import useTokenStore from '../../store/useTokenStore'
+import useRecordStore from '../../store/useRecordStore'
+import { selectedStorageOrder } from '../../config/urls.config'
+import { ScrollView } from 'react-native-gesture-handler'
+import { PastStyle } from '../../styles/PastRecordStyle'
+function PendingRecord({ navigation }) {
+  const [checked, setChecked] = useState(false)
 
-function PendingRecord() {
+  const onToggleCheckbox = () => {
+    setChecked(!checked)
+  }
+  const [input, setInput] = useState('')
+  const handleInputChange = (query) => {
+    setInput(query)
+  }
+  const [activeTab, setActiveTab] = useState('reception')
+
+  const switchTab = () => {
+    setActiveTab((prevTab) =>
+      prevTab === 'productsRecord' ? 'reception' : 'productsRecord',
+    )
+  }
+  //Resumen
+  const { token } = useTokenStore()
+  const { selectedPendingOrder } = useRecordStore()
+  const [detailsToShow, setDetailsToShow] = useState({})
+  useEffect(() => {
+    axios
+      .get(`${selectedStorageOrder}/${selectedPendingOrder}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setDetailsToShow(response.data.order)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
+
+  const handlePendingOrderSelect = (orderReference) => {
+    setSelectedPendingOrder(orderReference)
+    navigation.navigate('pastRecord')
+  }
+
   return (
-    <View>
-      <Text>Página de PendingRecord</Text>
-    </View>
+    <SafeAreaView style={RecordStyle.record}>
+      <ScrollView>
+        <View style={[RecordStyle.tabContainer, GlobalStyles.boxShadow]}>
+          <TouchableOpacity
+            style={[
+              {
+                flex: 1,
+                backgroundColor:
+                  activeTab === 'productsRecord' ? '#62c471' : 'white',
+                padding: 10,
+                alignItems: 'center',
+              },
+              RecordStyle.btnTab,
+            ]}
+            onPress={switchTab}
+          >
+            <Text
+              style={{
+                fontFamily: 'PoppinsRegular',
+                color: activeTab === 'productsRecord' ? 'white' : '#04444f',
+              }}
+            >
+              Products
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[
+              {
+                flex: 1,
+                backgroundColor:
+                  activeTab === 'reception' ? '#62c471' : 'white',
+              },
+              RecordStyle.btnTab,
+            ]}
+            onPress={switchTab}
+          >
+            <Text
+              style={{
+                fontFamily: 'PoppinsRegular',
+                color: activeTab === 'reception' ? 'white' : '#04444f',
+              }}
+            >
+              Reception
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View>
+          {activeTab === 'productsRecord' ? (
+            <View style={PastStyle.past}>
+              {detailsToShow && (
+                <View style={GlobalStyles.cardInvoces}>
+                  <Text style={PastStyle.tittle}>Supplier details</Text>
+                  <View style={PastStyle.products}>
+                    <Text style={PastStyle.subtittle}>
+                      {detailsToShow.nameSuppliers}
+                    </Text>
+                    <Text style={PastStyle.subtittle}>
+                      #{detailsToShow.reference}
+                    </Text>
+                  </View>
+                  <Text style={PastStyle.p}>{detailsToShow.created_date}</Text>
+                  <Text style={PastStyle.tittle}>Product details</Text>
+                  {detailsToShow.products?.map((product) => (
+                    <View>
+                      <View style={PastStyle.products}>
+                        <Text style={PastStyle.subtittle}>{product.name}</Text>
+                        <Text style={PastStyle.subtittle}>
+                          £{product.price}
+                        </Text>
+                      </View>
+                      <Text style={PastStyle.p}>
+                        {product.quantity} {product.uom}
+                      </Text>
+                    </View>
+                  ))}
+                  <Text style={PastStyle.tittle}>Payment details</Text>
+                  <View style={PastStyle.products}>
+                    <Text style={PastStyle.subtittle}>Tax</Text>
+                    <Text style={PastStyle.subtittle}>
+                      £{detailsToShow.total_tax}
+                    </Text>
+                  </View>
+                  <View style={PastStyle.total}>
+                    <View style={PastStyle.products}>
+                      <Text style={PastStyle.textTotal}>Current value</Text>
+                      <Text style={PastStyle.textTotal}>
+                        £{detailsToShow.total}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              )}
+            </View>
+          ) : (
+            <View style={[PendingStyle.receptionCard, GlobalStyles.boxShadow]}>
+              <Text style={PendingStyle.title}>Check your products</Text>
+              <View style={PendingStyle.cardProduct}>
+                <View style={PendingStyle.dispute}>
+                  <Text style={PendingStyle.text}>Broccoli</Text>
+                  <Text style={PendingStyle.p}>50 Unit</Text>
+                </View>
+                <View style={PendingStyle.disputeRight}>
+                  <Checkbox
+                    status={checked ? 'checked' : 'unchecked'}
+                    onPress={onToggleCheckbox}
+                  />
+                  <Button onPress={() => navigation.navigate('disputeRecord')}>
+                    <Text style={PendingStyle.p}>Open dispute</Text>
+                  </Button>
+                </View>
+              </View>
+              <Button style={GlobalStyles.btnPrimary}>
+                <Text style={GlobalStyles.textBtnSecundary}>Confirm order</Text>
+              </Button>
+            </View>
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
