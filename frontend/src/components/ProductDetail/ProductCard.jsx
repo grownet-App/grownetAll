@@ -55,7 +55,7 @@ export default function ProductCard({
               ></Icon>
             </div>
           </div>
-          <p>GBP £{selectedUom.priceWithTax}</p>
+          <p>£{selectedUom.priceWithTax}</p>
           <div className="product-amount">
             <Stepper
               productData={productData}
