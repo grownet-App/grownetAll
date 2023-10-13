@@ -25,7 +25,7 @@ const OrderInformation = () => {
   } = useOrderStore()
   const [data, setData] = useState([])
   const [showDatePicker, setShowDatePicker] = useState(false)
-  const {token} = useTokenStore()
+  const { token } = useTokenStore()
   const navigation = useNavigation()
   const tomorrow = new Date()
   tomorrow.setDate(tomorrow.getDate() + 1)
@@ -41,68 +41,61 @@ const OrderInformation = () => {
     }
     setShowDatePicker(false)
   }
-  console.log('ESTA ES LA NUEVA FECHA', deliveryData.toLocaleDateString())
 
-// OBTENER NUMERO DE ORDEN
-const getOrderNumber = async () => {
-  const filteredJsonProducts = articlesToPay.filter(
-    (article) => article.amount > 0
-  );
-  console.log('ARTICULOS A PAGAR=', filteredJsonProducts)
-  const jsonProducts = filteredJsonProducts.map((article) => ({
-    quantity: article.amount,
-    id_presentations: article.idUomToPay,
-    price: article.totalItemToPay,
-  }));
-  console.log("ESTE ES EL JSON A REVISAR", jsonProducts)
-  const jsonOrderData = {
-    id_suppliers: selectedSupplier.id,
-    date_delivery: deliveryData.toLocaleDateString(),
-    address_delivery: selectedRestaurant.address,
-    accountNumber_customers: selectedRestaurant.accountNumber,
-    observation: specialRequirements,
-    total: totalToPay,
-    net: totalNet,
-    total_tax: totalTaxes,
-    products: jsonProducts,
-  };
-
-  console.log("ESTE ES EL JSON:", jsonOrderData);
-  try {
-    const response = await axios.post(createStorageOrder, jsonOrderData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const newOrderNumber = response.data.reference;
-    setOrderNumber(newOrderNumber);
-    console.log("ESTE ES EL NUMERO DE ORDEN", newOrderNumber)
-    console.log(
-      "Respuesta exitosa al crear la orden",
-      response.data.reference
-    );
-    return newOrderNumber;
-  } catch (error) {
-    console.log("Error al crear la orden", error);
-  }
-};
-
-// ENVIAR FORMULARIO
-const handleSubmit = async (event) => {
-  event.preventDefault();
-  try {
-    const newOrderNumber = await getOrderNumber();
-    if (newOrderNumber) {
-      navigation.navigate('orderSuccessful')
-      console.log('Numero de orden', newOrderNumber);
-    } else {
-      console.log("No se obtuvo numero de orden");
+  // OBTENER NUMERO DE ORDEN
+  const getOrderNumber = async () => {
+    const filteredJsonProducts = articlesToPay.filter(
+      (article) => article.amount > 0,
+    )
+    const jsonProducts = filteredJsonProducts.map((article) => ({
+      quantity: article.amount,
+      id_presentations: article.idUomToPay,
+      price: article.totalItemToPay,
+    }))
+    const jsonOrderData = {
+      id_suppliers: selectedSupplier.id,
+      date_delivery: deliveryData.toLocaleDateString(),
+      address_delivery: selectedRestaurant.address,
+      accountNumber_customers: selectedRestaurant.accountNumber,
+      observation: specialRequirements,
+      total: totalToPay,
+      net: totalNet,
+      total_tax: totalTaxes,
+      products: jsonProducts,
     }
-  } catch (error) {
-    console.log("Error enviando el correo", error);
+
+    try {
+      const response = await axios.post(createStorageOrder, jsonOrderData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      const newOrderNumber = response.data.reference
+      setOrderNumber(newOrderNumber)
+      console.log(
+        'Respuesta exitosa al crear la orden',
+        response.data.reference,
+      )
+      return newOrderNumber
+    } catch (error) {
+      console.log('Error al crear la orden', error)
+    }
   }
-};
-console.log()
+
+  // ENVIAR FORMULARIO
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    try {
+      const newOrderNumber = await getOrderNumber()
+      if (newOrderNumber) {
+        navigation.navigate('orderSuccessful')
+      } else {
+        console.log('No se obtuvo numero de orden')
+      }
+    } catch (error) {
+      console.log('Error enviando el correo', error)
+    }
+  }
 
   return (
     <View>

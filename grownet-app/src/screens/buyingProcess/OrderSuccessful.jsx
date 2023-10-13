@@ -21,7 +21,7 @@ const OrderSuccessful = () => {
       <View style={OrderSuccessfulStyles.containerButtons}>
         <TouchableOpacity
           style={OrderSuccessfulStyles.btnPrimary}
-          onPress={() => navigation.navigate('')}
+          onPress={() => navigation.navigate('recordsStack')}
         >
           <Text style={OrderSuccessfulStyles.ContinueText}>Your orders</Text>
         </TouchableOpacity>
