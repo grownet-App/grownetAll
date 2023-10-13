@@ -12,11 +12,11 @@ const Records = ({ navigation }) => {
   const handleInputChange = (query) => {
     setInput(query)
   }
-  const [activeTab, setActiveTab] = useState('pendingggRecord')
+  const [activeTab, setActiveTab] = useState('pendingRecord')
 
   const switchTab = () => {
     setActiveTab((prevTab) =>
-      prevTab === 'pastRecord' ? 'penndingRecord' : 'pastRecord',
+      prevTab === 'pastRecord' ? 'pendingRecord' : 'pastRecord',
     )
   }
 
@@ -62,7 +62,7 @@ const Records = ({ navigation }) => {
             {
               flex: 1,
               backgroundColor:
-                activeTab === 'penndingRecord' ? '#62c471' : 'white',
+                activeTab === 'pendingRecord' ? '#62c471' : 'white',
             },
             RecordStyle.btnTab,
           ]}
@@ -71,10 +71,10 @@ const Records = ({ navigation }) => {
           <Text
             style={{
               fontFamily: 'PoppinsRegular',
-              color: activeTab === 'penndingRecord' ? 'white' : '#04444f',
+              color: activeTab === 'pendingRecord' ? 'white' : '#04444f',
             }}
           >
-            Pennding orders
+            Pending orders
           </Text>
         </TouchableOpacity>
       </View>
@@ -115,7 +115,7 @@ const Records = ({ navigation }) => {
               <Button
                 title="View details"
                 style={RecordStyle.btnPrimary}
-                onPress={() => navigation.navigate('penndingRecord')}
+                onPress={() => navigation.navigate('pendingRecord')}
               >
                 <Text style={GlobalStyles.textBtnSecundary}>View details</Text>
               </Button>
