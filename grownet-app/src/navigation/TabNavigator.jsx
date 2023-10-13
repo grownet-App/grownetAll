@@ -3,7 +3,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useNavigation } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { StatusBar, TouchableOpacity } from 'react-native'
 import { Button } from 'react-native-paper'
 import Chat from '../screens/Chat'
@@ -18,7 +18,6 @@ import Products from '../screens/buyingProcess/Products'
 import Restauranst from '../screens/buyingProcess/Restaurants'
 import Suppliers from '../screens/buyingProcess/Suppliers'
 import useTokenStore from '../store/useTokenStore'
-import useOrderStore from '../store/useOrderStore'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
