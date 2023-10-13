@@ -1,16 +1,17 @@
 import { Feather } from '@expo/vector-icons'
-import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { format, set } from 'date-fns'
+import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { Button, TextInput } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { RecordStyle } from '../../styles/RecordStyle'
-import { GlobalStyles } from '../../styles/Styles'
-import { SearchStyle } from '../../styles/SearchStyle'
-import axios from 'axios'
-import { format } from 'date-fns'
 import { allStorageOrders } from '../../config/urls.config'
 import useRecordStore from '../../store/useRecordStore'
 import useTokenStore from '../../store/useTokenStore'
+import { RecordStyle } from '../../styles/RecordStyle'
+import { SearchStyle } from '../../styles/SearchStyle'
+import { GlobalStyles } from '../../styles/Styles'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const Records = ({ navigation }) => {
   const { token } = useTokenStore()
@@ -20,7 +21,7 @@ const Records = ({ navigation }) => {
   const handleInputChange = (query) => {
     setInput(query)
   }
-  const [activeTab, setActiveTab] = useState('pendingggRecord')
+  const [activeTab, setActiveTab] = useState('pendingRecord')
 
   const switchTab = () => {
     setActiveTab((prevTab) =>
@@ -51,10 +52,12 @@ const Records = ({ navigation }) => {
 
   const handlePendingOrderSelect = (orderReference) => {
     setSelectedPendingOrder(orderReference)
+    navigation.navigate('pastRecord')
   }
 
   return (
     <SafeAreaView style={RecordStyle.record}>
+      <ScrollView>
       <View style={SearchStyle.containerSearch}>
         <TextInput
           style={SearchStyle.BgInput}
@@ -150,7 +153,7 @@ const Records = ({ navigation }) => {
                   <Button
                     title="View details"
                     style={RecordStyle.btnPrimary}
-                    onPress={() => navigation.navigate('pendingRecord')}
+                    onPress={() => handlePendingOrderSelect(order.reference)}
                   >
                     <Text style={GlobalStyles.textBtnSecundary}>
                       View details
@@ -162,6 +165,7 @@ const Records = ({ navigation }) => {
           </View>
         )}
       </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
