@@ -53,7 +53,7 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
               <Text style={ProductsStyles.textName}>{name}</Text>
               <Text style={ProductsStyles.textName1}>{selectedUom.name}</Text>
               <Text style={ProductsStyles.textPrice}>
-                GBP £{selectedUom.priceWithTax}
+                £{selectedUom.priceWithTax}
               </Text>
             </View>
 

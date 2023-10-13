@@ -311,7 +311,7 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="orders"
+        name="Orders"
         component={OrderStack}
         options={{
           tabBarIcon: tabBarIconProps('orders'),
@@ -320,7 +320,7 @@ const TabNavigator = () => {
       />
 
       <Tab.Screen
-        name="records"
+        name="Records"
         component={MyStack1}
         options={{
           tabBarIcon: tabBarIconProps('records'),
@@ -328,7 +328,7 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="chat"
+        name="Chat"
         component={MyStack3}
         options={{
           tabBarIcon: tabBarIconProps('chat'),
