@@ -11,8 +11,10 @@ const useOrderStore = create((set) => ({
   totalTaxes: 0,
   totalToPay: 0,
   uomToPay: null,
+  idUomToPay: null,
   deliveryData: new Date(),
   specialRequirements: null,
+  orderNumber: null,
   setRestaurants: (restaurants) => set({ restaurants: restaurants }),
   setSelectedRestaurant: (restaurant) =>
     set({ selectedRestaurant: restaurant }),
@@ -26,6 +28,7 @@ const useOrderStore = create((set) => ({
   setDeliveryData: (deliveryData) => set({ deliveryData: deliveryData }),
   setSpecialRequirements: (specialRequirements) =>
     set({ specialRequirements: specialRequirements }),
+  setOrderNumber: (orderNumber) => set({ orderNumber: orderNumber }),
 }))
 
 export default useOrderStore

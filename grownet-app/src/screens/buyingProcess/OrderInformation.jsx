@@ -5,6 +5,8 @@ import { OrderInformationStyles } from '../../styles/Styles'
 import axios from '../../../axiosConfig.'
 import useOrderStore from '../../store/useOrderStore'
 import { useNavigation } from '@react-navigation/native'
+import { createStorageOrder } from '../../config/urls.config'
+import useTokenStore from '../../store/useTokenStore'
 
 const OrderInformation = () => {
   const {
@@ -23,6 +25,7 @@ const OrderInformation = () => {
   } = useOrderStore()
   const [data, setData] = useState([])
   const [showDatePicker, setShowDatePicker] = useState(false)
+  const {token} = useTokenStore()
   const navigation = useNavigation()
   const tomorrow = new Date()
   tomorrow.setDate(tomorrow.getDate() + 1)
@@ -45,11 +48,13 @@ const getOrderNumber = async () => {
   const filteredJsonProducts = articlesToPay.filter(
     (article) => article.amount > 0
   );
+  console.log('ARTICULOS A PAGAR=', filteredJsonProducts)
   const jsonProducts = filteredJsonProducts.map((article) => ({
     quantity: article.amount,
     id_presentations: article.idUomToPay,
     price: article.totalItemToPay,
   }));
+  console.log("ESTE ES EL JSON A REVISAR", jsonProducts)
   const jsonOrderData = {
     id_suppliers: selectedSupplier.id,
     date_delivery: deliveryData.toLocaleDateString(),
@@ -71,6 +76,7 @@ const getOrderNumber = async () => {
     });
     const newOrderNumber = response.data.reference;
     setOrderNumber(newOrderNumber);
+    console.log("ESTE ES EL NUMERO DE ORDEN", newOrderNumber)
     console.log(
       "Respuesta exitosa al crear la orden",
       response.data.reference
@@ -88,7 +94,7 @@ const handleSubmit = async (event) => {
     const newOrderNumber = await getOrderNumber();
     if (newOrderNumber) {
       navigation.navigate('orderSuccessful')
-      console.log(newOrderNumber);
+      console.log('Numero de orden', newOrderNumber);
     } else {
       console.log("No se obtuvo numero de orden");
     }
@@ -96,6 +102,7 @@ const handleSubmit = async (event) => {
     console.log("Error enviando el correo", error);
   }
 };
+console.log()
 
   return (
     <View>

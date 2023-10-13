@@ -52,6 +52,7 @@ export default function Products() {
               ...product,
               amount: 0,
               uomToPay: product.prices[0].nameUoms,
+              idUomToPay: product.prices[0].id,
               prices: product.prices.map((price) => ({
                 ...price,
                 priceWithTax: (price.price + price.price * product.tax).toFixed(
@@ -103,6 +104,7 @@ export default function Products() {
         return {
           ...article,
           uomToPay: newUomToPay,
+          idUomToPay: selectedPrice.id,
           priceWithTax: selectedPrice.priceWithTax,
         }
       }
