@@ -14,15 +14,41 @@ export const OrderDetailStyle = StyleSheet.create({
     borderBottomWidth: 1,
     borderStyle: 'dashed',
   },
-
-  taxFont: {
-    fontSize: 20,
+  text: {
+    fontSize: 18,
+    fontFamily: 'PoppinsMedium',
     color: '#04444f',
-    fontWeight: 'bold',
-    borderBottomWidth: 1,
-    borderStyle: 'dashed',
-    borderBottomColor: '#04444f',
-    paddingBottom: 5,
+  },
+  currentText: {
+    fontSize: 18,
+    fontFamily: 'PoppinsSemi',
+    color: '#04444f',
+  },
+  cardProduct: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  cardTotal: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 0,
+    paddingTop: 0,
+  },
+  textProductView: {
+    fontSize: 18,
+    fontFamily: 'PoppinsMedium',
+    color: '#04444f',
+    width: '65%',
+  },
+  textSecondProductView: {
+    fontSize: 18,
+    fontFamily: 'PoppinsMedium',
+    color: '#04444f',
+    width: '50%',
+  },
+  spaceButton: {
+    marginBottom: 20,
+    marginTop: 10,
   },
   productDetail: {
     flexDirection: 'row',

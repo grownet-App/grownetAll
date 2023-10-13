@@ -3,11 +3,11 @@ import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import useOrderStore from '../../store/useOrderStore'
-import { OrdersDetailStyles } from '../../styles/Styles'
+import { GlobalStyles, OrdersDetailStyles } from '../../styles/Styles'
 import ProductDetail from '../../components/buyingProcess/ProductDetail'
 import { ScrollView } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native'
-
+import { OrderDetailStyle } from '../../styles/OrderDetailStyle'
 export default function OrderDetails() {
   const navigation = useNavigation()
   const articlesToPayStore = useOrderStore()
@@ -37,41 +37,39 @@ export default function OrderDetails() {
             alignItems: 'center',
           }}
         >
-          <View style={OrdersDetailStyles.containerDetails}>
+          <View style={OrderDetailStyle.containerDetails}>
             <ProductDetail
               updateTotalToPay={updateTotalToPay}
               updateTotalTaxes={updateTotalTaxes}
               updateTotalNet={updateTotalNet}
             />
             <View>
-              <Text style={OrdersDetailStyles.taxFont}>Payment details</Text>
+              <Text style={OrderDetailStyle.tittle}>Payment details</Text>
               <View style={OrdersDetailStyles.productDetail}>
-                <Text style={OrdersDetailStyles.Paymenttext}>Net</Text>
-                <Text style={OrdersDetailStyles.Paymenttext}>
+                <Text style={OrderDetailStyle.text}>Net</Text>
+                <Text style={OrderDetailStyle.text}>
                   £{totalNet.toFixed(2)}
                 </Text>
               </View>
               <View style={OrdersDetailStyles.productDetail}>
-                <Text style={OrdersDetailStyles.Paymenttext}>Tax</Text>
-                <Text style={OrdersDetailStyles.Paymenttext}>
+                <Text style={OrderDetailStyle.text}>Tax</Text>
+                <Text style={OrderDetailStyle.text}>
                   £{totalTaxes.toFixed(2)}
                 </Text>
               </View>
             </View>
             <View style={OrdersDetailStyles.totalDetail}>
-              <Text style={OrdersDetailStyles.CurrentValuetext}>
-                Current value
-              </Text>
-              <Text style={OrdersDetailStyles.CurrentValuetext}>
+              <Text style={OrderDetailStyle.currentText}>Current value</Text>
+              <Text style={OrderDetailStyle.currentText}>
                 £{totalToPay.toFixed(2)}
               </Text>
             </View>
           </View>
           <TouchableOpacity
-            style={OrdersDetailStyles.btnPrimary}
+            style={[GlobalStyles.btnPrimary, OrderDetailStyle.spaceButton]}
             onPress={() => navigation.navigate('orderInformation')}
           >
-            <Text style={OrdersDetailStyles.ContinueText}>Continue</Text>
+            <Text style={GlobalStyles.textBtnSecundary}>Continue</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
