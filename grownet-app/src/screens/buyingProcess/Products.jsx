@@ -10,8 +10,9 @@ import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
 import { supplierProducts } from '../../config/urls.config'
 import { ProductsStyles } from '../../styles/Styles'
+import { useIsFocused } from '@react-navigation/native'
 
-export default function Products() {
+export default function Products({ route }) {
   const [blurIntensity, setBlurIntensity] = useState(30)
   const { token, countryCode } = useTokenStore()
   const [showFavorites, setShowFavorites] = useState(false)
@@ -22,11 +23,16 @@ export default function Products() {
     useOrderStore()
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [resetInput, setResetInput] = useState(0)
+  const isFocused = useIsFocused()
 
   useEffect(() => {
     const fetchProducts = async () => {
+      if (!isFocused) {
+        return
+      }
       if (articlesToPay.length > 0) {
         setArticles(articlesToPay)
+        console.log('artucilos a pagar:', articlesToPay)
         setProducts(articlesToPay)
       } else {
         const requestBody = {
@@ -68,9 +74,10 @@ export default function Products() {
         }
       }
     }
+
     fetchProducts()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedSupplier])
+  }, [isFocused, selectedSupplier, articlesToPay])
 
   const resetInputSearcher = () => {
     setResetInput((prevKey) => prevKey + 1)

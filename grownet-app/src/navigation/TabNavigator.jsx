@@ -3,7 +3,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useNavigation } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StatusBar, TouchableOpacity } from 'react-native'
 import { Button } from 'react-native-paper'
 import Chat from '../screens/Chat'
@@ -18,6 +18,7 @@ import Products from '../screens/buyingProcess/Products'
 import Restauranst from '../screens/buyingProcess/Restaurants'
 import Suppliers from '../screens/buyingProcess/Suppliers'
 import useTokenStore from '../store/useTokenStore'
+import useOrderStore from '../store/useOrderStore'
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -27,6 +28,25 @@ const HeaderLeft = () => {
 
   const goBack = () => {
     navigation.goBack()
+  }
+
+  return (
+    <TouchableOpacity style={{ marginHorizontal: 28 }} onPress={goBack}>
+      <MaterialCommunityIcons
+        name="arrow-left"
+        size={24}
+        color="#04444F"
+        style={{ position: 'relative' }}
+      />
+    </TouchableOpacity>
+  )
+}
+
+const HeaderLeft2 = () => {
+  const navigation = useNavigation()
+
+  const goBack = () => {
+    navigation.navigate('products')
   }
 
   return (
@@ -147,7 +167,7 @@ function OrderStack() {
             fontFamily: 'PoppinsSemi',
             fontSize: 24,
           },
-          headerLeft: () => HeaderLeft(),
+          headerLeft: () => HeaderLeft2(),
         }}
       />
       <Stack.Screen
