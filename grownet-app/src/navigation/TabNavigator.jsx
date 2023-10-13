@@ -286,7 +286,7 @@ const tabBarIconProps =
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName="orders"
+      initialRouteName="Orders"
       screenOptions={{
         tabBarActiveTintColor: '#04444F',
       }}
