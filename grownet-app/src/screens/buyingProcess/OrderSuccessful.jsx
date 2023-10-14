@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import useOrderStore from '../../store/useOrderStore'
 import { printToFileAsync } from 'expo-print'
 import { shareAsync } from 'expo-sharing'
+import * as FileSystem from 'expo-file-system'
 
 const OrderSuccessful = () => {
   const navigation = useNavigation()
@@ -263,8 +264,13 @@ const OrderSuccessful = () => {
       `,
         base64: false,
       })
+      const fileName = `GrownetInvoice_order ${orderNumber}.pdf`
+      const documentsDirectory =
+        FileSystem.documentDirectory || `${FileSystem.cacheDirectory}Documents/`
+      const newUri = `${documentsDirectory}${fileName}`
+      await FileSystem.moveAsync({ from: uri, to: newUri })
 
-      await shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' })
+      await shareAsync(newUri)
     } catch (error) {
       console.error('Error generating PDF', error)
     }
