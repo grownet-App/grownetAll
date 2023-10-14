@@ -26,7 +26,7 @@ const SelectQuantity = ({
   const incrementAmount = () => {
     setAmount(amount + 1)
   }
-  console.log('dataquantiti:', amount)
+
   return (
     <View
       style={widthOrder ? ProductsStyles.countOrderD : ProductsStyles.count}

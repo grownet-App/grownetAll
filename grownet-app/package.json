@@ -42,7 +42,9 @@
     "react-native-tab-view": "^3.5.2",
     "react-native-web": "~0.19.6",
     "zustand": "^4.4.1",
-    "zustand-persist": "^0.4.0"
+    "zustand-persist": "^0.4.0",
+    "expo-print": "~12.4.2",
+    "expo-sharing": "~11.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
