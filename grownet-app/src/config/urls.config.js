@@ -19,4 +19,5 @@ export const supplierProducts = process.env.EXPO_PUBLIC_SELECT_SUPPLIER_PRODUCTS
 // ORDERS RECORD
 export const createStorageOrder = process.env.EXPO_PUBLIC_STORAGE_ORDER
 export const allStorageOrders = process.env.EXPO_PUBLIC_ALL_STORAGE_ORDERS
-export const selectedStorageOrder = process.env.EXPO_PUBLIC_SELECTED_STORAGE_ORDER
+export const selectedStorageOrder =
+  process.env.EXPO_PUBLIC_SELECTED_STORAGE_ORDER

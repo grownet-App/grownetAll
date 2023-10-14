@@ -33,41 +33,45 @@ function PastRecord() {
   return (
     <SafeAreaView style={PastStyle.past}>
       <ScrollView>
-      {detailsToShow && (
-        <View style={GlobalStyles.cardInvoces}>
-          <Text style={PastStyle.tittle}>Supplier details</Text>
-          <View style={PastStyle.products}>
-            <Text style={PastStyle.subtittle}>
-              {detailsToShow.nameSuppliers}
-            </Text>
-            <Text style={PastStyle.subtittle}>#{detailsToShow.reference}</Text>
-          </View>
-          <Text style={PastStyle.p}>{detailsToShow.created_date}</Text>
-          <Text style={PastStyle.tittle}>Product details</Text>
-          {detailsToShow.products?.map((product) => (
-            <View>
-              <View style={PastStyle.products}>
-                <Text style={PastStyle.subtittle}>{product.name}</Text>
-                <Text style={PastStyle.subtittle}>£{product.price}</Text>
-              </View>
-              <Text style={PastStyle.p}>
-                {product.quantity} {product.uom}
+        {detailsToShow && (
+          <View style={GlobalStyles.cardInvoces}>
+            <Text style={PastStyle.tittle}>Supplier details</Text>
+            <View style={PastStyle.products}>
+              <Text style={PastStyle.subtittle}>
+                {detailsToShow.nameSuppliers}
+              </Text>
+              <Text style={PastStyle.subtittle}>
+                #{detailsToShow.reference}
               </Text>
             </View>
-          ))}
-          <Text style={PastStyle.tittle}>Payment details</Text>
-          <View style={PastStyle.products}>
-            <Text style={PastStyle.subtittle}>Tax</Text>
-            <Text style={PastStyle.subtittle}>£{detailsToShow.total_tax}</Text>
-          </View>
-          <View style={PastStyle.total}>
+            <Text style={PastStyle.p}>{detailsToShow.created_date}</Text>
+            <Text style={PastStyle.tittle}>Product details</Text>
+            {detailsToShow.products?.map((product) => (
+              <View>
+                <View style={PastStyle.products}>
+                  <Text style={PastStyle.subtittle}>{product.name}</Text>
+                  <Text style={PastStyle.subtittle}>£{product.price}</Text>
+                </View>
+                <Text style={PastStyle.p}>
+                  {product.quantity} {product.uom}
+                </Text>
+              </View>
+            ))}
+            <Text style={PastStyle.tittle}>Payment details</Text>
             <View style={PastStyle.products}>
-              <Text style={PastStyle.textTotal}>Current value</Text>
-              <Text style={PastStyle.textTotal}>£{detailsToShow.total}</Text>
+              <Text style={PastStyle.subtittle}>Tax</Text>
+              <Text style={PastStyle.subtittle}>
+                £{detailsToShow.total_tax}
+              </Text>
+            </View>
+            <View style={PastStyle.total}>
+              <View style={PastStyle.products}>
+                <Text style={PastStyle.textTotal}>Current value</Text>
+                <Text style={PastStyle.textTotal}>£{detailsToShow.total}</Text>
+              </View>
             </View>
           </View>
-        </View>
-      )}
+        )}
       </ScrollView>
     </SafeAreaView>
   )

@@ -65,7 +65,9 @@ const Records = ({ navigation }) => {
             onChangeText={handleInputChange}
             placeholder="Search for products"
             placeholderStyle={SearchStyle.placeholderText}
-          ></TextInput>
+
+          />
+
           <TouchableOpacity style={SearchStyle.iconSearch}>
             <Feather name="search" size={24} color="#969696" />
           </TouchableOpacity>
@@ -119,6 +121,7 @@ const Records = ({ navigation }) => {
         <View>
           {/* Contenido de la pestaña activa */}
           {activeTab === 'pastRecord' ? (
+
             <View>
               {pendingOrders.map((order) => (
                 <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
@@ -131,6 +134,7 @@ const Records = ({ navigation }) => {
                   <View style={RecordStyle.textCard}>
                     <Text style={RecordStyle.tittle}>Date</Text>
                     <Text style={RecordStyle.text}>01/10/2023</Text>
+
                     <Button
                       title="View details"
                       style={RecordStyle.btnPrimary}
@@ -144,6 +148,7 @@ const Records = ({ navigation }) => {
                 </View>
               ))}
             </View>
+
           ) : (
             <View>
               {pendingOrders.map((order) => (
@@ -170,6 +175,7 @@ const Records = ({ navigation }) => {
                 </View>
               ))}
             </View>
+
           )}
         </View>
       </ScrollView>

@@ -19,7 +19,7 @@ export default function ProductDetail({
   const [articles, setArticles] = useState(articlesToPay)
   useEffect(() => {
     setArticles(articlesToPay)
-  }, [articles])
+  }, [articles, articlesToPay])
 
   const handleAmountChange = (productId, newAmount) => {
     setArticles((prevArticles) =>
@@ -68,8 +68,8 @@ export default function ProductDetail({
     return parseFloat(net.toFixed(2))
   }
 
-  const calculateTotalNet = (articles) => {
-    const totalNet = articles.reduce((total, article) => {
+  const calculateTotalNet = (articls) => {
+    const totalNet = articls.reduce((total, article) => {
       const itemNet = calculateItemNet(
         article.prices,
         article.amount,
@@ -87,8 +87,8 @@ export default function ProductDetail({
     return parseFloat(taxes.toFixed(2))
   }
 
-  const calculateTotalTaxes = (articles) => {
-    const totalTaxes = articles.reduce((total, article) => {
+  const calculateTotalTaxes = (articls) => {
+    const totalTaxes = articls.reduce((total, article) => {
       const itemTaxes = calculateItemTaxes(
         article.prices,
         article.tax,
@@ -116,8 +116,8 @@ export default function ProductDetail({
     return totalItemToPay
   }
 
-  const calculateTotalToPay = (articles) => {
-    const filteredArticles = articles.filter((article) => article.amount > 0)
+  const calculateTotalToPay = (articls) => {
+    const filteredArticles = articls.filter((article) => article.amount > 0)
     const totalToPay = filteredArticles.reduce((total, article) => {
       return total + article.totalItemToPay
     }, 0)
@@ -133,6 +133,7 @@ export default function ProductDetail({
 
     const newTotalNet = calculateTotalNet(articles)
     updateTotalNet(newTotalNet)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articles])
 
   return (

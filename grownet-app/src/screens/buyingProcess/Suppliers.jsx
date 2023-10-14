@@ -4,6 +4,7 @@ import {
   ImageBackground,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native'
 import React, { useEffect } from 'react'
 import { ApiSuppliers } from '../../config/urls.config'
@@ -11,7 +12,6 @@ import { SuppliersStyle } from '../../styles/SupplierStyle'
 import axios from '../../../axiosConfig.'
 import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
-import { View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 

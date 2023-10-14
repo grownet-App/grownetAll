@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import { ProductsStyles } from '../../styles/Styles'
 
@@ -8,23 +8,22 @@ const SelectQuantity = ({
   onAmountChange,
   counter,
 }) => {
-  const [amount, setAmount] = useState(productData.amount)
-
   const { id } = productData
 
-  useEffect(() => {
-    onAmountChange(id, amount)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amount])
+  const handleTextInputChange = (value) => {
+    if (!isNaN(value)) {
+      onAmountChange(id, parseInt(value, 10)) // Llamar a onAmountChange con el nuevo valor
+    }
+  }
 
   const decrementAmount = () => {
-    if (amount > counter) {
-      setAmount(amount - 1)
+    if (productData.amount > counter) {
+      onAmountChange(id, productData.amount - 1) // Llamar a onAmountChange con el nuevo valor
     }
   }
 
   const incrementAmount = () => {
-    setAmount(amount + 1)
+    onAmountChange(id, productData.amount + 1) // Llamar a onAmountChange con el nuevo valor
   }
 
   return (
@@ -36,15 +35,10 @@ const SelectQuantity = ({
       </TouchableOpacity>
 
       <TextInput
+        style={ProductsStyles.countSelect}
         keyboardType="numeric"
-        value={amount.toString()}
-        onChangeText={(value) => {
-          let num = parseInt(value)
-          num = isNaN(num) ? 0 : num
-          num = Math.max(0, num)
-          num = Math.min(100, num)
-          setAmount(num)
-        }}
+        value={productData.amount.toString()}
+        onChangeText={handleTextInputChange} // Agregar el evento onChangeText
       />
 
       <TouchableOpacity onPress={incrementAmount}>
