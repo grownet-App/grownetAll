@@ -79,12 +79,6 @@ const Restaurants = () => {
                       uri: imageUrl,
                     }}
                     style={{ width: 160, height: 160 }}
-                    onError={(error) => {
-                      console.log('Error cargando la imagen', error)
-                    }}
-                    onLoad={() => {
-                      console.log('Imagen cargada correctamente!')
-                    }}
                   />
                   <Text
                     style={RestaurantStyle.TextDirectionRestaurant}

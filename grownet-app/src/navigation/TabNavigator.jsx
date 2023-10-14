@@ -291,11 +291,11 @@ const tabBarIconProps =
   (name) =>
   ({ color, size }) => {
     name === 'Settings'
-      ? (name = 'md-settings-outline') //ajustes
+      ? (name = 'md-settings-outline') // ajustes
       : name === 'orders'
-      ? (name = 'cart-outline') //orders
+      ? (name = 'cart-outline') // orders
       : name === 'records'
-      ? (name = 'receipt-outline') //historial
+      ? (name = 'receipt-outline') // historial
       : name === 'chat'
       ? (name = 'ios-chatbubble-ellipses-outline')
       : ''

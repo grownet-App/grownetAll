@@ -58,113 +58,116 @@ const Records = ({ navigation }) => {
   return (
     <SafeAreaView style={RecordStyle.record}>
       <ScrollView>
-      <View style={SearchStyle.containerSearch}>
-        <TextInput
-          style={SearchStyle.BgInput}
-          value={input}
-          onChangeText={handleInputChange}
-          placeholder="Search for products"
-          placeholderStyle={SearchStyle.placeholderText}
-        ></TextInput>
-        <TouchableOpacity style={SearchStyle.iconSearch}>
-          <Feather name="search" size={24} color="#969696" />
-        </TouchableOpacity>
-      </View>
-      <View style={[RecordStyle.tabContainer, GlobalStyles.boxShadow]}>
-        <TouchableOpacity
-          style={[
-            {
-              flex: 1,
-              backgroundColor: activeTab === 'pastRecord' ? '#62c471' : 'white',
-              padding: 10,
-              alignItems: 'center',
-            },
-            RecordStyle.btnTab,
-          ]}
-          onPress={switchTab}
-        >
-          <Text
-            style={{
-              fontFamily: 'PoppinsRegular',
-              color: activeTab === 'pastRecord' ? 'white' : '#04444f',
-            }}
+        <View style={SearchStyle.containerSearch}>
+          <TextInput
+            style={SearchStyle.BgInput}
+            value={input}
+            onChangeText={handleInputChange}
+            placeholder="Search for products"
+            placeholderStyle={SearchStyle.placeholderText}
+          />
+          <TouchableOpacity style={SearchStyle.iconSearch}>
+            <Feather name="search" size={24} color="#969696" />
+          </TouchableOpacity>
+        </View>
+        <View style={[RecordStyle.tabContainer, GlobalStyles.boxShadow]}>
+          <TouchableOpacity
+            style={[
+              {
+                flex: 1,
+                backgroundColor:
+                  activeTab === 'pastRecord' ? '#62c471' : 'white',
+                padding: 10,
+                alignItems: 'center',
+              },
+              RecordStyle.btnTab,
+            ]}
+            onPress={switchTab}
           >
-            Past orders
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={{
+                fontFamily: 'PoppinsRegular',
+                color: activeTab === 'pastRecord' ? 'white' : '#04444f',
+              }}
+            >
+              Past orders
+            </Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[
-            {
-              flex: 1,
-              backgroundColor:
-                activeTab === 'pendingRecord' ? '#62c471' : 'white',
-            },
-            RecordStyle.btnTab,
-          ]}
-          onPress={switchTab}
-        >
-          <Text
-            style={{
-              fontFamily: 'PoppinsRegular',
-              color: activeTab === 'pendingRecord' ? 'white' : '#04444f',
-            }}
+          <TouchableOpacity
+            style={[
+              {
+                flex: 1,
+                backgroundColor:
+                  activeTab === 'pendingRecord' ? '#62c471' : 'white',
+              },
+              RecordStyle.btnTab,
+            ]}
+            onPress={switchTab}
           >
-            Pending orders
-          </Text>
-        </TouchableOpacity>
-      </View>
+            <Text
+              style={{
+                fontFamily: 'PoppinsRegular',
+                color: activeTab === 'pendingRecord' ? 'white' : '#04444f',
+              }}
+            >
+              Pending orders
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-      <View>
-        {/* Contenido de la pestaña activa */}
-        {activeTab === 'pastRecord' ? (
-          <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
-            <View style={RecordStyle.textCard}>
-              <Text style={RecordStyle.tittle}>#Order</Text>
-              <Text style={RecordStyle.text}>11154</Text>
-              <Text style={RecordStyle.tittle}>Amount</Text>
-              <Text style={RecordStyle.text}>£856</Text>
-            </View>
-            <View style={RecordStyle.textCard}>
-              <Text style={RecordStyle.tittle}>Date</Text>
-              <Text style={RecordStyle.text}>01/10/2023</Text>
-              <Button
-                title="View details"
-                style={RecordStyle.btnPrimary}
-                onPress={() => navigation.navigate('pastRecord')}
-              >
-                <Text style={GlobalStyles.textBtnSecundary}>View details</Text>
-              </Button>
-            </View>
-          </View>
-        ) : (
-          <View>
-            {pendingOrders.map((order) => (
-              <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
-                <View style={RecordStyle.textCard} key={order.reference}>
-                  <Text style={RecordStyle.tittle}>#Order</Text>
-                  <Text style={RecordStyle.text}>{order.reference}</Text>
-                  <Text style={RecordStyle.tittle}>Amount</Text>
-                  <Text style={RecordStyle.text}>£{order.total}</Text>
-                </View>
-                <View style={RecordStyle.textCard}>
-                  <Text style={RecordStyle.tittle}>Date</Text>
-                  <Text style={RecordStyle.text}>{order.created_date}</Text>
-                  <Button
-                    title="View details"
-                    style={RecordStyle.btnPrimary}
-                    onPress={() => handlePendingOrderSelect(order.reference)}
-                  >
-                    <Text style={GlobalStyles.textBtnSecundary}>
-                      View details
-                    </Text>
-                  </Button>
-                </View>
+        <View>
+          {/* Contenido de la pestaña activa */}
+          {activeTab === 'pastRecord' ? (
+            <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
+              <View style={RecordStyle.textCard}>
+                <Text style={RecordStyle.tittle}>#Order</Text>
+                <Text style={RecordStyle.text}>11154</Text>
+                <Text style={RecordStyle.tittle}>Amount</Text>
+                <Text style={RecordStyle.text}>£856</Text>
               </View>
-            ))}
-          </View>
-        )}
-      </View>
+              <View style={RecordStyle.textCard}>
+                <Text style={RecordStyle.tittle}>Date</Text>
+                <Text style={RecordStyle.text}>01/10/2023</Text>
+                <Button
+                  title="View details"
+                  style={RecordStyle.btnPrimary}
+                  onPress={() => navigation.navigate('pastRecord')}
+                >
+                  <Text style={GlobalStyles.textBtnSecundary}>
+                    View details
+                  </Text>
+                </Button>
+              </View>
+            </View>
+          ) : (
+            <View>
+              {pendingOrders.map((order) => (
+                <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
+                  <View style={RecordStyle.textCard} key={order.reference}>
+                    <Text style={RecordStyle.tittle}>#Order</Text>
+                    <Text style={RecordStyle.text}>{order.reference}</Text>
+                    <Text style={RecordStyle.tittle}>Amount</Text>
+                    <Text style={RecordStyle.text}>£{order.total}</Text>
+                  </View>
+                  <View style={RecordStyle.textCard}>
+                    <Text style={RecordStyle.tittle}>Date</Text>
+                    <Text style={RecordStyle.text}>{order.created_date}</Text>
+                    <Button
+                      title="View details"
+                      style={RecordStyle.btnPrimary}
+                      onPress={() => handlePendingOrderSelect(order.reference)}
+                    >
+                      <Text style={GlobalStyles.textBtnSecundary}>
+                        View details
+                      </Text>
+                    </Button>
+                  </View>
+                </View>
+              ))}
+            </View>
+          )}
+        </View>
       </ScrollView>
     </SafeAreaView>
   )

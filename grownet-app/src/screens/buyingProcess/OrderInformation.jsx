@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import DatePickerAndroid from '@react-native-community/datetimepicker'
@@ -20,7 +21,6 @@ const OrderInformation = () => {
     totalNet,
     totalTaxes,
     totalToPay,
-    orderNumber,
     setOrderNumber,
   } = useOrderStore()
   const [data, setData] = useState([])
@@ -33,6 +33,7 @@ const OrderInformation = () => {
   useEffect(() => {
     setData(articlesToPay)
     setDeliveryData(tomorrow)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleChangeDate = async (event, newDate) => {

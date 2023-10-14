@@ -1,12 +1,10 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import useOrderStore from '../../store/useOrderStore'
 import { OrdersDetailStyles } from '../../styles/Styles'
 import ProductDetail from '../../components/buyingProcess/ProductDetail'
 import { ScrollView } from 'react-native-gesture-handler'
-import { SafeAreaView } from 'react-native'
 
 export default function OrderDetails() {
   const navigation = useNavigation()

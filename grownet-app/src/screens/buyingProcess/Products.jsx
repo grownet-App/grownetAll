@@ -10,29 +10,27 @@ import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
 import { supplierProducts } from '../../config/urls.config'
 import { ProductsStyles } from '../../styles/Styles'
-import { useIsFocused } from '@react-navigation/native'
 
-export default function Products({ route }) {
+export default function Products() {
   const [blurIntensity, setBlurIntensity] = useState(30)
   const { token, countryCode } = useTokenStore()
   const [showFavorites, setShowFavorites] = useState(false)
   const [showSearchResults, setShowSearchResults] = useState(false)
   const [products, setProducts] = useState([])
   const [articles, setArticles] = useState(products)
-  const { articlesToPay, selectedSupplier, selectedRestaurant } =
-    useOrderStore()
+  const {
+    articlesToPay,
+    selectedSupplier,
+    selectedRestaurant,
+    setArticlesToPay,
+  } = useOrderStore()
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [resetInput, setResetInput] = useState(0)
-  const isFocused = useIsFocused()
 
   useEffect(() => {
     const fetchProducts = async () => {
-      if (!isFocused) {
-        return
-      }
       if (articlesToPay.length > 0) {
         setArticles(articlesToPay)
-        console.log('artucilos a pagar:', articlesToPay)
         setProducts(articlesToPay)
       } else {
         const requestBody = {
@@ -77,7 +75,7 @@ export default function Products({ route }) {
 
     fetchProducts()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFocused, selectedSupplier, articlesToPay])
+  }, [selectedSupplier, articlesToPay])
 
   const resetInputSearcher = () => {
     setResetInput((prevKey) => prevKey + 1)
@@ -99,7 +97,7 @@ export default function Products({ route }) {
       article.id === productId ? { ...article, amount: newAmount } : article,
     )
 
-    useOrderStore.setState({ articlesToPay: updatedArticlesToPay })
+    setArticlesToPay(updatedArticlesToPay)
   }
 
   const handleUomChange = (productId, newUomToPay) => {

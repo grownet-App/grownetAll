@@ -28,7 +28,7 @@ const OrderSuccessful = () => {
       (article) => article.amount > 0,
     )
     setArticlesData(filteredArticles)
-  }, [])
+  }, [articlesToPay])
 
   const generatePdfDocument = async () => {
     try {
@@ -264,7 +264,7 @@ const OrderSuccessful = () => {
       `,
         base64: false,
       })
-      const fileName = `GrownetInvoice_order ${orderNumber}.pdf`
+      const fileName = `GrownetInvoice_order_${orderNumber}.pdf`
       const documentsDirectory =
         FileSystem.documentDirectory || `${FileSystem.cacheDirectory}Documents/`
       const newUri = `${documentsDirectory}${fileName}`
@@ -275,7 +275,7 @@ const OrderSuccessful = () => {
       console.error('Error generating PDF', error)
     }
   }
-  console.log('data:', articlesData)
+
   return (
     <View style={OrderSuccessfulStyles.container}>
       <View style={OrderSuccessfulStyles.containerImage}>
