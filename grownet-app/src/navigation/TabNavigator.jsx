@@ -41,6 +41,25 @@ const HeaderLeft = () => {
   )
 }
 
+const HeaderLeft2 = () => {
+  const navigation = useNavigation()
+
+  const goBack = () => {
+    navigation.navigate('products')
+  }
+
+  return (
+    <TouchableOpacity style={{ marginHorizontal: 28 }} onPress={goBack}>
+      <MaterialCommunityIcons
+        name="arrow-left"
+        size={24}
+        color="#04444F"
+        style={{ position: 'relative' }}
+      />
+    </TouchableOpacity>
+  )
+}
+
 const headerRight = () => (
   <Button
     /* eslint-disable no-alert */
@@ -147,7 +166,7 @@ function OrderStack() {
             fontFamily: 'PoppinsSemi',
             fontSize: 24,
           },
-          headerLeft: () => HeaderLeft(),
+          headerLeft: () => HeaderLeft2(),
         }}
       />
       <Stack.Screen

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import { ProductsStyles } from '../../styles/Styles'
 
 const SelectQuantity = ({
@@ -20,14 +20,11 @@ const SelectQuantity = ({
   const decrementAmount = () => {
     if (amount > counter) {
       setAmount(amount - 1)
-      onAmountChange(id, amount - 1)
-      console.log('aca esta')
     }
   }
 
   const incrementAmount = () => {
     setAmount(amount + 1)
-    onAmountChange(id, amount + 1)
   }
 
   return (
@@ -38,7 +35,17 @@ const SelectQuantity = ({
         <Text style={ProductsStyles.button2}>-</Text>
       </TouchableOpacity>
 
-      <Text style={ProductsStyles.countSelect}>{amount}</Text>
+      <TextInput
+        keyboardType="numeric"
+        value={amount.toString()}
+        onChangeText={(value) => {
+          let num = parseInt(value)
+          num = isNaN(num) ? 0 : num
+          num = Math.max(0, num)
+          num = Math.min(100, num)
+          setAmount(num)
+        }}
+      />
 
       <TouchableOpacity onPress={incrementAmount}>
         <Text style={ProductsStyles.button}>+</Text>
