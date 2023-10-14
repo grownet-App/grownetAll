@@ -6,7 +6,7 @@ import { Dropdown } from 'react-native-element-dropdown'
 import { ProductsStyles } from '../../styles/Styles'
 import useOrderStore from '../../store/useOrderStore'
 import DeleteProduct from './DeleteProduct'
-
+import { OrderDetailStyle } from '../../styles/OrderDetailStyle'
 export default function ProductDetail({
   updateTotalToPay,
   updateTotalTaxes,
@@ -142,60 +142,62 @@ export default function ProductDetail({
         .filter((article) => article.amount > 0)
         .map((article) => (
           <View key={article.id}>
-            <View>
-              <View style={ProductsStyles.containerDetail}>
-                <View>
-                  <Text style={ProductsStyles.textOrder}>{article.name}</Text>
-                  <View style={ProductsStyles.containSelect}>
-                    <SelectQuantity
-                      widthOrder
-                      productData={article}
-                      onAmountChange={handleAmountChange}
-                      counter={counter}
-                    />
-                  </View>
-                </View>
-
-                <View style={ProductsStyles.containerDrop}>
-                  <View style={ProductsStyles.rowPrice}>
-                    <Text style={ProductsStyles.textOrder}>
-                      £ {calculateItemToPay(article, article.amount)}
-                    </Text>
-                    <DeleteProduct
-                      articles={articles}
-                      setArticles={setArticles}
-                      article={article}
-                      articlesToPay={articlesToPay}
-                      setArticlesToPay={setArticlesToPay}
-                      calculateTotalToPay={calculateTotalToPay}
-                      updateTotalToPay={updateTotalToPay}
-                    />
-                  </View>
-
-                  <Dropdown
-                    style={[
-                      styles.dropdown,
-                      isFocus && { borderColor: '#04444f' },
-                    ]}
-                    containerStyle={{ borderRadius: 20, color: '#04444f' }}
-                    placeholderStyle={styles.placeholderStyle}
-                    selectedTextStyle={styles.selectedTextStyle}
-                    data={article.prices}
-                    maxHeight={200}
-                    labelField="nameUoms"
-                    valueField="nameUoms"
-                    placeholder={!isFocus ? 'Unit' : '...'}
-                    value={article.uomToPay}
-                    onFocus={() => setIsFocus(true)}
-                    onBlur={() => setIsFocus(false)}
-                    onChange={(event) => {
-                      const { nameUoms } = event
-                      handleUomChange(article.id, nameUoms)
-                    }}
-                  />
-                </View>
+            <View style={OrderDetailStyle.cardProduct}>
+              <Text style={OrderDetailStyle.textProductView}>
+                {article.name}
+              </Text>
+              <View style={OrderDetailStyle.cardTotal}>
+                <Text style={OrderDetailStyle.textSecondProductView}>
+                  {' '}
+                  £ {calculateItemToPay(article, article.amount)}
+                </Text>
+                <DeleteProduct
+                  articles={articles}
+                  setArticles={setArticles}
+                  article={article}
+                  articlesToPay={articlesToPay}
+                  setArticlesToPay={setArticlesToPay}
+                  calculateTotalToPay={calculateTotalToPay}
+                  updateTotalToPay={updateTotalToPay}
+                />
               </View>
             </View>
+            {
+              <View style={OrderDetailStyle.cardProduct}>
+                <View style={ProductsStyles.containSelect}>
+                  <SelectQuantity
+                    widthOrder
+                    productData={article}
+                    onAmountChange={handleAmountChange}
+                    counter={counter}
+                  />
+                </View>
+                <Dropdown
+                  style={[
+                    styles.dropdown,
+                    isFocus && { borderColor: '#04444f' },
+                  ]}
+                  containerStyle={{
+                    borderRadius: 20,
+                    color: '#04444f',
+                  }}
+                  placeholderStyle={styles.placeholderStyle}
+                  selectedTextStyle={styles.selectedTextStyle}
+                  data={article.prices}
+                  maxHeight={200}
+                  labelField="nameUoms"
+                  valueField="nameUoms"
+                  placeholder={!isFocus ? 'Unit' : '...'}
+                  value={article.uomToPay}
+                  onFocus={() => setIsFocus(true)}
+                  onBlur={() => setIsFocus(false)}
+                  onChange={(event) => {
+                    const { nameUoms } = event
+                    handleUomChange(article.id, nameUoms)
+                  }}
+                />
+              </View>
+            }
           </View>
         ))}
     </View>

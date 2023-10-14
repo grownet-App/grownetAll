@@ -18,7 +18,7 @@ import Products from '../screens/buyingProcess/Products'
 import Restauranst from '../screens/buyingProcess/Restaurants'
 import Suppliers from '../screens/buyingProcess/Suppliers'
 import useTokenStore from '../store/useTokenStore'
-
+import DisputeRecord from '../screens/Record/DisputeRecord'
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 
@@ -257,6 +257,24 @@ function MyStack1() {
           headerTitleStyle: {
             fontFamily: 'PoppinsSemi',
             fontSize: 22,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="disputeRecord"
+        component={DisputeRecord}
+        options={{
+          title: 'What went wrong?',
+          headerStyle: {
+            backgroundColor: 'white',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
+            color: '#026cd2',
           },
         }}
       />

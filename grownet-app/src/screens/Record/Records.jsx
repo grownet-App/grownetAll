@@ -65,7 +65,9 @@ const Records = ({ navigation }) => {
             onChangeText={handleInputChange}
             placeholder="Search for products"
             placeholderStyle={SearchStyle.placeholderText}
+
           />
+
           <TouchableOpacity style={SearchStyle.iconSearch}>
             <Feather name="search" size={24} color="#969696" />
           </TouchableOpacity>
@@ -119,27 +121,34 @@ const Records = ({ navigation }) => {
         <View>
           {/* Contenido de la pestaña activa */}
           {activeTab === 'pastRecord' ? (
-            <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
-              <View style={RecordStyle.textCard}>
-                <Text style={RecordStyle.tittle}>#Order</Text>
-                <Text style={RecordStyle.text}>11154</Text>
-                <Text style={RecordStyle.tittle}>Amount</Text>
-                <Text style={RecordStyle.text}>£856</Text>
-              </View>
-              <View style={RecordStyle.textCard}>
-                <Text style={RecordStyle.tittle}>Date</Text>
-                <Text style={RecordStyle.text}>01/10/2023</Text>
-                <Button
-                  title="View details"
-                  style={RecordStyle.btnPrimary}
-                  onPress={() => navigation.navigate('pastRecord')}
-                >
-                  <Text style={GlobalStyles.textBtnSecundary}>
-                    View details
-                  </Text>
-                </Button>
-              </View>
+
+            <View>
+              {pendingOrders.map((order) => (
+                <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
+                  <View style={RecordStyle.textCard}>
+                    <Text style={RecordStyle.tittle}>#Order</Text>
+                    <Text style={RecordStyle.text}>11154</Text>
+                    <Text style={RecordStyle.tittle}>Amount</Text>
+                    <Text style={RecordStyle.text}>£856</Text>
+                  </View>
+                  <View style={RecordStyle.textCard}>
+                    <Text style={RecordStyle.tittle}>Date</Text>
+                    <Text style={RecordStyle.text}>01/10/2023</Text>
+
+                    <Button
+                      title="View details"
+                      style={RecordStyle.btnPrimary}
+                      onPress={() => handlePendingOrderSelect(order.reference)}
+                    >
+                      <Text style={GlobalStyles.textBtnSecundary}>
+                        View details
+                      </Text>
+                    </Button>
+                  </View>
+                </View>
+              ))}
             </View>
+
           ) : (
             <View>
               {pendingOrders.map((order) => (
@@ -156,7 +165,7 @@ const Records = ({ navigation }) => {
                     <Button
                       title="View details"
                       style={RecordStyle.btnPrimary}
-                      onPress={() => handlePendingOrderSelect(order.reference)}
+                      onPress={() => navigation.navigate('pendingRecord')}
                     >
                       <Text style={GlobalStyles.textBtnSecundary}>
                         View details
@@ -166,6 +175,7 @@ const Records = ({ navigation }) => {
                 </View>
               ))}
             </View>
+
           )}
         </View>
       </ScrollView>
