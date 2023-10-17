@@ -21,6 +21,7 @@ export const SettingsStyle = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
+    position: 'relative',
   },
   textLogout: {
     color: '#026cd2',
