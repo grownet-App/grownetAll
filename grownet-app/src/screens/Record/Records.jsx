@@ -2,8 +2,8 @@ import { Feather } from '@expo/vector-icons'
 import axios from 'axios'
 import { format, set } from 'date-fns'
 import React, { useEffect, useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import { Button, TextInput } from 'react-native-paper'
+import { Text, TouchableOpacity, View, TextInput } from 'react-native'
+import { Button } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { allStorageOrders } from '../../config/urls.config'
 import useRecordStore from '../../store/useRecordStore'
@@ -12,6 +12,7 @@ import { RecordStyle } from '../../styles/RecordStyle'
 import { SearchStyle } from '../../styles/SearchStyle'
 import { GlobalStyles } from '../../styles/Styles'
 import { ScrollView } from 'react-native-gesture-handler'
+import { DisputeStyle } from '../../styles/PendingRecordStyle'
 
 const Records = ({ navigation }) => {
   const { token } = useTokenStore()
@@ -58,17 +59,15 @@ const Records = ({ navigation }) => {
   return (
     <SafeAreaView style={RecordStyle.record}>
       <ScrollView>
-        <View style={SearchStyle.containerSearch}>
+        <View style={RecordStyle.input}>
           <TextInput
-            style={SearchStyle.BgInput}
+            style={RecordStyle.BgInput}
             value={input}
             onChangeText={handleInputChange}
             placeholder="Search for products"
             placeholderStyle={SearchStyle.placeholderText}
-
           />
-
-          <TouchableOpacity style={SearchStyle.iconSearch}>
+          <TouchableOpacity>
             <Feather name="search" size={24} color="#969696" />
           </TouchableOpacity>
         </View>
@@ -121,7 +120,6 @@ const Records = ({ navigation }) => {
         <View>
           {/* Contenido de la pestaña activa */}
           {activeTab === 'pastRecord' ? (
-
             <View>
               {pendingOrders.map((order) => (
                 <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
@@ -148,7 +146,6 @@ const Records = ({ navigation }) => {
                 </View>
               ))}
             </View>
-
           ) : (
             <View>
               {pendingOrders.map((order) => (
@@ -175,7 +172,6 @@ const Records = ({ navigation }) => {
                 </View>
               ))}
             </View>
-
           )}
         </View>
       </ScrollView>
