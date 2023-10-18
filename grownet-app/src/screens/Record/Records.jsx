@@ -12,8 +12,10 @@ import { RecordStyle } from '../../styles/RecordStyle'
 import { SearchStyle } from '../../styles/SearchStyle'
 import { GlobalStyles } from '../../styles/Styles'
 import { ScrollView } from 'react-native-gesture-handler'
+import { useTranslation } from 'react-i18next'
 
 const Records = ({ navigation }) => {
+  const { t } = useTranslation()
   const { token } = useTokenStore()
   const { pendingOrders, setPendingOrders, setSelectedPendingOrder } =
     useRecordStore()
@@ -63,9 +65,8 @@ const Records = ({ navigation }) => {
             style={SearchStyle.BgInput}
             value={input}
             onChangeText={handleInputChange}
-            placeholder="Search for products"
+            placeholder={t('record.searchPlaceholder')}
             placeholderStyle={SearchStyle.placeholderText}
-
           />
 
           <TouchableOpacity style={SearchStyle.iconSearch}>
@@ -92,7 +93,7 @@ const Records = ({ navigation }) => {
                 color: activeTab === 'pastRecord' ? 'white' : '#04444f',
               }}
             >
-              Past orders
+              {t('record.pastOrders')}
             </Text>
           </TouchableOpacity>
 
@@ -113,7 +114,7 @@ const Records = ({ navigation }) => {
                 color: activeTab === 'pendingRecord' ? 'white' : '#04444f',
               }}
             >
-              Pending orders
+              {t('record.pendingOrders')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -121,18 +122,20 @@ const Records = ({ navigation }) => {
         <View>
           {/* Contenido de la pestaña activa */}
           {activeTab === 'pastRecord' ? (
-
             <View>
               {pendingOrders.map((order) => (
                 <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
                   <View style={RecordStyle.textCard}>
-                    <Text style={RecordStyle.tittle}>#Order</Text>
+                    <Text style={RecordStyle.tittle}> {t('record.order')}</Text>
                     <Text style={RecordStyle.text}>11154</Text>
-                    <Text style={RecordStyle.tittle}>Amount</Text>
+                    <Text style={RecordStyle.tittle}>
+                      {' '}
+                      {t('record.amount')}
+                    </Text>
                     <Text style={RecordStyle.text}>£856</Text>
                   </View>
                   <View style={RecordStyle.textCard}>
-                    <Text style={RecordStyle.tittle}>Date</Text>
+                    <Text style={RecordStyle.tittle}>{t('record.date')}</Text>
                     <Text style={RecordStyle.text}>01/10/2023</Text>
 
                     <Button
@@ -141,26 +144,25 @@ const Records = ({ navigation }) => {
                       onPress={() => handlePendingOrderSelect(order.reference)}
                     >
                       <Text style={GlobalStyles.textBtnSecundary}>
-                        View details
+                        {t('record.viewDetails')}
                       </Text>
                     </Button>
                   </View>
                 </View>
               ))}
             </View>
-
           ) : (
             <View>
               {pendingOrders.map((order) => (
                 <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
                   <View style={RecordStyle.textCard} key={order.reference}>
-                    <Text style={RecordStyle.tittle}>#Order</Text>
+                    <Text style={RecordStyle.tittle}> {t('record.order')}</Text>
                     <Text style={RecordStyle.text}>{order.reference}</Text>
-                    <Text style={RecordStyle.tittle}>Amount</Text>
+                    <Text style={RecordStyle.tittle}>{t('record.amount')}</Text>
                     <Text style={RecordStyle.text}>£{order.total}</Text>
                   </View>
                   <View style={RecordStyle.textCard}>
-                    <Text style={RecordStyle.tittle}>Date</Text>
+                    <Text style={RecordStyle.tittle}>{t('record.date')}</Text>
                     <Text style={RecordStyle.text}>{order.created_date}</Text>
                     <Button
                       title="View details"
@@ -168,14 +170,13 @@ const Records = ({ navigation }) => {
                       onPress={() => navigation.navigate('pendingRecord')}
                     >
                       <Text style={GlobalStyles.textBtnSecundary}>
-                        View details
+                        {t('record.viewDetails')}
                       </Text>
                     </Button>
                   </View>
                 </View>
               ))}
             </View>
-
           )}
         </View>
       </ScrollView>

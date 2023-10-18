@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { MaterialIcons } from '@expo/vector-icons'
 import { DisputeStyle } from '../../styles/PendingRecordStyle'
 import { GlobalStyles } from '../../styles/Styles'
+
 function DisputeRecord() {
   return (
     <SafeAreaView style={DisputeStyle.dispute}>

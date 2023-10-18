@@ -3,13 +3,13 @@ import {
   View,
   Text,
   TouchableWithoutFeedback,
-  StyleSheet,
   Animated,
   Easing,
 } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
+import { SettingsStyle } from '../../styles/SettingsStyle'
 
-const AccordionListItem = ({ title, children }) => {
+const AccordionListItem = ({ title, children, onListToggle }) => {
   const [open, setOpen] = useState(false)
   const animatedController = useRef(new Animated.Value(0)).current
   const [bodySectionHeight, setBodySectionHeight] = useState()
@@ -28,32 +28,41 @@ const AccordionListItem = ({ title, children }) => {
     if (open) {
       Animated.timing(animatedController, {
         duration: 300,
+        useNativeDriver: false,
         toValue: 0,
         easing: Easing.bezier(0.4, 0.0, 0.2, 1),
       }).start()
     } else {
       Animated.timing(animatedController, {
         duration: 300,
+        useNativeDriver: false,
         toValue: 1,
         easing: Easing.bezier(0.4, 0.0, 0.2, 1),
       }).start()
     }
     setOpen(!open)
+    onListToggle()
   }
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => toggleListItem()}>
-        <View style={styles.titleContainer}>
-          <Text>{title}</Text>
+        <View style={SettingsStyle.titleContainer}>
+          <Text style={SettingsStyle.styleTextTitle}>{title}</Text>
           <Animated.View style={{ transform: [{ rotateZ: arrowAngle }] }}>
-            <MaterialIcons name="keyboard-arrow-down" size={20} color="black" />
+            <MaterialIcons
+              name="keyboard-arrow-down"
+              size={30}
+              color="#04444f"
+            />
           </Animated.View>
         </View>
       </TouchableWithoutFeedback>
-      <Animated.View style={[styles.bodyBackground, { height: bodyHeight }]}>
+      <Animated.View
+        style={[SettingsStyle.bodyBackground, { height: bodyHeight }]}
+      >
         <View
-          style={styles.bodyContainer}
+          style={SettingsStyle.bodyContainer}
           onLayout={(event) =>
             setBodySectionHeight(event.nativeEvent.layout.height)
           }
@@ -66,23 +75,3 @@ const AccordionListItem = ({ title, children }) => {
 }
 
 export default AccordionListItem
-
-const styles = StyleSheet.create({
-  bodyBackground: {
-    backgroundColor: '#EFEFEF',
-    overflow: 'hidden',
-  },
-  titleContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-    paddingLeft: 10,
-  },
-  bodyContainer: {
-    padding: 10,
-    paddingLeft: 10,
-    bottom: 0,
-  },
-})

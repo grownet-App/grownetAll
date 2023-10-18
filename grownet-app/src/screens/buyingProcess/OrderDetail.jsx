@@ -5,13 +5,11 @@ import useOrderStore from '../../store/useOrderStore'
 import { GlobalStyles, OrdersDetailStyles } from '../../styles/Styles'
 import ProductDetail from '../../components/buyingProcess/ProductDetail'
 import { ScrollView } from 'react-native-gesture-handler'
-
-
-
-
 import { OrderDetailStyle } from '../../styles/OrderDetailStyle'
+import { useTranslation } from 'react-i18next'
 
 export default function OrderDetails() {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const articlesToPayStore = useOrderStore()
   const totalNet = articlesToPayStore.totalNet
@@ -47,22 +45,30 @@ export default function OrderDetails() {
               updateTotalNet={updateTotalNet}
             />
             <View>
-              <Text style={OrderDetailStyle.tittle}>Payment details</Text>
+              <Text style={OrderDetailStyle.tittle}>
+                {t('orderDetails.paymentDetails')}
+              </Text>
               <View style={OrdersDetailStyles.productDetail}>
-                <Text style={OrderDetailStyle.text}>Net</Text>
+                <Text style={OrderDetailStyle.text}>
+                  {t('orderDetails.net')}
+                </Text>
                 <Text style={OrderDetailStyle.text}>
                   £{totalNet.toFixed(2)}
                 </Text>
               </View>
               <View style={OrdersDetailStyles.productDetail}>
-                <Text style={OrderDetailStyle.text}>Tax</Text>
+                <Text style={OrderDetailStyle.text}>
+                  {t('orderDetails.tax')}
+                </Text>
                 <Text style={OrderDetailStyle.text}>
                   £{totalTaxes.toFixed(2)}
                 </Text>
               </View>
             </View>
             <View style={OrdersDetailStyles.totalDetail}>
-              <Text style={OrderDetailStyle.currentText}>Current value</Text>
+              <Text style={OrderDetailStyle.currentText}>
+                {t('orderDetails.currentvalue')}
+              </Text>
               <Text style={OrderDetailStyle.currentText}>
                 £{totalToPay.toFixed(2)}
               </Text>
@@ -72,7 +78,9 @@ export default function OrderDetails() {
             style={[GlobalStyles.btnPrimary, OrderDetailStyle.spaceButton]}
             onPress={() => navigation.navigate('orderInformation')}
           >
-            <Text style={GlobalStyles.textBtnSecundary}>Continue</Text>
+            <Text style={GlobalStyles.textBtnSecundary}>
+              {t('orderDetails.continue')}
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

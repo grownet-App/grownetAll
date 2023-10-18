@@ -69,4 +69,40 @@ export const SettingsStyle = StyleSheet.create({
     marginTop: 10,
     justifyContent: 'space-between',
   },
+
+  // ACCORDION_LIST
+  bodyBackground: {
+    backgroundColor: '#EFEFEF',
+    overflow: 'hidden',
+  },
+  titleContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+    paddingLeft: 10,
+    marginHorizontal: 30,
+  },
+  bodyContainer: {
+    padding: 10,
+    paddingLeft: 10,
+    bottom: 0,
+    position: 'absolute',
+  },
+  styleTextTitle: {
+    color: '#04444f',
+    fontSize: 15,
+    fontFamily: 'PoppinsRegular',
+  },
+  Languages: {
+    color: '#04444f',
+    fontFamily: 'PoppinsRegular',
+    marginVertical: 5,
+    marginHorizontal: 8,
+  },
+  itemsAccordion: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 })
