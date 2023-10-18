@@ -9,8 +9,10 @@ import useRecordStore from '../../store/useRecordStore'
 import { useEffect, useState } from 'react'
 import { selectedStorageOrder } from '../../config/urls.config'
 import { ScrollView } from 'react-native-gesture-handler'
+import { useTranslation } from 'react-i18next'
 
 function PastRecord() {
+  const { t } = useTranslation()
   const { token } = useTokenStore()
   const { selectedPendingOrder } = useRecordStore()
   const [detailsToShow, setDetailsToShow] = useState({})
@@ -35,7 +37,9 @@ function PastRecord() {
       <ScrollView>
         {detailsToShow && (
           <View style={GlobalStyles.cardInvoces}>
-            <Text style={PastStyle.tittle}>Supplier details</Text>
+            <Text style={PastStyle.tittle}>
+              {t('pastRecord.supplierDetails')}
+            </Text>
             <View style={PastStyle.products}>
               <Text style={PastStyle.subtittle}>
                 {detailsToShow.nameSuppliers}
@@ -45,7 +49,10 @@ function PastRecord() {
               </Text>
             </View>
             <Text style={PastStyle.p}>{detailsToShow.created_date}</Text>
-            <Text style={PastStyle.tittle}>Product details</Text>
+            <Text style={PastStyle.tittle}>
+              {' '}
+              {t('pastRecord.productDetails')}
+            </Text>
             {detailsToShow.products?.map((product) => (
               <View>
                 <View style={PastStyle.products}>
@@ -57,16 +64,20 @@ function PastRecord() {
                 </Text>
               </View>
             ))}
-            <Text style={PastStyle.tittle}>Payment details</Text>
+            <Text style={PastStyle.tittle}>
+              {t('pastRecord.paymentDetails')}
+            </Text>
             <View style={PastStyle.products}>
-              <Text style={PastStyle.subtittle}>Tax</Text>
+              <Text style={PastStyle.subtittle}>{t('pastRecord.tax')}</Text>
               <Text style={PastStyle.subtittle}>
                 £{detailsToShow.total_tax}
               </Text>
             </View>
             <View style={PastStyle.total}>
               <View style={PastStyle.products}>
-                <Text style={PastStyle.textTotal}>Current value</Text>
+                <Text style={PastStyle.textTotal}>
+                  {t('pastRecord.currentTotal')}
+                </Text>
                 <Text style={PastStyle.textTotal}>£{detailsToShow.total}</Text>
               </View>
             </View>

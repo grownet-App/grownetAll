@@ -8,8 +8,10 @@ import { LoginStyle } from '../../styles/LoginStyle'
 import { GlobalStyles } from '../../styles/Styles'
 import { validationApiUrl, onlyCountries } from '../../config/urls.config'
 import useTokenStore from '../../store/useTokenStore'
+import { useTranslation } from 'react-i18next'
 
 const LoginPage = () => {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const [phoneNumber, setPhoneNumber] = useState('')
   const [phoneDos, setPhoneDos] = useState('')
@@ -77,7 +79,7 @@ const LoginPage = () => {
         resizeMode="contain"
       />
 
-      <Text style={GlobalStyles.p}>Enter your mobile number:</Text>
+      <Text style={GlobalStyles.p}>{t('login.enterMobileNumber')}</Text>
       <View style={LoginStyle.inputCountry}>
         {countries.length > 0 ? (
           <PhoneInput
@@ -85,6 +87,7 @@ const LoginPage = () => {
               countryCodes: countries,
             }}
             defaultCode={'GB'}
+            placeholder={t('login.phoneNumber')}
             defaultValue={phoneNumber}
             onChangeText={(text) => {
               setPhoneNumber(text)
@@ -102,7 +105,9 @@ const LoginPage = () => {
         style={GlobalStyles.btnSecundary}
         onPress={handleChange}
       >
-        <Text style={GlobalStyles.textBtnSecundary}>Let’s Begin</Text>
+        <Text style={GlobalStyles.textBtnSecundary}>
+          {t('login.letsBegin')}
+        </Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>

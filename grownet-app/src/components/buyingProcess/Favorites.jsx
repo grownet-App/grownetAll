@@ -3,8 +3,10 @@ import { StyleSheet, Text, View } from 'react-native'
 import { useFavoritesStore } from '../../store/useFavoriteStore'
 import useOrderStore from '../../store/useOrderStore'
 import ProductCard from './ProductCards'
+import { useTranslation } from 'react-i18next'
 
 export default function Favorites({ onAmountChange, onUomChange }) {
+  const { t } = useTranslation()
   const { favorites } = useFavoritesStore()
   const { articlesToPay } = useOrderStore()
 
@@ -15,7 +17,8 @@ export default function Favorites({ onAmountChange, onUomChange }) {
   return (
     <View style={{ flex: 1 }}>
       <Text style={styles.StyleText}>
-        You have {favorites.length} favorites products:
+        <Text>{t('favorites.findFirstPart')} </Text> {favorites.length}{' '}
+        <Text>{t('favorites.findSecondPart')}</Text>
       </Text>
       <View style={{ flex: 1 }}>
         {favoriteProducts.map((product) => (

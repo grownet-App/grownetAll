@@ -5,7 +5,9 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { MaterialIcons } from '@expo/vector-icons'
 import { DisputeStyle } from '../../styles/PendingRecordStyle'
 import { GlobalStyles } from '../../styles/Styles'
+
 import UploadFile from '../../components/UploadFile'
+
 function DisputeRecord() {
   const [activeTab, setActiveTab] = useState('first')
 

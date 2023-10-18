@@ -15,8 +15,10 @@ import useTokenStore from '../../store/useTokenStore'
 import useOrderStore from '../../store/useOrderStore'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 
 const Restaurants = () => {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const { token } = useTokenStore()
   const { restaurants, setRestaurants, setSelectedRestaurant } = useOrderStore()
@@ -103,7 +105,7 @@ const Restaurants = () => {
                 style={{ padding: 10 }}
               />
               <Text style={RestaurantStyle.textAddRestaurant}>
-                Add restaurant
+                {t('restaurants.addRestaurant')}
               </Text>
             </View>
           </TouchableOpacity>

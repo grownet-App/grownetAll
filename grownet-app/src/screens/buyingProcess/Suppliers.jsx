@@ -14,8 +14,10 @@ import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 
 const Suppliers = () => {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const { token } = useTokenStore()
   const {
@@ -102,7 +104,7 @@ const Suppliers = () => {
                 style={{ padding: 10 }}
               />
               <Text style={SuppliersStyle.textAddRestaurant}>
-                Contact us to add suppliers
+                {t('suppliers.addSuppliers')}
               </Text>
             </View>
           </TouchableOpacity>

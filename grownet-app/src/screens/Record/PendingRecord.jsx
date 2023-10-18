@@ -11,7 +11,11 @@ import useRecordStore from '../../store/useRecordStore'
 import { selectedStorageOrder } from '../../config/urls.config'
 import { ScrollView } from 'react-native-gesture-handler'
 import { PastStyle } from '../../styles/PastRecordStyle'
+import { useTranslation } from 'react-i18next'
+
 function PendingRecord({ navigation }) {
+  const { t } = useTranslation()
+
   const [checked, setChecked] = useState(false)
 
   const onToggleCheckbox = () => {
@@ -28,7 +32,7 @@ function PendingRecord({ navigation }) {
       prevTab === 'productsRecord' ? 'reception' : 'productsRecord',
     )
   }
-  //Resumen
+  // Resumen
   const { token } = useTokenStore()
   const { selectedPendingOrder } = useRecordStore()
   const [detailsToShow, setDetailsToShow] = useState({})
@@ -75,7 +79,7 @@ function PendingRecord({ navigation }) {
                 color: activeTab === 'productsRecord' ? 'white' : '#04444f',
               }}
             >
-              Products
+              {t('pendingRecord.products')}
             </Text>
           </TouchableOpacity>
 
@@ -96,7 +100,7 @@ function PendingRecord({ navigation }) {
                 color: activeTab === 'reception' ? 'white' : '#04444f',
               }}
             >
-              Reception
+              {t('pendingRecord.reception')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -106,7 +110,10 @@ function PendingRecord({ navigation }) {
             <View style={PastStyle.past}>
               {detailsToShow && (
                 <View style={GlobalStyles.cardInvoces}>
-                  <Text style={PastStyle.tittle}>Supplier details</Text>
+                  <Text style={PastStyle.tittle}>
+                    {' '}
+                    {t('pendingRecord.supplierDetails')}
+                  </Text>
                   <View style={PastStyle.products}>
                     <Text style={PastStyle.subtittle}>
                       {detailsToShow.nameSuppliers}
@@ -116,7 +123,10 @@ function PendingRecord({ navigation }) {
                     </Text>
                   </View>
                   <Text style={PastStyle.p}>{detailsToShow.created_date}</Text>
-                  <Text style={PastStyle.tittle}>Product details</Text>
+                  <Text style={PastStyle.tittle}>
+                    {' '}
+                    {t('pendingRecord.productDetails')}
+                  </Text>
                   {detailsToShow.products?.map((product) => (
                     <View>
                       <View style={PastStyle.products}>
@@ -130,16 +140,22 @@ function PendingRecord({ navigation }) {
                       </Text>
                     </View>
                   ))}
-                  <Text style={PastStyle.tittle}>Payment details</Text>
+                  <Text style={PastStyle.tittle}>
+                    {t('pendingRecord.paymentDetails')}
+                  </Text>
                   <View style={PastStyle.products}>
-                    <Text style={PastStyle.subtittle}>Tax</Text>
+                    <Text style={PastStyle.subtittle}>
+                      {t('pendingRecord.tax')}
+                    </Text>
                     <Text style={PastStyle.subtittle}>
                       £{detailsToShow.total_tax}
                     </Text>
                   </View>
                   <View style={PastStyle.total}>
                     <View style={PastStyle.products}>
-                      <Text style={PastStyle.textTotal}>Current value</Text>
+                      <Text style={PastStyle.textTotal}>
+                        {t('pendingRecord.currentTotal')}
+                      </Text>
                       <Text style={PastStyle.textTotal}>
                         £{detailsToShow.total}
                       </Text>
@@ -150,7 +166,9 @@ function PendingRecord({ navigation }) {
             </View>
           ) : (
             <View style={[PendingStyle.receptionCard, GlobalStyles.boxShadow]}>
-              <Text style={PendingStyle.title}>Check your products</Text>
+              <Text style={PendingStyle.title}>
+                {t('pendingRecord.checkYourProducts')}
+              </Text>
               <View style={PendingStyle.cardProduct}>
                 <View style={PendingStyle.dispute}>
                   <Text style={PendingStyle.text}>Broccoli</Text>
@@ -162,12 +180,16 @@ function PendingRecord({ navigation }) {
                     onPress={onToggleCheckbox}
                   />
                   <Button onPress={() => navigation.navigate('disputeRecord')}>
-                    <Text style={PendingStyle.p}>Open dispute</Text>
+                    <Text style={PendingStyle.p}>
+                      {t('pendingRecord.openDispute')}
+                    </Text>
                   </Button>
                 </View>
               </View>
               <Button style={GlobalStyles.btnPrimary}>
-                <Text style={GlobalStyles.textBtnSecundary}>Confirm order</Text>
+                <Text style={GlobalStyles.textBtnSecundary}>
+                  {t('pendingRecord.confirmOrder')}
+                </Text>
               </Button>
             </View>
           )}
