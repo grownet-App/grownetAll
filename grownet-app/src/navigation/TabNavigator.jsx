@@ -17,8 +17,8 @@ import OrderSuccessful from '../screens/buyingProcess/OrderSuccessful'
 import Products from '../screens/buyingProcess/Products'
 import Restauranst from '../screens/buyingProcess/Restaurants'
 import Suppliers from '../screens/buyingProcess/Suppliers'
-import useTokenStore from '../store/useTokenStore'
 import DisputeRecord from '../screens/Record/DisputeRecord'
+import TermsAndConditions from '../screens/TermsAndConditions'
 import { useTranslation } from 'react-i18next'
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -42,15 +42,57 @@ const HeaderLeft = () => {
   )
 }
 
-const headerRight = () => (
-  <Button
-    /* eslint-disable no-alert */
-    onPress={() => alert('This is a button!')}
-    title="Info"
-    color="#fff"
-  />
-)
+function SettingsStack() {
+  const { t } = useTranslation()
+  return (
+    <Stack.Navigator
+      initialRouteName="Settings"
+      screenOptions={{
+        headerMode: 'screen',
+        headerTintColor: 'white',
+        headerStyle: { backgroundColor: '#026CD2' },
+      }}
+    >
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          headerBackTitleVisible: false,
 
+          title: t('menuPrimary.titleSettings'),
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#f2f2f2',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTitleStyle: {
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
+            color: '#026CD2',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Terms&Conditions"
+        component={TermsAndConditions}
+        options={{
+          headerShown: true,
+          title: 'Terms & Conditions',
+          headerStyle: {
+            backgroundColor: '#f2f2f2',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
+          },
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
 function OrderStack() {
   const { t } = useTranslation()
   return (
@@ -173,7 +215,7 @@ function OrderStack() {
     </Stack.Navigator>
   )
 }
-function MyStack1() {
+function RecordsStack() {
   const { t } = useTranslation()
   return (
     <Stack.Navigator
@@ -257,7 +299,7 @@ function MyStack1() {
     </Stack.Navigator>
   )
 }
-function MyStack3() {
+function ChatStack() {
   return (
     <Stack.Navigator
       initialRouteName="login"
@@ -273,7 +315,6 @@ function MyStack3() {
         options={{
           headerBackTitleVisible: false,
           headerLeft: () => HeaderLeft(),
-          headerRight: () => headerRight(),
         }}
       />
     </Stack.Navigator>
@@ -306,21 +347,10 @@ const TabNavigator = () => {
     >
       <Tab.Screen
         name={t('menuPrimary.Settings')}
-        component={Settings}
+        component={SettingsStack}
         options={{
           tabBarIcon: tabBarIconProps('Settings'),
-          headerShown: true,
-          title: t('menuPrimary.titleSettings'),
-          headerTitleAlign: 'center',
-          headerStyle: {
-            backgroundColor: '#f2f2f2',
-            height: StatusBar.currentHeight + 60,
-          },
-          headerTitleStyle: {
-            fontFamily: 'PoppinsSemi',
-            fontSize: 22,
-            color: '#026CD2',
-          },
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -334,7 +364,7 @@ const TabNavigator = () => {
 
       <Tab.Screen
         name={t('menuPrimary.records')}
-        component={MyStack1}
+        component={RecordsStack}
         options={{
           tabBarIcon: tabBarIconProps('records'),
           headerShown: false,
@@ -342,7 +372,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name={t('menuPrimary.chat')}
-        component={MyStack3}
+        component={ChatStack}
         options={{
           tabBarIcon: tabBarIconProps('chat'),
           headerShown: false,

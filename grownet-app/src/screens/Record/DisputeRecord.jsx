@@ -141,7 +141,7 @@ function DisputeRecord() {
           <Button style={[GlobalStyles.btnPrimary, DisputeStyle.space]}>
             <Text style={GlobalStyles.textBtnSecundary}>Send</Text>
           </Button>
-          <View style={DisputeStyle.space}></View>
+          <View style={DisputeStyle.space} />
         </View>
       </ScrollView>
     </SafeAreaView>

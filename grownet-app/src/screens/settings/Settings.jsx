@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 import { AntDesign, Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import React, { useState, useRef } from 'react'
 import { SafeAreaView, TouchableOpacity, View, Animated } from 'react-native'
-import { Button, Card, Text } from 'react-native-paper'
+import { Card, Text } from 'react-native-paper'
 import useTokenStore from '../../store/useTokenStore'
 import { SettingsStyle } from '../../styles/SettingsStyle'
 import AccordionListItem from './AccordionListItem'
@@ -25,7 +24,7 @@ const Settings = () => {
   const handleListToggle = () => {
     setListOpen(!isListOpen)
     Animated.timing(logoutButtonPosition, {
-      toValue: isListOpen ? 0 : 100,
+      toValue: isListOpen ? 0 : 110,
       duration: 300,
       useNativeDriver: false,
     }).start()
@@ -38,6 +37,10 @@ const Settings = () => {
       console.error('Error al cerrar sesión:', error)
     }
   }
+  const navigateTermnsAndConditions = () => {
+    navigation.navigate('Terms&Conditions')
+  }
+
   return (
     <SafeAreaView style={SettingsStyle.settings}>
       <Text style={SettingsStyle.tittle}>{t('settings.hi')} 👋</Text>
@@ -103,14 +106,24 @@ const Settings = () => {
           </View>
         </AccordionListItem>
       </View>
+      <Animated.View style={{ marginTop: logoutButtonPosition }}>
+        <View style={SettingsStyle.containerFaqAndTerms}>
+          <TouchableOpacity style={SettingsStyle.FaqAndTerms}>
+            <Text style={SettingsStyle.styleTextTitle}>FAQ</Text>
+            <Ionicons name="chevron-forward" size={24} color="#04444F" />
+          </TouchableOpacity>
+        </View>
 
-      {/* <Button style={SettingsStyle.settingButton}>
-        <Text>FAQ</Text>
-        <Ionicons name="chevron-forward" size={24} color="#04444F" />
-      </Button> */}
-      <Animated.View
-        style={[SettingsStyle.btnlogOut, { marginTop: logoutButtonPosition }]}
-      >
+        <View style={SettingsStyle.containerFaqAndTerms}>
+          <TouchableOpacity
+            style={SettingsStyle.FaqAndTerms}
+            onPress={navigateTermnsAndConditions}
+          >
+            <Text style={SettingsStyle.styleTextTitle}>Terms & conditions</Text>
+            <Ionicons name="chevron-forward" size={24} color="#04444F" />
+          </TouchableOpacity>
+        </View>
+
         <TouchableOpacity
           style={SettingsStyle.btnlogOut}
           onPress={handleLogout}
