@@ -109,7 +109,10 @@ const Settings = () => {
       <Animated.View style={{ marginTop: logoutButtonPosition }}>
         <View style={SettingsStyle.containerFaqAndTerms}>
           <TouchableOpacity style={SettingsStyle.FaqAndTerms}>
-            <Text style={SettingsStyle.styleTextTitle}>FAQ</Text>
+            <Text style={SettingsStyle.styleTextTitle}>
+              {' '}
+              {t('settings.faq')}
+            </Text>
             <Ionicons name="chevron-forward" size={24} color="#04444F" />
           </TouchableOpacity>
         </View>
@@ -119,7 +122,9 @@ const Settings = () => {
             style={SettingsStyle.FaqAndTerms}
             onPress={navigateTermnsAndConditions}
           >
-            <Text style={SettingsStyle.styleTextTitle}>Terms & conditions</Text>
+            <Text style={SettingsStyle.styleTextTitle}>
+              {t('settings.termsAndConditions')}
+            </Text>
             <Ionicons name="chevron-forward" size={24} color="#04444F" />
           </TouchableOpacity>
         </View>

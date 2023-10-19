@@ -97,3 +97,53 @@ export const CarouselStyle = StyleSheet.create({
     marginBottom: 33,
   },
 })
+export const ModalStyle = StyleSheet.create({
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+  },
+  modalView: {
+    width: '100%',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalTextTitle: {
+    fontFamily: 'PoppinsSemi',
+    fontSize: 25,
+    color: '#04444f',
+  },
+  modalText: {
+    fontFamily: 'PoppinsRegular',
+    color: '#04444f',
+  },
+  modalText2: {
+    fontFamily: 'PoppinsRegular',
+    color: '#026CD2',
+  },
+  TextChange: {
+    fontFamily: 'PoppinsRegular',
+    color: '#026CD2',
+    marginTop: 10,
+  },
+})
