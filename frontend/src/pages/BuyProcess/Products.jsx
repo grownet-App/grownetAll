@@ -60,6 +60,7 @@ export default function Products(props) {
           useOrderStore.setState({ articlesToPay: productsWithTax });
           setArticles(productsWithTax);
           setProducts(productsWithTax);
+          console.log("Productos del proveedor:", productsWithTax)
         })
         .catch((error) => {
           console.error("Error al obtener los productos del proveedor:", error);

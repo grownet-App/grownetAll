@@ -4,6 +4,10 @@ import Form from "react-bootstrap/Form";
 import "../../css/products.css";
 import { useFavoritesStore } from "../../store/useFavoritesStore";
 import Stepper from "../Stepper/Stepper";
+import axios from "axios";
+import { addRemoveFavorite } from "../../config/urls.config";
+import useOrderStore from "../../store/useOrderStore";
+import useTokenStore from "../../store/useTokenStore";
 
 export default function ProductCard({
   productData,
@@ -13,20 +17,66 @@ export default function ProductCard({
   const counter = 0;
   const { id, name, image, prices, priceWithTax, uomToPay, idUomToPay } = productData;
   const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
+  const { token } = useTokenStore();
+  const { selectedRestaurant, selectedSupplier } = useOrderStore();
   const isFavorite = favorites.includes(id, name, image);
   const urlImg =
     "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/";
   const selectedUom = prices.find((price) => price.nameUoms === uomToPay);
 
-  const handleToggleFavorite = () => {
-    if (isFavorite) {
+  /* const toggleFavorite = async (product_id) => {
+    try {
+      const favoritesData = {
+        customer_id: selectedRestaurant.accountNumber,
+        product_id: product_id,
+        supplier_id: selectedSupplier.id,
+        active: 0,
+      };
+      const response = await axios.post( addRemoveFavorite, favoritesData);
+      console.log("Éxito", response.data);
+      } catch (error) {
+      console.log("Error al modificar el favorito", error);
+    }
+  }; */
+
+  const handleToggleFavorite = async () => {
+    try {
+      if (isFavorite) {
       console.log("remove the ", id);
       removeFavorite(id);
-    } else {
+      const removeData = {
+          customer_id: selectedRestaurant.accountNumber,
+          product_id: id,
+          supplier_id: selectedSupplier.id,
+          active: 0,
+        };
+        const response = await axios.post( addRemoveFavorite, removeData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        console.log("Se eliminó el favorito de la BD", response.data);
+      } else {
       console.log("add the ", id);
       addFavorite(id);
-    }
-  };
+
+        const addData = {
+          customer_id: selectedRestaurant.accountNumber,
+          product_id: id,
+          supplier_id: selectedSupplier.id,
+          active: 1,
+        };
+        const response = await axios.post( addRemoveFavorite, addData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("Éxito al agregar favorito", response.data);
+        } 
+      } catch (error) {
+        console.log("Error al agregar el favorito", error);
+      }
+    };
 
   const handleUomToPayChange = (event) => {
     const newUomToPay = event.target.value;
