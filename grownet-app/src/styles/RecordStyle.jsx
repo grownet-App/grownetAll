@@ -51,7 +51,7 @@ export const RecordStyle = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 15,
   },
-  /*input*/
+  /* input*/
   input: {
     flexDirection: 'row',
     width: 320,
