@@ -5,29 +5,35 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { MaterialIcons } from '@expo/vector-icons'
 import { DisputeStyle } from '../../styles/PendingRecordStyle'
 import { GlobalStyles } from '../../styles/Styles'
-
+import { useTranslation } from 'react-i18next'
 import UploadFile from '../../components/UploadFile'
 
 function DisputeRecord() {
   const [activeTab, setActiveTab] = useState('first')
-
+  const { t } = useTranslation()
   const renderContent = () => {
     if (activeTab === 'first') {
       return (
         <View>
           <View style={[GlobalStyles.boxShadow, DisputeStyle.cardForm]}>
-            <Text style={DisputeStyle.text}>Enter quantity delivered:</Text>
+            <Text style={DisputeStyle.text}>
+              {t('disputeRecord.enterQuantityDelivered')}
+            </Text>
             <TextInput
               style={DisputeStyle.input}
               placeholder="11 total received"
               required
             />
-            <Text style={DisputeStyle.text}>Add a comment:</Text>
+            <Text style={DisputeStyle.text}>
+              {t('disputeRecord.addComment')}
+            </Text>
             <TextInput style={DisputeStyle.input} multiline />
           </View>
           <View style={[GlobalStyles.boxShadow, DisputeStyle.cardForm]}>
             <View style={DisputeStyle.optionForm}>
-              <Text style={DisputeStyle.text}>Send Next Order</Text>
+              <Text style={DisputeStyle.text}>
+                {t('disputeRecord.sendNextOrder')}
+              </Text>
               <Checkbox.Item
                 label=""
                 status={
@@ -37,7 +43,9 @@ function DisputeRecord() {
               />
             </View>
             <View style={DisputeStyle.optionForm}>
-              <Text style={DisputeStyle.text}>Credit note</Text>
+              <Text style={DisputeStyle.text}>
+                {t('disputeRecord.creditNote')}
+              </Text>
               <Checkbox.Item
                 label=""
                 status={
@@ -53,13 +61,17 @@ function DisputeRecord() {
       return (
         <View>
           <View style={[GlobalStyles.boxShadow, DisputeStyle.cardForm]}>
-            <Text style={DisputeStyle.text}>Enter quantity delivered:</Text>
+            <Text style={DisputeStyle.text}>
+              {t('disputeRecord.enterQuantityDelivered')}
+            </Text>
             <TextInput
               style={DisputeStyle.input}
               placeholder="11 total received"
               required
             />
-            <Text style={DisputeStyle.text}>Add a comment:</Text>
+            <Text style={DisputeStyle.text}>
+              {t('disputeRecord.addComment')}
+            </Text>
             <TextInput
               style={DisputeStyle.input}
               editable
@@ -76,7 +88,9 @@ function DisputeRecord() {
       return (
         <View>
           <View style={[GlobalStyles.boxShadow, DisputeStyle.cardForm]}>
-            <Text style={DisputeStyle.text}>Add a comment:</Text>
+            <Text style={DisputeStyle.text}>
+              {t('disputeRecord.addComment')}
+            </Text>
             <TextInput
               style={DisputeStyle.input}
               editable
@@ -119,27 +133,35 @@ function DisputeRecord() {
               onPress={() => setActiveTab('first')}
               style={activeTab === 'first' ? activeButtonColor : null}
             >
-              <Text style={DisputeStyle.text}>Wrong quantity</Text>
+              <Text style={DisputeStyle.text}>
+                {t('disputeRecord.wrongQuantity')}
+              </Text>
             </Button>
             <Button
               mode={activeTab === 'second' ? 'contained' : 'text'}
               onPress={() => setActiveTab('second')}
               style={activeTab === 'second' ? activeButtonColor : null}
             >
-              <Text style={DisputeStyle.text}>Defective</Text>
+              <Text style={DisputeStyle.text}>
+                {t('disputeRecord.defective')}
+              </Text>
             </Button>
             <Button
               mode={activeTab === 'third' ? 'contained' : 'text'}
               onPress={() => setActiveTab('third')}
               style={activeTab === 'third' ? activeButtonColor : null}
             >
-              <Text style={DisputeStyle.text}>Other</Text>
+              <Text style={DisputeStyle.text}>{t('disputeRecord.other')}</Text>
             </Button>
           </View>
-          <Text style={DisputeStyle.text}>Leave your comments here:</Text>
+          <Text style={DisputeStyle.text}>
+            {t('disputeRecord.leaveYourCommentsHere')}
+          </Text>
           {renderContent()}
           <Button style={[GlobalStyles.btnPrimary, DisputeStyle.space]}>
-            <Text style={GlobalStyles.textBtnSecundary}>Send</Text>
+            <Text style={GlobalStyles.textBtnSecundary}>
+              {t('disputeRecord.send')}
+            </Text>
           </Button>
           <View style={DisputeStyle.space} />
         </View>
