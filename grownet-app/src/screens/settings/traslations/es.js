@@ -20,6 +20,10 @@ const esTranslations = {
     verifyAndProceed: 'Verificar y Continuar',
     didntReceiveCode: '¿No recibiste el código?',
     sendAgain: 'Enviar nuevamente',
+    title: 'Lo sentimos',
+    message: 'El código que ingresaste es incorrecto',
+    code: 'Intentar de nuevo',
+    message2Modal: 'Por favor ingresa el código.',
   },
   restaurants: {
     addRestaurant: '¡Contáctanos para agregar restaurantes!',
@@ -79,6 +83,21 @@ const esTranslations = {
     order: '#Orden',
     amount: 'Monto',
     date: 'Fecha',
+  },
+  disputeRecord: {
+    enterQuantityDelivered: 'Ingrese la cantidad entregada:',
+    addComment: 'Agregar un comentario:',
+    sendNextOrder: 'Enviar el próximo pedido',
+    creditNote: 'Nota de crédito',
+    wrongQuantity: 'Cantidad incorrecta',
+    defective: 'Defectuoso',
+    other: 'Otro',
+    leaveYourCommentsHere: 'Deje sus comentarios aquí:',
+    send: 'Enviar',
+  },
+  uploadFile: {
+    attachPhoto: 'Adjuntar foto:',
+    customUpload: 'Subida personalizada',
   },
   pendingRecord: {
     products: 'Productos',

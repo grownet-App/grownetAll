@@ -145,4 +145,17 @@ export const ModalStyle = StyleSheet.create({
     color: '#026CD2',
     marginTop: 10,
   },
+  TextChange2: {
+    fontFamily: 'PoppinsRegular',
+    color: 'white',
+    marginTop: 10,
+    textAlign: 'center',
+    paddingVertical: 3,
+    marginBottom: 6,
+  },
+  bgInt: {
+    backgroundColor: '#026CD2',
+    borderRadius: 51,
+    width: '50%',
+  },
 })

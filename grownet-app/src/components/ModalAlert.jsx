@@ -19,6 +19,7 @@ const ModalAlert = ({
   handleOutsidePress = () => {},
   showModal,
   Top,
+  isOtp,
 }) => {
   return (
     <Modal
@@ -42,8 +43,13 @@ const ModalAlert = ({
                 {`${countryCode} ${phoneNumber}`}
               </Text>
 
-              <TouchableOpacity onPress={closeModal}>
-                <Text style={ModalStyle.TextChange} onPress={closeModal}>
+              <TouchableOpacity
+                onPress={closeModal}
+                style={isOtp ? ModalStyle.bgInt : ''}
+              >
+                <Text
+                  style={isOtp ? ModalStyle.TextChange2 : ModalStyle.TextChange}
+                >
                   {message2}
                 </Text>
               </TouchableOpacity>

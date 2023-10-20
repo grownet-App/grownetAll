@@ -14,9 +14,15 @@ import { otpApiUrl } from '../../config/urls.config'
 import axios from '../../../axiosConfig.'
 import useTokenStore from '../../store/useTokenStore'
 import { useTranslation } from 'react-i18next'
+import ModalAlert from '../../components/ModalAlert'
 
 const Otp = () => {
   const { t } = useTranslation()
+
+  const [showModal, setShowModal] = useState(false)
+  const [showEmptyInputModal, setShowEmptyInputModal] = useState(false)
+  const [Otp, setOtp] = useState('')
+
   const pin1Ref = useRef()
   const pin2Ref = useRef()
   const pin3Ref = useRef()
@@ -33,19 +39,34 @@ const Otp = () => {
   const enviarOTP = async () => {
     const otp = pin1 + pin2 + pin3 + pin4
 
+    setOtp(otp)
     const formData = route.params
+    if (otp.length !== 4) {
+      setShowEmptyInputModal(true)
+      return
+    }
 
     try {
       const response = await axios.post(
         `${otpApiUrl}?country=${formData.country}&telephone=${formData.telephone}&code=${otp}`,
       )
-      console.log('Respuesta de la API:', response.data)
-      const token = response.data.token
-      setToken(token)
-      console.log('token:', token)
+      if (response.data.flag === 1) {
+        const token = response.data.token
+        setToken(token)
+        console.log('token:', token)
+      } else {
+        setShowModal(true)
+      }
     } catch (error) {
       console.error('Error al enviar OTP:', error)
     }
+  }
+  const closeModal = () => {
+    setShowModal(false)
+    setShowEmptyInputModal(false)
+  }
+  const handleOutsidePress = () => {
+    closeModal()
   }
 
   return (
@@ -121,6 +142,25 @@ const Otp = () => {
           <Text style={OtpStyle.sendCode}>{t('codeOtp.sendAgain')}</Text>
         </TouchableOpacity>
       </View>
+      <ModalAlert
+        showModal={showModal}
+        closeModal={closeModal}
+        handleOutsidePress={handleOutsidePress}
+        Title={t('codeOtp.title')}
+        message={t('codeOtp.message')}
+        countryCode={Otp}
+        message2={t('codeOtp.code')}
+        isOtp
+      />
+
+      <ModalAlert
+        showModal={showEmptyInputModal}
+        closeModal={closeModal}
+        handleOutsidePress={handleOutsidePress}
+        Title={t('login.modalTitle_2')}
+        message={t('codeOtp.message2Modal')}
+        Top
+      />
     </SafeAreaView>
   )
 }
