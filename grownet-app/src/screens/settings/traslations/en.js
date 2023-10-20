@@ -20,6 +20,10 @@ const enTranslations = {
     verifyAndProceed: 'Verify & Proceed',
     didntReceiveCode: "Didn't you receive the code?",
     sendAgain: 'Send again',
+    title: 'Sorry',
+    message: 'The code you entered is incorrect',
+    code: 'Try again',
+    message2Modal: 'Please enter the code.',
   },
   restaurants: {
     addRestaurant: 'Contact us to add a restaurant!',
@@ -79,6 +83,21 @@ const enTranslations = {
     order: '#Order',
     amount: 'Amount',
     date: 'Date',
+  },
+  disputeRecord: {
+    enterQuantityDelivered: 'Enter quantity delivered:',
+    addComment: 'Add a comment:',
+    sendNextOrder: 'Send Next Order',
+    creditNote: 'Credit note',
+    wrongQuantity: 'Wrong quantity',
+    defective: 'Defective',
+    other: 'Other',
+    leaveYourCommentsHere: 'Leave your comments here:',
+    send: 'Send',
+  },
+  uploadFile: {
+    attachPhoto: 'Attach photo:',
+    customUpload: 'Custom Upload',
   },
   pendingRecord: {
     products: 'Products',
