@@ -16,7 +16,9 @@ import useTokenStore from '../../store/useTokenStore'
 import { allCategories } from '../../config/urls.config'
 import axios from '../../../axiosConfig.'
 import { useNavigation } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 const { width } = Dimensions.get('window')
+
 function ProductsCategories({
   blurIntensity,
   showFavorites,
@@ -24,6 +26,7 @@ function ProductsCategories({
   categoriesProduct,
   filterCategory,
 }) {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const isCarousel = useRef(null)
   const [categories, setCategories] = useState()
@@ -104,7 +107,9 @@ function ProductsCategories({
             style={ProductsStyles.bgContinue}
             onPress={handlePress}
           >
-            <Text style={ProductsStyles.ContinueText}>Continue</Text>
+            <Text style={ProductsStyles.ContinueText}>
+              {t('categoriesMenu.continue')}
+            </Text>
           </TouchableOpacity>
         </View>
       </BlurView>

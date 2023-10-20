@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react'
 import { navigate } from './RootNavigation'
 import useTokenStore from '../store/useTokenStore'
@@ -10,6 +11,7 @@ import {
   Poppins_400Regular,
   Poppins_600SemiBold,
   Poppins_500Medium,
+  Poppins_300Light_Italic,
 } from '@expo-google-fonts/poppins'
 import { createStackNavigator } from '@react-navigation/stack'
 import TabNavigator from './TabNavigator'
@@ -22,6 +24,7 @@ function AuthNavigator() {
     PoppinsRegular: Poppins_400Regular,
     PoppinsMedium: Poppins_500Medium,
     PoppinsSemi: Poppins_600SemiBold,
+    PoppinsItalic: Poppins_300Light_Italic,
   })
 
   const { token } = useTokenStore()

@@ -2,8 +2,8 @@ import { Feather } from '@expo/vector-icons'
 import axios from 'axios'
 import { format, set } from 'date-fns'
 import React, { useEffect, useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import { Button, TextInput } from 'react-native-paper'
+import { Text, TouchableOpacity, View, TextInput } from 'react-native'
+import { Button } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { allStorageOrders } from '../../config/urls.config'
 import useRecordStore from '../../store/useRecordStore'
@@ -13,7 +13,12 @@ import { SearchStyle } from '../../styles/SearchStyle'
 import { GlobalStyles } from '../../styles/Styles'
 import { ScrollView } from 'react-native-gesture-handler'
 
+import { useTranslation } from 'react-i18next'
+
+import { DisputeStyle } from '../../styles/PendingRecordStyle'
+
 const Records = ({ navigation }) => {
+  const { t } = useTranslation()
   const { token } = useTokenStore()
   const { pendingOrders, setPendingOrders, setSelectedPendingOrder } =
     useRecordStore()
@@ -58,113 +63,124 @@ const Records = ({ navigation }) => {
   return (
     <SafeAreaView style={RecordStyle.record}>
       <ScrollView>
-      <View style={SearchStyle.containerSearch}>
-        <TextInput
-          style={SearchStyle.BgInput}
-          value={input}
-          onChangeText={handleInputChange}
-          placeholder="Search for products"
-          placeholderStyle={SearchStyle.placeholderText}
-        ></TextInput>
-        <TouchableOpacity style={SearchStyle.iconSearch}>
-          <Feather name="search" size={24} color="#969696" />
-        </TouchableOpacity>
-      </View>
-      <View style={[RecordStyle.tabContainer, GlobalStyles.boxShadow]}>
-        <TouchableOpacity
-          style={[
-            {
-              flex: 1,
-              backgroundColor: activeTab === 'pastRecord' ? '#62c471' : 'white',
-              padding: 10,
-              alignItems: 'center',
-            },
-            RecordStyle.btnTab,
-          ]}
-          onPress={switchTab}
-        >
-          <Text
-            style={{
-              fontFamily: 'PoppinsRegular',
-              color: activeTab === 'pastRecord' ? 'white' : '#04444f',
-            }}
+        <View style={RecordStyle.input}>
+          <TextInput
+            style={RecordStyle.BgInput}
+            value={input}
+            onChangeText={handleInputChange}
+            placeholder={t('record.searchPlaceholder')}
+            placeholderStyle={SearchStyle.placeholderText}
+          />
+          <TouchableOpacity>
+            <Feather name="search" size={24} color="#969696" />
+          </TouchableOpacity>
+        </View>
+        <View style={[RecordStyle.tabContainer, GlobalStyles.boxShadow]}>
+          <TouchableOpacity
+            style={[
+              {
+                flex: 1,
+                backgroundColor:
+                  activeTab === 'pastRecord' ? '#62c471' : 'white',
+                padding: 10,
+                alignItems: 'center',
+              },
+              RecordStyle.btnTab,
+            ]}
+            onPress={switchTab}
           >
-            Past orders
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={{
+                fontFamily: 'PoppinsRegular',
+                color: activeTab === 'pastRecord' ? 'white' : '#04444f',
+              }}
+            >
+              {t('record.pastOrders')}
+            </Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[
-            {
-              flex: 1,
-              backgroundColor:
-                activeTab === 'pendingRecord' ? '#62c471' : 'white',
-            },
-            RecordStyle.btnTab,
-          ]}
-          onPress={switchTab}
-        >
-          <Text
-            style={{
-              fontFamily: 'PoppinsRegular',
-              color: activeTab === 'pendingRecord' ? 'white' : '#04444f',
-            }}
+          <TouchableOpacity
+            style={[
+              {
+                flex: 1,
+                backgroundColor:
+                  activeTab === 'pendingRecord' ? '#62c471' : 'white',
+              },
+              RecordStyle.btnTab,
+            ]}
+            onPress={switchTab}
           >
-            Pending orders
-          </Text>
-        </TouchableOpacity>
-      </View>
+            <Text
+              style={{
+                fontFamily: 'PoppinsRegular',
+                color: activeTab === 'pendingRecord' ? 'white' : '#04444f',
+              }}
+            >
+              {t('record.pendingOrders')}
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-      <View>
-        {/* Contenido de la pestaña activa */}
-        {activeTab === 'pastRecord' ? (
-          <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
-            <View style={RecordStyle.textCard}>
-              <Text style={RecordStyle.tittle}>#Order</Text>
-              <Text style={RecordStyle.text}>11154</Text>
-              <Text style={RecordStyle.tittle}>Amount</Text>
-              <Text style={RecordStyle.text}>£856</Text>
-            </View>
-            <View style={RecordStyle.textCard}>
-              <Text style={RecordStyle.tittle}>Date</Text>
-              <Text style={RecordStyle.text}>01/10/2023</Text>
-              <Button
-                title="View details"
-                style={RecordStyle.btnPrimary}
-                onPress={() => navigation.navigate('pastRecord')}
-              >
-                <Text style={GlobalStyles.textBtnSecundary}>View details</Text>
-              </Button>
-            </View>
-          </View>
-        ) : (
-          <View>
-            {pendingOrders.map((order) => (
-              <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
-                <View style={RecordStyle.textCard} key={order.reference}>
-                  <Text style={RecordStyle.tittle}>#Order</Text>
-                  <Text style={RecordStyle.text}>{order.reference}</Text>
-                  <Text style={RecordStyle.tittle}>Amount</Text>
-                  <Text style={RecordStyle.text}>£{order.total}</Text>
-                </View>
-                <View style={RecordStyle.textCard}>
-                  <Text style={RecordStyle.tittle}>Date</Text>
-                  <Text style={RecordStyle.text}>{order.created_date}</Text>
-                  <Button
-                    title="View details"
-                    style={RecordStyle.btnPrimary}
-                    onPress={() => handlePendingOrderSelect(order.reference)}
-                  >
-                    <Text style={GlobalStyles.textBtnSecundary}>
-                      View details
+        <View>
+          {/* Contenido de la pestaña activa */}
+          {activeTab === 'pastRecord' ? (
+            <View>
+              {pendingOrders.map((order) => (
+                <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
+                  <View style={RecordStyle.textCard}>
+                    <Text style={RecordStyle.tittle}> {t('record.order')}</Text>
+                    <Text style={RecordStyle.text}>11154</Text>
+                    <Text style={RecordStyle.tittle}>
+                      {' '}
+                      {t('record.amount')}
                     </Text>
-                  </Button>
+                    <Text style={RecordStyle.text}>£856</Text>
+                  </View>
+                  <View style={RecordStyle.textCard}>
+                    <Text style={RecordStyle.tittle}>{t('record.date')}</Text>
+                    <Text style={RecordStyle.text}>01/10/2023</Text>
+
+                    <Button
+                      title="View details"
+                      style={RecordStyle.btnPrimary}
+                      onPress={() => handlePendingOrderSelect(order.reference)}
+                    >
+                      <Text style={GlobalStyles.textBtnSecundary}>
+                        {t('record.viewDetails')}
+                      </Text>
+                    </Button>
+                  </View>
                 </View>
-              </View>
-            ))}
-          </View>
-        )}
-      </View>
+              ))}
+            </View>
+          ) : (
+            <View>
+              {pendingOrders.map((order) => (
+                <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
+                  <View style={RecordStyle.textCard} key={order.reference}>
+                    <Text style={RecordStyle.tittle}> {t('record.order')}</Text>
+                    <Text style={RecordStyle.text}>{order.reference}</Text>
+                    <Text style={RecordStyle.tittle}>{t('record.amount')}</Text>
+                    <Text style={RecordStyle.text}>£{order.total}</Text>
+                  </View>
+                  <View style={RecordStyle.textCard}>
+                    <Text style={RecordStyle.tittle}>{t('record.date')}</Text>
+                    <Text style={RecordStyle.text}>{order.created_date}</Text>
+                    <Button
+                      title="View details"
+                      style={RecordStyle.btnPrimary}
+                      onPress={() => navigation.navigate('pendingRecord')}
+                    >
+                      <Text style={GlobalStyles.textBtnSecundary}>
+                        {t('record.viewDetails')}
+                      </Text>
+                    </Button>
+                  </View>
+                </View>
+              ))}
+            </View>
+          )}
+        </View>
       </ScrollView>
     </SafeAreaView>
   )

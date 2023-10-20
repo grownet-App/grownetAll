@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["INTERNET", "CAMERA", "ACCESS_FINE_LOCATION"],
+      "permissions": ["INTERNET", "CAMERA", "ACCESS_FINE_LOCATION", "STORAGE"],
       "package": "com.heinera.grownetapp"
     },
     "web": {
@@ -31,6 +31,7 @@
         "projectId": "e59cca18-5f9e-45d9-a19d-233d060387cf"
       }
     },
-    "owner": "grownetapp"
+    "owner": "grownetapp",
+    "plugins": ["expo-localization"]
   }
 }

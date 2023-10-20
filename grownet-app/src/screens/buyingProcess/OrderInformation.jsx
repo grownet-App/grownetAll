@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import DatePickerAndroid from '@react-native-community/datetimepicker'
@@ -7,8 +8,10 @@ import useOrderStore from '../../store/useOrderStore'
 import { useNavigation } from '@react-navigation/native'
 import { createStorageOrder } from '../../config/urls.config'
 import useTokenStore from '../../store/useTokenStore'
+import { useTranslation } from 'react-i18next'
 
 const OrderInformation = () => {
+  const { t } = useTranslation()
   const {
     selectedRestaurant,
     articlesToPay,
@@ -20,7 +23,6 @@ const OrderInformation = () => {
     totalNet,
     totalTaxes,
     totalToPay,
-    orderNumber,
     setOrderNumber,
   } = useOrderStore()
   const [data, setData] = useState([])
@@ -33,6 +35,7 @@ const OrderInformation = () => {
   useEffect(() => {
     setData(articlesToPay)
     setDeliveryData(tomorrow)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleChangeDate = async (event, newDate) => {
@@ -99,7 +102,9 @@ const OrderInformation = () => {
 
   return (
     <View>
-      <Text style={OrderInformationStyles.PrimaryTex}>Address</Text>
+      <Text style={OrderInformationStyles.PrimaryTex}>
+        {t('deliveryDetail.address')}
+      </Text>
       <View style={OrderInformationStyles.containerInputs}>
         <TextInput
           style={OrderInformationStyles.input}
@@ -107,7 +112,9 @@ const OrderInformation = () => {
           editable={false}
         />
       </View>
-      <Text style={OrderInformationStyles.PrimaryTex}>Deliver</Text>
+      <Text style={OrderInformationStyles.PrimaryTex}>
+        {t('deliveryDetail.deliver')}
+      </Text>
       <View style={OrderInformationStyles.containerInputs}>
         <TextInput
           value={deliveryData.toLocaleDateString()}
@@ -128,7 +135,7 @@ const OrderInformation = () => {
         )}
       </View>
       <Text style={OrderInformationStyles.PrimaryTex}>
-        Any special requirements?
+        {t('deliveryDetail.specialRequirements')}
       </Text>
       <View style={OrderInformationStyles.containerInputs}>
         <TextInput
@@ -145,7 +152,10 @@ const OrderInformation = () => {
           onPress={handleSubmit}
           style={OrderInformationStyles.btnPrimary}
         >
-          <Text style={OrderInformationStyles.ContinueText}>Continue</Text>
+          <Text style={OrderInformationStyles.ContinueText}>
+            {' '}
+            {t('deliveryDetail.continue')}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -15,8 +15,10 @@ import useTokenStore from '../../store/useTokenStore'
 import useOrderStore from '../../store/useOrderStore'
 import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 
 const Restaurants = () => {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const { token } = useTokenStore()
   const { restaurants, setRestaurants, setSelectedRestaurant } = useOrderStore()
@@ -79,12 +81,6 @@ const Restaurants = () => {
                       uri: imageUrl,
                     }}
                     style={{ width: 160, height: 160 }}
-                    onError={(error) => {
-                      console.log('Error cargando la imagen', error)
-                    }}
-                    onLoad={() => {
-                      console.log('Imagen cargada correctamente!')
-                    }}
                   />
                   <Text
                     style={RestaurantStyle.TextDirectionRestaurant}
@@ -109,7 +105,7 @@ const Restaurants = () => {
                 style={{ padding: 10 }}
               />
               <Text style={RestaurantStyle.textAddRestaurant}>
-                Add restaurant
+                {t('restaurants.addRestaurant')}
               </Text>
             </View>
           </TouchableOpacity>

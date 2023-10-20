@@ -7,7 +7,6 @@ export const SearchStyle = StyleSheet.create({
     backgroundColor: '#f2f2f2',
     borderRadius: 51,
     marginBottom: 15,
-    marginTop: -10,
   },
 
   BgInput: {

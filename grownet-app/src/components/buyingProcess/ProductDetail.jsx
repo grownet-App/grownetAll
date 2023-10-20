@@ -6,7 +6,7 @@ import { Dropdown } from 'react-native-element-dropdown'
 import { ProductsStyles } from '../../styles/Styles'
 import useOrderStore from '../../store/useOrderStore'
 import DeleteProduct from './DeleteProduct'
-
+import { OrderDetailStyle } from '../../styles/OrderDetailStyle'
 export default function ProductDetail({
   updateTotalToPay,
   updateTotalTaxes,
@@ -19,7 +19,7 @@ export default function ProductDetail({
   const [articles, setArticles] = useState(articlesToPay)
   useEffect(() => {
     setArticles(articlesToPay)
-  }, [articles])
+  }, [articles, articlesToPay])
 
   const handleAmountChange = (productId, newAmount) => {
     setArticles((prevArticles) =>
@@ -68,8 +68,8 @@ export default function ProductDetail({
     return parseFloat(net.toFixed(2))
   }
 
-  const calculateTotalNet = (articles) => {
-    const totalNet = articles.reduce((total, article) => {
+  const calculateTotalNet = (articls) => {
+    const totalNet = articls.reduce((total, article) => {
       const itemNet = calculateItemNet(
         article.prices,
         article.amount,
@@ -87,8 +87,8 @@ export default function ProductDetail({
     return parseFloat(taxes.toFixed(2))
   }
 
-  const calculateTotalTaxes = (articles) => {
-    const totalTaxes = articles.reduce((total, article) => {
+  const calculateTotalTaxes = (articls) => {
+    const totalTaxes = articls.reduce((total, article) => {
       const itemTaxes = calculateItemTaxes(
         article.prices,
         article.tax,
@@ -116,8 +116,8 @@ export default function ProductDetail({
     return totalItemToPay
   }
 
-  const calculateTotalToPay = (articles) => {
-    const filteredArticles = articles.filter((article) => article.amount > 0)
+  const calculateTotalToPay = (articls) => {
+    const filteredArticles = articls.filter((article) => article.amount > 0)
     const totalToPay = filteredArticles.reduce((total, article) => {
       return total + article.totalItemToPay
     }, 0)
@@ -133,6 +133,7 @@ export default function ProductDetail({
 
     const newTotalNet = calculateTotalNet(articles)
     updateTotalNet(newTotalNet)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articles])
 
   return (
@@ -141,60 +142,62 @@ export default function ProductDetail({
         .filter((article) => article.amount > 0)
         .map((article) => (
           <View key={article.id}>
-            <View>
-              <View style={ProductsStyles.containerDetail}>
-                <View>
-                  <Text style={ProductsStyles.textOrder}>{article.name}</Text>
-                  <View style={ProductsStyles.containSelect}>
-                    <SelectQuantity
-                      widthOrder
-                      productData={article}
-                      onAmountChange={handleAmountChange}
-                      counter={counter}
-                    />
-                  </View>
-                </View>
-
-                <View style={ProductsStyles.containerDrop}>
-                  <View style={ProductsStyles.rowPrice}>
-                    <Text style={ProductsStyles.textOrder}>
-                      £ {calculateItemToPay(article, article.amount)}
-                    </Text>
-                    <DeleteProduct
-                      articles={articles}
-                      setArticles={setArticles}
-                      article={article}
-                      articlesToPay={articlesToPay}
-                      setArticlesToPay={setArticlesToPay}
-                      calculateTotalToPay={calculateTotalToPay}
-                      updateTotalToPay={updateTotalToPay}
-                    />
-                  </View>
-
-                  <Dropdown
-                    style={[
-                      styles.dropdown,
-                      isFocus && { borderColor: '#04444f' },
-                    ]}
-                    containerStyle={{ borderRadius: 20, color: '#04444f' }}
-                    placeholderStyle={styles.placeholderStyle}
-                    selectedTextStyle={styles.selectedTextStyle}
-                    data={article.prices}
-                    maxHeight={200}
-                    labelField="nameUoms"
-                    valueField="nameUoms"
-                    placeholder={!isFocus ? 'Unit' : '...'}
-                    value={article.uomToPay}
-                    onFocus={() => setIsFocus(true)}
-                    onBlur={() => setIsFocus(false)}
-                    onChange={(event) => {
-                      const { nameUoms } = event
-                      handleUomChange(article.id, nameUoms)
-                    }}
-                  />
-                </View>
+            <View style={OrderDetailStyle.cardProduct}>
+              <Text style={OrderDetailStyle.textProductView}>
+                {article.name}
+              </Text>
+              <View style={OrderDetailStyle.cardTotal}>
+                <Text style={OrderDetailStyle.textSecondProductView}>
+                  {' '}
+                  £ {calculateItemToPay(article, article.amount)}
+                </Text>
+                <DeleteProduct
+                  articles={articles}
+                  setArticles={setArticles}
+                  article={article}
+                  articlesToPay={articlesToPay}
+                  setArticlesToPay={setArticlesToPay}
+                  calculateTotalToPay={calculateTotalToPay}
+                  updateTotalToPay={updateTotalToPay}
+                />
               </View>
             </View>
+            {
+              <View style={OrderDetailStyle.cardProduct}>
+                <View style={ProductsStyles.containSelect}>
+                  <SelectQuantity
+                    widthOrder
+                    productData={article}
+                    onAmountChange={handleAmountChange}
+                    counter={counter}
+                  />
+                </View>
+                <Dropdown
+                  style={[
+                    styles.dropdown,
+                    isFocus && { borderColor: '#04444f' },
+                  ]}
+                  containerStyle={{
+                    borderRadius: 20,
+                    color: '#04444f',
+                  }}
+                  placeholderStyle={styles.placeholderStyle}
+                  selectedTextStyle={styles.selectedTextStyle}
+                  data={article.prices}
+                  maxHeight={200}
+                  labelField="nameUoms"
+                  valueField="nameUoms"
+                  placeholder={!isFocus ? 'Unit' : '...'}
+                  value={article.uomToPay}
+                  onFocus={() => setIsFocus(true)}
+                  onBlur={() => setIsFocus(false)}
+                  onChange={(event) => {
+                    const { nameUoms } = event
+                    handleUomChange(article.id, nameUoms)
+                  }}
+                />
+              </View>
+            }
           </View>
         ))}
     </View>

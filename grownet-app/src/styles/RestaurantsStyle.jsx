@@ -31,7 +31,7 @@ export const RestaurantStyle = StyleSheet.create({
     backgroundColor: '#026cd2',
     paddingHorizontal: 10,
     borderRadius: 50,
-    width: 222,
+    width: '80%',
     marginBottom: 25,
   },
   containButtonAdd: {
@@ -45,5 +45,6 @@ export const RestaurantStyle = StyleSheet.create({
     color: '#ffff',
     fontFamily: 'PoppinsSemi',
     paddingRight: 10,
+    textAlign: 'center',
   },
 })

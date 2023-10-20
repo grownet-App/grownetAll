@@ -18,8 +18,12 @@ export default function Products() {
   const [showSearchResults, setShowSearchResults] = useState(false)
   const [products, setProducts] = useState([])
   const [articles, setArticles] = useState(products)
-  const { articlesToPay, selectedSupplier, selectedRestaurant } =
-    useOrderStore()
+  const {
+    articlesToPay,
+    selectedSupplier,
+    selectedRestaurant,
+    setArticlesToPay,
+  } = useOrderStore()
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [resetInput, setResetInput] = useState(0)
 
@@ -68,9 +72,10 @@ export default function Products() {
         }
       }
     }
+
     fetchProducts()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedSupplier])
+  }, [selectedSupplier, articlesToPay])
 
   const resetInputSearcher = () => {
     setResetInput((prevKey) => prevKey + 1)
@@ -92,7 +97,7 @@ export default function Products() {
       article.id === productId ? { ...article, amount: newAmount } : article,
     )
 
-    useOrderStore.setState({ articlesToPay: updatedArticlesToPay })
+    setArticlesToPay(updatedArticlesToPay)
   }
 
   const handleUomChange = (productId, newUomToPay) => {
@@ -214,9 +219,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     textAlign: 'center',
   },
-  spaceCatgMenu: {
-    // Estilos para el espacio entre el menú de categorías y los productos
-  },
+
   viewCategories: {
     position: 'absolute',
     bottom: 10,

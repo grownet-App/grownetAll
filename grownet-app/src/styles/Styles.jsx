@@ -169,7 +169,7 @@ export const ProductsStyles = StyleSheet.create({
   countSelect: {
     fontSize: 20,
     color: '#04444f',
-    marginRight: 5,
+    marginLeft: 3,
   },
   button2: {
     backgroundColor: 'transparent',

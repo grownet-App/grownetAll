@@ -3,8 +3,10 @@ import { View, TextInput, TouchableOpacity } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { ProductsStyles } from '../../styles/Styles'
 import useProductStore from '../../store/useProductStore'
+import { useTranslation } from 'react-i18next'
 
 function ProductSearcher({ products, setShowSearchResults, resetInput }) {
+  const { t } = useTranslation()
   const [input, setInput] = useState('')
   const setFilteredProducts = useProductStore(
     (state) => state.setFilteredProducts,
@@ -52,7 +54,7 @@ function ProductSearcher({ products, setShowSearchResults, resetInput }) {
         style={ProductsStyles.BgInput}
         value={input}
         onChangeText={handleInputChange}
-        placeholder="Search for products"
+        placeholder={t('productSearcher.placeholder')}
         placeholderTextColor="#969696"
       />
       <TouchableOpacity style={ProductsStyles.iconSearch} onPress={handleReset}>

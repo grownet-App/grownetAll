@@ -4,6 +4,7 @@ export const RecordStyle = StyleSheet.create({
   record: {
     alignItems: 'center',
     backgroundColor: 'white',
+    justifyContent: 'center',
   },
   cardRecord: {
     backgroundColor: 'white',
@@ -36,18 +37,36 @@ export const RecordStyle = StyleSheet.create({
   textCard: {
     alignItems: 'center',
   },
-  /*Tab*/
+  /* Tab*/
   tabContainer: {
     flexDirection: 'row',
     margin: 15,
-    borderRadius: 25,
+    borderRadius: 40,
     marginTop: 0,
     backgroundColor: 'white',
-    borderRadius: 15,
   },
   btnTab: {
     padding: 15,
     alignItems: 'center',
     borderRadius: 15,
+  },
+  /* input*/
+  input: {
+    flexDirection: 'row',
+    width: 320,
+    paddingVertical: 10,
+    backgroundColor: '#f2f2f2',
+    borderRadius: 51,
+    marginBottom: 15,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    marginLeft: 12,
+  },
+  BgInput: {
+    width: 200,
+    fontSize: 15,
+    fontFamily: 'PoppinsRegular',
+    marginLeft: 10,
   },
 })

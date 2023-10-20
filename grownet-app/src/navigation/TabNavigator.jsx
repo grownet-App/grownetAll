@@ -10,15 +10,16 @@ import Chat from '../screens/Chat'
 import PastRecord from '../screens/Record/PastRecord'
 import PendingRecord from '../screens/Record/PendingRecord'
 import Records from '../screens/Record/Records'
-import Settings from '../screens/Settings'
+import Settings from '../screens/settings/Settings'
 import OrderDetail from '../screens/buyingProcess/OrderDetail'
 import OrderInformation from '../screens/buyingProcess/OrderInformation'
 import OrderSuccessful from '../screens/buyingProcess/OrderSuccessful'
 import Products from '../screens/buyingProcess/Products'
 import Restauranst from '../screens/buyingProcess/Restaurants'
 import Suppliers from '../screens/buyingProcess/Suppliers'
-import useTokenStore from '../store/useTokenStore'
-
+import DisputeRecord from '../screens/Record/DisputeRecord'
+import TermsAndConditions from '../screens/TermsAndConditions'
+import { useTranslation } from 'react-i18next'
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 
@@ -41,26 +42,60 @@ const HeaderLeft = () => {
   )
 }
 
-const headerRight = () => (
-  <Button
-    /* eslint-disable no-alert */
-    onPress={() => alert('This is a button!')}
-    title="Info"
-    color="#fff"
-  />
-)
-
-function OrderStack() {
-  const { setToken } = useTokenStore()
-  const handleLogout = async () => {
-    try {
-      setToken(null)
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error)
-    }
-  }
+function SettingsStack() {
+  const { t } = useTranslation()
   return (
-    // TODO. PONER RUTA DE RESTAURANTES
+    <Stack.Navigator
+      initialRouteName="Settings"
+      screenOptions={{
+        headerMode: 'screen',
+        headerTintColor: 'white',
+        headerStyle: { backgroundColor: '#026CD2' },
+      }}
+    >
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          headerBackTitleVisible: false,
+
+          title: t('menuPrimary.titleSettings'),
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#f2f2f2',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTitleStyle: {
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
+            color: '#026CD2',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Terms&Conditions"
+        component={TermsAndConditions}
+        options={{
+          headerShown: true,
+          title: 'Terms & Conditions',
+          headerStyle: {
+            backgroundColor: '#f2f2f2',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
+          },
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
+function OrderStack() {
+  const { t } = useTranslation()
+  return (
     <Stack.Navigator
       initialRouteName="restaurants"
       screenOptions={{
@@ -77,7 +112,7 @@ function OrderStack() {
         options={{
           headerShown: true,
 
-          title: 'Choose your restaurant',
+          title: t('stackNavigator.chooseYourRestaurant'),
           headerStyle: {
             backgroundColor: '#f2f2f2',
             height: StatusBar.currentHeight + 60,
@@ -96,7 +131,7 @@ function OrderStack() {
         options={{
           headerShown: true,
 
-          title: 'Suppliers',
+          title: t('stackNavigator.suppliers'),
           headerStyle: {
             backgroundColor: '#f2f2f2',
             height: StatusBar.currentHeight + 60,
@@ -116,7 +151,7 @@ function OrderStack() {
         options={{
           headerShown: true,
 
-          title: 'Make your order',
+          title: t('stackNavigator.makeYourOrder'),
           headerStyle: {
             backgroundColor: '#f2f2f2',
             height: StatusBar.currentHeight + 60,
@@ -136,7 +171,7 @@ function OrderStack() {
         options={{
           headerShown: true,
 
-          title: 'Order detail',
+          title: t('stackNavigator.orderDetail'),
           headerStyle: {
             backgroundColor: '#f2f2f2',
             height: StatusBar.currentHeight + 60,
@@ -156,7 +191,7 @@ function OrderStack() {
         options={{
           headerShown: true,
 
-          title: 'Order detail',
+          title: t('stackNavigator.orderDetail'),
           headerStyle: {
             backgroundColor: '#f2f2f2',
             height: StatusBar.currentHeight + 60,
@@ -180,7 +215,8 @@ function OrderStack() {
     </Stack.Navigator>
   )
 }
-function MyStack1() {
+function RecordsStack() {
+  const { t } = useTranslation()
   return (
     <Stack.Navigator
       initialRouteName="login"
@@ -194,7 +230,7 @@ function MyStack1() {
         name="recordsStack"
         component={Records}
         options={{
-          title: 'Your orders',
+          title: t('stackRecord.yourOrders'),
           headerStyle: {
             backgroundColor: 'white',
             height: StatusBar.currentHeight + 60,
@@ -211,7 +247,7 @@ function MyStack1() {
         name="pastRecord"
         component={PastRecord}
         options={{
-          title: 'Order details',
+          title: t('stackRecord.orderDetails'),
           headerStyle: {
             backgroundColor: 'white',
             height: StatusBar.currentHeight + 60,
@@ -228,7 +264,7 @@ function MyStack1() {
         name="pendingRecord"
         component={PendingRecord}
         options={{
-          title: 'Order details',
+          title: t('stackRecord.orderDetails'),
           headerStyle: {
             backgroundColor: 'white',
             height: StatusBar.currentHeight + 60,
@@ -241,11 +277,29 @@ function MyStack1() {
           },
         }}
       />
+      <Stack.Screen
+        name="disputeRecord"
+        component={DisputeRecord}
+        options={{
+          title: t('stackRecord.whatWentWrong'),
+          headerStyle: {
+            backgroundColor: 'white',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
+            color: '#026cd2',
+          },
+        }}
+      />
       <Stack.Screen name="ordersDetail" component={OrderDetail} />
     </Stack.Navigator>
   )
 }
-function MyStack3() {
+function ChatStack() {
   return (
     <Stack.Navigator
       initialRouteName="login"
@@ -261,7 +315,6 @@ function MyStack3() {
         options={{
           headerBackTitleVisible: false,
           headerLeft: () => HeaderLeft(),
-          headerRight: () => headerRight(),
         }}
       />
     </Stack.Navigator>
@@ -272,11 +325,11 @@ const tabBarIconProps =
   (name) =>
   ({ color, size }) => {
     name === 'Settings'
-      ? (name = 'md-settings-outline') //ajustes
+      ? (name = 'md-settings-outline') // ajustes
       : name === 'orders'
-      ? (name = 'cart-outline') //orders
+      ? (name = 'cart-outline') // orders
       : name === 'records'
-      ? (name = 'receipt-outline') //historial
+      ? (name = 'receipt-outline') // historial
       : name === 'chat'
       ? (name = 'ios-chatbubble-ellipses-outline')
       : ''
@@ -284,34 +337,24 @@ const tabBarIconProps =
     return <Ionicons name={name} size={size} color={color} />
   }
 const TabNavigator = () => {
+  const { t } = useTranslation()
   return (
     <Tab.Navigator
-      initialRouteName="Orders"
+      initialRouteName={t('menuPrimary.orders')}
       screenOptions={{
         tabBarActiveTintColor: '#04444F',
       }}
     >
       <Tab.Screen
-        name="settings"
-        component={Settings}
+        name={t('menuPrimary.Settings')}
+        component={SettingsStack}
         options={{
           tabBarIcon: tabBarIconProps('Settings'),
-          headerShown: true,
-          title: 'Settings',
-          headerTitleAlign: 'center',
-          headerStyle: {
-            backgroundColor: '#f2f2f2',
-            height: StatusBar.currentHeight + 60,
-          },
-          headerTitleStyle: {
-            fontFamily: 'PoppinsSemi',
-            fontSize: 22,
-            color: '#026CD2',
-          },
+          headerShown: false,
         }}
       />
       <Tab.Screen
-        name="Orders"
+        name={t('menuPrimary.orders')}
         component={OrderStack}
         options={{
           tabBarIcon: tabBarIconProps('orders'),
@@ -320,16 +363,16 @@ const TabNavigator = () => {
       />
 
       <Tab.Screen
-        name="Records"
-        component={MyStack1}
+        name={t('menuPrimary.records')}
+        component={RecordsStack}
         options={{
           tabBarIcon: tabBarIconProps('records'),
           headerShown: false,
         }}
       />
       <Tab.Screen
-        name="Chat"
-        component={MyStack3}
+        name={t('menuPrimary.chat')}
+        component={ChatStack}
         options={{
           tabBarIcon: tabBarIconProps('chat'),
           headerShown: false,
