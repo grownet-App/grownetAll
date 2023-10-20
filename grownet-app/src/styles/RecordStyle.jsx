@@ -41,10 +41,9 @@ export const RecordStyle = StyleSheet.create({
   tabContainer: {
     flexDirection: 'row',
     margin: 15,
-    borderRadius: 25,
+    borderRadius: 40,
     marginTop: 0,
     backgroundColor: 'white',
-    borderRadius: 15,
   },
   btnTab: {
     padding: 15,

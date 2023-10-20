@@ -8,6 +8,11 @@ const esTranslations = {
     enterMobileNumber: 'Ingresa tu número de teléfono móvil:',
     letsBegin: 'Iniciar',
     phoneNumber: 'Número de teléfono',
+    modalTitle_1: 'Pedimos disculpas',
+    FirstModalmessage: 'No encontramos el número de móvil registrado',
+    FirstModalmessage2: 'Cambiar número de móvil',
+    modalTitle_2: '¡Hola 👋!',
+    secondModalMessage: '¡Por favor ingresa un número de teléfono!',
   },
   codeOtp: {
     enterVerificationCode: 'Ingresa tu código de verificación',

@@ -9,6 +9,7 @@ import { GlobalStyles } from '../../styles/Styles'
 import { validationApiUrl, onlyCountries } from '../../config/urls.config'
 import useTokenStore from '../../store/useTokenStore'
 import { useTranslation } from 'react-i18next'
+import ModalAlert from '../../components/ModalAlert'
 
 const LoginPage = () => {
   const { t } = useTranslation()
@@ -16,7 +17,9 @@ const LoginPage = () => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [phoneDos, setPhoneDos] = useState('')
   const [countries, setCountries] = useState([])
-  const { setCountryCode } = useTokenStore()
+  const { setCountryCode, countryCode } = useTokenStore()
+  const [showModal, setShowModal] = useState(false)
+  const [showEmptyInputModal, setShowEmptyInputModal] = useState(false)
 
   useEffect(() => {
     async function fetchData() {
@@ -38,6 +41,11 @@ const LoginPage = () => {
   }, [])
 
   const handleChange = async () => {
+    if (phoneNumber === '') {
+      setShowEmptyInputModal(true)
+      return
+    }
+
     const countrySplit = phoneDos.split(phoneNumber)
     const countryCod = countrySplit[0]
     const countryP = countryCod.split('+')[1]
@@ -62,6 +70,7 @@ const LoginPage = () => {
         // TODO QUITAR ESTE CONSOLE LOG CUANDO YA LLEGUEN LOS MENSAJES POR TWILIO
         console.log('Respuesta con CODIGO TWILIO:', response.data)
       } else {
+        setShowModal(true)
         console.log('====================================')
         console.log('puusss')
         console.log('====================================')
@@ -70,7 +79,13 @@ const LoginPage = () => {
       console.log(error)
     }
   }
-
+  const closeModal = () => {
+    setShowModal(false)
+    setShowEmptyInputModal(false)
+  }
+  const handleOutsidePress = () => {
+    closeModal()
+  }
   return (
     <View style={LoginStyle.container}>
       <Image
@@ -110,6 +125,26 @@ const LoginPage = () => {
         </Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
+
+      <ModalAlert
+        showModal={showModal}
+        closeModal={closeModal}
+        handleOutsidePress={handleOutsidePress}
+        Title={t('login.modalTitle_1')}
+        message={t('login.FirstModalmessage')}
+        countryCode={`+${countryCode}`}
+        phoneNumber={phoneNumber}
+        message2={t('login.FirstModalmessage2')}
+      />
+
+      <ModalAlert
+        showModal={showEmptyInputModal}
+        closeModal={closeModal}
+        handleOutsidePress={handleOutsidePress}
+        Title={t('login.modalTitle_2')}
+        message={t('login.secondModalMessage')}
+        Top
+      />
     </View>
   )
 }

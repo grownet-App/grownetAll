@@ -8,6 +8,11 @@ const enTranslations = {
     enterMobileNumber: 'Enter your mobile number:',
     letsBegin: "Let's Begin",
     phoneNumber: 'Phone number',
+    modalTitle_1: 'We apologize',
+    FirstModalmessage: "We didn't find the mobile number registered",
+    FirstModalmessage2: 'Change mobile number',
+    modalTitle_2: 'Hi 👋',
+    secondModalMessage: '¡Please enter a phone number!',
   },
   codeOtp: {
     enterVerificationCode: 'Enter your verification code',

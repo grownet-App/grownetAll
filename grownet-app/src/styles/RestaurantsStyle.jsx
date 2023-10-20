@@ -45,5 +45,6 @@ export const RestaurantStyle = StyleSheet.create({
     color: '#ffff',
     fontFamily: 'PoppinsSemi',
     paddingRight: 10,
+    textAlign: 'center',
   },
 })

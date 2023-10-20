@@ -8,6 +8,11 @@ const ptTranslations = {
     enterMobileNumber: 'Digite o número do seu celular:',
     letsBegin: 'Começar',
     phoneNumber: 'Número de telefone',
+    modalTitle_1: 'Pedimos desculpas',
+    FirstModalmessage: 'Não encontramos o número de celular registrado',
+    FirstModalmessage2: 'Alterar número de celular',
+    modalTitle_2: 'Oi 👋',
+    secondModalMessage: 'Por favor, insira um número de telefone!',
   },
   codeOtp: {
     enterVerificationCode: 'Insira seu código de verificação',
