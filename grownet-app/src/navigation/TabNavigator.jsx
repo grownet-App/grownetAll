@@ -337,7 +337,7 @@ const TabNavigator = () => {
           title: 'Settings',
           headerTitleAlign: 'center',
           headerStyle: {
-            backgroundColor: '#f2f2f2',
+            backgroundColor: 'white',
             height: StatusBar.currentHeight + 60,
           },
           headerTitleStyle: {
