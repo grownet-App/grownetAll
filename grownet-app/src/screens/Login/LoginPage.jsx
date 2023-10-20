@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
-import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Modal,
-  TouchableWithoutFeedback,
-} from 'react-native'
+import { Text, View, Image, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import PhoneInput from 'react-native-phone-number-input'
 import axios from '../../../axiosConfig.'
-import { LoginStyle, ModalStyle } from '../../styles/LoginStyle'
+import { LoginStyle } from '../../styles/LoginStyle'
 import { GlobalStyles } from '../../styles/Styles'
 import { validationApiUrl, onlyCountries } from '../../config/urls.config'
 import useTokenStore from '../../store/useTokenStore'
 import { useTranslation } from 'react-i18next'
-import { MaterialIcons } from '@expo/vector-icons'
+import ModalAlert from '../../components/ModalAlert'
 
 const LoginPage = () => {
   const { t } = useTranslation()
@@ -132,61 +125,26 @@ const LoginPage = () => {
         </Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
-      <Modal
-        visible={showModal}
-        animationType="fade"
-        transparent={true}
-        onRequestClose={closeModal}
-      >
-        <TouchableWithoutFeedback onPress={handleOutsidePress}>
-          <View style={ModalStyle.modalContainer}>
-            <View style={ModalStyle.centeredView}>
-              <View style={ModalStyle.modalView}>
-                <MaterialIcons name="error-outline" size={45} color="#ee6055" />
-                <Text style={ModalStyle.modalTextTitle}>We apologize</Text>
-                <Text style={ModalStyle.modalText}>
-                  We didn't find the mobile number registered
-                </Text>
-                <Text style={ModalStyle.modalText2}>
-                  {`+${countryCode} ${phoneNumber}`}
-                </Text>
 
-                <TouchableOpacity onPress={closeModal}>
-                  <Text style={ModalStyle.TextChange} onPress={closeModal}>
-                    Change mobile number
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-      <Modal
-        visible={showEmptyInputModal}
-        animationType="fade"
-        transparent={true}
-        onRequestClose={closeModal}
-      >
-        <View style={LoginStyle.modalContainer}>
-          <View style={LoginStyle.modalContent}>
-            <MaterialIcons name="error-outline" size={45} color="#ee6055" />
-            <Text style={LoginStyle.modalText}></Text>
-            <Text style={LoginStyle.modalText}>por favor ingresa un valor</Text>
-            <Text style={LoginStyle.modalText}>
-              {`+${countryCode} ${phoneNumber}`}
-            </Text>
+      <ModalAlert
+        showModal={showModal}
+        closeModal={closeModal}
+        handleOutsidePress={handleOutsidePress}
+        Title={t('login.modalTitle_1')}
+        message={t('login.FirstModalmessage')}
+        countryCode={`+${countryCode}`}
+        phoneNumber={phoneNumber}
+        message2={t('login.FirstModalmessage2')}
+      />
 
-            <Text style={LoginStyle.modalText}>Change mobile number</Text>
-
-            <TouchableOpacity
-              style={GlobalStyles.btnPrimary}
-              onPress={closeModal}
-            >
-              <Text style={GlobalStyles.textBtnPrimary}>Cerrar</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+      <ModalAlert
+        showModal={showEmptyInputModal}
+        closeModal={closeModal}
+        handleOutsidePress={handleOutsidePress}
+        Title={t('login.modalTitle_2')}
+        message={t('login.secondModalMessage')}
+        Top
+      />
     </View>
   )
 }
