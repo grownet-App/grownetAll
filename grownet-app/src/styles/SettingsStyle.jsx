@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native'
 export const SettingsStyle = StyleSheet.create({
   settings: {
     alignItems: 'center',
+    backgroundColor: 'white',
+    height: '100%',
   },
   tittle: {
     fontSize: 22,
