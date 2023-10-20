@@ -11,8 +11,10 @@ import { GlobalStyles } from '../styles/Styles'
 import { CarouselStyle } from '../styles/LoginStyle'
 import { useNavigation } from '@react-navigation/native'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
+import { useTranslation } from 'react-i18next'
 
 const Home = () => {
+  const { t } = useTranslation()
   const [index, setIndex] = useState(0)
   const navigation = useNavigation()
   const isCarousel = useRef(null)
@@ -70,16 +72,19 @@ const Home = () => {
           style={GlobalStyles.btnSecundary}
           onPress={() => navigation.navigate('login')}
         >
-          <Text style={GlobalStyles.textBtnSecundary}>Register</Text>
+          <Text style={GlobalStyles.textBtnSecundary}>
+            {' '}
+            {t('home.register')}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={GlobalStyles.btnWhite}
           onPress={() => navigation.navigate('login')}
         >
-          <Text style={GlobalStyles.textBtnW}>Login</Text>
+          <Text style={GlobalStyles.textBtnW}> {t('home.login')}</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('login')}>
-          <Text style={GlobalStyles.linkWhite}>Terms & Conditions</Text>
+          <Text style={GlobalStyles.linkWhite}>{t('home.tandc')}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

@@ -6,9 +6,10 @@ import useOrderStore from '../../store/useOrderStore'
 import { printToFileAsync } from 'expo-print'
 import { shareAsync } from 'expo-sharing'
 import * as FileSystem from 'expo-file-system'
-import favicon from '../../img/favicon.png'
+import { useTranslation } from 'react-i18next'
 
 const OrderSuccessful = () => {
+  const { t } = useTranslation()
   const navigation = useNavigation()
 
   const [articlesData, setArticlesData] = useState([])
@@ -288,9 +289,11 @@ const OrderSuccessful = () => {
           resizeMode="cover"
           style={OrderSuccessfulStyles.image}
         />
-        <Text style={OrderSuccessfulStyles.textSuccessful}>Successful!</Text>
+        <Text style={OrderSuccessfulStyles.textSuccessful}>
+          {t('orderSuccessful.successful')}
+        </Text>
         <Text style={{ color: '#04444f', fontSize: 20 }}>
-          Your order is successful
+          {t('orderSuccessful.yourOrderSuccessful')}
         </Text>
       </View>
       <View style={OrderSuccessfulStyles.containerButtons}>
@@ -298,13 +301,18 @@ const OrderSuccessful = () => {
           style={OrderSuccessfulStyles.btnPrimary}
           onPress={() => navigation.navigate('recordsStack')}
         >
-          <Text style={OrderSuccessfulStyles.ContinueText}>Your orders</Text>
+          <Text style={OrderSuccessfulStyles.ContinueText}>
+            {' '}
+            {t('orderSuccessful.yourOrders')}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={OrderSuccessfulStyles.btnPrimary2}
           onPress={generatePdfDocument}
         >
-          <Text style={OrderSuccessfulStyles.ContinueText2}>Download PDF</Text>
+          <Text style={OrderSuccessfulStyles.ContinueText2}>
+            {t('orderSuccessful.downloadPDF')}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

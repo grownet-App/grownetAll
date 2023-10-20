@@ -219,9 +219,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     textAlign: 'center',
   },
-  spaceCatgMenu: {
-    // Estilos para el espacio entre el menú de categorías y los productos
-  },
+
   viewCategories: {
     position: 'absolute',
     bottom: 10,

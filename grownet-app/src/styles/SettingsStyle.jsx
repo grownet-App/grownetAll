@@ -19,16 +19,17 @@ export const SettingsStyle = StyleSheet.create({
   btnlogOut: {
     padding: 16,
     width: '80%',
-    marginBottom: 20,
+    marginTop: 20,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
+    position: 'relative',
   },
   textLogout: {
     color: '#026cd2',
     fontSize: 18,
     fontFamily: 'PoppinsSemi',
-    marginLeft: 12,
+    marginLeft: 10,
   },
   cardButton: {
     flexDirection: 'row',
@@ -69,5 +70,56 @@ export const SettingsStyle = StyleSheet.create({
     borderRadius: 15,
     marginTop: 10,
     justifyContent: 'space-between',
+  },
+  containerFaqAndTerms: {
+    width: 300,
+    height: 60,
+    backgroundColor: 'white',
+    borderRadius: 15,
+    marginTop: 10,
+  },
+  FaqAndTerms: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+    paddingLeft: 10,
+    marginHorizontal: 30,
+  },
+
+  // ACCORDION_LIST
+  bodyBackground: {
+    backgroundColor: '#EFEFEF',
+    overflow: 'hidden',
+  },
+  titleContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+    paddingLeft: 10,
+    marginHorizontal: 30,
+  },
+  bodyContainer: {
+    padding: 10,
+    paddingLeft: 10,
+    bottom: 0,
+    position: 'absolute',
+  },
+  styleTextTitle: {
+    color: '#04444f',
+    fontSize: 15,
+    fontFamily: 'PoppinsRegular',
+  },
+  Languages: {
+    color: '#04444f',
+    fontFamily: 'PoppinsRegular',
+    marginVertical: 5,
+    marginHorizontal: 8,
+  },
+  itemsAccordion: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 })

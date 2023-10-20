@@ -5,7 +5,9 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { MaterialIcons } from '@expo/vector-icons'
 import { DisputeStyle } from '../../styles/PendingRecordStyle'
 import { GlobalStyles } from '../../styles/Styles'
+
 import UploadFile from '../../components/UploadFile'
+
 function DisputeRecord() {
   const [activeTab, setActiveTab] = useState('first')
 
@@ -139,7 +141,7 @@ function DisputeRecord() {
           <Button style={[GlobalStyles.btnPrimary, DisputeStyle.space]}>
             <Text style={GlobalStyles.textBtnSecundary}>Send</Text>
           </Button>
-          <View style={DisputeStyle.space}></View>
+          <View style={DisputeStyle.space} />
         </View>
       </ScrollView>
     </SafeAreaView>

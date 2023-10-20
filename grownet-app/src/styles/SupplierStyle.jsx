@@ -33,5 +33,6 @@ export const SuppliersStyle = StyleSheet.create({
     fontSize: 15,
     color: '#ffff',
     paddingRight: 10,
+    textAlign: 'center',
   },
 })

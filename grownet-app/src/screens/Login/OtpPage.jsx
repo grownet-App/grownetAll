@@ -13,8 +13,10 @@ import { useRoute } from '@react-navigation/native'
 import { otpApiUrl } from '../../config/urls.config'
 import axios from '../../../axiosConfig.'
 import useTokenStore from '../../store/useTokenStore'
+import { useTranslation } from 'react-i18next'
 
 const Otp = () => {
+  const { t } = useTranslation()
   const pin1Ref = useRef()
   const pin2Ref = useRef()
   const pin3Ref = useRef()
@@ -53,10 +55,10 @@ const Otp = () => {
         source={require('../../../assets/logo.png')}
       />
 
-      <Text style={OtpStyle.textTittle}>Enter your verification code</Text>
-      <Text style={OtpStyle.textP}>
-        An 4 digit code has been sent to your phone
+      <Text style={OtpStyle.textTittle}>
+        {t('codeOtp.enterVerificationCode')}
       </Text>
+      <Text style={OtpStyle.textP}>{t('codeOtp.codeSent')}</Text>
       <View style={OtpStyle.containerOTP}>
         <View style={OtpStyle.textInputView}>
           <TextInput
@@ -108,12 +110,15 @@ const Otp = () => {
         </View>
       </View>
       <TouchableOpacity onPress={enviarOTP} style={GlobalStyles.btnSecundary}>
-        <Text style={GlobalStyles.textBtnSecundary}>Verify & Proceed</Text>
+        <Text style={GlobalStyles.textBtnSecundary}>
+          {' '}
+          {t('codeOtp.verifyAndProceed')}
+        </Text>
       </TouchableOpacity>
       <View style={OtpStyle.ContainerdidntCode}>
-        <Text style={OtpStyle.textP}>Didn't you receive the code?</Text>
+        <Text style={OtpStyle.textP}>{t('codeOtp.didntReceiveCode')}</Text>
         <TouchableOpacity>
-          <Text style={OtpStyle.sendCode}>Send again</Text>
+          <Text style={OtpStyle.sendCode}>{t('codeOtp.sendAgain')}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
