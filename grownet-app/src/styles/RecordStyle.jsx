@@ -5,6 +5,7 @@ export const RecordStyle = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     justifyContent: 'center',
+    height: '100%',
   },
   cardRecord: {
     backgroundColor: 'white',
@@ -13,6 +14,7 @@ export const RecordStyle = StyleSheet.create({
     width: 350,
     borderRadius: 15,
     padding: 10,
+    margin: 1,
     marginBottom: 20,
   },
   tittle: {
@@ -41,7 +43,7 @@ export const RecordStyle = StyleSheet.create({
   tabContainer: {
     flexDirection: 'row',
     margin: 15,
-    borderRadius: 40,
+    borderRadius: 15,
     marginTop: 0,
     backgroundColor: 'white',
   },

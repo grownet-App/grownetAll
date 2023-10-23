@@ -6,7 +6,8 @@ export const PendingStyle = StyleSheet.create({
     alignItems: 'center',
     width: 350,
     borderRadius: 20,
-    marginBottom: 20,
+    margin: 5,
+    paddingBottom: 20,
   },
   title: {
     fontFamily: 'PoppinsSemi',

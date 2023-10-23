@@ -62,7 +62,7 @@ function SettingsStack() {
           title: t('menuPrimary.titleSettings'),
           headerTitleAlign: 'center',
           headerStyle: {
-            backgroundColor: '#f2f2f2',
+            backgroundColor: 'white',
             height: StatusBar.currentHeight + 60,
           },
           headerTitleStyle: {
@@ -153,7 +153,7 @@ function OrderStack() {
 
           title: t('stackNavigator.makeYourOrder'),
           headerStyle: {
-            backgroundColor: '#f2f2f2',
+            backgroundColor: 'white',
             height: StatusBar.currentHeight + 60,
           },
           headerTintColor: '#04444F',
@@ -173,7 +173,7 @@ function OrderStack() {
 
           title: t('stackNavigator.orderDetail'),
           headerStyle: {
-            backgroundColor: '#f2f2f2',
+            backgroundColor: 'white',
             height: StatusBar.currentHeight + 60,
           },
           headerTintColor: '#04444F',
@@ -193,7 +193,7 @@ function OrderStack() {
 
           title: t('stackNavigator.orderDetail'),
           headerStyle: {
-            backgroundColor: '#f2f2f2',
+            backgroundColor: 'white',
             height: StatusBar.currentHeight + 60,
           },
           headerTintColor: '#04444F',

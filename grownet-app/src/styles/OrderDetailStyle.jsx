@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native'
 
 export const OrderDetailStyle = StyleSheet.create({
+  details: {
+    backgroundColor: 'white',
+    height: '100%',
+  },
   containerDetails: {
     width: 350,
     backgroundColor: '#e9f4ff',

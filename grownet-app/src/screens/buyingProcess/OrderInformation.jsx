@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
-import { View, Text, TextInput, TouchableOpacity, Keyboard } from 'react-native'
-import React, { useState, useEffect } from 'react'
 import DatePickerAndroid from '@react-native-community/datetimepicker'
-import { OrderInformationStyles } from '../../styles/Styles'
-import axios from '../../../axiosConfig.'
-import useOrderStore from '../../store/useOrderStore'
 import { useNavigation } from '@react-navigation/native'
-import { createStorageOrder } from '../../config/urls.config'
-import useTokenStore from '../../store/useTokenStore'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Keyboard, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import axios from '../../../axiosConfig.'
+import { createStorageOrder } from '../../config/urls.config'
+import useOrderStore from '../../store/useOrderStore'
+import useTokenStore from '../../store/useTokenStore'
+import { OrderInformationStyle } from '../../styles/OrderInformationStyle'
+import { GlobalStyles } from '../../styles/Styles'
 
 const OrderInformation = () => {
   const { t } = useTranslation()
@@ -101,28 +102,28 @@ const OrderInformation = () => {
   }
 
   return (
-    <View>
-      <Text style={OrderInformationStyles.PrimaryTex}>
+    <View style={OrderInformationStyle.OrderInformation}>
+      <Text style={OrderInformationStyle.PrimaryTex}>
         {t('deliveryDetail.address')}
       </Text>
-      <View style={OrderInformationStyles.containerInputs}>
+      <View style={OrderInformationStyle.containerInputs}>
         <TextInput
-          style={OrderInformationStyles.input}
+          style={OrderInformationStyle.input}
           value={selectedRestaurant.address}
           editable={false}
         />
       </View>
-      <Text style={OrderInformationStyles.PrimaryTex}>
+      <Text style={OrderInformationStyle.PrimaryTex}>
         {t('deliveryDetail.deliver')}
       </Text>
-      <View style={OrderInformationStyles.containerInputs}>
+      <View style={OrderInformationStyle.containerInputs}>
         <TextInput
           value={deliveryData.toLocaleDateString()}
           onFocus={() => {
             Keyboard.dismiss()
             setShowDatePicker(true)
           }}
-          style={OrderInformationStyles.input}
+          style={OrderInformationStyle.input2}
         />
         {showDatePicker && (
           <DatePickerAndroid
@@ -134,25 +135,25 @@ const OrderInformation = () => {
           />
         )}
       </View>
-      <Text style={OrderInformationStyles.PrimaryTex}>
+      <Text style={OrderInformationStyle.PrimaryTex}>
         {t('deliveryDetail.specialRequirements')}
       </Text>
-      <View style={OrderInformationStyles.containerInputs}>
+      <View style={OrderInformationStyle.containerInputs}>
         <TextInput
           value={specialRequirements}
           onChangeText={(text) => setSpecialRequirements(text)}
-          style={OrderInformationStyles.inputRequirements}
+          style={OrderInformationStyle.inputRequirements}
           multiline={true}
           numberOfLines={8}
           textAlignVertical="top"
         />
       </View>
-      <View style={OrderInformationStyles.containerButton}>
+      <View style={OrderInformationStyle.containerButton}>
         <TouchableOpacity
           onPress={handleSubmit}
-          style={OrderInformationStyles.btnPrimary}
+          style={GlobalStyles.btnPrimary}
         >
-          <Text style={OrderInformationStyles.ContinueText}>
+          <Text style={GlobalStyles.textBtnSecundary}>
             {' '}
             {t('deliveryDetail.continue')}
           </Text>

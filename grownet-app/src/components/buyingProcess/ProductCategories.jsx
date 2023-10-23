@@ -8,13 +8,14 @@ import {
   Text,
 } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
-import { ProductsStyles } from '../../styles/Styles'
+import { GlobalStyles, ProductsStyles } from '../../styles/Styles'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Iconify } from 'react-native-iconify'
 import { BlurView } from 'expo-blur'
 import useTokenStore from '../../store/useTokenStore'
 import { allCategories } from '../../config/urls.config'
 import axios from '../../../axiosConfig.'
+import { ProductsStyle } from '../../styles/ProductsStyle'
 import { useNavigation } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 const { width } = Dimensions.get('window')
@@ -77,7 +78,7 @@ function ProductsCategories({
               )}
             </View>
           ))}
-          <Text style={ProductsStyles.text}>{item}</Text>
+          <Text style={ProductsStyle.text}>{item}</Text>
         </TouchableOpacity>
       </View>
     )
@@ -86,7 +87,7 @@ function ProductsCategories({
     navigation.navigate('ordersDetail')
   }
   return (
-    <SafeAreaView style={ProductsStyles.fixedContainer}>
+    <SafeAreaView style={ProductsStyle.fixedContainer}>
       <BlurView intensity={blurIntensity}>
         <Carousel
           data={updatedCategories}
@@ -102,12 +103,12 @@ function ProductsCategories({
           enableSnap={true}
           inactiveSlideOpacity={1}
         />
-        <View style={ProductsStyles.containerButton}>
+        <View style={ProductsStyle.containerButton}>
           <TouchableOpacity
-            style={ProductsStyles.bgContinue}
+            style={GlobalStyles.btnPrimary}
             onPress={handlePress}
           >
-            <Text style={ProductsStyles.ContinueText}>
+            <Text style={GlobalStyles.textBtnSecundary}>
               {t('categoriesMenu.continue')}
             </Text>
           </TouchableOpacity>

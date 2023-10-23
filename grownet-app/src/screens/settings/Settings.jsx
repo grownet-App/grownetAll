@@ -8,6 +8,7 @@ import { SettingsStyle } from '../../styles/SettingsStyle'
 import AccordionListItem from './AccordionListItem'
 import { Iconify } from 'react-native-iconify'
 import { useTranslation } from 'react-i18next'
+import { GlobalStyles } from '../../styles/Styles'
 
 const Settings = () => {
   const { t, i18n } = useTranslation()
@@ -72,7 +73,7 @@ const Settings = () => {
         </Card.Content>
       </Card>
 
-      <View style={SettingsStyle.settingButton}>
+      <View style={[SettingsStyle.settingButton, GlobalStyles.boxShadow]}>
         <AccordionListItem
           title={t('settings.languages')}
           onListToggle={handleListToggle}
@@ -107,7 +108,9 @@ const Settings = () => {
         </AccordionListItem>
       </View>
       <Animated.View style={{ marginTop: logoutButtonPosition }}>
-        <View style={SettingsStyle.containerFaqAndTerms}>
+        <View
+          style={[SettingsStyle.containerFaqAndTerms, GlobalStyles.boxShadow]}
+        >
           <TouchableOpacity style={SettingsStyle.FaqAndTerms}>
             <Text style={SettingsStyle.styleTextTitle}>
               {' '}
@@ -117,7 +120,9 @@ const Settings = () => {
           </TouchableOpacity>
         </View>
 
-        <View style={SettingsStyle.containerFaqAndTerms}>
+        <View
+          style={[SettingsStyle.containerFaqAndTerms, GlobalStyles.boxShadow]}
+        >
           <TouchableOpacity
             style={SettingsStyle.FaqAndTerms}
             onPress={navigateTermnsAndConditions}

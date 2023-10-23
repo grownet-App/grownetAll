@@ -10,6 +10,7 @@ import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
 import { supplierProducts } from '../../config/urls.config'
 import { ProductsStyles } from '../../styles/Styles'
+import { ProductsStyle } from '../../styles/ProductsStyle'
 
 export default function Products() {
   const [blurIntensity, setBlurIntensity] = useState(30)
@@ -153,7 +154,7 @@ export default function Products() {
         setShowSearchResults={setShowSearchResults}
         resetInput={resetInput}
       />
-      <SafeAreaView style={ProductsStyles.containerCards}>
+      <SafeAreaView style={ProductsStyle.containerCards}>
         <ScrollView onScroll={handleScroll}>
           {showSearchResults ? (
             <ProductsFind
@@ -191,7 +192,7 @@ export default function Products() {
           <View style={{ height: 220 }} />
         </ScrollView>
       </SafeAreaView>
-      <View style={styles.viewCategories} />
+      <View style={ProductsStyle.viewCategories} />
       <ProductCategories
         showFavorites={showFavorites}
         toggleShowFavorites={toggleShowFavorites}
@@ -207,22 +208,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'relative',
-  },
-  arrow: {
-    fontSize: 24,
-    color: 'blue',
-    padding: 10,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 10,
-    textAlign: 'center',
-  },
-
-  viewCategories: {
-    position: 'absolute',
-    bottom: 10,
-    zIndex: 1,
+    backgroundColor: 'white',
   },
 })

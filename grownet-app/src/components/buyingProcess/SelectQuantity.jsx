@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, TextInput } from 'react-native'
-import { ProductsStyles } from '../../styles/Styles'
+import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ProductsStyle } from '../../styles/ProductsStyle'
 
 const SelectQuantity = ({
   widthOrder,
@@ -27,22 +27,20 @@ const SelectQuantity = ({
   }
 
   return (
-    <View
-      style={widthOrder ? ProductsStyles.countOrderD : ProductsStyles.count}
-    >
+    <View style={widthOrder ? ProductsStyle.countOrderD : ProductsStyle.count}>
       <TouchableOpacity onPress={decrementAmount}>
-        <Text style={ProductsStyles.button2}>-</Text>
+        <Text style={ProductsStyle.button}>-</Text>
       </TouchableOpacity>
 
       <TextInput
-        style={ProductsStyles.countSelect}
+        style={ProductsStyle.countSelect}
         keyboardType="numeric"
         value={productData.amount.toString()}
         onChangeText={handleTextInputChange} // Agregar el evento onChangeText
       />
 
       <TouchableOpacity onPress={incrementAmount}>
-        <Text style={ProductsStyles.button}>+</Text>
+        <Text style={ProductsStyle.button2}>+</Text>
       </TouchableOpacity>
     </View>
   )
