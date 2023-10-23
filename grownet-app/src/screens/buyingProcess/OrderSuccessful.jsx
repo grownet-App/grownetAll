@@ -301,7 +301,7 @@ const OrderSuccessful = () => {
       <View style={OrderSuccessfulStyle.containerButtons}>
         <TouchableOpacity
           style={[GlobalStyles.btnPrimary, OrderSuccessfulStyle.spaceBttn]}
-          onPress={() => navigation.navigate('recordsStack')}
+          onPress={rocordsNavigate}
         >
           <Text style={GlobalStyles.textBtnSecundary}>
             {' '}
