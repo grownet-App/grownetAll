@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import useOrderStore from '../../store/useOrderStore'
-import { GlobalStyles, OrdersDetailStyles } from '../../styles/Styles'
+import { GlobalStyles } from '../../styles/Styles'
 import ProductDetail from '../../components/buyingProcess/ProductDetail'
 import { ScrollView } from 'react-native-gesture-handler'
 import { OrderDetailStyle } from '../../styles/OrderDetailStyle'
@@ -29,7 +29,7 @@ export default function OrderDetails() {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={OrderDetailStyle.details}>
       <ScrollView>
         <View
           style={{
@@ -48,7 +48,7 @@ export default function OrderDetails() {
               <Text style={OrderDetailStyle.tittle}>
                 {t('orderDetails.paymentDetails')}
               </Text>
-              <View style={OrdersDetailStyles.productDetail}>
+              <View style={OrderDetailStyle.productDetail}>
                 <Text style={OrderDetailStyle.text}>
                   {t('orderDetails.net')}
                 </Text>
@@ -56,7 +56,7 @@ export default function OrderDetails() {
                   £{totalNet.toFixed(2)}
                 </Text>
               </View>
-              <View style={OrdersDetailStyles.productDetail}>
+              <View style={OrderDetailStyle.productDetail}>
                 <Text style={OrderDetailStyle.text}>
                   {t('orderDetails.tax')}
                 </Text>
@@ -65,7 +65,7 @@ export default function OrderDetails() {
                 </Text>
               </View>
             </View>
-            <View style={OrdersDetailStyles.totalDetail}>
+            <View style={OrderDetailStyle.totalDetail}>
               <Text style={OrderDetailStyle.currentText}>
                 {t('orderDetails.currentvalue')}
               </Text>

@@ -36,6 +36,7 @@ function PendingRecord({ navigation }) {
   const { token } = useTokenStore()
   const { selectedPendingOrder } = useRecordStore()
   const [detailsToShow, setDetailsToShow] = useState({})
+
   useEffect(() => {
     axios
       .get(`${selectedStorageOrder}/${selectedPendingOrder}`, {
@@ -179,14 +180,17 @@ function PendingRecord({ navigation }) {
                     status={checked ? 'checked' : 'unchecked'}
                     onPress={onToggleCheckbox}
                   />
-                  <Button onPress={() => navigation.navigate('disputeRecord')}>
+                  {/*<Button onPress={() => navigation.navigate('disputeRecord')}>
                     <Text style={PendingStyle.p}>
                       {t('pendingRecord.openDispute')}
                     </Text>
-                  </Button>
+          </Button>*/}
                 </View>
               </View>
-              <Button style={GlobalStyles.btnPrimary}>
+              <Button
+                style={GlobalStyles.btnPrimary}
+                onPress={() => navigation.navigate('recordsStack')}
+              >
                 <Text style={GlobalStyles.textBtnSecundary}>
                   {t('pendingRecord.confirmOrder')}
                 </Text>

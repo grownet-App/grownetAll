@@ -1,8 +1,9 @@
 import { Feather } from '@expo/vector-icons'
 import axios from 'axios'
-import { format, set } from 'date-fns'
+import { format } from 'date-fns'
 import React, { useEffect, useState } from 'react'
-import { Text, TouchableOpacity, View, TextInput } from 'react-native'
+import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import { Button } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { allStorageOrders } from '../../config/urls.config'
@@ -11,11 +12,8 @@ import useTokenStore from '../../store/useTokenStore'
 import { RecordStyle } from '../../styles/RecordStyle'
 import { SearchStyle } from '../../styles/SearchStyle'
 import { GlobalStyles } from '../../styles/Styles'
-import { ScrollView } from 'react-native-gesture-handler'
 
 import { useTranslation } from 'react-i18next'
-
-import { DisputeStyle } from '../../styles/PendingRecordStyle'
 
 const Records = ({ navigation }) => {
   const { t } = useTranslation()

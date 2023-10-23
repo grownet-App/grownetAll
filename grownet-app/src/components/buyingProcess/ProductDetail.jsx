@@ -228,9 +228,11 @@ const styles = StyleSheet.create({
   placeholderStyle: {
     fontSize: 16,
     color: '#04444f',
+    fontFamily: 'PoppinsMedium',
   },
   selectedTextStyle: {
     fontSize: 16,
     color: '#04444f',
+    fontFamily: 'PoppinsMedium',
   },
 })
