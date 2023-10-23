@@ -340,40 +340,44 @@ const TabNavigator = () => {
   const { t } = useTranslation()
   return (
     <Tab.Navigator
-      initialRouteName={t('menuPrimary.orders')}
+      initialRouteName="Orders"
       screenOptions={{
         tabBarActiveTintColor: '#04444F',
       }}
     >
       <Tab.Screen
-        name={t('menuPrimary.Settings')}
+        name="Settings"
         component={SettingsStack}
         options={{
+          title: t('menuPrimary.Settings'),
           tabBarIcon: tabBarIconProps('Settings'),
           headerShown: false,
         }}
       />
       <Tab.Screen
-        name={t('menuPrimary.orders')}
+        name="Orders"
         component={OrderStack}
         options={{
+          title: t('menuPrimary.orders'),
           tabBarIcon: tabBarIconProps('orders'),
           headerShown: false,
         }}
       />
 
       <Tab.Screen
-        name={t('menuPrimary.records')}
+        name="Records"
         component={RecordsStack}
         options={{
+          title: t('menuPrimary.records'),
           tabBarIcon: tabBarIconProps('records'),
           headerShown: false,
         }}
       />
       <Tab.Screen
-        name={t('menuPrimary.chat')}
+        name="Chat"
         component={ChatStack}
         options={{
+          title: t('menuPrimary.chat'),
           tabBarIcon: tabBarIconProps('chat'),
           headerShown: false,
         }}

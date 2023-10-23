@@ -280,7 +280,9 @@ const OrderSuccessful = () => {
       console.error('Error generating PDF', error)
     }
   }
-
+  const rocordsNavigate = () => {
+    navigation.navigate('Records')
+  }
   return (
     <View style={OrderSuccessfulStyle.container}>
       <View style={OrderSuccessfulStyle.containerImage}>
