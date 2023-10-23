@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { View, TextInput, TouchableOpacity } from 'react-native'
 import { Feather } from '@expo/vector-icons'
-import { ProductsStyles } from '../../styles/Styles'
-import useProductStore from '../../store/useProductStore'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
+import { TextInput, TouchableOpacity, View } from 'react-native'
+import useProductStore from '../../store/useProductStore'
+import { ProductsStyle } from '../../styles/ProductsStyle'
 function ProductSearcher({ products, setShowSearchResults, resetInput }) {
   const { t } = useTranslation()
   const [input, setInput] = useState('')
@@ -49,15 +48,15 @@ function ProductSearcher({ products, setShowSearchResults, resetInput }) {
   }
 
   return (
-    <View style={ProductsStyles.containerSearch}>
+    <View style={ProductsStyle.containerSearch}>
       <TextInput
-        style={ProductsStyles.BgInput}
+        style={ProductsStyle.BgInput}
         value={input}
         onChangeText={handleInputChange}
         placeholder={t('productSearcher.placeholder')}
         placeholderTextColor="#969696"
       />
-      <TouchableOpacity style={ProductsStyles.iconSearch} onPress={handleReset}>
+      <TouchableOpacity style={ProductsStyle.iconSearch} onPress={handleReset}>
         <Feather name="search" size={24} color="#969696" />
       </TouchableOpacity>
     </View>

@@ -1,99 +1,15 @@
 import { StyleSheet } from 'react-native'
 
-export const GlobalStyles = StyleSheet.create({
-  boxShadow: {
-    shadowColor: '#3B3B3B',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 9,
-    elevation: 3,
-  },
-  btnPrimary: {
-    backgroundColor: '#026cd2',
-    paddingHorizontal: 25,
-    paddingVertical: 12,
-    borderRadius: 30,
-    margin: 0.5,
-    alignItems: 'center',
-  },
-  btnSecundary: {
-    backgroundColor: '#04444F',
-    paddingHorizontal: 25,
-    paddingVertical: 10,
-    borderRadius: 30,
-    margin: 0.5,
-    alignItems: 'center',
-  },
-  textBtnSecundary: {
-    color: 'white',
-    fontSize: 16,
-    textAlign: 'center',
-    fontFamily: 'PoppinsSemi',
-  },
-  btnWhite: {
-    backgroundColor: 'white',
-    paddingHorizontal: 25,
-    paddingVertical: 12,
-    borderRadius: 30,
-    marginVertical: 16,
-    alignItems: 'center',
-  },
-  textBtnW: {
-    color: '#04444F',
-    fontWeight: '500',
-    fontSize: 16,
-    textAlign: 'center',
-    fontFamily: 'PoppinsSemi',
-  },
-  btnOutline: {
-    backgroundColor: 'white',
-    paddingHorizontal: 25,
-    paddingVertical: 12,
-    borderRadius: 30,
-    margin: 0.5,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#026cd2',
-  },
-  textBtnOutline: {
-    color: '#026cd2',
-    fontWeight: '500',
-    fontSize: 16,
-    textAlign: 'center',
-    fontFamily: 'PoppinsSemi',
-  },
-  cardSuppliers: {
-    backgroundColor: '#1D446A',
-    fontWeight: '500',
-  },
-  container: {
+export const ProductsStyle = StyleSheet.create({
+  products: {
     flex: 1,
-    backgroundColor: '#026CD2',
-    alignItems: 'center',
-    justifyContent: 'center',
+    position: 'relative',
   },
-  linkWhite: {
-    color: 'white',
-    fontWeight: '500',
-    fontSize: 16,
-    paddingVertical: 50,
-    fontFamily: 'PoppinsRegular',
+  viewCategories: {
+    position: 'absolute',
+    bottom: 10,
+    zIndex: 1,
   },
-  p: {
-    color: 'white',
-    fontSize: 16,
-    marginBottom: 25,
-    fontFamily: 'PoppinsRegular',
-  },
-  cardInvoces: {
-    backgroundColor: '#E9F4FF',
-    padding: 25,
-    borderRadius: 20,
-    width: 330,
-  },
-})
-
-export const ProductsStyles = StyleSheet.create({
   // MAKE YOUR ORDER
 
   // SEARCH BAR
@@ -109,6 +25,7 @@ export const ProductsStyles = StyleSheet.create({
     borderRadius: 51,
     paddingLeft: 20,
     fontSize: 20,
+    backgroundColor: '#f2f2f2',
   },
   iconSearch: {
     position: 'absolute',
@@ -121,8 +38,9 @@ export const ProductsStyles = StyleSheet.create({
     marginVertical: 10,
     flexDirection: 'row',
     borderRadius: 20,
-    height: 175,
+    height: 'auto',
     width: '85%',
+    padding: 18,
   },
   containerImage: {
     width: '40%',
@@ -147,6 +65,7 @@ export const ProductsStyles = StyleSheet.create({
     width: 80,
     height: 45,
     borderRadius: 51,
+    textAlign: 'center',
   },
   countOrderD: {
     flexDirection: 'row',
@@ -158,27 +77,28 @@ export const ProductsStyles = StyleSheet.create({
     width: 100,
     height: 45,
     borderRadius: 51,
+    textAlign: 'center',
   },
   button: {
     backgroundColor: 'transparent',
-    width: 20,
     fontSize: 25,
     color: '#62c471',
-    fontWeight: 'bold',
+    fontFamily: 'PoppinsSemi',
+    marginLeft: 4,
   },
   countSelect: {
-    fontSize: 20,
+    fontSize: 16,
     color: '#04444f',
-    marginLeft: 3,
+    fontFamily: 'PoppinsMedium',
+    marginLeft: 6,
   },
   button2: {
     backgroundColor: 'transparent',
-    width: 20,
     fontSize: 25,
     color: '#62c471',
-    fontWeight: 'bold',
+    fontFamily: 'PoppinsSemi',
     textAlign: 'center',
-    marginLeft: 5,
+    marginRight: 4,
   },
   containerSelect: {
     flexDirection: 'row',
@@ -190,17 +110,19 @@ export const ProductsStyles = StyleSheet.create({
   },
   textName: {
     color: '#04444f',
-    fontWeight: 'bold',
-    fontSize: 15,
+    fontSize: 16,
     width: 120,
+    fontFamily: 'PoppinsMedium',
   },
   textName1: {
     color: '#868686',
-    fontSize: 12,
+    fontSize: 14,
+    fontFamily: 'PoppinsRegular',
   },
   textPrice: {
-    color: '#0d6efd',
-    fontWeight: 'bold',
+    color: '#026cd2',
+    fontFamily: 'PoppinsMedium',
+    fontSize: 16,
   },
 
   containerCards: { flex: 1, marginTop: 10 },
@@ -213,15 +135,15 @@ export const ProductsStyles = StyleSheet.create({
   contenImage: {
     justifyContent: 'center',
     backgroundColor: 'white',
-    width: 120,
-    height: 120,
+    width: 100,
+    height: 100,
     borderRadius: 25,
     margin: 10,
     alignItems: 'center',
     shadowColor: '#144D56',
     elevation: 4,
   },
-  text: { color: '#04444f', textAlign: 'center', fontWeight: 'bold' },
+  text: { color: '#04444f', textAlign: 'center', fontFamily: 'PoppinsSemi' },
   bgContinue: {
     alignItems: 'center',
     backgroundColor: '#026cd2',
@@ -238,7 +160,8 @@ export const ProductsStyles = StyleSheet.create({
   containerButton: {
     width: '100%',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 8,
+    marginTop: 5,
   },
   // PRODUCT DETAIL
 

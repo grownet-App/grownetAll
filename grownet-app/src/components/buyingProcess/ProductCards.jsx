@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { ProductsStyles } from '../../styles/Styles'
+import { GlobalStyles } from '../../styles/Styles'
 import { Dropdown } from 'react-native-element-dropdown'
 import SelectQuantity from './SelectQuantity'
 import { useFavoritesStore } from '../../store/useFavoriteStore'
+import { ProductsStyle } from '../../styles/ProductsStyle'
 
 const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
   const { id, name, image, prices, uomToPay } = productData
@@ -39,20 +40,20 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
 
   return (
     <View style={{ alignItems: 'center', width: '100%' }}>
-      <View style={ProductsStyles.container}>
-        <View style={ProductsStyles.containerImage}>
+      <View style={[ProductsStyle.container, GlobalStyles.boxShadow]}>
+        <View style={ProductsStyle.containerImage}>
           <Image
             source={{ uri: urlImg + image }}
-            style={ProductsStyles.ImageCardProduct}
+            style={ProductsStyle.ImageCardProduct}
             resizeMode="contain"
           />
         </View>
-        <View style={{ marginTop: 20 }}>
-          <View style={ProductsStyles.containName}>
+        <View>
+          <View style={ProductsStyle.containName}>
             <View>
-              <Text style={ProductsStyles.textName}>{name}</Text>
-              <Text style={ProductsStyles.textName1}>{selectedUom.name}</Text>
-              <Text style={ProductsStyles.textPrice}>
+              <Text style={ProductsStyle.textName}>{name}</Text>
+              <Text style={ProductsStyle.textName1}>{selectedUom.name}</Text>
+              <Text style={ProductsStyle.textPrice}>
                 £{selectedUom.priceWithTax}
               </Text>
             </View>
@@ -66,13 +67,13 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
               />
             </TouchableOpacity>
           </View>
-          <View style={ProductsStyles.containerSelect}>
+          <View style={ProductsStyle.containerSelect}>
             <SelectQuantity
               productData={productData}
               onAmountChange={onAmountChange}
               counter={counter}
             />
-            <View style={ProductsStyles.containerDrop}>
+            <View style={ProductsStyle.containerDrop}>
               <Dropdown
                 style={[styles.dropdown, isFocus && { borderColor: '#04444f' }]}
                 containerStyle={{ borderRadius: 20 }}
@@ -118,9 +119,11 @@ const styles = StyleSheet.create({
   placeholderStyle: {
     fontSize: 16,
     color: '#04444f',
+    fontFamily: 'PoppinsMedium',
   },
   selectedTextStyle: {
     fontSize: 16,
     color: '#04444f',
+    fontFamily: 'PoppinsMedium',
   },
 })

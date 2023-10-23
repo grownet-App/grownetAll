@@ -57,7 +57,7 @@ const Restaurants = () => {
   }
   const onPressSuppliers = (restaurant) => {
     setSelectedRestaurant(restaurant)
-    navigation.navigate('suppliers')
+    navigation.navigate('TabNavigator')
   }
 
   return (

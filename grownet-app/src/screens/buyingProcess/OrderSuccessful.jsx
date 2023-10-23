@@ -1,13 +1,13 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { OrderSuccessfulStyles } from '../../styles/Styles'
 import { useNavigation } from '@react-navigation/native'
 import useOrderStore from '../../store/useOrderStore'
 import { printToFileAsync } from 'expo-print'
 import { shareAsync } from 'expo-sharing'
 import * as FileSystem from 'expo-file-system'
 import { useTranslation } from 'react-i18next'
-
+import { OrderSuccessfulStyle } from '../../styles/OrderSuccessfulStyle'
+import { GlobalStyles } from '../../styles/Styles'
 const OrderSuccessful = () => {
   const { t } = useTranslation()
   const navigation = useNavigation()
@@ -280,37 +280,39 @@ const OrderSuccessful = () => {
       console.error('Error generating PDF', error)
     }
   }
-
+  const rocordsNavigate = () => {
+    navigation.navigate('Records')
+  }
   return (
-    <View style={OrderSuccessfulStyles.container}>
-      <View style={OrderSuccessfulStyles.containerImage}>
+    <View style={OrderSuccessfulStyle.container}>
+      <View style={OrderSuccessfulStyle.containerImage}>
         <Image
           source={require('../../../assets/img/img-succesful.png')}
           resizeMode="cover"
-          style={OrderSuccessfulStyles.image}
+          style={OrderSuccessfulStyle.image}
         />
-        <Text style={OrderSuccessfulStyles.textSuccessful}>
+        <Text style={OrderSuccessfulStyle.tittleSuccessful}>
           {t('orderSuccessful.successful')}
         </Text>
-        <Text style={{ color: '#04444f', fontSize: 20 }}>
+        <Text style={OrderSuccessfulStyle.textSuccessful}>
           {t('orderSuccessful.yourOrderSuccessful')}
         </Text>
       </View>
-      <View style={OrderSuccessfulStyles.containerButtons}>
+      <View style={OrderSuccessfulStyle.containerButtons}>
         <TouchableOpacity
-          style={OrderSuccessfulStyles.btnPrimary}
+          style={[GlobalStyles.btnPrimary, OrderSuccessfulStyle.spaceBttn]}
           onPress={() => navigation.navigate('recordsStack')}
         >
-          <Text style={OrderSuccessfulStyles.ContinueText}>
+          <Text style={GlobalStyles.textBtnSecundary}>
             {' '}
             {t('orderSuccessful.yourOrders')}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={OrderSuccessfulStyles.btnPrimary2}
+          style={[GlobalStyles.btnOutline, OrderSuccessfulStyle.spaceBttn]}
           onPress={generatePdfDocument}
         >
-          <Text style={OrderSuccessfulStyles.ContinueText2}>
+          <Text style={GlobalStyles.textBtnOutline}>
             {t('orderSuccessful.downloadPDF')}
           </Text>
         </TouchableOpacity>

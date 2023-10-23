@@ -5,6 +5,8 @@ import useTokenStore from '../store/useTokenStore'
 import Home from '../screens/Home'
 import Login from '../screens/Login/LoginPage'
 import OTP from '../screens/Login/OtpPage'
+import Restauranst from '../screens/buyingProcess/Restaurants'
+import { StatusBar } from 'react-native'
 import {
   useFonts,
   Poppins_700Bold,
@@ -15,10 +17,12 @@ import {
 } from '@expo-google-fonts/poppins'
 import { createStackNavigator } from '@react-navigation/stack'
 import TabNavigator from './TabNavigator'
+import { useTranslation } from 'react-i18next'
 
 const Stack = createStackNavigator()
 
 function AuthNavigator() {
+  const { t } = useTranslation()
   const [fontsLoaded] = useFonts({
     PoppinsBold: Poppins_700Bold,
     PoppinsRegular: Poppins_400Regular,
@@ -49,6 +53,25 @@ function AuthNavigator() {
     <Stack.Navigator>
       {token ? (
         <>
+          <Stack.Screen
+            name="restaurants"
+            component={Restauranst}
+            options={{
+              headerShown: true,
+
+              title: t('stackNavigator.chooseYourRestaurant'),
+              headerStyle: {
+                backgroundColor: '#f2f2f2',
+                height: StatusBar.currentHeight + 60,
+              },
+              headerTintColor: '#04444F',
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                fontFamily: 'PoppinsSemi',
+                fontSize: 22,
+              },
+            }}
+          />
           <Stack.Screen
             name="TabNavigator"
             component={TabNavigator}

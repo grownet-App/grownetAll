@@ -24,6 +24,7 @@ export const SettingsStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     position: 'relative',
+    marginBottom: 20,
   },
   textLogout: {
     color: '#026cd2',

@@ -5,6 +5,7 @@ export const PastStyle = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     marginBottom: 20,
+    height: '100%',
   },
   tittle: {
     fontFamily: 'PoppinsSemi',
