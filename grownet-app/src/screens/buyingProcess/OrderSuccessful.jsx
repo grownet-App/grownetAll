@@ -280,7 +280,9 @@ const OrderSuccessful = () => {
       console.error('Error generating PDF', error)
     }
   }
-
+  const rocordsNavigate = () => {
+    navigation.navigate('Records')
+  }
   return (
     <View style={OrderSuccessfulStyles.container}>
       <View style={OrderSuccessfulStyles.containerImage}>
@@ -299,7 +301,7 @@ const OrderSuccessful = () => {
       <View style={OrderSuccessfulStyles.containerButtons}>
         <TouchableOpacity
           style={OrderSuccessfulStyles.btnPrimary}
-          onPress={() => navigation.navigate('recordsStack')}
+          onPress={rocordsNavigate}
         >
           <Text style={OrderSuccessfulStyles.ContinueText}>
             {' '}
