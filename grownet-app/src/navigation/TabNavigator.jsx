@@ -295,7 +295,6 @@ function RecordsStack() {
           },
         }}
       />
-      <Stack.Screen name="ordersDetail" component={OrderDetail} />
     </Stack.Navigator>
   )
 }
