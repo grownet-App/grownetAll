@@ -216,7 +216,7 @@ function RecordsStack() {
   const { t } = useTranslation()
   return (
     <Stack.Navigator
-      initialRouteName="login"
+      initialRouteName="recordsStack"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: 'white',
@@ -238,6 +238,7 @@ function RecordsStack() {
             fontFamily: 'PoppinsSemi',
             fontSize: 22,
           },
+          headerLeft: null,
         }}
       />
       <Stack.Screen
@@ -292,7 +293,6 @@ function RecordsStack() {
           },
         }}
       />
-      <Stack.Screen name="ordersDetail" component={OrderDetail} />
     </Stack.Navigator>
   )
 }
