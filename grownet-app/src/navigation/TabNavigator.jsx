@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
 import { StatusBar, TouchableOpacity } from 'react-native'
-import { Button } from 'react-native-paper'
 import Chat from '../screens/Chat'
 import PastRecord from '../screens/Record/PastRecord'
 import PendingRecord from '../screens/Record/PendingRecord'
@@ -15,7 +14,6 @@ import OrderDetail from '../screens/buyingProcess/OrderDetail'
 import OrderInformation from '../screens/buyingProcess/OrderInformation'
 import OrderSuccessful from '../screens/buyingProcess/OrderSuccessful'
 import Products from '../screens/buyingProcess/Products'
-import Restauranst from '../screens/buyingProcess/Restaurants'
 import Suppliers from '../screens/buyingProcess/Suppliers'
 import DisputeRecord from '../screens/Record/DisputeRecord'
 import TermsAndConditions from '../screens/TermsAndConditions'
@@ -28,6 +26,24 @@ const HeaderLeft = () => {
 
   const goBack = () => {
     navigation.goBack()
+  }
+
+  return (
+    <TouchableOpacity style={{ marginHorizontal: 28 }} onPress={goBack}>
+      <MaterialCommunityIcons
+        name="arrow-left"
+        size={24}
+        color="#04444F"
+        style={{ position: 'relative' }}
+      />
+    </TouchableOpacity>
+  )
+}
+const HeaderLeft2 = () => {
+  const navigation = useNavigation()
+
+  const goBack = () => {
+    navigation.navigate('restaurants')
   }
 
   return (
@@ -97,7 +113,7 @@ function OrderStack() {
   const { t } = useTranslation()
   return (
     <Stack.Navigator
-      initialRouteName="restaurants"
+      initialRouteName="suppliers"
       screenOptions={{
         headerMode: 'screen',
         headerTintColor: '#026CD2',
@@ -106,25 +122,6 @@ function OrderStack() {
         },
       }}
     >
-      <Stack.Screen
-        name="restaurants"
-        component={Restauranst}
-        options={{
-          headerShown: true,
-
-          title: t('stackNavigator.chooseYourRestaurant'),
-          headerStyle: {
-            backgroundColor: '#f2f2f2',
-            height: StatusBar.currentHeight + 60,
-          },
-          headerTintColor: '#04444F',
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            fontFamily: 'PoppinsSemi',
-            fontSize: 22,
-          },
-        }}
-      />
       <Stack.Screen
         name="suppliers"
         component={Suppliers}
@@ -142,7 +139,7 @@ function OrderStack() {
             fontFamily: 'PoppinsSemi',
             fontSize: 22,
           },
-          headerLeft: () => HeaderLeft(),
+          headerLeft: () => HeaderLeft2(),
         }}
       />
       <Stack.Screen
