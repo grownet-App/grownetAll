@@ -23,6 +23,6 @@ export const ChatStyle = StyleSheet.create({
     marginHorizontal: 35,
   },
   image: {
-    marginTop: -30,
+    marginTop: -45,
   },
 })
