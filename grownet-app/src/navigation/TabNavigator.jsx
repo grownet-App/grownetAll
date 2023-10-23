@@ -310,8 +310,18 @@ function ChatStack() {
         name="chat"
         component={Chat}
         options={{
-          headerBackTitleVisible: false,
-          headerLeft: () => HeaderLeft(),
+          title: 'Chat',
+          headerStyle: {
+            backgroundColor: 'white',
+            height: StatusBar.currentHeight + 60,
+          },
+          headerTintColor: '#04444F',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontFamily: 'PoppinsSemi',
+            fontSize: 22,
+            color: '#026cd2',
+          },
         }}
       />
     </Stack.Navigator>
