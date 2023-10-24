@@ -9,33 +9,24 @@ const ChatIntercom = () => {
 
   useEffect(() => {
     if (window.Intercom && userName) {
-      window.Intercom("boot", {
-        app_id: "pqsj7h24",
-        name: userName,
-      });
+        window.Intercom("boot", {
+            app_id: "pqsj7h24",
+            name: userName,
+        });
     }
-  }, [userName]);
+}, [userName]);
 
   return (
-    <>
-      <style>
-        {`
-                .intercom-lightweight-app .intercom-branding {
-                    display: none;
-                }
-            `}
-      </style>
-      <section className="chat-intercom">
-        <img src={img_succesful} alt="Chat grownet" />
-        <h1>Welcome to Grownet Support</h1>
-        <p>{userName} an agent is waiting to speak to you.</p>
-        <div className="buttons-succesful">
-          <button className="bttn btn-outline" id="my-intercom">
-            Open chat
-          </button>
-        </div>
-      </section>
-    </>
+    <section className="chat-intercom">
+      <img src={img_succesful} alt="Chat grownet" />
+      <h1>Welcome to Grownet Support</h1>
+      <p>{userName} an agent is waiting to speak to you.</p>
+      <div className="buttons-succesful">
+        <button className="bttn btn-outline" id="my-intercom">
+          Open chat
+        </button>
+      </div>
+    </section>
   );
 };
 
