@@ -3,14 +3,18 @@ import React from 'react'
 import { ChatStyle } from '../styles/ChatStyle'
 import { useTranslation } from 'react-i18next'
 import { WebView } from 'react-native-webview'
+import useOrderStore from '../store/useOrderStore'
 
 const Chat = () => {
   const { t } = useTranslation()
+  const { selectedRestaurant } = useOrderStore()
+
+  const userName = selectedRestaurant.accountName
 
   return (
     <WebView
       originWhitelist={['*']}
-      source={{ uri: 'https://grownet-all.vercel.app/chatintercom' }}
+      source={{ uri: `https://grownet-all.vercel.app/chatintercom?name=${userName}`}}
       style={{ flex: 1 }}
       startInLoadingState={true}
       javaScriptEnabled={true}
