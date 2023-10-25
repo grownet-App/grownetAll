@@ -42,37 +42,44 @@ const Settings = () => {
     navigation.navigate('Terms&Conditions')
   }
 
+  const onPressAdd = () => {
+    navigation.navigate('Chat')
+  }
+
   return (
     <SafeAreaView style={SettingsStyle.settings}>
       <Text style={SettingsStyle.tittle}>{t('settings.hi')} 👋</Text>
       <Text style={SettingsStyle.subtittle}>{t('settings.helpText')}</Text>
-      <Card style={SettingsStyle.card}>
-        <Card.Content style={SettingsStyle.card1}>
-          <View>
-            <Text variant="titleLarge" style={SettingsStyle.txtCard}>
-              {t('settings.restaurants')}
-            </Text>
-            <Text variant="bodyMedium" style={SettingsStyle.txtCard2}>
-              {t('settings.editRestaurants')}
-            </Text>
-          </View>
-          <Ionicons name="add-circle-outline" size={45} color="#ffff" />
-        </Card.Content>
-      </Card>
-      <Card style={SettingsStyle.card}>
-        <Card.Content style={SettingsStyle.card1}>
-          <View>
-            <Text variant="titleLarge" style={SettingsStyle.txtCard}>
-              {t('settings.suppliers')}
-            </Text>
-            <Text variant="bodyMedium" style={SettingsStyle.txtCard2}>
-              {t('settings.editSuppliers')}
-            </Text>
-          </View>
-          <Ionicons name="add-circle-outline" size={45} color="#ffff" />
-        </Card.Content>
-      </Card>
-
+      <TouchableOpacity onPress={onPressAdd}>
+        <Card style={SettingsStyle.card}>
+          <Card.Content style={SettingsStyle.card1}>
+            <View>
+              <Text variant="titleLarge" style={SettingsStyle.txtCard}>
+                {t('settings.restaurants')}
+              </Text>
+              <Text variant="bodyMedium" style={SettingsStyle.txtCard2}>
+                {t('settings.editRestaurants')}
+              </Text>
+            </View>
+            <Ionicons name="add-circle-outline" size={45} color="#ffff" />
+          </Card.Content>
+        </Card>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={onPressAdd}>
+        <Card style={SettingsStyle.card}>
+          <Card.Content style={SettingsStyle.card1}>
+            <View>
+              <Text variant="titleLarge" style={SettingsStyle.txtCard}>
+                {t('settings.suppliers')}
+              </Text>
+              <Text variant="bodyMedium" style={SettingsStyle.txtCard2}>
+                {t('settings.editSuppliers')}
+              </Text>
+            </View>
+            <Ionicons name="add-circle-outline" size={45} color="#ffff" />
+          </Card.Content>
+        </Card>
+      </TouchableOpacity>
       <View style={[SettingsStyle.settingButton, GlobalStyles.boxShadow]}>
         <AccordionListItem
           title={t('settings.languages')}
