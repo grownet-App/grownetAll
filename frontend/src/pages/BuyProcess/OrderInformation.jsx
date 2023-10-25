@@ -271,7 +271,7 @@ export const PdfDocument = ({
                 <Text style={styles.tableCell}>{article.uomToPay}</Text>
               </View>
               <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>£{article.totalItemToPay/article.amount}</Text>
+                <Text style={styles.tableCell}>£{article.selectedPriceWithTax}</Text>
               </View>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>£{article.totalItemToPay}</Text>
@@ -356,6 +356,7 @@ export default function OrderInformation() {
   useEffect(() => {
     setData(articlesToPay);
     setSpecialRequirements("");
+    console.log("ESTE ES EL DATA:", articlesToPay);
   }, []);
 
   // OBTENER NUMERO DE ORDEN
@@ -399,63 +400,13 @@ export default function OrderInformation() {
     }
   };
 
-  // ENVIAR CORREO
-  const sendEmail = async (newOrderNumber) => {
-    const pdfBlob = await pdf(
-      <PdfDocument
-        selectedRestaurant={selectedRestaurant}
-        selectedSupplier={selectedSupplier}
-        specialRequirements={specialRequirements}
-        deliveryData={deliveryData}
-        orderNumber={newOrderNumber}
-        data={data}
-        totalNet={totalNet}
-        totalTaxes={totalTaxes}
-        totalToPay={totalToPay}
-      />
-    ).toBlob();
-    const pdfBase64 = await new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(pdfBlob);
-      reader.onloadend = () => {
-        resolve(reader.result);
-      };
-    });
-    const serviceId = "service_2voynei";
-    const templateId = "templateorders";
-    const userId = "ZWLp3lK1btJHqpyCa";
-    const emailParams = {
-      to_name: "Grownet",
-      restaurant: selectedRestaurant.account_name,
-      address: selectedRestaurant.address,
-      date: deliveryData,
-      orderNumber: newOrderNumber,
-      message: specialRequirements,
-      file: pdfBase64,
-      supplier: selectedSupplier.name,
-    };
-    emailjs.send(serviceId, templateId, emailParams, userId).then(
-      (result) => {
-        navigate("/orderSuccessful");
-        console.log(result);
-      },
-      (error) => {
-        console.log("no se envio nada de correo", error);
-      }
-    );
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
       const newOrderNumber = await getOrderNumber();
       if (newOrderNumber) {
-        await sendEmail(newOrderNumber);
+        navigate("/orderSuccessful");
       } else {
         console.log("No se obtuvo numero de orden");
-      }
-    } catch (error) {
-      console.log("Error enviando el correo", error);
     }
   };
 
