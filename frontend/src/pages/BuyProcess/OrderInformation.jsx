@@ -21,6 +21,7 @@ import "../../css/orderDetail.css";
 import fav_icon from "../../img/fav_icon.png";
 import useOrderStore from "../../store/useOrderStore";
 import useTokenStore from "../../store/useTokenStore";
+import { set } from "date-fns";
 
 Font.register({
   family: "Poppins",
@@ -337,6 +338,7 @@ export default function OrderInformation() {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const [dateToPicker, setDateToPicker] = useState();
+  const [mysqlDate, setMysqlDate] = useState("")
   const { token } = useTokenStore();
 
   const handleChangeDate = (date) => {
@@ -345,7 +347,10 @@ export default function OrderInformation() {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     const formattedDate = `${day}/${month}/${year}`;
+    const dateMysqlFormat = `${year}/${month}/${day}`;
+
     setDeliveryData(formattedDate);
+    setMysqlDate(dateMysqlFormat);
   };
 
   useEffect(() => {
@@ -361,11 +366,11 @@ export default function OrderInformation() {
     const jsonProducts = filteredJsonProducts.map((article) => ({
       quantity: article.amount,
       id_presentations: article.idUomToPay,
-      price: article.totalItemToPay,
+      price: parseFloat(article.totalItemToPay.toFixed(2)),
     }));
     const jsonOrderData = {
       id_suppliers: selectedSupplier.id,
-      date_delivery: deliveryData,
+      date_delivery: mysqlDate,
       address_delivery: selectedRestaurant.address,
       accountNumber_customers: selectedRestaurant.accountNumber,
       observation: specialRequirements,
