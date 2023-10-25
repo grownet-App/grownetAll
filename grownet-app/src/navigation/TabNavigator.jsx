@@ -10,10 +10,7 @@ import PastRecord from '../screens/Record/PastRecord'
 import PendingRecord from '../screens/Record/PendingRecord'
 import Records from '../screens/Record/Records'
 import Settings from '../screens/settings/Settings'
-import OrderDetail from '../screens/buyingProcess/OrderDetail'
-import OrderInformation from '../screens/buyingProcess/OrderInformation'
 import OrderSuccessful from '../screens/buyingProcess/OrderSuccessful'
-import Products from '../screens/buyingProcess/Products'
 import Suppliers from '../screens/buyingProcess/Suppliers'
 import DisputeRecord from '../screens/Record/DisputeRecord'
 import TermsAndConditions from '../screens/TermsAndConditions'
@@ -21,24 +18,6 @@ import { useTranslation } from 'react-i18next'
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 
-const HeaderLeft = () => {
-  const navigation = useNavigation()
-
-  const goBack = () => {
-    navigation.goBack()
-  }
-
-  return (
-    <TouchableOpacity style={{ marginHorizontal: 28 }} onPress={goBack}>
-      <MaterialCommunityIcons
-        name="arrow-left"
-        size={24}
-        color="#04444F"
-        style={{ position: 'relative' }}
-      />
-    </TouchableOpacity>
-  )
-}
 const HeaderLeft2 = () => {
   const navigation = useNavigation()
 
@@ -142,66 +121,7 @@ function OrderStack() {
           headerLeft: () => HeaderLeft2(),
         }}
       />
-      <Stack.Screen
-        name="products"
-        component={Products}
-        options={{
-          headerShown: true,
 
-          title: t('stackNavigator.makeYourOrder'),
-          headerStyle: {
-            backgroundColor: 'white',
-            height: StatusBar.currentHeight + 60,
-          },
-          headerTintColor: '#04444F',
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            fontFamily: 'PoppinsSemi',
-            fontSize: 24,
-          },
-          headerLeft: () => HeaderLeft(),
-        }}
-      />
-      <Stack.Screen
-        name="ordersDetail"
-        component={OrderDetail}
-        options={{
-          headerShown: true,
-
-          title: t('stackNavigator.orderDetail'),
-          headerStyle: {
-            backgroundColor: 'white',
-            height: StatusBar.currentHeight + 60,
-          },
-          headerTintColor: '#04444F',
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            fontFamily: 'PoppinsSemi',
-            fontSize: 24,
-          },
-          headerLeft: () => HeaderLeft(),
-        }}
-      />
-      <Stack.Screen
-        name="orderInformation"
-        component={OrderInformation}
-        options={{
-          headerShown: true,
-
-          title: t('stackNavigator.orderDetail'),
-          headerStyle: {
-            backgroundColor: 'white',
-            height: StatusBar.currentHeight + 60,
-          },
-          headerTintColor: '#04444F',
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            fontFamily: 'PoppinsSemi',
-            fontSize: 24,
-          },
-          headerLeft: () => HeaderLeft(),
-        }}
-      />
       <Stack.Screen
         name="orderSuccessful"
         component={OrderSuccessful}

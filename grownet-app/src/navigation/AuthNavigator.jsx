@@ -6,7 +6,7 @@ import Home from '../screens/Home'
 import Login from '../screens/Login/LoginPage'
 import OTP from '../screens/Login/OtpPage'
 import Restauranst from '../screens/buyingProcess/Restaurants'
-import { StatusBar } from 'react-native'
+import { StatusBar, TouchableOpacity } from 'react-native'
 import {
   useFonts,
   Poppins_700Bold,
@@ -18,6 +18,11 @@ import {
 import { createStackNavigator } from '@react-navigation/stack'
 import TabNavigator from './TabNavigator'
 import { useTranslation } from 'react-i18next'
+import Products from '../screens/buyingProcess/Products'
+import { useNavigation } from '@react-navigation/native'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import OrderDetail from '../screens/buyingProcess/OrderDetail'
+import OrderInformation from '../screens/buyingProcess/OrderInformation'
 
 const Stack = createStackNavigator()
 
@@ -49,6 +54,25 @@ function AuthNavigator() {
     return null
   }
 
+  const HeaderLeft = () => {
+    const navigation = useNavigation()
+
+    const goBack = () => {
+      navigation.goBack()
+    }
+
+    return (
+      <TouchableOpacity style={{ marginHorizontal: 28 }} onPress={goBack}>
+        <MaterialCommunityIcons
+          name="arrow-left"
+          size={24}
+          color="#04444F"
+          style={{ position: 'relative' }}
+        />
+      </TouchableOpacity>
+    )
+  }
+
   return (
     <Stack.Navigator>
       {token ? (
@@ -76,6 +100,67 @@ function AuthNavigator() {
             name="TabNavigator"
             component={TabNavigator}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="products"
+            component={Products}
+            options={{
+              headerShown: true,
+
+              title: t('stackNavigator.makeYourOrder'),
+              headerStyle: {
+                backgroundColor: 'white',
+                height: StatusBar.currentHeight + 60,
+              },
+              headerTintColor: '#04444F',
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                fontFamily: 'PoppinsSemi',
+                fontSize: 24,
+              },
+              headerLeft: () => HeaderLeft(),
+            }}
+          />
+          <Stack.Screen
+            name="ordersDetail"
+            component={OrderDetail}
+            options={{
+              headerShown: true,
+
+              title: t('stackNavigator.orderDetail'),
+              headerStyle: {
+                backgroundColor: 'white',
+                height: StatusBar.currentHeight + 60,
+              },
+              headerTintColor: '#04444F',
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                fontFamily: 'PoppinsSemi',
+                fontSize: 24,
+              },
+              headerLeft: () => HeaderLeft(),
+            }}
+          />
+
+          <Stack.Screen
+            name="orderInformation"
+            component={OrderInformation}
+            options={{
+              headerShown: true,
+
+              title: t('stackNavigator.orderDetail'),
+              headerStyle: {
+                backgroundColor: 'white',
+                height: StatusBar.currentHeight + 60,
+              },
+              headerTintColor: '#04444F',
+              headerTitleAlign: 'center',
+              headerTitleStyle: {
+                fontFamily: 'PoppinsSemi',
+                fontSize: 24,
+              },
+              headerLeft: () => HeaderLeft(),
+            }}
           />
         </>
       ) : (
