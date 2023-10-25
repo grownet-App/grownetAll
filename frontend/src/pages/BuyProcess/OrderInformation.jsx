@@ -356,7 +356,6 @@ export default function OrderInformation() {
   useEffect(() => {
     setData(articlesToPay);
     setSpecialRequirements("");
-    console.log("ESTE ES EL DATA:", articlesToPay);
   }, []);
 
   // OBTENER NUMERO DE ORDEN
@@ -380,8 +379,6 @@ export default function OrderInformation() {
       total_tax: totalTaxes,
       products: jsonProducts,
     };
-
-    console.log("ESTE ES EL JSON:", jsonOrderData);
     try {
       const response = await axios.post(createStorageOrder, jsonOrderData, {
         headers: {
