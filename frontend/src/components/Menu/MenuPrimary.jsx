@@ -29,11 +29,11 @@ export default function MenuPrimary() {
             <Icon className="icon-active3" icon="basil:invoice-solid" />
             <p> {t("menuPrimary.record")} </p>
           </NavLink>
-          <Nav.Link className="icons" href="" id="my-intercom">
+          <NavLink className="icons" to="/chat">
             <Icon className="" icon="solar:chat-round-dots-linear" />
             <Icon className="icon-active4" icon="solar:chat-round-bold" />
             <p> {t("menuPrimary.chat")} </p>
-          </Nav.Link>
+          </NavLink>
         </Nav>
       </Container>
     </Navbar>

@@ -1,12 +1,14 @@
 import { createContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import useTokenStore from "../store/useTokenStore";
 import { useEffect } from "react";
+import routes from "../helpers/routes";
 
 export const  AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const { token, countryCode } = useTokenStore();
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -19,7 +21,11 @@ export default function AuthProvider({ children }) {
     setUser({
       token: token,
     });
-    navigate("/restaurants");
+    if (location.pathname === routes.chat) {
+      navigate("/chat");
+    } else {
+      navigate("/restaurants");
+    }
   };
 
   const logout = () => {
