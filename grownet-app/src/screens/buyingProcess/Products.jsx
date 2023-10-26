@@ -9,7 +9,6 @@ import ProductsFind from '../../components/buyingProcess/ProductsFind'
 import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
 import { supplierProducts } from '../../config/urls.config'
-import { ProductsStyles } from '../../styles/Styles'
 import { ProductsStyle } from '../../styles/ProductsStyle'
 
 export default function Products() {
@@ -98,7 +97,7 @@ export default function Products() {
       article.id === productId ? { ...article, amount: newAmount } : article,
     )
 
-    setArticlesToPay(updatedArticlesToPay)
+    useOrderStore.setState({ articlesToPay: updatedArticlesToPay })
   }
 
   const handleUomChange = (productId, newUomToPay) => {

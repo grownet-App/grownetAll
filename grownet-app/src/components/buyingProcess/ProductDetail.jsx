@@ -108,11 +108,20 @@ export default function ProductDetail({
     const total = selectedPrice.priceWithTax * amount
     const totalItemToPay = parseFloat(total.toFixed(2))
 
+    const selectedPriceWithTax = selectedPrice.priceWithTax;
+
     if ('totalItemToPay' in article) {
       article.totalItemToPay = totalItemToPay
     } else {
       Object.assign(article, { totalItemToPay })
     }
+
+    if ("selectedPriceWithTax" in article) {
+      article.selectedPriceWithTax = selectedPriceWithTax;
+    } else {
+      Object.assign(article, { selectedPriceWithTax });
+    }
+    
     return totalItemToPay
   }
 
