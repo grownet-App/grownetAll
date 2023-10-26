@@ -18,6 +18,8 @@ import axios from '../../../axiosConfig.'
 import { ProductsStyle } from '../../styles/ProductsStyle'
 import { useNavigation } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
+import { LinearGradient } from 'expo-linear-gradient'
+
 const { width } = Dimensions.get('window')
 
 function ProductsCategories({
@@ -55,23 +57,23 @@ function ProductsCategories({
       <View style={ProductsStyles.contenImage}>
         {item === 'Favorites' && showFavorites ? (
           <TouchableOpacity onPress={toggleShowFavorites}>
-            <Iconify icon="icon-park-solid:back" size={70} color="#62C471" />
+            <Iconify icon="icon-park-solid:back" size={65} color="#62C471" />
           </TouchableOpacity>
         ) : item === 'Favorites' ? (
           <TouchableOpacity onPress={toggleShowFavorites}>
-            <MaterialIcons name="favorite" size={70} color="#62C471" />
+            <MaterialIcons name="favorite" size={65} color="#62C471" />
           </TouchableOpacity>
         ) : null}
         <TouchableOpacity key={item} onPress={() => filterCategory(item)}>
           {item === 'All' && (
-            <Iconify icon="fluent-emoji:basket" size={70} color="#62C471" />
+            <Iconify icon="fluent-emoji:basket" size={65} color="#62C471" />
           )}
           {categories?.map((categoryApi) => (
             <View key={categoryApi.id}>
               {item === categoryApi.name && (
                 <>
                   <Image
-                    style={{ width: 70, height: 70 }}
+                    style={{ width: 65, height: 65 }}
                     source={{ uri: urlImg + categoryApi.image }}
                   />
                 </>
@@ -88,7 +90,11 @@ function ProductsCategories({
   }
   return (
     <SafeAreaView style={ProductsStyle.fixedContainer}>
-      <BlurView intensity={blurIntensity}>
+      <LinearGradient
+        colors={['rgba(255, 255, 255, 0)', 'white']}
+        start={[0.5, 0.2]}
+        end={[0.5, 0.4]}
+      >
         <Carousel
           data={updatedCategories}
           renderItem={renderItem}
@@ -108,12 +114,12 @@ function ProductsCategories({
             style={GlobalStyles.btnPrimary}
             onPress={handlePress}
           >
-            <Text style={GlobalStyles.textBtnSecundary}>
+            <Text style={ProductsStyle.textButton}>
               {t('categoriesMenu.continue')}
             </Text>
           </TouchableOpacity>
         </View>
-      </BlurView>
+      </LinearGradient>
     </SafeAreaView>
   )
 }

@@ -84,6 +84,8 @@ const esTranslations = {
     date: "Fecha",
     amount: "Monto",
     viewDetails: "Ver detalles",
+    noOrders: "Aún no hay pedidos",
+    bttnNoOrders: "Ordena ya",
   },
   pendingRecord: {
     title: "Detalles del pedido",

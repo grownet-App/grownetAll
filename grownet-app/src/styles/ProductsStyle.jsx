@@ -116,13 +116,15 @@ export const ProductsStyle = StyleSheet.create({
   },
   textName1: {
     color: '#868686',
-    fontSize: 14,
+    fontSize: 15,
     fontFamily: 'PoppinsRegular',
+    marginTop: -5,
   },
   textPrice: {
     color: '#026cd2',
     fontFamily: 'PoppinsMedium',
     fontSize: 16,
+    marginTop: -5,
   },
 
   containerCards: { flex: 1, marginTop: 10 },
@@ -131,6 +133,11 @@ export const ProductsStyle = StyleSheet.create({
     overflow: 'hidden',
     position: 'absolute',
     bottom: 0,
+  },
+  textButton: {
+    fontFamily: 'PoppinsSemi',
+    fontSize: 14,
+    color: 'white',
   },
   contenImage: {
     justifyContent: 'center',

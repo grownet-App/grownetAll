@@ -53,6 +53,17 @@ export const RecordStyle = StyleSheet.create({
     borderRadius: 15,
   },
   /* input*/
+  filter: {
+    backgroundColor: '#f2f2f2',
+    flexDirection: 'row',
+    width: 340,
+    paddingVertical: 10,
+    borderRadius: 51,
+    paddingHorizontal: 20,
+    marginBottom: 15,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   input: {
     flexDirection: 'row',
     width: 320,
@@ -70,5 +81,21 @@ export const RecordStyle = StyleSheet.create({
     fontSize: 15,
     fontFamily: 'PoppinsRegular',
     marginLeft: 10,
+  },
+  textFilter: {
+    fontSize: 14,
+    fontFamily: 'PoppinsMedium',
+    color: '#04444F',
+  },
+  /*No orders*/
+  recordZero: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: '20%',
+  },
+  textZero: {
+    fontFamily: 'PoppinsRegular',
+    fontSize: 18,
+    marginBottom: 10,
   },
 })

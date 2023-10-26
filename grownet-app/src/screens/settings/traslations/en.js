@@ -83,6 +83,8 @@ const enTranslations = {
     order: '#Order',
     amount: 'Amount',
     date: 'Date',
+    noOrders: 'No orders yet',
+    bttnNoOrders: 'Order now',
   },
   disputeRecord: {
     enterQuantityDelivered: 'Enter quantity delivered:',

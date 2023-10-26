@@ -39,7 +39,7 @@ a.icons.active .icon-active3 {
     z-index: -1;
     display: none;
     bottom: 47px;
-    left: 12px;
+    left: 16px;
 }
 .icon-active2{
     position: absolute;
@@ -48,7 +48,7 @@ a.icons.active .icon-active3 {
     z-index: -1;
     display: none;
     bottom: 47px;
-    left: 19px;
+    left: 14px;
 }
 .icon-active3{
     position: absolute;
