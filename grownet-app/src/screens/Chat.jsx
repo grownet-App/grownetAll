@@ -14,7 +14,9 @@ const Chat = () => {
   return (
     <WebView
       originWhitelist={['*']}
-      source={{ uri: `https://grownet-all.vercel.app/chatintercom?name=${userName}`}}
+      source={{
+        uri: `https://grownet-all.vercel.app/chatintercom?name=${userName}`,
+      }}
       style={{ flex: 1 }}
       startInLoadingState={true}
       javaScriptEnabled={true}

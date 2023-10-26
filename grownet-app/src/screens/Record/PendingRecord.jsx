@@ -180,7 +180,7 @@ function PendingRecord({ navigation }) {
                     status={checked ? 'checked' : 'unchecked'}
                     onPress={onToggleCheckbox}
                   />
-                  {/*<Button onPress={() => navigation.navigate('disputeRecord')}>
+                  {/* <Button onPress={() => navigation.navigate('disputeRecord')}>
                     <Text style={PendingStyle.p}>
                       {t('pendingRecord.openDispute')}
                     </Text>
