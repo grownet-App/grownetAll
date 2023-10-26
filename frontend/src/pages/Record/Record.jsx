@@ -37,7 +37,7 @@ export default function Record() {
         setPendingOrders(
           response.data.orders.map((order) => ({
             ...order,
-            created_date: format(new Date(order.created_date), "dd/MM/yyyy"),
+            date_delivery: format(new Date(order.date_delivery), "yyyy/MM/dd"),
           }))
         );
         console.log("Ordenes pendientes:", pendingOrders);
@@ -54,7 +54,7 @@ export default function Record() {
       setSelectedPendingOrder(orderReference);
     } else {
       const filteredOrders = pendingOrders.filter(
-        (order) => order.created_date === selectedDate
+        (order) => order.date_delivery === selectedDate
       );
       if (filteredOrders.length > 0) {
         setSelectedPendingOrder(orderReference);
@@ -62,7 +62,6 @@ export default function Record() {
     }
   };
   console.log(pendingOrders);
-  console.log(selectedDate);
   return (
     <>
       <section className="record">
@@ -121,7 +120,7 @@ export default function Record() {
               </Tab>
               <Tab eventKey="pending" title={t("record.currentOrders")}>
                 {pendingOrders.map((order) => {
-                  if (!selectedDate || order.created_date === selectedDate) {
+                  if (!selectedDate || order.date_delivery === selectedDate) {
                     return (
                       <div className="card-record" key={order.reference}>
                         <div className="information-past">
@@ -131,7 +130,7 @@ export default function Record() {
                           </div>
                           <div>
                             <h4>{t("record.date")}</h4>
-                            <p>{order.created_date}</p>
+                            <p>{order.date_delivery}</p>
                           </div>
                         </div>
                         <div className="information-past o2" id="o2">
@@ -152,12 +151,16 @@ export default function Record() {
                       </div>
                     );
                   } else {
-                    //return null;
-                    console.log(
-                      "no coincide la fecha seleccionada: " +
-                        selectedDate +
-                        "y  la de la api: " +
-                        order.created_date
+                    return (
+                      <div>
+                        <h4>No tienes ordenes en esta fecha</h4>
+                        {console.log(
+                          "no coincide la fecha seleccionada: " +
+                            selectedDate +
+                            " y  la de la api: " +
+                            order.date_delivery
+                        )}
+                      </div>
                     );
                   }
                 })}

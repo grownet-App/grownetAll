@@ -271,7 +271,9 @@ export const PdfDocument = ({
                 <Text style={styles.tableCell}>{article.uomToPay}</Text>
               </View>
               <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>£{article.selectedPriceWithTax}</Text>
+                <Text style={styles.tableCell}>
+                  £{article.selectedPriceWithTax}
+                </Text>
               </View>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>£{article.totalItemToPay}</Text>
@@ -338,7 +340,7 @@ export default function OrderInformation() {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const [dateToPicker, setDateToPicker] = useState();
-  const [mysqlDate, setMysqlDate] = useState("")
+  const [mysqlDate, setMysqlDate] = useState("");
   const { token } = useTokenStore();
 
   const handleChangeDate = (date) => {
@@ -379,6 +381,7 @@ export default function OrderInformation() {
       total_tax: totalTaxes,
       products: jsonProducts,
     };
+    console.log(jsonOrderData, "este es  :DDD");
     try {
       const response = await axios.post(createStorageOrder, jsonOrderData, {
         headers: {
@@ -399,11 +402,11 @@ export default function OrderInformation() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-      const newOrderNumber = await getOrderNumber();
-      if (newOrderNumber) {
-        navigate("/orderSuccessful");
-      } else {
-        console.log("No se obtuvo numero de orden");
+    const newOrderNumber = await getOrderNumber();
+    if (newOrderNumber) {
+      navigate("/orderSuccessful");
+    } else {
+      console.log("No se obtuvo numero de orden");
     }
   };
 
