@@ -43,9 +43,7 @@ const OrderSuccessful = () => {
           <td class="textTable">£ ${article.name}</td>
           <td class="textTable">£ ${article.amount}</td>
           <td class="textTable">£ ${article.uomToPay}</td>
-          <td class="textTable">£ ${
-            article.totalItemToPay / article.amount
-          }</td>
+          <td class="textTable">£ ${article.selectedPriceWithTax}</td>
           <td class="textTable">£ ${article.totalItemToPay}</td>
         </tr>
       `,

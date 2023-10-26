@@ -21,6 +21,7 @@ import "../../css/orderDetail.css";
 import fav_icon from "../../img/fav_icon.png";
 import useOrderStore from "../../store/useOrderStore";
 import useTokenStore from "../../store/useTokenStore";
+import { set } from "date-fns";
 
 Font.register({
   family: "Poppins",
@@ -270,7 +271,7 @@ export const PdfDocument = ({
                 <Text style={styles.tableCell}>{article.uomToPay}</Text>
               </View>
               <View style={styles.tableCol}>
-                <Text style={styles.tableCell}>£{article.totalItemToPay/article.amount}</Text>
+                <Text style={styles.tableCell}>£{article.selectedPriceWithTax}</Text>
               </View>
               <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>£{article.totalItemToPay}</Text>
@@ -337,6 +338,7 @@ export default function OrderInformation() {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const [dateToPicker, setDateToPicker] = useState();
+  const [mysqlDate, setMysqlDate] = useState("")
   const { token } = useTokenStore();
 
   const handleChangeDate = (date) => {
@@ -345,7 +347,10 @@ export default function OrderInformation() {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     const formattedDate = `${day}/${month}/${year}`;
+    const dateMysqlFormat = `${year}/${month}/${day}`;
+
     setDeliveryData(formattedDate);
+    setMysqlDate(dateMysqlFormat);
   };
 
   useEffect(() => {
@@ -361,11 +366,11 @@ export default function OrderInformation() {
     const jsonProducts = filteredJsonProducts.map((article) => ({
       quantity: article.amount,
       id_presentations: article.idUomToPay,
-      price: article.totalItemToPay,
+      price: parseFloat(article.totalItemToPay.toFixed(2)),
     }));
     const jsonOrderData = {
       id_suppliers: selectedSupplier.id,
-      date_delivery: deliveryData,
+      date_delivery: mysqlDate,
       address_delivery: selectedRestaurant.address,
       accountNumber_customers: selectedRestaurant.accountNumber,
       observation: specialRequirements,
@@ -374,8 +379,6 @@ export default function OrderInformation() {
       total_tax: totalTaxes,
       products: jsonProducts,
     };
-
-    console.log("ESTE ES EL JSON:", jsonOrderData);
     try {
       const response = await axios.post(createStorageOrder, jsonOrderData, {
         headers: {
@@ -394,63 +397,13 @@ export default function OrderInformation() {
     }
   };
 
-  // ENVIAR CORREO
-  const sendEmail = async (newOrderNumber) => {
-    const pdfBlob = await pdf(
-      <PdfDocument
-        selectedRestaurant={selectedRestaurant}
-        selectedSupplier={selectedSupplier}
-        specialRequirements={specialRequirements}
-        deliveryData={deliveryData}
-        orderNumber={newOrderNumber}
-        data={data}
-        totalNet={totalNet}
-        totalTaxes={totalTaxes}
-        totalToPay={totalToPay}
-      />
-    ).toBlob();
-    const pdfBase64 = await new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(pdfBlob);
-      reader.onloadend = () => {
-        resolve(reader.result);
-      };
-    });
-    const serviceId = "service_2voynei";
-    const templateId = "templateorders";
-    const userId = "ZWLp3lK1btJHqpyCa";
-    const emailParams = {
-      to_name: "Grownet",
-      restaurant: selectedRestaurant.account_name,
-      address: selectedRestaurant.address,
-      date: deliveryData,
-      orderNumber: newOrderNumber,
-      message: specialRequirements,
-      file: pdfBase64,
-      supplier: selectedSupplier.name,
-    };
-    emailjs.send(serviceId, templateId, emailParams, userId).then(
-      (result) => {
-        navigate("/orderSuccessful");
-        console.log(result);
-      },
-      (error) => {
-        console.log("no se envio nada de correo", error);
-      }
-    );
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
       const newOrderNumber = await getOrderNumber();
       if (newOrderNumber) {
-        await sendEmail(newOrderNumber);
+        navigate("/orderSuccessful");
       } else {
         console.log("No se obtuvo numero de orden");
-      }
-    } catch (error) {
-      console.log("Error enviando el correo", error);
     }
   };
 
