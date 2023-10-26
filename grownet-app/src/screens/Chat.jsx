@@ -9,7 +9,7 @@ const Chat = () => {
   const { t } = useTranslation()
   const { selectedRestaurant } = useOrderStore()
 
-  const userName = selectedRestaurant.accountName
+  const userName = selectedRestaurant?.accountName || "Chef";
 
   return (
     <WebView
