@@ -34,12 +34,7 @@ export default function Record() {
         },
       })
       .then((response) => {
-        setPendingOrders(
-          response.data.orders.map((order) => ({
-            ...order,
-            date_delivery: format(new Date(order.date_delivery), "yyyy/MM/dd"),
-          }))
-        );
+        setPendingOrders(response.data.orders);
         console.log("Ordenes pendientes:", pendingOrders);
       })
       .catch((error) => {
