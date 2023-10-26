@@ -7,8 +7,8 @@ export default function PublicRoute() {
 
      const {isLogged} = useAuth(); 
 /*     const user = {id:1, role:'regular' }; */
-    if (isLogged()) {
-        return <Navigate to={{pathname: routes.orders}} state={{from: location}}  /> 
+    if (isLogged() && location.pathname !== routes.chat) {
+        return <Navigate to={{pathname: routes.restaurants}} state={{from: location}}  /> 
     }
 
     return  <Outlet />;

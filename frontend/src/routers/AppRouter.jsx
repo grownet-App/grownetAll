@@ -22,6 +22,7 @@ import SettingsRestaurants from "../pages/Settings/SettingsRestaurants";
 import SettingsSuppliers from "../pages/Settings/SettingsSuppliers";
 import TermsAndConditions from "../pages/TermsAndConditions";
 import ChatIntercom from "../pages/ChatIntercom";
+import Chat from "../pages/Chat";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 
@@ -43,6 +44,9 @@ export default function AppRouter() {
       </Route>
       <Route exact path={routes.chatIntercom} element={<PublicRoute />}>
         <Route exact path={routes.chatIntercom} element={<ChatIntercom />} />
+      </Route>
+      <Route exact path={routes.chat} element={<PublicRoute />}>
+        <Route exact path={routes.chat} element={<Chat />} />
       </Route>
 
       <Route exact path={routes.firstView} element={<PrivateRoute />}>

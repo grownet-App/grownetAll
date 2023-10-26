@@ -26,6 +26,74 @@ import OrderInformation from '../screens/buyingProcess/OrderInformation'
 
 const Stack = createStackNavigator()
 
+function useHeaderLeftLogic() {
+  const navigation = useNavigation()
+
+  const goBack = () => {
+    navigation.goBack()
+  }
+
+  return { goBack }
+}
+
+function useHeaderLeftLogic2() {
+  const navigation = useNavigation()
+
+  const goBackProducts = () => {
+    navigation.replace('products')
+  }
+  const goBackSuppliers = () => {
+    navigation.navigate('TabNavigator')
+  }
+
+  return { goBackProducts, goBackSuppliers }
+}
+
+const HeaderLeft = () => {
+  const { goBack } = useHeaderLeftLogic()
+
+  return (
+    <TouchableOpacity style={{ marginHorizontal: 28 }} onPress={goBack}>
+      <MaterialCommunityIcons
+        name="arrow-left"
+        size={24}
+        color="#04444F"
+        style={{ position: 'relative' }}
+      />
+    </TouchableOpacity>
+  )
+}
+const HeaderLeft2 = () => {
+  const { goBackProducts } = useHeaderLeftLogic2()
+
+  return (
+    <TouchableOpacity style={{ marginHorizontal: 28 }} onPress={goBackProducts}>
+      <MaterialCommunityIcons
+        name="arrow-left"
+        size={24}
+        color="#04444F"
+        style={{ position: 'relative', width: 20 }}
+      />
+    </TouchableOpacity>
+  )
+}
+const HeaderLeft3 = () => {
+  const { goBackSuppliers } = useHeaderLeftLogic2()
+
+  return (
+    <TouchableOpacity
+      style={{ marginHorizontal: 28 }}
+      onPress={goBackSuppliers}
+    >
+      <MaterialCommunityIcons
+        name="arrow-left"
+        size={24}
+        color="#04444F"
+        style={{ position: 'relative', width: 20 }}
+      />
+    </TouchableOpacity>
+  )
+}
 function AuthNavigator() {
   const { t } = useTranslation()
   const [fontsLoaded] = useFonts({
@@ -52,25 +120,6 @@ function AuthNavigator() {
 
   if (!fontsLoaded || isLoading) {
     return null
-  }
-
-  const HeaderLeft = () => {
-    const navigation = useNavigation()
-
-    const goBack = () => {
-      navigation.goBack()
-    }
-
-    return (
-      <TouchableOpacity style={{ marginHorizontal: 28 }} onPress={goBack}>
-        <MaterialCommunityIcons
-          name="arrow-left"
-          size={24}
-          color="#04444F"
-          style={{ position: 'relative' }}
-        />
-      </TouchableOpacity>
-    )
   }
 
   return (
@@ -118,7 +167,7 @@ function AuthNavigator() {
                 fontFamily: 'PoppinsSemi',
                 fontSize: 24,
               },
-              headerLeft: () => HeaderLeft(),
+              headerLeft: () => HeaderLeft3(),
             }}
           />
           <Stack.Screen
@@ -138,7 +187,7 @@ function AuthNavigator() {
                 fontFamily: 'PoppinsSemi',
                 fontSize: 24,
               },
-              headerLeft: () => HeaderLeft(),
+              headerLeft: () => HeaderLeft2(),
             }}
           />
 

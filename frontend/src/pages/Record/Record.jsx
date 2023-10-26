@@ -40,6 +40,7 @@ export default function Record() {
             created_date: format(new Date(order.created_date), "dd/MM/yyyy"),
           }))
         );
+        console.log("Ordenes pendientes:", pendingOrders);
       })
       .catch((error) => {
         console.log("Error al llamar las ordenes", error);

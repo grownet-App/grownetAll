@@ -21,7 +21,6 @@ export const ProductsStyle = StyleSheet.create({
 
   BgInput: {
     flex: 1,
-    backgroundColor: 'white',
     borderRadius: 51,
     paddingLeft: 20,
     fontSize: 20,

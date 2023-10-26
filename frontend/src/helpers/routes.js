@@ -13,6 +13,7 @@ const routes = {
     restaurants: '/restaurants',
     suppliers: '/suppliers',
     chatIntercom: '/chatIntercom',
+    chat: '/chat',
     supplier: (supplierId) => (supplierId ? `/supplier/:${supplierId}` : '/supplier/:id'),
     admin: {
         team: '/admin/team',
