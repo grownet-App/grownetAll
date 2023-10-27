@@ -1,18 +1,18 @@
+import DateTimePicker from '@react-native-community/datetimepicker'
 import axios from 'axios'
-import { format } from 'date-fns'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Text, TouchableOpacity, View, Image } from 'react-native'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { Button } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import FilterDate from '../../components/FilterDate'
 import { allStorageOrders } from '../../config/urls.config'
+import useOrderStore from '../../store/useOrderStore'
 import useRecordStore from '../../store/useRecordStore'
 import useTokenStore from '../../store/useTokenStore'
 import { RecordStyle } from '../../styles/RecordStyle'
 import { GlobalStyles } from '../../styles/Styles'
-import useOrderStore from '../../store/useOrderStore'
+import { Feather } from '@expo/vector-icons'
 
 const Records = ({ navigation }) => {
   const { t } = useTranslation()
@@ -22,7 +22,6 @@ const Records = ({ navigation }) => {
     useRecordStore()
   const apiOrders = allStorageOrders + selectedRestaurant.accountNumber
   const [activeTab, setActiveTab] = useState('pendingRecord')
-  console.log(apiOrders)
   const switchTab = () => {
     setActiveTab((prevTab) =>
       prevTab === 'pastRecord' ? 'pendingRecord' : 'pastRecord',
@@ -40,7 +39,6 @@ const Records = ({ navigation }) => {
         setPendingOrders(
           response.data.orders.map((order) => ({
             ...order,
-            date_delivery: format(new Date(order.date_delivery), 'dd/MM/yyyy'),
           })),
         )
       })
@@ -52,6 +50,27 @@ const Records = ({ navigation }) => {
   const handlePendingOrderSelect = (orderReference) => {
     setSelectedPendingOrder(orderReference)
     navigation.navigate('pastRecord')
+  }
+
+  //Filtro
+  const [showDatePicker, setShowDatePicker] = useState(false)
+  const [selectedDate, setSelectedDate] = useState(new Date())
+  const showDatepicker = () => {
+    setShowDatePicker(true)
+  }
+
+  const handleDateChange = (event, selected) => {
+    if (event.type === 'set') {
+      setShowDatePicker(false)
+      console.log(orderReference)
+      if (selected) {
+        setSelectedDate(selected)
+        // Realiza la lógica de filtrado con la fecha seleccionada
+        console.log('Fecha seleccionada:', selected)
+      }
+    } else if (event.type === 'dismiss') {
+      setShowDatePicker(false)
+    }
   }
 
   return (
@@ -74,7 +93,26 @@ const Records = ({ navigation }) => {
           </View>
         ) : (
           <>
-            <FilterDate />
+            <View style={RecordStyle.filter}>
+              <Button onPress={showDatepicker}>
+                <Text style={RecordStyle.textFilter}>
+                  {selectedDate.toDateString()}
+                </Text>
+              </Button>
+              <TouchableOpacity onPress={showDatepicker}>
+                <Feather name="search" size={24} color="#969696" />
+              </TouchableOpacity>
+
+              {showDatePicker && (
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={selectedDate}
+                  mode="date"
+                  display="calendar"
+                  onChange={handleDateChange}
+                />
+              )}
+            </View>
             <View style={[RecordStyle.tabContainer, GlobalStyles.boxShadow]}>
               <TouchableOpacity
                 style={[
