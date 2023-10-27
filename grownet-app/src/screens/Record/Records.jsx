@@ -12,7 +12,7 @@ import useTokenStore from '../../store/useTokenStore'
 import { RecordStyle } from '../../styles/RecordStyle'
 import { SearchStyle } from '../../styles/SearchStyle'
 import { GlobalStyles } from '../../styles/Styles'
-
+import useOrderStore from '../../store/useOrderStore'
 import { useTranslation } from 'react-i18next'
 
 const Records = ({ navigation }) => {
@@ -20,6 +20,7 @@ const Records = ({ navigation }) => {
   const { token } = useTokenStore()
   const { pendingOrders, setPendingOrders, setSelectedPendingOrder } =
     useRecordStore()
+  const { selectedRestaurant } = useOrderStore()
   const [input, setInput] = useState('')
   const handleInputChange = (query) => {
     setInput(query)
@@ -34,6 +35,10 @@ const Records = ({ navigation }) => {
 
   useEffect(() => {
     // LLAMAR LAS ORDENES PENDIENTES DE LA BASE DE DATOS
+    if (selectedRestaurant === null) {
+      navigation.navigate('restaurants');
+      return;
+    }
     axios
       .get(allStorageOrders, {
         headers: {
