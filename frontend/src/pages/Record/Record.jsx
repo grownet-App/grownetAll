@@ -162,7 +162,7 @@ export default function Record() {
               ) && (
                 <div className="date-zero-record">
                   <Icon icon="mingcute:warning-line" className="warning-icon" />
-                  <p>No tienes ordenes en esta fecha:</p>
+                  <p>{t("record.noOrdersDate")}</p>
                   <h5>{selectedDate}</h5>
                 </div>
               )}

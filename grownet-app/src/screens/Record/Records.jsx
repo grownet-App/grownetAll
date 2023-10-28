@@ -1,5 +1,7 @@
+import { Feather, MaterialIcons } from '@expo/vector-icons'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import axios from 'axios'
+import { isSameDay, parseISO } from 'date-fns'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
@@ -12,7 +14,6 @@ import useRecordStore from '../../store/useRecordStore'
 import useTokenStore from '../../store/useTokenStore'
 import { RecordStyle } from '../../styles/RecordStyle'
 import { GlobalStyles } from '../../styles/Styles'
-import { Feather } from '@expo/vector-icons'
 
 const Records = ({ navigation }) => {
   const { t } = useTranslation()
@@ -22,6 +23,7 @@ const Records = ({ navigation }) => {
     useRecordStore()
   const apiOrders = allStorageOrders + selectedRestaurant.accountNumber
   const [activeTab, setActiveTab] = useState('pendingRecord')
+  console.log(apiOrders)
   const switchTab = () => {
     setActiveTab((prevTab) =>
       prevTab === 'pastRecord' ? 'pendingRecord' : 'pastRecord',
@@ -55,18 +57,21 @@ const Records = ({ navigation }) => {
   //Filtro
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [selectedDate, setSelectedDate] = useState(new Date())
+  const [formattedDate, setFormattedDate] = useState('All orders')
   const showDatepicker = () => {
     setShowDatePicker(true)
   }
-
   const handleDateChange = (event, selected) => {
     if (event.type === 'set') {
       setShowDatePicker(false)
-      console.log(orderReference)
       if (selected) {
         setSelectedDate(selected)
-        // Realiza la lógica de filtrado con la fecha seleccionada
+        const formatted = selected.toDateString()
+        setFormattedDate(formatted)
         console.log('Fecha seleccionada:', selected)
+      } else {
+        // Si no hay fecha seleccionada, muestra "All Orders"
+        setFormattedDate('All Orders')
       }
     } else if (event.type === 'dismiss') {
       setShowDatePicker(false)
@@ -95,9 +100,7 @@ const Records = ({ navigation }) => {
           <>
             <View style={RecordStyle.filter}>
               <Button onPress={showDatepicker}>
-                <Text style={RecordStyle.textFilter}>
-                  {selectedDate.toDateString()}
-                </Text>
+                <Text style={RecordStyle.textFilter}>{formattedDate}</Text>
               </Button>
               <TouchableOpacity onPress={showDatepicker}>
                 <Feather name="search" size={24} color="#969696" />
@@ -160,7 +163,6 @@ const Records = ({ navigation }) => {
             </View>
 
             <View>
-              {/* Contenido de la pestaña activa */}
               {activeTab === 'pastRecord' ? (
                 <View style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}>
                   <View style={RecordStyle.textCard}>
@@ -189,40 +191,139 @@ const Records = ({ navigation }) => {
                 </View>
               ) : (
                 <View>
-                  {pendingOrders.map((order) => (
-                    <View
-                      style={[RecordStyle.cardRecord, GlobalStyles.boxShadow]}
-                    >
-                      <View style={RecordStyle.textCard} key={order.reference}>
-                        <Text style={RecordStyle.tittle}>
-                          {' '}
-                          {t('record.order')}
-                        </Text>
-                        <Text style={RecordStyle.text}>{order.reference}</Text>
-                        <Text style={RecordStyle.tittle}>
-                          {t('record.amount')}
-                        </Text>
-                        <Text style={RecordStyle.text}>£{order.total}</Text>
-                      </View>
-                      <View style={RecordStyle.textCard}>
-                        <Text style={RecordStyle.tittle}>
-                          {t('record.date')}
-                        </Text>
-                        <Text style={RecordStyle.text}>
-                          {order.date_delivery}
-                        </Text>
-                        <Button
-                          title="View details"
-                          style={RecordStyle.btnPrimary}
-                          onPress={() => navigation.navigate('pendingRecord')}
+                  {formattedDate === 'All orders' ? (
+                    <View>
+                      {pendingOrders.map((order) => (
+                        <View
+                          style={[
+                            RecordStyle.cardRecord,
+                            GlobalStyles.boxShadow,
+                          ]}
                         >
-                          <Text style={GlobalStyles.textBtnSecundary}>
-                            {t('record.viewDetails')}
-                          </Text>
-                        </Button>
-                      </View>
+                          <View
+                            style={RecordStyle.textCard}
+                            key={order.reference}
+                          >
+                            <Text style={RecordStyle.tittle}>
+                              {' '}
+                              {t('record.order')}
+                            </Text>
+                            <Text style={RecordStyle.text}>
+                              {order.reference}
+                            </Text>
+                            <Text style={RecordStyle.tittle}>
+                              {t('record.amount')}
+                            </Text>
+                            <Text style={RecordStyle.text}>£{order.total}</Text>
+                          </View>
+                          <View style={RecordStyle.textCard}>
+                            <Text style={RecordStyle.tittle}>
+                              {t('record.date')}
+                            </Text>
+                            <Text style={RecordStyle.text}>
+                              {order.date_delivery}
+                            </Text>
+                            <Button
+                              title="View details"
+                              style={RecordStyle.btnPrimary}
+                              onPress={() =>
+                                navigation.navigate('pendingRecord')
+                              }
+                            >
+                              <Text style={GlobalStyles.textBtnSecundary}>
+                                {t('record.viewDetails')}
+                              </Text>
+                            </Button>
+                          </View>
+                        </View>
+                      ))}
                     </View>
-                  ))}
+                  ) : (
+                    <View>
+                      {pendingOrders
+                        .filter((order) => {
+                          const orderDate = new Date(order.date_delivery)
+                          const selectedDateUTC = new Date(
+                            selectedDate.toUTCString(),
+                          )
+
+                          return (
+                            orderDate.getUTCDate() ===
+                              selectedDateUTC.getUTCDate() &&
+                            orderDate.getUTCMonth() ===
+                              selectedDateUTC.getUTCMonth() &&
+                            orderDate.getUTCFullYear() ===
+                              selectedDateUTC.getUTCFullYear()
+                          )
+                        })
+                        .map((order) => (
+                          <View
+                            style={[
+                              RecordStyle.cardRecord,
+                              GlobalStyles.boxShadow,
+                            ]}
+                          >
+                            <View
+                              style={RecordStyle.textCard}
+                              key={order.reference}
+                            >
+                              <Text style={RecordStyle.tittle}>
+                                {' '}
+                                {t('record.order')}
+                              </Text>
+                              <Text style={RecordStyle.text}>
+                                {order.reference}
+                              </Text>
+                              <Text style={RecordStyle.tittle}>
+                                {t('record.amount')}
+                              </Text>
+                              <Text style={RecordStyle.text}>
+                                £{order.total}
+                              </Text>
+                            </View>
+                            <View style={RecordStyle.textCard}>
+                              <Text style={RecordStyle.tittle}>
+                                {t('record.date')}
+                              </Text>
+                              <Text style={RecordStyle.text}>
+                                {order.date_delivery}
+                              </Text>
+                              <Button
+                                title="View details"
+                                style={RecordStyle.btnPrimary}
+                                onPress={() =>
+                                  navigation.navigate('pendingRecord')
+                                }
+                              >
+                                <Text style={GlobalStyles.textBtnSecundary}>
+                                  {t('record.viewDetails')}
+                                </Text>
+                              </Button>
+                            </View>
+                          </View>
+                        ))}
+                    </View>
+                  )}
+                  {selectedDate &&
+                    formattedDate !== 'All orders' &&
+                    !pendingOrders.some((order) => {
+                      const orderDate = parseISO(order.date_delivery)
+                      return isSameDay(orderDate, selectedDate)
+                    }) && (
+                      <View style={RecordStyle.dateZero}>
+                        <MaterialIcons
+                          name="error-outline"
+                          size={100}
+                          color="#026CD2"
+                        />
+                        <Text style={RecordStyle.textDateZero}>
+                          {t('record.noOrdersDate')}
+                        </Text>
+                        <Text style={RecordStyle.textDateFilter}>
+                          {formattedDate}
+                        </Text>
+                      </View>
+                    )}
                 </View>
               )}
             </View>

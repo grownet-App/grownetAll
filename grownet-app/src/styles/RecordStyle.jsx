@@ -98,4 +98,24 @@ export const RecordStyle = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
+  /*Date no-found*/
+  dateZero: {
+    paddingTop: '35%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textDateZero: {
+    fontSize: 18,
+    fontFamily: 'PoppinsRegular',
+    color: '#04444F',
+    marginTop: 15,
+  },
+  textDateFilter: {
+    fontSize: 18,
+    fontFamily: 'PoppinsSemi',
+    color: '#026CD2',
+  },
+  btnCloseFilter: {
+    flexDirection: 'row',
+  },
 })
