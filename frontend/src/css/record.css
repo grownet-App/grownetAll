@@ -58,3 +58,18 @@
     padding-bottom: 12px;
     border: none;
 }
+/*Sin ordenes*/
+.record-zero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.record-zero h1 {
+    font-size: 21px;
+    font-weight: 400;
+}
+.record-zero img {
+    width: 90%;
+    margin-top: 35%;
+}

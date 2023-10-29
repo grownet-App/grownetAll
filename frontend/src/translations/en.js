@@ -84,6 +84,8 @@ const enTranslations = {
     date: "Date",
     amount: "Amount",
     viewDetails: "View details",
+    noOrders: "No orders yet",
+    bttnNoOrders: "Order now",
   },
   pendingRecord: {
     title: "Order details",
@@ -96,9 +98,9 @@ const enTranslations = {
     detailsItem: "Detail items",
     paymentDetails: "Payment details",
     currentValue: "Current value",
-    tax: "Tax"
+    tax: "Tax",
   },
-  reception:{
+  reception: {
     title: "What went wrong?",
     wrong: "Wrong quantity",
     defective: "Defective",

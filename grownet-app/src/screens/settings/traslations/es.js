@@ -83,6 +83,8 @@ const esTranslations = {
     order: '#Orden',
     amount: 'Monto',
     date: 'Fecha',
+    noOrders: 'Aún no hay pedidos',
+    bttnNoOrders: 'Ordena ya',
   },
   disputeRecord: {
     enterQuantityDelivered: 'Ingrese la cantidad entregada:',
