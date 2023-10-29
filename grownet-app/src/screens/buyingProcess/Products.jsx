@@ -18,62 +18,90 @@ export default function Products() {
   const [showSearchResults, setShowSearchResults] = useState(false)
   const [products, setProducts] = useState([])
   const [articles, setArticles] = useState(products)
-  const {
-    articlesToPay,
-    selectedSupplier,
-    selectedRestaurant,
-    setArticlesToPay,
-  } = useOrderStore()
+  const { articlesToPay, selectedSupplier, selectedRestaurant } =
+    useOrderStore()
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [resetInput, setResetInput] = useState(0)
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      if (articlesToPay.length > 0) {
-        setArticles(articlesToPay)
-        setProducts(articlesToPay)
-      } else {
-        const requestBody = {
-          id: selectedSupplier.id,
-          country: countryCode,
-          accountNumber: selectedRestaurant.accountNumber,
-        }
+  const fetchProducts = async () => {
+    if (articlesToPay.length > 0) {
+      setArticles(articlesToPay)
+      setProducts(articlesToPay)
+    } else {
+      const requestBody = {
+        id: selectedSupplier.id,
+        country: countryCode,
+        accountNumber: selectedRestaurant.accountNumber,
+      }
 
-        try {
-          const response = await axios.post(
-            `${supplierProducts}`,
-            requestBody,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            },
-          )
-          const defaultProducts = response.data.products
-          const productsWithTax = defaultProducts
-            .filter((product) => product.prices.some((price) => price.nameUoms))
-            .map((product) => ({
-              ...product,
-              amount: 0,
-              uomToPay: product.prices[0].nameUoms,
-              idUomToPay: product.prices[0].id,
-              prices: product.prices.map((price) => ({
-                ...price,
-                priceWithTax: (price.price + price.price * product.tax).toFixed(
-                  2,
-                ),
-              })),
-            }))
-          useOrderStore.setState({ articlesToPay: productsWithTax })
-          setArticles(productsWithTax)
-          setProducts(productsWithTax)
-        } catch (error) {
-          console.error('Error al obtener los productos del proveedor:', error)
-        }
+      try {
+        const response = await axios.post(`${supplierProducts}`, requestBody, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        const defaultProducts = response.data.products
+
+        const productsWithTax = defaultProducts
+          .filter((product) => product.prices.some((price) => price.nameUoms))
+          .map((product) => ({
+            ...product,
+            amount: 0,
+            uomToPay: product.prices[0].nameUoms,
+            idUomToPay: product.prices[0].id,
+            prices: product.prices.map((price) => ({
+              ...price,
+              priceWithTax: (price.price + price.price * product.tax).toFixed(
+                2,
+              ),
+            })),
+          }))
+        useOrderStore.setState({ articlesToPay: productsWithTax })
+        setArticles(productsWithTax)
+        setProducts(productsWithTax)
+      } catch (error) {
+        console.error('Error al obtener los productos del proveedor:', error)
       }
     }
+  }
+  const fetchFavorites = async () => {
+    const requestBody = {
+      id: selectedSupplier.id,
+      country: countryCode,
+      accountNumber: selectedRestaurant.accountNumber,
+    }
 
+    try {
+      const response = await axios.post(`${supplierProducts}`, requestBody, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      const defaultProducts = response.data.products
+
+      const productsWithTax = defaultProducts
+        .filter((product) => product.prices.some((price) => price.nameUoms))
+        .map((product) => ({
+          ...product,
+          amount: 0,
+          uomToPay: product.prices[0].nameUoms,
+          idUomToPay: product.prices[0].id,
+          prices: product.prices.map((price) => ({
+            ...price,
+            priceWithTax: (price.price + price.price * product.tax).toFixed(2),
+          })),
+        }))
+      useOrderStore.setState({ articlesToPay: productsWithTax })
+      setArticles(productsWithTax)
+      setProducts(productsWithTax)
+    } catch (error) {
+      console.error('Error al obtener los productos del proveedor:', error)
+    }
+  }
+
+  useEffect(() => {
     fetchProducts()
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSupplier, articlesToPay])
 
@@ -81,10 +109,16 @@ export default function Products() {
     setResetInput((prevKey) => prevKey + 1)
   }
 
-  const toggleShowFavorites = () => {
+  const toggleShowFavorites = async () => {
     setShowFavorites(!showFavorites)
     setSelectedCategory('All')
     resetInputSearcher()
+
+    try {
+      await fetchFavorites()
+    } catch (error) {
+      console.error('Error al obtener productos al mostrar favoritos:', error)
+    }
   }
 
   const handleAmountChange = (productId, newAmount) => {
@@ -166,6 +200,8 @@ export default function Products() {
                 <Favorites
                   onAmountChange={handleAmountChange}
                   onUomChange={handleUomChange}
+                  updateFavorites={fetchFavorites}
+                  fetchFavorites={fetchFavorites}
                 />
               ) : (
                 <>
@@ -182,6 +218,7 @@ export default function Products() {
                         productData={article}
                         onAmountChange={handleAmountChange}
                         onUomChange={handleUomChange}
+                        fetchFavorites={fetchFavorites}
                       />
                     ))}
                 </>

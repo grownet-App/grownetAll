@@ -62,7 +62,7 @@ const Suppliers = () => {
   }
 
   const onPressAdd = () => {
-    navigation.navigate('TabNavigator', { screen: 'Chat' });
+    navigation.navigate('TabNavigator', { screen: 'Chat' })
   }
 
   return (
