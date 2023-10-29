@@ -24,8 +24,7 @@ export default function Products(props) {
     useOrderStore();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [resetInput, setResetInput] = useState(0);
-
-  useEffect(() => {
+  const fetchData = () => {
     if (articlesToPay.length > 0) {
       setArticles(articlesToPay);
       setProducts(articlesToPay);
@@ -43,6 +42,7 @@ export default function Products(props) {
         })
         .then((response) => {
           const defaultProducts = response.data.products;
+
           const productsWithTax = defaultProducts
             .filter((product) => product.prices.some((price) => price.nameUoms))
             .map((product) => ({
@@ -57,7 +57,9 @@ export default function Products(props) {
                 ),
               })),
             }));
+
           useOrderStore.setState({ articlesToPay: productsWithTax });
+
           setArticles(productsWithTax);
           setProducts(productsWithTax);
         })
@@ -65,16 +67,63 @@ export default function Products(props) {
           console.error("Error al obtener los productos del proveedor:", error);
         });
     }
+  };
+  useEffect(() => {
+    fetchData();
   }, [selectedSupplier]);
+
+  const fetchFavorites = async () => {
+    try {
+      const requestBody = {
+        id: selectedSupplier.id,
+        country: countryCode,
+        accountNumber: selectedRestaurant.accountNumber,
+      };
+
+      const response = await axios.post(`${supplierProducts}`, requestBody, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const defaultProducts = response.data.products;
+
+      const productsWithTax = defaultProducts
+        .filter((product) => product.prices.some((price) => price.nameUoms))
+        .map((product) => ({
+          ...product,
+          amount: 0,
+          uomToPay: product.prices[0].nameUoms,
+          idUomToPay: product.prices[0].id,
+          prices: product.prices.map((price) => ({
+            ...price,
+            priceWithTax: (price.price + price.price * product.tax).toFixed(2),
+          })),
+        }));
+
+      useOrderStore.setState({ articlesToPay: productsWithTax });
+      setArticles(productsWithTax);
+      setProducts(productsWithTax);
+    } catch (error) {
+      console.error("Error al obtener los productos del proveedor:", error);
+    }
+  };
 
   const resetInputSearcher = () => {
     setResetInput((prevKey) => prevKey + 1);
   };
 
-  const toggleShowFavorites = () => {
+  const toggleShowFavorites = async () => {
     setShowFavorites(!showFavorites);
     setSelectedCategory("All");
     resetInputSearcher();
+
+    try {
+      await fetchFavorites();
+      console.log("priductstogglw:", articlesToPay);
+    } catch (error) {
+      console.error("Error al obtener productos al mostrar favoritos:", error);
+    }
   };
   // CAMBIO DE CANTIDAD DE ARTICULOS
   const handleAmountChange = (productId, newAmount) => {
@@ -120,7 +169,7 @@ export default function Products(props) {
     setShowFavorites(false);
     resetInputSearcher();
   };
-
+  console.log("producys:", articlesToPay);
   return (
     <section className="products">
       <div className="tittle-products">
@@ -145,6 +194,7 @@ export default function Products(props) {
             <Favorites
               onAmountChange={handleAmountChange}
               onUomChange={handleUomChange}
+              fetchFavorites={fetchFavorites}
             />
           ) : (
             <>
@@ -162,6 +212,7 @@ export default function Products(props) {
                       productData={article}
                       onAmountChange={handleAmountChange}
                       onUomChange={handleUomChange}
+                      fetchFavorites={fetchFavorites}
                     ></ProductCard>
                   </section>
                 ))}

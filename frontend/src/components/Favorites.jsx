@@ -1,31 +1,34 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useFavoritesStore } from "../store/useFavoritesStore";
 import useOrderStore from "../store/useOrderStore";
 import ProductCard from "./ProductDetail/ProductCard";
 
-export default function Favorites({ onAmountChange, onUomChange }) {
+export default function Favorites({
+  onAmountChange,
+  onUomChange,
+  fetchFavorites,
+}) {
   const { t } = useTranslation();
-  const { favorites } = useFavoritesStore();
-  const { articlesToPay } = useOrderStore();
 
-  const favoriteProducts = articlesToPay.filter((product) =>
-    favorites.includes(product.id)
+  const { articlesToPay } = useOrderStore();
+  const favoriteArticlesToPay = articlesToPay.filter(
+    (article) => article.active === 1
   );
 
   return (
     <div className="products">
       <p>
-        {t("favorites.findFirstPart")} {favorites.length}{" "}
+        {t("favorites.findFirstPart")} {favoriteArticlesToPay.length}{" "}
         {t("favorites.findSecondPart")}{" "}
       </p>
       <div className="favorite-items">
-        {favoriteProducts.map((product) => (
+        {favoriteArticlesToPay.map((product) => (
           <ProductCard
             key={product.id}
             productData={product}
             onAmountChange={onAmountChange}
             onUomChange={onUomChange}
+            fetchFavorites={fetchFavorites}
           />
         ))}
       </div>

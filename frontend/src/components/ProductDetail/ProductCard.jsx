@@ -2,29 +2,70 @@ import { Icon } from "@iconify/react";
 import React from "react";
 import Form from "react-bootstrap/Form";
 import "../../css/products.css";
-import { useFavoritesStore } from "../../store/useFavoritesStore";
 import Stepper from "../Stepper/Stepper";
+import useOrderStore from "../../store/useOrderStore";
+import useTokenStore from "../../store/useTokenStore";
+import axios from "axios";
+import { useState } from "react";
+import { addFavorite } from "../../config/urls.config";
+import { useEffect } from "react";
 
 export default function ProductCard({
   productData,
   onAmountChange,
   onUomChange,
+  fetchFavorites,
 }) {
   const counter = 0;
-  const { id, name, image, prices, priceWithTax, uomToPay, idUomToPay } = productData;
-  const { favorites, addFavorite, removeFavorite } = useFavoritesStore();
-  const isFavorite = favorites.includes(id, name, image);
+  const {
+    id,
+    name,
+    image,
+    prices,
+    priceWithTax,
+    uomToPay,
+    idUomToPay,
+    active,
+  } = productData;
+  const { selectedSupplier, selectedRestaurant } = useOrderStore();
+
+  const [isFavorite, setIsFavorite] = useState(active === 1);
+  const [isFavoritePending, setIsFavoritePending] = useState(false);
+
+  const { token } = useTokenStore();
   const urlImg =
     "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/";
   const selectedUom = prices.find((price) => price.nameUoms === uomToPay);
 
-  const handleToggleFavorite = () => {
-    if (isFavorite) {
-      console.log("remove the ", id);
-      removeFavorite(id);
-    } else {
-      console.log("add the ", id);
-      addFavorite(id);
+  const handleToggleFavorite = async () => {
+    if (isFavoritePending) return;
+
+    try {
+      setIsFavoritePending(true);
+      const newFavoriteState = !isFavorite;
+
+      setIsFavorite(newFavoriteState);
+
+      const requestData = {
+        customer_id: selectedRestaurant.accountNumber,
+        product_id: productData.id,
+        supplier_id: selectedSupplier.id,
+        active: newFavoriteState ? 1 : 0,
+      };
+
+      const response = await axios.post(addFavorite, requestData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setIsFavoritePending(false);
+      console.log("Toggle favorite response:", response.data);
+      await fetchFavorites();
+    } catch (error) {
+      setIsFavorite(!isFavorite);
+      setIsFavoritePending(false);
+      console.error("Error al gestionar el favorito:", error);
     }
   };
 

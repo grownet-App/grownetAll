@@ -21,3 +21,7 @@ export const createStorageOrder = process.env.EXPO_PUBLIC_STORAGE_ORDER
 export const allStorageOrders = process.env.EXPO_PUBLIC_ALL_STORAGE_ORDERS
 export const selectedStorageOrder =
   process.env.EXPO_PUBLIC_SELECTED_STORAGE_ORDER
+
+// FAVORITES
+
+export const addFavorites = process.env.EXPO_PUBLIC_ADD_FAVORITES

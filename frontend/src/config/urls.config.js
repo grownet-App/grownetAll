@@ -28,6 +28,16 @@ export const supplierProducts =
 export const createStorageOrder =
   "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/orders/create";
 export const allStorageOrders =
-  "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/orders/chef/";
+
+   "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/orders/chef/";
+
+
+
+
+
 export const selectedStorageOrder =
   "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/orders";
+
+//FAVORITES
+export const addFavorite =
+  "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/products/favorite";

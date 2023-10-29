@@ -4,30 +4,61 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { GlobalStyles } from '../../styles/Styles'
 import { Dropdown } from 'react-native-element-dropdown'
 import SelectQuantity from './SelectQuantity'
-import { useFavoritesStore } from '../../store/useFavoriteStore'
+import axios from '../../../axiosConfig.'
 import { ProductsStyle } from '../../styles/ProductsStyle'
+import { addFavorites } from '../../config/urls.config'
+import useOrderStore from '../../store/useOrderStore'
+import useTokenStore from '../../store/useTokenStore'
 
-const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
-  const { id, name, image, prices, uomToPay } = productData
-
+const ProductCards = ({
+  productData,
+  onAmountChange,
+  onUomChange,
+  fetchFavorites,
+}) => {
+  const { id, name, image, prices, uomToPay, active } = productData
+  const { selectedSupplier, selectedRestaurant } = useOrderStore()
+  const { token } = useTokenStore()
   const [isFocus, setIsFocus] = useState(false)
-  const { favorites, addFavorite, removeFavorite } = useFavoritesStore()
-  const isFavorite = favorites.includes(id, name, image)
-  const counter = 0
 
+  const [isFavorite, setIsFavorite] = useState(active === 1)
+  const [isFavoritePending, setIsFavoritePending] = useState(false)
+
+  const counter = 0
   const urlImg = process.env.EXPO_PUBLIC_BASE_IMG
   const selectedUom = prices.find((price) => price.nameUoms === uomToPay)
 
-  const handleToggleFavorite = () => {
-    if (isFavorite) {
-      console.log('remove', id)
-      removeFavorite(id)
-    } else {
-      console.log('add  ', id)
-      addFavorite(id)
+  const handleToggleFavorite = async () => {
+    if (isFavoritePending) return
+
+    try {
+      setIsFavoritePending(true)
+      const newFavoriteState = !isFavorite
+
+      setIsFavorite(newFavoriteState)
+
+      const requestData = {
+        customer_id: selectedRestaurant.accountNumber,
+        product_id: productData.id,
+        supplier_id: selectedSupplier.id,
+        active: newFavoriteState ? 1 : 0,
+      }
+
+      const response = await axios.post(addFavorites, requestData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      setIsFavoritePending(false)
+      console.log('Toggle favorite response:', response.data)
+      await fetchFavorites()
+    } catch (error) {
+      setIsFavorite(!isFavorite)
+      setIsFavoritePending(false)
+      console.error('Error al gestionar el favorito:', error)
     }
   }
-
   function handleUomToPayChange(event) {
     console.log('newUomToPay:', event)
     try {
@@ -98,6 +129,7 @@ const ProductCards = ({ productData, onAmountChange, onUomChange }) => {
 }
 
 export default ProductCards
+
 const styles = StyleSheet.create({
   dropdown: {
     height: 45,
