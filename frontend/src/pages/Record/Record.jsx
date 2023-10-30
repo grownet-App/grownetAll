@@ -13,6 +13,7 @@ import useRecordStore from "../../store/useRecordStore";
 import useTokenStore from "../../store/useTokenStore";
 import useOrderStore from "../../store/useOrderStore";
 import img_succesful from "../../img/img_succesful.png";
+
 export default function Record() {
   const { t } = useTranslation();
   const { token } = useTokenStore();
@@ -80,9 +81,6 @@ export default function Record() {
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
                 />
-                <button className="search-button">
-                  <Icon icon="ic:round-search" />
-                </button>
               </form>
             </div>
             <Tabs
@@ -143,24 +141,27 @@ export default function Record() {
                             {t("record.viewDetails")}
                           </Link>
                         </div>
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div>
-                        <h4>No tienes ordenes en esta fecha</h4>
                         {console.log(
-                          "no coincide la fecha seleccionada: " +
-                            selectedDate +
-                            " y  la de la api: " +
-                            order.date_delivery
+                          selectedDate + " tamaño " + order.date_delivery
                         )}
                       </div>
                     );
+                  } else {
+                    return null;
                   }
                 })}
               </Tab>
             </Tabs>
+            {selectedDate &&
+              !pendingOrders.some(
+                (order) => order.date_delivery === selectedDate
+              ) && (
+                <div className="date-zero-record">
+                  <Icon icon="mingcute:warning-line" className="warning-icon" />
+                  <p>{t("record.noOrdersDate")}</p>
+                  <h5>{selectedDate}</h5>
+                </div>
+              )}
           </>
         )}
         <div className="space-menu"></div>

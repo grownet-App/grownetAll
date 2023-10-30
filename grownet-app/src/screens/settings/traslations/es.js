@@ -77,14 +77,15 @@ const esTranslations = {
   },
   record: {
     searchPlaceholder: 'Buscar productos',
-    pastOrders: 'Órdenes anteriores',
-    pendingOrders: 'Órdenes pendientes',
+    pastOrders: 'Pedidos anteriores',
+    pendingOrders: 'Pedidos actuales',
     viewDetails: 'Ver detalles',
     order: '#Orden',
     amount: 'Monto',
     date: 'Fecha',
     noOrders: 'Aún no hay pedidos',
     bttnNoOrders: 'Ordena ya',
+    noOrdersDate: 'No tienes órdenes en esta fecha',
   },
   disputeRecord: {
     enterQuantityDelivered: 'Ingrese la cantidad entregada:',

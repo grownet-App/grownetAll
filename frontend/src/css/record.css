@@ -73,3 +73,18 @@
     width: 90%;
     margin-top: 35%;
 }
+.date-zero-record{
+    align-items: center;
+    padding-top: 20vh;
+}
+.warning-icon{
+    font-size: 150px;
+    margin-bottom: 1rem;
+    color: var(--color-blue-primary);
+}
+.date-zero-record h5 {
+    font-weight: 600;
+    color: var(--color-blue-primary);
+    margin-top: 5px;
+    font-size: 18px;
+}
