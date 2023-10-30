@@ -31,6 +31,10 @@ const Records = ({ navigation }) => {
   }
   useEffect(() => {
     // LLAMAR LAS ORDENES PENDIENTES DE LA BASE DE DATOS
+    if (selectedRestaurant === null) {
+      navigation.navigate('restaurants')
+      return
+    }
     axios
       .get(apiOrders, {
         headers: {

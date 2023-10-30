@@ -35,11 +35,7 @@ export default function Record() {
         },
       })
       .then((response) => {
-        setPendingOrders(
-          response.data.orders.map((order) => ({
-            ...order,
-          }))
-        );
+        setPendingOrders(response.data.orders);
         console.log("Ordenes pendientes:", pendingOrders);
       })
       .catch((error) => {
