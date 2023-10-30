@@ -24,47 +24,6 @@ export default function Products() {
   const [resetInput, setResetInput] = useState(0)
 
   const fetchProducts = async () => {
-    if (articlesToPay.length > 0) {
-      setArticles(articlesToPay)
-      setProducts(articlesToPay)
-    } else {
-      const requestBody = {
-        id: selectedSupplier.id,
-        country: countryCode,
-        accountNumber: selectedRestaurant.accountNumber,
-      }
-
-      try {
-        const response = await axios.post(`${supplierProducts}`, requestBody, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        const defaultProducts = response.data.products
-
-        const productsWithTax = defaultProducts
-          .filter((product) => product.prices.some((price) => price.nameUoms))
-          .map((product) => ({
-            ...product,
-            amount: 0,
-            uomToPay: product.prices[0].nameUoms,
-            idUomToPay: product.prices[0].id,
-            prices: product.prices.map((price) => ({
-              ...price,
-              priceWithTax: (price.price + price.price * product.tax).toFixed(
-                2,
-              ),
-            })),
-          }))
-        useOrderStore.setState({ articlesToPay: productsWithTax })
-        setArticles(productsWithTax)
-        setProducts(productsWithTax)
-      } catch (error) {
-        console.error('Error al obtener los productos del proveedor:', error)
-      }
-    }
-  }
-  const fetchFavorites = async () => {
     const requestBody = {
       id: selectedSupplier.id,
       country: countryCode,
@@ -100,10 +59,13 @@ export default function Products() {
   }
 
   useEffect(() => {
-    fetchProducts()
+    const fetchData = async () => {
+      await fetchProducts()
+    }
 
+    fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedSupplier, articlesToPay])
+  }, [])
 
   const resetInputSearcher = () => {
     setResetInput((prevKey) => prevKey + 1)
@@ -115,7 +77,7 @@ export default function Products() {
     resetInputSearcher()
 
     try {
-      await fetchFavorites()
+      await fetchProducts()
     } catch (error) {
       console.error('Error al obtener productos al mostrar favoritos:', error)
     }
@@ -200,8 +162,7 @@ export default function Products() {
                 <Favorites
                   onAmountChange={handleAmountChange}
                   onUomChange={handleUomChange}
-                  updateFavorites={fetchFavorites}
-                  fetchFavorites={fetchFavorites}
+                  fetchFavorites={fetchProducts}
                 />
               ) : (
                 <>
@@ -218,7 +179,7 @@ export default function Products() {
                         productData={article}
                         onAmountChange={handleAmountChange}
                         onUomChange={handleUomChange}
-                        fetchFavorites={fetchFavorites}
+                        fetchFavorites={fetchProducts}
                       />
                     ))}
                 </>
