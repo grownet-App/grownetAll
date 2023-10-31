@@ -128,17 +128,7 @@ export default function Record() {
                       </div>
                     );
                   } else {
-                    return (
-                      <div>
-                        <h4>No tienes ordenes en esta fecha</h4>
-                        {console.log(
-                          "no coincide la fecha seleccionada: " +
-                            selectedDate +
-                            " y  la de la api: " +
-                            order.date_delivery
-                        )}
-                      </div>
-                    );
+                    return null;
                   }
                 })}
 
@@ -180,9 +170,6 @@ export default function Record() {
                             {t("record.viewDetails")}
                           </Link>
                         </div>
-                        {console.log(
-                          selectedDate + " tamaño " + order.date_delivery
-                        )}
                       </div>
                     );
                   } else {
