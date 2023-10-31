@@ -51,6 +51,7 @@ const Records = ({ navigation }) => {
       .catch((error) => {
         console.log('Error al llamar las ordenes', error)
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handlePendingOrderSelect = (orderReference) => {
@@ -58,7 +59,7 @@ const Records = ({ navigation }) => {
     navigation.navigate('pastRecord')
   }
 
-  //Filtro
+  // Filtro
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [formattedDate, setFormattedDate] = useState('All orders')
@@ -87,9 +88,7 @@ const Records = ({ navigation }) => {
       <ScrollView>
         {pendingOrders.length === 0 ? (
           <View style={RecordStyle.recordZero}>
-            <Image
-              source={require('../../../assets/img/img-succesful.png')}
-            ></Image>
+            <Image source={require('../../../assets/img/img-succesful.png')} />
             <Text style={RecordStyle.textZero}>{t('record.noOrders')}</Text>
             <TouchableOpacity
               style={GlobalStyles.btnPrimary}

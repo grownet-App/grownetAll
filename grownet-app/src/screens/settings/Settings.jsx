@@ -24,6 +24,7 @@ const Settings = () => {
     if (selectedRestaurant === null) {
       navigation.navigate('restaurants')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const changeLanguage = (language) => {
