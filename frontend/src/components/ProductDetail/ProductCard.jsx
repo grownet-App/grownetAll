@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import React from "react";
+import React, { useCallback } from "react";
 import Form from "react-bootstrap/Form";
 import "../../css/products.css";
 import Stepper from "../Stepper/Stepper";
@@ -8,43 +8,45 @@ import useTokenStore from "../../store/useTokenStore";
 import axios from "axios";
 import { useState } from "react";
 import { addFavorite } from "../../config/urls.config";
-import { useEffect } from "react";
 
 export default function ProductCard({
   productData,
   onAmountChange,
   onUomChange,
   fetchFavorites,
+  opacity,
 }) {
   const counter = 0;
-  const {
-    id,
-    name,
-    image,
-    prices,
-    priceWithTax,
-    uomToPay,
-    idUomToPay,
-    active,
-  } = productData;
+  const { id, name, image, prices, uomToPay, active } = productData;
   const { selectedSupplier, selectedRestaurant } = useOrderStore();
 
-  const [isFavorite, setIsFavorite] = useState(active === 1);
-  const [isFavoritePending, setIsFavoritePending] = useState(false);
+  const [productState, setProductState] = useState({
+    isFavorite: active === 1,
+    isFavoritePending: false,
+    isBeingUpdated: false,
+  });
 
   const { token } = useTokenStore();
   const urlImg =
     "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/";
   const selectedUom = prices.find((price) => price.nameUoms === uomToPay);
 
-  const handleToggleFavorite = async () => {
-    if (isFavoritePending) return;
+  const handleToggleFavorite = useCallback(async () => {
+    if (productState.isFavoritePending) return;
 
     try {
-      setIsFavoritePending(true);
-      const newFavoriteState = !isFavorite;
+      setProductState((prevState) => ({
+        ...prevState,
+        isFavoritePending: true,
+      }));
 
-      setIsFavorite(newFavoriteState);
+      const newFavoriteState = !productState.isFavorite;
+
+      setProductState((prevState) => ({
+        ...prevState,
+        isFavorite: newFavoriteState,
+        isBeingUpdated: !newFavoriteState,
+      }));
 
       const requestData = {
         customer_id: selectedRestaurant.accountNumber,
@@ -59,15 +61,33 @@ export default function ProductCard({
         },
       });
 
-      setIsFavoritePending(false);
+      setProductState((prevState) => ({
+        ...prevState,
+        isFavoritePending: false,
+      }));
+
       console.log("Toggle favorite response:", response.data);
+
       await fetchFavorites();
     } catch (error) {
-      setIsFavorite(!isFavorite);
-      setIsFavoritePending(false);
+      setProductState((prevState) => ({
+        ...prevState,
+        isFavorite: !prevState.isFavorite,
+        isFavoritePending: false,
+        isBeingUpdated: false,
+      }));
+
       console.error("Error al gestionar el favorito:", error);
     }
-  };
+  }, [
+    fetchFavorites,
+    productData,
+    productState.isFavorite,
+    productState.isFavoritePending,
+    selectedRestaurant.accountNumber,
+    selectedSupplier.id,
+    token,
+  ]);
 
   const handleUomToPayChange = (event) => {
     const newUomToPay = event.target.value;
@@ -76,7 +96,10 @@ export default function ProductCard({
 
   return (
     <section className="products">
-      <div className="elements">
+      <div
+        className="elements"
+        style={opacity && productState.isBeingUpdated ? { opacity: 0.5 } : null}
+      >
         <img src={urlImg + image} alt={"image " + name} />
         <div>
           <div className="titlle-products">
@@ -88,7 +111,7 @@ export default function ProductCard({
             <div className="pr">
               <Icon
                 className="fav-icon"
-                icon={isFavorite ? "ph:heart-fill" : "ph:heart"}
+                icon={productState.isFavorite ? "ph:heart-fill" : "ph:heart"}
                 onClick={handleToggleFavorite}
                 color="#62C471"
                 size={35}
