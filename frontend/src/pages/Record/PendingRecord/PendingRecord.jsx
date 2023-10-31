@@ -81,12 +81,11 @@ console.log(detailsToShow.products)
                     <div className="product-detail" id="check-products">
                       <div>
                         <h3>{product.name}</h3>
-                        <p>{product.quantity} {product.uom}</p> 
-                        <p>{product.code}</p>
+                        <p>{product.quantity} {product.uom}</p>
                       </div>
                       <div className="calification-reception">
                         {/* <Form.Check id="flexCheck"/>  */}
-                        <Link to={`/record/reception/${product.code}/${product.name}/${product.quantity}/${product.uom}`} className="warning-record">{t("pendingRecord.openDispute")}</Link>  
+                        <Link to={`/record/reception/${product.id}/${product.name}/${product.quantity}/${product.uom}`} className="warning-record">{t("pendingRecord.openDispute")}</Link>  
                       </div>
                     </div>   
                   </div>

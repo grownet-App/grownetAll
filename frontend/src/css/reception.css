@@ -26,6 +26,10 @@
   margin-right: 1rem;
   color: var(--color-green);
 }
+.open-dispute {
+  display: flex;
+  flex-direction: column;
+}
 #dispute-icon {
   font-size: 20px;
   margin-right: 1rem;

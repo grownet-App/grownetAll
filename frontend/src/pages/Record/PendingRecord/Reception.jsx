@@ -15,7 +15,7 @@ export default function Reception() {
   const { t } = useTranslation();
   const { token } = useTokenStore();
   const [item, setItem] = useState({ kindOfStand: "", another: "another" });
-  const { code, name, quantity, uom } = useParams();
+  const { id, name, quantity, uom } = useParams();
   const [description, setDescription] = useState("");
   const [quantityDispute, setQuantityDispute] = useState("");
   const [motive, setMotive] = useState("1");
@@ -69,10 +69,10 @@ export default function Reception() {
 
     const disputeBody = {
       //TODO PASAR EL NUMERO DE LA ORDEN AQUI 
-      order: 343,
+      order: 344,
       motive: motive,
       id_solutionsDisputes: kindOfStand,
-      product_id: code,
+      product_id: id,
       description: description,
       quantity: quantityDispute,
     };
