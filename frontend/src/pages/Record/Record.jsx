@@ -144,12 +144,6 @@ export default function Record() {
                             <h4>{t("record.orderNumber")}</h4>
                             <p>{order.reference}</p>
                           </div>
-                          {order.id_stateOrders === 6 && (
-                            <div className="alert-icon">
-                              <Icon id="dispute-icon" icon="pajamas:warning" />
-                              <p id="dispute-text">Open dispute</p>
-                            </div>
-                          )}
                           <div className="open-dispute">
                             <h4>{t("record.date")}</h4>
                             <p>{order.date_delivery}</p>
@@ -160,15 +154,26 @@ export default function Record() {
                             <h4>{t("record.amount")}</h4>
                             <p>£{order.total}</p>
                           </div>
-                          <Link
-                            className="bttn btn-primary"
-                            onClick={() =>
-                              handlePendingOrderSelect(order.reference)
-                            }
-                            to={"pendingRecord"}
-                          >
-                            {t("record.viewDetails")}
-                          </Link>
+                          <div className="right-button-record">
+                            <Link
+                              className="bttn btn-primary"
+                              onClick={() =>
+                                handlePendingOrderSelect(order.reference)
+                              }
+                              to={"pendingRecord"}
+                            >
+                              {t("record.viewDetails")}
+                            </Link>
+                            {order.id_stateOrders === 6 && (
+                              <div className="alert-icon">
+                                <Icon
+                                  id="dispute-icon"
+                                  icon="pajamas:warning"
+                                />
+                                <p id="dispute-text">Open dispute</p>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     );

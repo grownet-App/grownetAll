@@ -10,11 +10,14 @@ import "../../../css/pendingRecord.css";
 import useRecordStore from "../../../store/useRecordStore";
 import useTokenStore from "../../../store/useTokenStore";
 import { closeSelectedOrder } from "../../../config/urls.config";
+import Modal from "react-bootstrap/Modal";
 
 export default function PendingRecord() {
   const { t } = useTranslation();
   const { token } = useTokenStore();
-  const { selectedPendingOrder, detailsToShow, setDetailsToShow } = useRecordStore();
+  const [show, setShow] = useState(false);
+  const { selectedPendingOrder, detailsToShow, setDetailsToShow } =
+    useRecordStore();
 
   useEffect(() => {
     axios
@@ -33,6 +36,7 @@ export default function PendingRecord() {
 
   // CERRAR LA ORDEN SELECCIONADA
   const onCloseOrder = (e) => {
+    setShow(true);
     e.preventDefault();
     const bodyCloseOrder = {
       reference: selectedPendingOrder,
@@ -40,17 +44,17 @@ export default function PendingRecord() {
     };
     axios
       .post(closeSelectedOrder, bodyCloseOrder, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         console.log(response.data);
       })
       .catch((error) => {
         console.log("Error al cerrar la orden", error);
       });
-  }
+  };
 
   return (
     <>
@@ -73,7 +77,7 @@ export default function PendingRecord() {
             className="mb-3"
           >
             {/* DETALLES DE PRODUCTS DENTRO DE PEDIDOS ACTUALES */}
-            
+
             <Tab eventKey="home" title={t("pendingRecord.tabProducts")}>
               <div className="card-invoices">
                 <h2 id="tax-tittle">{t("pendingRecord.supplierDetail")}</h2>
@@ -133,13 +137,33 @@ export default function PendingRecord() {
                       </div>
                     </div>
                   ))}
-                  <button className="bttn btn-primary" onClick={(e)=>onCloseOrder(e)}>
+                  <button
+                    className="bttn btn-primary"
+                    onClick={(e) => onCloseOrder(e)}
+                  >
                     {t("pendingRecord.confirmOrder")}
                   </button>
                 </form>
               </div>
             </Tab>
           </Tabs>
+
+          <Modal show={show} className="modal-dispute">
+            <section className="alerta">
+              <Icon
+                icon="fluent-emoji:party-popper"
+                className="icon-reception"
+              />
+              <h1>
+                {t("pendingRecord.modalTittle")}{" "}
+                <span className="grownet-pending">Grownet</span>
+              </h1>
+              <p>{t("pendingRecord.modalText")}</p>
+              <Link to="/record" className="bttn btn-primary">
+                {t("pendingRecord.modalButton")}
+              </Link>
+            </section>
+          </Modal>
           <div className="menu-space"></div>
         </section>
       )}

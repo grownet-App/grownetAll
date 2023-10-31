@@ -103,6 +103,10 @@ const esTranslations = {
     paymentDetails: "Detalles de pago",
     currentValue: "Total",
     tax: "Impuestos",
+    modalTittle: "Gracias por usar",
+    modalText:
+      "Para ver tus pedidos confirmados, ve a 'Pedidos anteriores' en 'Historial'.",
+    modalButton: "Continuar",
   },
   reception: {
     title: "¿Qué salió mal?",
@@ -118,6 +122,9 @@ const esTranslations = {
     defectiveQuantity: "Ingresa la cantidad defectuosa:",
     attachPhoto: "Adjuntar foto:",
     customUpload: "Carga personalizada",
+    modalTittle: "Disputa creada exitosamente",
+    modalText: "Nuestro equipo verificará la información",
+    modalButton: "Continuar",
   },
   settings: {
     title: "Configuración",

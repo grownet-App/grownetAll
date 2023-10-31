@@ -103,6 +103,10 @@ const enTranslations = {
     paymentDetails: "Payment details",
     currentValue: "Current value",
     tax: "Tax",
+    modalTittle: "Thank you for using",
+    modalText:
+      "To view your confirmed orders, go to 'Past orders' under 'Record'.",
+    modalButton: "Continue",
   },
   reception: {
     title: "What went wrong?",
@@ -118,6 +122,9 @@ const enTranslations = {
     defectiveQuantity: "Enter defective quantity:",
     attachPhoto: "Attach photo:",
     customUpload: "Custom Upload",
+    modalTittle: "Successfully created dispute",
+    modalText: "Our team will verify the information",
+    modalButton: "Continue",
   },
   settings: {
     title: "Settings",

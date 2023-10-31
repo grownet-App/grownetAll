@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Form, Nav, Tab } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import Modal from "react-bootstrap/Modal";
 import { Link, useParams } from "react-router-dom";
 import MenuPrimary from "../../../components/Menu/MenuPrimary";
 import { createDisputeOrder } from "../../../config/urls.config";
@@ -21,6 +22,7 @@ export default function Reception() {
   const [evidences, setEvidences] = useState([]);
   const { selectedPendingOrder } = useRecordStore();
   const { kindOfStand } = item;
+  const [show, setShow] = useState(false);
 
   const resetFormData = () => {
     setDescription("");
@@ -59,8 +61,8 @@ export default function Reception() {
   // ENVIAR LA DISPUTA
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`${kindOfStand}`);
-
+    //alert(`${kindOfStand}`);
+    setShow(true);
     const formData = new FormData();
 
     const disputeBody = {
@@ -331,6 +333,16 @@ export default function Reception() {
           </Tab.Content>
         </Tab.Container>
       </section>
+      <Modal show={show} className="modal-dispute">
+        <section className="alerta">
+          <Icon icon="flat-color-icons:ok" className="icon-reception" />
+          <h1>Successfully created dispute</h1>
+          <p>Our team will verify the information</p>
+          <Link to="/record/pendingRecord" className="bttn btn-primary">
+            Continue
+          </Link>
+        </section>
+      </Modal>
       <div className="space-menu"></div>
       <MenuPrimary />
     </>
