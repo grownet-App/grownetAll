@@ -44,8 +44,6 @@ export default function Record() {
         );
         setClosedOrders(closedOrders);
         setPendingOrders(pendingOrders);
-        console.log("Ordenes cerradas:", closedOrders);
-        console.log("Ordenes pendientes:", pendingOrders);
       })
       .catch((error) => {
         console.log("Error al llamar las ordenes", error);
@@ -66,8 +64,6 @@ export default function Record() {
       }
     }
   };
-  console.log(pendingOrders);
-  console.log(closedOrders);
   return (
     <>
       <section className="record">

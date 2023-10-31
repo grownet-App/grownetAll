@@ -26,7 +26,6 @@ export default function Suppliers() {
         },
       })
       .then((response) => {
-        console.log(response.data.supplier)
         setSuppliers(response.data.supplier);
       })
       .catch((error) => {
