@@ -46,6 +46,9 @@ const Settings = () => {
       console.error('Error al cerrar sesión:', error)
     }
   }
+  const navigateFaq = () => {
+    navigation.navigate('Faq')
+  }
   const navigateTermnsAndConditions = () => {
     navigation.navigate('Terms&Conditions')
   }
@@ -126,7 +129,10 @@ const Settings = () => {
         <View
           style={[SettingsStyle.containerFaqAndTerms, GlobalStyles.boxShadow]}
         >
-          <TouchableOpacity style={SettingsStyle.FaqAndTerms}>
+          <TouchableOpacity
+            style={SettingsStyle.FaqAndTerms}
+            onPress={navigateFaq}
+          >
             <Text style={SettingsStyle.styleTextTitle}>
               {' '}
               {t('settings.faq')}
