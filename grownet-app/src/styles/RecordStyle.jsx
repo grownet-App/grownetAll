@@ -87,7 +87,7 @@ export const RecordStyle = StyleSheet.create({
     fontFamily: 'PoppinsMedium',
     color: '#04444F',
   },
-  /*No orders*/
+  /* No orders*/
   recordZero: {
     flex: 1,
     alignItems: 'center',
@@ -98,7 +98,7 @@ export const RecordStyle = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
-  /*Date no-found*/
+  /* Date no-found*/
   dateZero: {
     paddingTop: '35%',
     alignItems: 'center',

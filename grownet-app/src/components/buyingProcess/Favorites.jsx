@@ -31,6 +31,7 @@ export default function Favorites({
             onAmountChange={onAmountChange}
             onUomChange={onUomChange}
             fetchFavorites={fetchFavorites}
+            opacity
           />
         ))}
       </View>

@@ -11,7 +11,6 @@ import Carousel from 'react-native-snap-carousel'
 import { GlobalStyles, ProductsStyles } from '../../styles/Styles'
 import { MaterialIcons } from '@expo/vector-icons'
 import { Iconify } from 'react-native-iconify'
-import { BlurView } from 'expo-blur'
 import useTokenStore from '../../store/useTokenStore'
 import { allCategories } from '../../config/urls.config'
 import axios from '../../../axiosConfig.'
@@ -23,7 +22,6 @@ import { LinearGradient } from 'expo-linear-gradient'
 const { width } = Dimensions.get('window')
 
 function ProductsCategories({
-  blurIntensity,
   showFavorites,
   toggleShowFavorites,
   categoriesProduct,
