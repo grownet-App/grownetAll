@@ -21,10 +21,7 @@ function PendingRecord({ navigation }) {
   const onToggleCheckbox = () => {
     setChecked(!checked)
   }
-  const [input, setInput] = useState('')
-  const handleInputChange = (query) => {
-    setInput(query)
-  }
+
   const [activeTab, setActiveTab] = useState('reception')
 
   const switchTab = () => {
@@ -50,12 +47,8 @@ function PendingRecord({ navigation }) {
       .catch((error) => {
         console.log(error)
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const handlePendingOrderSelect = (orderReference) => {
-    setSelectedPendingOrder(orderReference)
-    navigation.navigate('pastRecord')
-  }
 
   return (
     <SafeAreaView style={RecordStyle.record}>

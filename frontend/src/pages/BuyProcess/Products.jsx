@@ -154,6 +154,7 @@ export default function Products(props) {
               onAmountChange={handleAmountChange}
               onUomChange={handleUomChange}
               fetchFavorites={fetchProducts}
+              opacity
             />
           ) : (
             <>

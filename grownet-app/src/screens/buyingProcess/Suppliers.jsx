@@ -33,8 +33,8 @@ const Suppliers = () => {
 
   useEffect(() => {
     if (selectedRestaurant === null) {
-      navigation.navigate('restaurants');
-      return;
+      navigation.navigate('restaurants')
+      return
     }
     async function fetchData() {
       const requestBody = {

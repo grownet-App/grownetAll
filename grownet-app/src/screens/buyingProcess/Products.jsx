@@ -163,6 +163,7 @@ export default function Products() {
                   onAmountChange={handleAmountChange}
                   onUomChange={handleUomChange}
                   fetchFavorites={fetchProducts}
+                  opacity
                 />
               ) : (
                 <>
