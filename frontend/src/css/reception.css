@@ -30,14 +30,28 @@
   display: flex;
   flex-direction: column;
 }
+.right-button-record{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: end;
+}
+.alert-icon{
+  display: flex;
+  align-items: center;
+}
+.right-button-record .bttn {
+  margin: 0 !important;
+  margin-bottom: 8px !important;
+}
 #dispute-icon {
   font-size: 20px;
-  margin-right: 1rem;
-  color: var(--color-green);
+  margin-right: 5px;
+  color: var(--color-danger);
 }
 #dispute-text {
   font-size: 14px;
-  color: var(--color-green);
+  color: var(--color-danger);
 }
 .reception h4 {
   margin-top: 5px;
@@ -150,6 +164,21 @@ input[type="file"]::file-selector-button {
   color: white;
   border: none;
   cursor: pointer;
+}
+/*Modal*/
+.modal-dispute h1{
+  font-size: 22px;
+  color: var(--color-green);
+}
+.icon-reception{
+  text-align: center;
+    font-size: 65px;
+    color: var(--color-green);
+    padding-bottom: 15px;
+}
+.grownet-pending{
+  color: var(--color-blue-primary);
+  font-weight: 600;
 }
 
 @media screen and (min-width: 800px) {
