@@ -1,15 +1,14 @@
 import { Icon } from "@iconify/react";
+import axios from "axios";
 import React, { useState } from "react";
 import { Form, Nav, Tab } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import MenuPrimary from "../../../components/Menu/MenuPrimary";
-import "../../../css/reception.css";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import MenuPrimary from "../../../components/Menu/MenuPrimary";
 import { createDisputeOrder } from "../../../config/urls.config";
+import "../../../css/reception.css";
+import useRecordStore from "../../../store/useRecordStore";
 import useTokenStore from "../../../store/useTokenStore";
-import { set } from "date-fns";
 
 export default function Reception() {
   const { t } = useTranslation();
@@ -20,10 +19,7 @@ export default function Reception() {
   const [quantityDispute, setQuantityDispute] = useState("");
   const [motive, setMotive] = useState("1");
   const [evidences, setEvidences] = useState([]);
-
-  //TODO BORRAR ESTE PREVISUALIZADOR
-  const [previewData, setPreviewData] = useState({});
-
+  const { selectedPendingOrder } = useRecordStore();
   const { kindOfStand } = item;
 
   const resetFormData = () => {
@@ -68,8 +64,7 @@ export default function Reception() {
     const formData = new FormData();
 
     const disputeBody = {
-      //TODO PASAR EL NUMERO DE LA ORDEN AQUI 
-      order: 344,
+      order: selectedPendingOrder,
       motive: motive,
       id_solutionsDisputes: kindOfStand,
       product_id: id,
@@ -81,13 +76,9 @@ export default function Reception() {
         formData.append(key, disputeBody[key]);
       }
     }
-
     evidences.forEach((file) => {
-      formData.append('evidences[]', file);
+      formData.append("evidences[]", file);
     });
-
-    console.log("INFORMACIÓN DEL FORMULARIO", formData);
-    setPreviewData(formData);
 
     axios
       .post(createDisputeOrder, formData, {
@@ -137,9 +128,7 @@ export default function Reception() {
               <Nav.Link eventKey="1">{t("reception.wrong")}</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="2">
-                {t("reception.defective")}
-              </Nav.Link>
+              <Nav.Link eventKey="2">{t("reception.defective")}</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="3">{t("reception.other")}</Nav.Link>
@@ -151,7 +140,7 @@ export default function Reception() {
               <form
                 className="wrong-reception"
                 onSubmit={handleSubmit}
-                controlId="kindOfStand"
+                controlid="kindOfStand"
               >
                 <div className="wrong-product">
                   <h3>{t("reception.enterQuantity")}</h3>
@@ -203,7 +192,7 @@ export default function Reception() {
               <form
                 className="wrong-reception"
                 onSubmit={handleSubmit}
-                controlId="kindOfStand"
+                controlid="kindOfStand"
               >
                 <div className="wrong-product">
                   <h3>{t("reception.defectiveQuantity")}</h3>
@@ -289,7 +278,7 @@ export default function Reception() {
               <form
                 className="wrong-reception"
                 onSubmit={handleSubmit}
-                controlId="kindOfStand"
+                controlid="kindOfStand"
               >
                 <div className="wrong-product">
                   <h3>{t("reception.addComent")}</h3>

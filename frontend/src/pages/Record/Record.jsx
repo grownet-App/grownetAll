@@ -1,6 +1,5 @@
 import { Icon } from "@iconify/react";
 import axios from "axios";
-import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
@@ -9,10 +8,10 @@ import MenuPrimary from "../../components/Menu/MenuPrimary";
 import "../../components/ProductSearcher/productSearcher.css";
 import { allStorageOrders } from "../../config/urls.config";
 import "../../css/record.css";
+import img_succesful from "../../img/img_succesful.png";
+import useOrderStore from "../../store/useOrderStore";
 import useRecordStore from "../../store/useRecordStore";
 import useTokenStore from "../../store/useTokenStore";
-import useOrderStore from "../../store/useOrderStore";
-import img_succesful from "../../img/img_succesful.png";
 export default function Record() {
   const { t } = useTranslation();
   const { token } = useTokenStore();
