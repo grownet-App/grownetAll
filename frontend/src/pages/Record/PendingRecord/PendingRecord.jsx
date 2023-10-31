@@ -30,7 +30,7 @@ export default function PendingRecord() {
     });
   }, []
   )
-
+console.log(detailsToShow.products)
   return (
     <>
     {detailsToShow && (
@@ -81,11 +81,12 @@ export default function PendingRecord() {
                     <div className="product-detail" id="check-products">
                       <div>
                         <h3>{product.name}</h3>
-                        <p>{product.quantity} {product.uom}</p>
+                        <p>{product.quantity} {product.uom}</p> 
+                        <p>{product.code}</p>
                       </div>
                       <div className="calification-reception">
-                        <Form.Check id="flexCheck"/> 
-                        <Link to="/record/reception" className="warning-record">{t("pendingRecord.openDispute")}</Link>  
+                        {/* <Form.Check id="flexCheck"/>  */}
+                        <Link to={`/record/reception/${product.code}/${product.name}/${product.quantity}/${product.uom}`} className="warning-record">{t("pendingRecord.openDispute")}</Link>  
                       </div>
                     </div>   
                   </div>

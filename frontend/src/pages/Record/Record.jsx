@@ -123,6 +123,12 @@ export default function Record() {
                             <h4>{t("record.orderNumber")}</h4>
                             <p>{order.reference}</p>
                           </div>
+                          {order.id_stateOrders === 6 && (
+                            <div className="alert-icon">
+                              <Icon id="dispute-icon" icon="pajamas:warning" />
+                                <p id="dispute-text">Open dispute</p>
+                            </div>
+                        )}
                           <div>
                             <h4>{t("record.date")}</h4>
                             <p>{order.date_delivery}</p>

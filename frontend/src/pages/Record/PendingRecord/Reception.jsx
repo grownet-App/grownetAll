@@ -5,14 +5,35 @@ import { Link } from "react-router-dom";
 import MenuPrimary from "../../../components/Menu/MenuPrimary";
 import "../../../css/reception.css";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { createDisputeOrder } from "../../../config/urls.config";
+import useTokenStore from "../../../store/useTokenStore";
+import { set } from "date-fns";
 
 export default function Reception() {
   const { t } = useTranslation();
+  const { token } = useTokenStore();
   const [item, setItem] = useState({ kindOfStand: "", another: "another" });
+  const { code, name, quantity, uom } = useParams();
+  const [description, setDescription] = useState("");
+  const [quantityDispute, setQuantityDispute] = useState("");
+  const [motive, setMotive] = useState("1");
+  const [evidences, setEvidences] = useState([]);
+
+  //TODO BORRAR ESTE PREVISUALIZADOR
+  const [previewData, setPreviewData] = useState({});
 
   const { kindOfStand } = item;
 
-  const handleChange = (e) => {
+  const resetFormData = () => {
+    setDescription("");
+    setQuantityDispute("");
+    setItem({ kindOfStand: "", another: "another" });
+    setEvidences([]);
+  };
+
+  const onChangeSolution = (e) => {
     e.persist();
     console.log(e.target.value);
 
@@ -21,10 +42,68 @@ export default function Reception() {
       kindOfStand: e.target.value,
     }));
   };
+
+  const handleFilesChange = (e) => {
+    if (e.target.files.length > 10) {
+      alert("No puedes subir más de 10 imágenes.");
+      return;
+    }
+    const fileArray = Array.from(e.target.files);
+    setEvidences(fileArray);
+  };
+
+  const handleQuantityChange = (e) => {
+    const inputValue = e.target.value;
+    const re = /^[0-9\b]+$/;
+    if (inputValue === "" || re.test(inputValue)) {
+      setQuantityDispute(inputValue);
+    }
+  };
+
+  // ENVIAR LA DISPUTA
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`${kindOfStand}`);
+
+    const formData = new FormData();
+
+    const disputeBody = {
+      //TODO PASAR EL NUMERO DE LA ORDEN AQUI 
+      order: 343,
+      motive: motive,
+      id_solutionsDisputes: kindOfStand,
+      product_id: code,
+      description: description,
+      quantity: quantityDispute,
+    };
+    for (let key in disputeBody) {
+      if (disputeBody.hasOwnProperty(key)) {
+        formData.append(key, disputeBody[key]);
+      }
+    }
+
+    evidences.forEach((file) => {
+      formData.append('evidences[]', file);
+    });
+
+    console.log("INFORMACIÓN DEL FORMULARIO", formData);
+    setPreviewData(formData);
+
+    axios
+      .post(createDisputeOrder, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al crear la disputa:", error);
+      });
   };
+
   return (
     <>
       <section className="reception">
@@ -38,85 +117,167 @@ export default function Reception() {
         <div className="reception-tittle">
           <Icon id="error-icon" icon="pajamas:error" />
           <div>
-            <h3>Broccoli</h3>
-            <p>1 box</p>
+            <h3>{name}</h3>
+            <p>
+              {quantity} {uom}
+            </p>
           </div>
         </div>
 
-        <Tab.Container id="left-tabs-example" defaultActiveKey="second">
+        <Tab.Container
+          id="left-tabs-example"
+          defaultActiveKey="1"
+          onSelect={(key) => {
+            setMotive(key);
+            resetFormData();
+          }}
+        >
           <Nav variant="pills" className="flex-column">
             <Nav.Item>
-              <Nav.Link eventKey="second">{t("reception.wrong")}</Nav.Link>
+              <Nav.Link eventKey="1">{t("reception.wrong")}</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="third">{t("reception.defective")}</Nav.Link>
+              <Nav.Link eventKey="2">
+                {t("reception.defective")}
+              </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="fourth">{t("reception.other")}</Nav.Link>
+              <Nav.Link eventKey="3">{t("reception.other")}</Nav.Link>
             </Nav.Item>
           </Nav>
           <h4>{t("reception.comments")}</h4>
           <Tab.Content>
-            <Tab.Pane eventKey="second">
-              <form className="wrong-reception" controlId="kindOfStand">
+            <Tab.Pane eventKey="1">
+              <form
+                className="wrong-reception"
+                onSubmit={handleSubmit}
+                controlId="kindOfStand"
+              >
                 <div className="wrong-product">
                   <h3>{t("reception.enterQuantity")}</h3>
                   <div className="unit-reception">
                     <input
                       type="text"
-                      placeholder="11 total recived"
+                      placeholder="Number of item received"
+                      value={quantityDispute}
+                      onChange={handleQuantityChange}
                       required
                     />
                     <h3>{t("reception.addComent")}</h3>
-                    <textarea type="text"></textarea>
+                    <textarea
+                      type="text"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      required
+                    ></textarea>
                   </div>
                 </div>
                 <div className="wrong-product">
                   <div id="wrong-detail">
                     <h3>{t("reception.sendNextOrder")}</h3>
                     <Form.Check
-                      value="sendNextOrder"
+                      value="1"
                       type="radio"
                       aria-label="radio 1"
-                      onChange={handleChange}
-                      checked={kindOfStand === "sendNextOrder"}
+                      onChange={onChangeSolution}
+                      checked={kindOfStand === "1"}
                     />
                   </div>
                   <div id="wrong-detail">
                     <h3>{t("reception.crediteNote")}</h3>
                     <Form.Check
-                      value="creditNote"
+                      value="2"
                       type="radio"
                       aria-label="radio 1"
-                      onChange={handleChange}
-                      checked={kindOfStand === "creditNote"}
+                      onChange={onChangeSolution}
+                      checked={kindOfStand === "2"}
                     />
                   </div>
                 </div>
                 <button type="submit" className="bttn btn-primary">
-                {t("reception.send")}
+                  {t("reception.send")}
                 </button>
               </form>
             </Tab.Pane>
-            <Tab.Pane eventKey="third">
-              <form className="wrong-reception" controlId="kindOfStand">
+            <Tab.Pane eventKey="2">
+              <form
+                className="wrong-reception"
+                onSubmit={handleSubmit}
+                controlId="kindOfStand"
+              >
                 <div className="wrong-product">
                   <h3>{t("reception.defectiveQuantity")}</h3>
                   <div className="unit-reception">
                     <input
                       type="text"
-                      placeholder="11 total recived"
+                      placeholder="Number of item received"
+                      value={quantityDispute}
+                      onChange={handleQuantityChange}
                       required
                     />
                     <h3>{t("reception.addComent")}</h3>
-                    <textarea type="text"></textarea>
+                    <textarea
+                      type="text"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      required
+                    ></textarea>
+                  </div>
+                </div>
+                <div className="wrong-product">
+                  <div id="wrong-detail">
+                    <h3>{t("reception.sendNextOrder")}</h3>
+                    <Form.Check
+                      value="1"
+                      type="radio"
+                      aria-label="radio 1"
+                      onChange={onChangeSolution}
+                      checked={kindOfStand === "1"}
+                    />
+                  </div>
+                  <div id="wrong-detail">
+                    <h3>{t("reception.crediteNote")}</h3>
+                    <Form.Check
+                      value="2"
+                      type="radio"
+                      aria-label="radio 1"
+                      onChange={onChangeSolution}
+                      checked={kindOfStand === "2"}
+                    />
                   </div>
                 </div>
                 <div className="wrong-product">
                   <h3>{t("reception.attachPhoto")}</h3>
-                  <label class="custom-file-upload">
-                    <input type="file" required />
-                    <Icon id="upload-icon" icon="tabler:upload" /> {t("reception.customUpload")}
+                  <div className="uploaded-images">
+                    {evidences.map((file, index) => (
+                      <div key={index} className="image-preview">
+                        <img
+                          src={URL.createObjectURL(file)}
+                          alt="uploaded-preview"
+                          width="30"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newEvidences = [...evidences];
+                            newEvidences.splice(index, 1);
+                            setEvidences(newEvidences);
+                          }}
+                        >
+                          X
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <label className="custom-file-upload">
+                    <input
+                      type="file"
+                      onChange={handleFilesChange}
+                      multiple
+                      required
+                    />
+                    <Icon id="upload-icon" icon="tabler:upload" />{" "}
+                    {t("reception.customUpload")}
                   </label>
                 </div>
                 <button type="submit" className="bttn btn-primary">
@@ -124,17 +285,53 @@ export default function Reception() {
                 </button>
               </form>
             </Tab.Pane>
-            <Tab.Pane eventKey="fourth">
-              <form className="wrong-reception" controlId="kindOfStand">
+            <Tab.Pane eventKey="3">
+              <form
+                className="wrong-reception"
+                onSubmit={handleSubmit}
+                controlId="kindOfStand"
+              >
                 <div className="wrong-product">
                   <h3>{t("reception.addComent")}</h3>
-                  <textarea type="text"></textarea>
+                  <textarea
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                  ></textarea>
                 </div>
                 <div className="wrong-product">
                   <h3>{t("reception.attachPhoto")}</h3>
-                  <label class="custom-file-upload">
-                    <input type="file" required />
-                    <Icon id="upload-icon" icon="tabler:upload" /> {t("reception.customUpload")}
+                  <div className="uploaded-images">
+                    {evidences.map((file, index) => (
+                      <div key={index} className="image-preview">
+                        <img
+                          src={URL.createObjectURL(file)}
+                          alt="uploaded-preview"
+                          width="30"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newEvidences = [...evidences];
+                            newEvidences.splice(index, 1);
+                            setEvidences(newEvidences);
+                          }}
+                        >
+                          X
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <label className="custom-file-upload">
+                    <input
+                      type="file"
+                      onChange={handleFilesChange}
+                      multiple
+                      required
+                    />
+                    <Icon id="upload-icon" icon="tabler:upload" />{" "}
+                    {t("reception.customUpload")}
                   </label>
                 </div>
                 <button type="submit" className="bttn btn-primary">

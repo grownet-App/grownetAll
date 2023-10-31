@@ -82,7 +82,7 @@ export default function AppRouter() {
         <Route exact path={routes.record} element={<Record />} />
         <Route exact path="pendingRecord" element={<PendingRecord />}></Route>
         <Route exact path="pastRecord" element={<PastRecord />} />
-        <Route exact path="reception" element={<Reception />} />
+        <Route exact path="reception/:code/:name/:quantity/:uom" element={<Reception />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
