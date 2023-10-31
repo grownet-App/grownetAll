@@ -9,12 +9,12 @@ import { selectedStorageOrder } from "../../../config/urls.config";
 import "../../../css/pendingRecord.css";
 import useRecordStore from "../../../store/useRecordStore";
 import useTokenStore from "../../../store/useTokenStore";
+import { closeSelectedOrder } from "../../../config/urls.config";
 
 export default function PendingRecord() {
   const { t } = useTranslation();
   const { token } = useTokenStore();
-  const { selectedPendingOrder } = useRecordStore();
-  const [detailsToShow, setDetailsToShow] = useState({});
+  const { selectedPendingOrder, detailsToShow, setDetailsToShow } = useRecordStore();
 
   useEffect(() => {
     axios
@@ -30,6 +30,28 @@ export default function PendingRecord() {
         console.log(error);
       });
   }, []);
+
+  // CERRAR LA ORDEN SELECCIONADA
+  const onCloseOrder = (e) => {
+    e.preventDefault();
+    const bodyCloseOrder = {
+      reference: selectedPendingOrder,
+      state: 5,
+    };
+    axios
+      .post(closeSelectedOrder, bodyCloseOrder, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log("Error al cerrar la orden", error);
+      });
+  }
+
   return (
     <>
       {detailsToShow && (
@@ -50,6 +72,8 @@ export default function PendingRecord() {
             id="uncontrolled-tab-example"
             className="mb-3"
           >
+            {/* DETALLES DE PRODUCTS DENTRO DE PEDIDOS ACTUALES */}
+            
             <Tab eventKey="home" title={t("pendingRecord.tabProducts")}>
               <div className="card-invoices">
                 <h2 id="tax-tittle">{t("pendingRecord.supplierDetail")}</h2>
@@ -81,6 +105,9 @@ export default function PendingRecord() {
                 </div>
               </div>
             </Tab>
+
+            {/* RECEPCION DE PRODUCTOS POSIBILIDAD ABRIR DISPUTA */}
+
             <Tab eventKey="reception" title={t("pendingRecord.tabReception")}>
               <div className="pending-record">
                 <form className="card-pending-record">
@@ -106,7 +133,7 @@ export default function PendingRecord() {
                       </div>
                     </div>
                   ))}
-                  <button className="bttn btn-primary">
+                  <button className="bttn btn-primary" onClick={(e)=>onCloseOrder(e)}>
                     {t("pendingRecord.confirmOrder")}
                   </button>
                 </form>

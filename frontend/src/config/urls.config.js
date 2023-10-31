@@ -31,6 +31,8 @@ export const allStorageOrders =
   "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/orders/chef/";
 export const selectedStorageOrder =
   "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/orders";
+export const closeSelectedOrder = 
+  "https://ec2-13-58-203-20.us-east-2.compute.amazonaws.com/grownet/api/orders/state"
 
 // DISPUTAS
 export const createDisputeOrder =
