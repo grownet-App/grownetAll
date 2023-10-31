@@ -141,11 +141,15 @@ function Login() {
             <Modal show={show} onHide={handleClose}>
               <section className="alerta">
                 <Icon className="error" icon="pajamas:error" />
-                <h1>We apologize</h1>
-                <p>We didn't find the mobile number registered</p>
+                <h1>{t("login.modalTittle")}</h1>
+                <p>{t("login.modalText")}</p>
                 <p id="number-phone">{"+ " + country + " " + numero}</p>
-                <a onClick={handleClose} id="close">
-                  Change mobile number
+                <a
+                  className="bttn btn-primary"
+                  onClick={handleClose}
+                  id="close"
+                >
+                  {t("login.modalButton")}
                 </a>
                 {/*<Link> className="bttn btn-primary" to="/register">
               Register now

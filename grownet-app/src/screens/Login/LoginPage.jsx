@@ -143,6 +143,7 @@ const LoginPage = () => {
         handleOutsidePress={handleOutsidePress}
         Title={t('login.modalTitle_2')}
         message={t('login.secondModalMessage')}
+        message2={t('codeOtp.code')}
         Top
       />
     </View>

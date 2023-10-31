@@ -1,7 +1,7 @@
 .otp{
     background-color: var(--color-blue-primary);
     color: white;
-    min-height: 100vh;
+    min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,6 +69,6 @@
 }
 @media(max-width:760px) {
     .img-otp{
-        width:60%;
+        width:80%;
     }
 }

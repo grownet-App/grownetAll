@@ -13,6 +13,7 @@ const esTranslations = {
     FirstModalmessage2: 'Cambiar número de móvil',
     modalTitle_2: '¡Hola 👋!',
     secondModalMessage: '¡Por favor ingresa un número de teléfono!',
+    secondModalMessage2: 'El código que ingresaste es incorrecto',
   },
   codeOtp: {
     enterVerificationCode: 'Ingresa tu código de verificación',

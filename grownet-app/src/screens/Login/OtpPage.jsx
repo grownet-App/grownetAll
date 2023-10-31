@@ -159,6 +159,7 @@ const Otp = () => {
         handleOutsidePress={handleOutsidePress}
         Title={t('login.modalTitle_2')}
         message={t('codeOtp.message2Modal')}
+        message2={t('codeOtp.code')}
         Top
       />
     </SafeAreaView>

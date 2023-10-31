@@ -7,6 +7,9 @@ const ptTranslations = {
   login: {
     title: "Digite seu número de celular:",
     button: "Começar",
+    modalTittle: "Pedimos desculpas",
+    modalText: "Não encontramos o número de celular registrado",
+    modalButton: "Alterar número de celular",
   },
   codeOtp: {
     enterCode: "Insira seu código de verificação",

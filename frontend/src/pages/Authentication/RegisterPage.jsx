@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { registerApiUrl } from "../../config/urls.config";
 import Login from "./LoginPage";
@@ -48,10 +48,9 @@ export default function RegisterPage() {
   return (
     <section className="login">
       <div className="login-form">
-        <p>Welcome to</p>
         {/* TODO CAMBIAR ESTE LOGIN POR EL COMPONENTE PARA REGISTER */}
         <Login className="number-form" />
       </div>
-    </section>  
+    </section>
   );
 }

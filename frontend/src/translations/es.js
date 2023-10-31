@@ -7,6 +7,9 @@ const esTranslations = {
   login: {
     title: "Ingrese su número de teléfono:",
     button: "Iniciar",
+    modalTittle: "Pedimos disculpas",
+    modalText: "No encontramos el número de móvil registrado",
+    modalButton: "Cambiar número de móvil",
   },
   codeOtp: {
     enterCode: "Ingresa tu código de verificación",
