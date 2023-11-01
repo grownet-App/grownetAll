@@ -63,9 +63,14 @@ const Records = ({ navigation }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handlePendingOrderSelect = (orderReference) => {
+  const handleClosedOrderSelect = (orderReference) => {
     setSelectedPendingOrder(orderReference)
     navigation.navigate('pastRecord')
+  }
+
+  const handlePendingOrderSelect = (orderReference) => {
+    setSelectedPendingOrder(orderReference)
+    navigation.navigate('pendingRecord')
   }
 
   // Filtro
@@ -217,7 +222,7 @@ const Records = ({ navigation }) => {
                               title="View details"
                               style={RecordStyle.btnPrimary}
                               onPress={() =>
-                                navigation.navigate('pendingRecord')
+                                handleClosedOrderSelect(order.reference)
                               }
                             >
                               <Text style={GlobalStyles.textBtnSecundary}>
@@ -280,7 +285,7 @@ const Records = ({ navigation }) => {
                                 title="View details"
                                 style={RecordStyle.btnPrimary}
                                 onPress={() =>
-                                  navigation.navigate('pendingRecord')
+                                  handlePendingOrderSelect(order.reference)
                                 }
                               >
                                 <Text style={GlobalStyles.textBtnSecundary}>
