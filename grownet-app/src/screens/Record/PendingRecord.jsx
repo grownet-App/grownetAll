@@ -12,15 +12,18 @@ import { selectedStorageOrder } from '../../config/urls.config'
 import { ScrollView } from 'react-native-gesture-handler'
 import { PastStyle } from '../../styles/PastRecordStyle'
 import { useTranslation } from 'react-i18next'
+import { closeSelectedOrder } from '../../config/urls.config'
 
 function PendingRecord({ navigation }) {
   const { t } = useTranslation()
-
   const [checked, setChecked] = useState(false)
+  const { token } = useTokenStore()
+  const { selectedPendingOrder } = useRecordStore()
+  const [detailsToShow, setDetailsToShow] = useState({})
 
-  const onToggleCheckbox = () => {
+/*   const onToggleCheckbox = () => {
     setChecked(!checked)
-  }
+  } */
 
   const [activeTab, setActiveTab] = useState('reception')
 
@@ -29,10 +32,6 @@ function PendingRecord({ navigation }) {
       prevTab === 'productsRecord' ? 'reception' : 'productsRecord',
     )
   }
-  // Resumen
-  const { token } = useTokenStore()
-  const { selectedPendingOrder } = useRecordStore()
-  const [detailsToShow, setDetailsToShow] = useState({})
 
   useEffect(() => {
     axios
@@ -49,6 +48,28 @@ function PendingRecord({ navigation }) {
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+    // CERRAR LA ORDEN SELECCIONADA
+    const onCloseOrder = (e) => {
+      e.preventDefault();
+      const bodyCloseOrder = {
+        reference: selectedPendingOrder,
+        state: 5,
+      };
+      axios
+        .post(closeSelectedOrder, bodyCloseOrder, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          navigation.navigate('record')
+        })
+        .catch((error) => {
+          console.log("Error al cerrar la orden", error);
+        });
+    };
 
   return (
     <SafeAreaView style={RecordStyle.record}>
@@ -163,26 +184,32 @@ function PendingRecord({ navigation }) {
               <Text style={PendingStyle.title}>
                 {t('pendingRecord.checkYourProducts')}
               </Text>
-              <View style={PendingStyle.cardProduct}>
-                <View style={PendingStyle.dispute}>
-                  <Text style={PendingStyle.text}>Broccoli</Text>
-                  <Text style={PendingStyle.p}>50 Unit</Text>
-                </View>
-                <View style={PendingStyle.disputeRight}>
-                  <Checkbox
+              {detailsToShow.products?.map((product) => (
+                <View style={PendingStyle.cardProduct} key={product.id}>
+                  <View style={PendingStyle.dispute}>
+                    <Text style={PendingStyle.text}>{product.name}</Text>
+                    <Text style={PendingStyle.p}>
+                      {product.quantity} {product.uom}
+                    </Text>
+                  </View>
+                  <View style={PendingStyle.disputeRight}>
+                    {/* <Checkbox
                     status={checked ? 'checked' : 'unchecked'}
                     onPress={onToggleCheckbox}
-                  />
-                  {/* <Button onPress={() => navigation.navigate('disputeRecord')}>
-                    <Text style={PendingStyle.p}>
-                      {t('pendingRecord.openDispute')}
-                    </Text>
-          </Button>*/}
+                  /> */}
+                    <Button
+                      onPress={() => navigation.navigate('disputeRecord')}
+                    >
+                      <Text style={PendingStyle.p}>
+                        {t('pendingRecord.openDispute')}
+                      </Text>
+                    </Button>
+                  </View>
                 </View>
-              </View>
+              ))}
               <Button
                 style={GlobalStyles.btnPrimary}
-                onPress={() => navigation.navigate('recordsStack')}
+                onPress={(e) => onCloseOrder(e)}
               >
                 <Text style={GlobalStyles.textBtnSecundary}>
                   {t('pendingRecord.confirmOrder')}
