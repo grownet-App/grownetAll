@@ -14,7 +14,7 @@ import useRecordStore from '../../store/useRecordStore'
 import useTokenStore from '../../store/useTokenStore'
 import { RecordStyle } from '../../styles/RecordStyle'
 import { GlobalStyles } from '../../styles/Styles'
-
+import { FontAwesome } from '@expo/vector-icons'
 const Records = ({ navigation }) => {
   const { t } = useTranslation()
   const { token } = useTokenStore()
@@ -66,6 +66,9 @@ const Records = ({ navigation }) => {
   const showDatepicker = () => {
     setShowDatePicker(true)
   }
+  const closeDatepicker = () => {
+    setFormattedDate('All orders')
+  }
   const handleDateChange = (event, selected) => {
     if (event.type === 'set') {
       setShowDatePicker(false)
@@ -105,10 +108,19 @@ const Records = ({ navigation }) => {
               <Button onPress={showDatepicker}>
                 <Text style={RecordStyle.textFilter}>{formattedDate}</Text>
               </Button>
-              <TouchableOpacity onPress={showDatepicker}>
-                <Feather name="search" size={24} color="#969696" />
-              </TouchableOpacity>
-
+              <View style={RecordStyle.btnCloseFilter}>
+                <TouchableOpacity onPress={showDatepicker}>
+                  <Feather name="search" size={24} color="#969696" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={closeDatepicker}>
+                  <FontAwesome
+                    style={{ marginLeft: 15 }}
+                    name="trash-o"
+                    size={24}
+                    color="#ee6055"
+                  />
+                </TouchableOpacity>
+              </View>
               {showDatePicker && (
                 <DateTimePicker
                   testID="dateTimePicker"
