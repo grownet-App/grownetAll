@@ -285,7 +285,7 @@ const Records = ({ navigation }) => {
                                 title="View details"
                                 style={RecordStyle.btnPrimary}
                                 onPress={() =>
-                                  handlePendingOrderSelect(order.reference)
+                                  handleClosedOrderSelect(order.reference)
                                 }
                               >
                                 <Text style={GlobalStyles.textBtnSecundary}>
@@ -356,7 +356,7 @@ const Records = ({ navigation }) => {
                               title="View details"
                               style={RecordStyle.btnPrimary}
                               onPress={() =>
-                                navigation.navigate('pendingRecord')
+                                handlePendingOrderSelect(order.reference)
                               }
                             >
                               <Text style={GlobalStyles.textBtnSecundary}>
@@ -422,7 +422,7 @@ const Records = ({ navigation }) => {
                                 title="View details"
                                 style={RecordStyle.btnPrimary}
                                 onPress={() =>
-                                  navigation.navigate('pendingRecord')
+                                  handlePendingOrderSelect(order.reference)
                                 }
                               >
                                 <Text style={GlobalStyles.textBtnSecundary}>
