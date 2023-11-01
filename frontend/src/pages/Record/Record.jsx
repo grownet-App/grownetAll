@@ -28,7 +28,6 @@ export default function Record() {
   const apiOrders = allStorageOrders + selectedRestaurant.accountNumber;
 
   useEffect(() => {
-    // LLAMAR LAS ORDENES PENDIENTES DE LA BASE DE DATOS
     axios
       .get(apiOrders, {
         headers: {
@@ -48,6 +47,7 @@ export default function Record() {
       .catch((error) => {
         console.log("Error al llamar las ordenes", error);
       });
+          // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Filtro buscador

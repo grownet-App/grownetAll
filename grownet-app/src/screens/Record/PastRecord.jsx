@@ -54,7 +54,7 @@ function PastRecord() {
               {t('pastRecord.productDetails')}
             </Text>
             {detailsToShow.products?.map((product) => (
-              <View>
+              <View key={product.id}>
                 <View style={PastStyle.products}>
                   <Text style={PastStyle.subtittle}>{product.name}</Text>
                   <Text style={PastStyle.subtittle}>£{product.price}</Text>
