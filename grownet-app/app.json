@@ -18,7 +18,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/grownet_icon.png",
-        "backgroundColor": "white"
+        "backgroundColor": "#FFFFFF"
       },
       "permissions": ["INTERNET", "CAMERA", "ACCESS_FINE_LOCATION", "STORAGE"],
       "package": "com.heinera.grownetapp"
