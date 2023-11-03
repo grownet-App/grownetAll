@@ -12,6 +12,7 @@ export const ApiSuppliers = process.env.EXPO_PUBLIC_SUPPLIERS
 // CATEGORIES
 export const allCategories = process.env.EXPO_PUBLIC_CATEGORIES
 export const selectedCategory = process.env.EXPO_PUBLIC_SELECT_CATEGORY
+export const supplierCategorie = process.env.EXPO_PUBLIC_SUPPLIER_CATEGORIE
 
 // PRODUCTS
 export const supplierProducts = process.env.EXPO_PUBLIC_SELECT_SUPPLIER_PRODUCTS

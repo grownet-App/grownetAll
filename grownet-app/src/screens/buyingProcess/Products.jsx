@@ -8,11 +8,10 @@ import ProductSearcher from '../../components/buyingProcess/ProductSearch'
 import ProductsFind from '../../components/buyingProcess/ProductsFind'
 import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
-import { supplierProducts } from '../../config/urls.config'
+import { supplierCategorie, supplierProducts } from '../../config/urls.config'
 import { ProductsStyle } from '../../styles/ProductsStyle'
 
 export default function Products() {
-  const [blurIntensity, setBlurIntensity] = useState(30)
   const { token, countryCode } = useTokenStore()
   const [showFavorites, setShowFavorites] = useState(false)
   const [showSearchResults, setShowSearchResults] = useState(false)
@@ -60,12 +59,59 @@ export default function Products() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetchProducts()
+      if (articlesToPay && articlesToPay.length > 0) {
+        setArticles(articlesToPay)
+        setProducts(articlesToPay)
+      } else {
+        await fetchProducts()
+      }
     }
 
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const fetchProductsByCategory = async (categoryId) => {
+    if (categoryId === 'All') {
+      await fetchProducts()
+      return
+    }
+    const requestBody = {
+      supplier: selectedSupplier.id,
+      categorie: categoryId,
+      country: countryCode,
+      accountNumber: selectedRestaurant.accountNumber,
+    }
+
+    try {
+      const response = await axios.post(supplierCategorie, requestBody, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      const categorizedProducts = response.data.products
+
+      const productsWithTax = categorizedProducts
+        .filter((product) => product.prices.some((price) => price.nameUoms))
+        .map((product) => ({
+          ...product,
+          amount: 0,
+          uomToPay: product.prices[0].nameUoms,
+          idUomToPay: product.prices[0].id,
+          prices: product.prices.map((price) => ({
+            ...price,
+            priceWithTax: (price.price + price.price * product.tax).toFixed(2),
+          })),
+        }))
+      useOrderStore.setState({ articlesToPay: productsWithTax })
+
+      setProducts(productsWithTax)
+      setArticles(productsWithTax)
+    } catch (error) {
+      console.error('Error al obtener los productos por categoría:', error)
+    }
+  }
 
   const resetInputSearcher = () => {
     setResetInput((prevKey) => prevKey + 1)
@@ -120,28 +166,18 @@ export default function Products() {
       ? ['All', ...new Set(articles.map((article) => article.nameCategorie))]
       : ['All', selectedCategory]
 
-  const filterCategories = (category) => {
+  const filterCategories = async (category, categoryId) => {
     setSelectedCategory(category)
+
     setShowFavorites(false)
     resetInputSearcher()
-  }
-
-  const handleScroll = (event) => {
-    const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent
-
-    const offsetY = contentOffset.y
-    const contentHeight = contentSize.height
-    const screenHeight = layoutMeasurement.height
-
-    const maxScroll = contentHeight - screenHeight
-
-    if (offsetY >= maxScroll - 5) {
-      setBlurIntensity(0)
-    } else {
-      setBlurIntensity(30)
+    try {
+      await fetchProductsByCategory(categoryId)
+    } catch (error) {
+      console.error('Error al obtener productos al mostrar categoría:', error)
     }
   }
-
+  console.log('EarticlesToPay:', articlesToPay)
   return (
     <View style={styles.container}>
       <ProductSearcher
@@ -150,7 +186,7 @@ export default function Products() {
         resetInput={resetInput}
       />
       <SafeAreaView style={ProductsStyle.containerCards}>
-        <ScrollView onScroll={handleScroll}>
+        <ScrollView>
           {showSearchResults ? (
             <ProductsFind
               onAmountChange={handleAmountChange}
@@ -196,7 +232,6 @@ export default function Products() {
         toggleShowFavorites={toggleShowFavorites}
         categoriesProduct={productsCategory}
         filterCategory={filterCategories}
-        blurIntensity={blurIntensity}
       />
     </View>
   )

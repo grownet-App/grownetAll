@@ -50,6 +50,7 @@ function ProductsCategories({
   }, [])
   const urlImg = process.env.EXPO_PUBLIC_BASE_IMG
   const updatedCategories = [...categoriesProduct, 'Favorites']
+
   const renderItem = ({ item }) => {
     return (
       <View style={ProductsStyles.contenImage}>
@@ -62,24 +63,26 @@ function ProductsCategories({
             <MaterialIcons name="favorite" size={65} color="#62C471" />
           </TouchableOpacity>
         ) : null}
-        <TouchableOpacity key={item} onPress={() => filterCategory(item)}>
+        <TouchableOpacity
+          key={item}
+          onPress={() => filterCategory('All', item)}
+        >
           {item === 'All' && (
             <Iconify icon="fluent-emoji:basket" size={65} color="#62C471" />
           )}
-          {categories?.map((categoryApi) => (
-            <View key={categoryApi.id}>
-              {item === categoryApi.name && (
-                <>
-                  <Image
-                    style={{ width: 65, height: 65 }}
-                    source={{ uri: urlImg + categoryApi.image }}
-                  />
-                </>
-              )}
-            </View>
-          ))}
-          <Text style={ProductsStyle.text}>{item}</Text>
         </TouchableOpacity>
+        {categories?.map((categoryApi) => (
+          <TouchableOpacity
+            key={categoryApi.id}
+            onPress={() => filterCategory(categoryApi.name, categoryApi.id)}
+          >
+            {item === categoryApi.name && (
+              <>
+                <Text style={ProductsStyle.text}>{categoryApi.name}</Text>
+              </>
+            )}
+          </TouchableOpacity>
+        ))}
       </View>
     )
   }
