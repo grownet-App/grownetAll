@@ -219,7 +219,9 @@ export default function Products(props) {
           )}
         </>
       )}
-      <div ref={loader} className="loading"></div>
+      <div ref={loader} className="loader-container">
+        <div className="loader"></div>
+      </div>
       <div className="space-CatgMenu"></div>
       {
         <CategoriesMenu
