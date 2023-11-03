@@ -75,13 +75,20 @@ export default function Products(props) {
           )
         );
       useOrderStore.setState({ articlesToPay: productsWithTax });
-      if (page !== 0) {
-        setArticles((prevArticles) => [...prevArticles, ...productsWithTax]);
-        setProducts((prevProducts) => [...prevProducts, ...productsWithTax]);
-      } else {
-        setArticles(productsWithTax);
-        setProducts(productsWithTax);
-      }
+      setArticles((prevProducts) => {
+        const productIds = new Set(prevProducts.map((p) => p.id));
+        const newProducts = productsWithTax.filter(
+          (p) => !productIds.has(p.id)
+        );
+        return [...prevProducts, ...newProducts];
+      });
+      setProducts((prevProducts) => {
+        const productIds = new Set(prevProducts.map((p) => p.id));
+        const newProducts = productsWithTax.filter(
+          (p) => !productIds.has(p.id)
+        );
+        return [...prevProducts, ...newProducts];
+      });
     } catch (error) {
       console.error("Error al obtener los productos del proveedor:", error);
     }

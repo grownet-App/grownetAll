@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { ActivityIndicator } from 'react-native-paper'
 import axios from '../../../axiosConfig'
 import Favorites from '../../components/buyingProcess/Favorites'
@@ -266,7 +266,7 @@ export default function Products() {
             </View>
           )}
           <View style={{ height: 220 }} />
-        </ScrollView>
+        </ScrollView> 
       </SafeAreaView>
       <View style={ProductsStyle.viewCategories} />
       <ProductCategories
