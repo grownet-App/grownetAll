@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
@@ -12,7 +12,6 @@ import { supplierProducts } from "../../config/urls.config";
 import "../../css/products.css";
 import useOrderStore from "../../store/useOrderStore";
 import useTokenStore from "../../store/useTokenStore";
-import { useRef } from "react";
 
 export default function Products(props) {
   const { t } = useTranslation();
@@ -76,20 +75,13 @@ export default function Products(props) {
           )
         );
       useOrderStore.setState({ articlesToPay: productsWithTax });
-      setArticles((prevProducts) => {
-        const productIds = new Set(prevProducts.map((p) => p.id));
-        const newProducts = productsWithTax.filter(
-          (p) => !productIds.has(p.id)
-        );
-        return [...prevProducts, ...newProducts];
-      });
-      setProducts((prevProducts) => {
-        const productIds = new Set(prevProducts.map((p) => p.id));
-        const newProducts = productsWithTax.filter(
-          (p) => !productIds.has(p.id)
-        );
-        return [...prevProducts, ...newProducts];
-      });
+      if (page !== 0) {
+        setArticles((prevArticles) => [...prevArticles, ...productsWithTax]);
+        setProducts((prevProducts) => [...prevProducts, ...productsWithTax]);
+      } else {
+        setArticles(productsWithTax);
+        setProducts(productsWithTax);
+      }
     } catch (error) {
       console.error("Error al obtener los productos del proveedor:", error);
     }
@@ -172,6 +164,7 @@ export default function Products(props) {
   // PAGINATION
 
   useEffect(() => {
+    const currentLoader = loader.current;
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -186,8 +179,8 @@ export default function Products(props) {
     }
 
     return () => {
-      if (loader.current) {
-        observer.unobserve(loader.current);
+      if (currentLoader) {
+        observer.unobserve(currentLoader);
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -249,7 +242,9 @@ export default function Products(props) {
           )}
         </>
       )}
-      <div ref={loader} className="loading"></div>
+      <div ref={loader} className="loader-container">
+        <div className="loader"></div>
+      </div>
       <div className="space-CatgMenu"></div>
       {
         <CategoriesMenu
