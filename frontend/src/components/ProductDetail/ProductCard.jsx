@@ -104,8 +104,9 @@ export default function ProductCard({
         <div>
           <div className="titlle-products">
             <div>
-              <h1>{name}</h1>
-              <p className="product-selectUom">{selectedUom.name} </p>
+              <h1>
+                {name} {selectedUom.name}
+              </h1>
             </div>
 
             <div className="pr">

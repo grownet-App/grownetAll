@@ -149,6 +149,27 @@ padding: 5px;
 .space-CatgMenu{
   margin-bottom: 13rem;
 }
+.icon-search{
+  font-size: 32px;
+  position: absolute;
+  right: 0px;
+  left: 250px;  
+  top: 12px;
+  cursor: pointer;
+}
+#tittleProducts{
+margin-top: 1rem;
+}
+
+@media screen and (max-width: 893px) {
+.icon-search{
+  font-size: 32px;
+  position: absolute;
+  right: 0px;
+  left: 80%;
+  margin-top: 1rem;
+}
+}
   @media screen and (max-width: 350px) {
     .elements{
      width: 90%;
@@ -168,5 +189,4 @@ padding: 5px;
     right: 13.8rem;
     top: 1.5rem;
   }
-
  }

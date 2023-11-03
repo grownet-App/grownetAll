@@ -30,6 +30,7 @@ const Records = ({ navigation }) => {
   const apiOrders = allStorageOrders + selectedRestaurant.accountNumber
   const [activeTab, setActiveTab] = useState('pendingRecord')
   const switchTab = () => {
+    setShowDatePicker(false)
     setActiveTab((prevTab) =>
       prevTab === 'pastRecord' ? 'pendingRecord' : 'pastRecord',
     )
@@ -78,11 +79,12 @@ const Records = ({ navigation }) => {
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [formattedDate, setFormattedDate] = useState('All orders')
   const showDatepicker = () => {
-    setShowDatePicker(true)
+    setShowDatePicker(!showDatePicker)
   }
   const closeDatepicker = () => {
     setFormattedDate('All orders')
   }
+
   const handleDateChange = (event, selected) => {
     if (event.type === 'set') {
       setShowDatePicker(false)
@@ -92,7 +94,6 @@ const Records = ({ navigation }) => {
         setFormattedDate(formatted)
         console.log('Fecha seleccionada:', selected)
       } else {
-        // Si no hay fecha seleccionada, muestra "All Orders"
         setFormattedDate('All Orders')
       }
     } else if (event.type === 'dismiss') {

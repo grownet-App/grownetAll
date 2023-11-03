@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+} from 'react-native'
 import axios from '../../../axiosConfig.'
 import ProductCategories from '../../components/buyingProcess/ProductCategories'
 import Favorites from '../../components/buyingProcess/Favorites'
@@ -10,6 +17,8 @@ import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
 import { supplierProducts } from '../../config/urls.config'
 import { ProductsStyle } from '../../styles/ProductsStyle'
+import { useTranslation } from 'react-i18next'
+import { Ionicons } from '@expo/vector-icons'
 
 export default function Products() {
   const [blurIntensity, setBlurIntensity] = useState(30)
@@ -141,14 +150,35 @@ export default function Products() {
       setBlurIntensity(30)
     }
   }
+  const { t } = useTranslation()
 
+  //Filtro
+  const [showProductSearch, setShowProductSearch] = useState(false)
+
+  const toggleProductSearch = () => {
+    setShowProductSearch(!showProductSearch)
+  }
   return (
     <View style={styles.container}>
-      <ProductSearcher
-        products={articlesToPay}
-        setShowSearchResults={setShowSearchResults}
-        resetInput={resetInput}
-      />
+      <View style={styles.tittleDiv}>
+        <Text style={styles.textTittle}>
+          {t('stackNavigator.makeYourOrder')}
+        </Text>
+        <TouchableOpacity
+          style={styles.iconFilter}
+          onPress={toggleProductSearch}
+        >
+          <Ionicons name="search-circle-outline" size={32} color="#04444f" />
+        </TouchableOpacity>
+      </View>
+
+      {showProductSearch && (
+        <ProductSearcher
+          products={articlesToPay}
+          setShowSearchResults={setShowSearchResults}
+          resetInput={resetInput}
+        />
+      )}
       <SafeAreaView style={ProductsStyle.containerCards}>
         <ScrollView onScroll={handleScroll}>
           {showSearchResults ? (
@@ -197,6 +227,7 @@ export default function Products() {
         categoriesProduct={productsCategory}
         filterCategory={filterCategories}
         blurIntensity={blurIntensity}
+        selectedCategory={selectedCategory}
       />
     </View>
   )
@@ -207,5 +238,23 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'relative',
     backgroundColor: 'white',
+  },
+  textTittle: {
+    fontFamily: 'PoppinsSemi',
+    fontSize: 22,
+    textAlign: 'center',
+    marginVertical: 10,
+    marginTop: 18,
+    color: '#04444f',
+  },
+  tittleDiv: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconFilter: {
+    position: 'relative',
+    left: 45,
   },
 })

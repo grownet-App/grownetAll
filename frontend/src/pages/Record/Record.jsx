@@ -47,9 +47,9 @@ export default function Record() {
       .catch((error) => {
         console.log("Error al llamar las ordenes", error);
       });
-          // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  console.log(pendingOrders, "hola");
   // Filtro buscador
   const [selectedDate, setSelectedDate] = useState("");
   const handlePendingOrderSelect = (orderReference) => {

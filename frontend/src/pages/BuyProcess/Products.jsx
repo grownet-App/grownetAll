@@ -129,19 +129,31 @@ export default function Products(props) {
     resetInputSearcher();
   };
 
+  //Filtro
+  const [showProductSearch, setShowProductSearch] = useState(false);
+
+  const toggleProductSearch = () => {
+    setShowProductSearch(!showProductSearch);
+  };
+
   return (
     <section className="products">
-      <div className="tittle-products">
+      <div className="tittle-page">
         <Link to="/suppliers">
-          <Icon src="google.com" icon="ic:round-arrow-back" className="arrow" />
+          <Icon src="google.com" icon="ic:round-arrow-back" id="arrow-icon" />
         </Link>
-        <h1 className="tittle-products">{t("products.title")}</h1>
+        <h1 id="tittleProducts">{t("products.title")}</h1>
+        <a onClick={toggleProductSearch} id="search-magnifying">
+          <Icon icon="ion:search-circle-outline" className="icon-search" />
+        </a>
       </div>
-      <ProductSearcher
-        products={articlesToPay}
-        setShowSearchResults={setShowSearchResults}
-        resetInput={resetInput}
-      />
+      {showProductSearch && (
+        <ProductSearcher
+          products={articlesToPay}
+          setShowSearchResults={setShowSearchResults}
+          resetInput={resetInput}
+        />
+      )}
       {showSearchResults ? (
         <ProductsFind
           onAmountChange={handleAmountChange}
@@ -187,6 +199,7 @@ export default function Products(props) {
           toggleShowFavorites={toggleShowFavorites}
           categoriesProduct={productsCategory}
           filterCategory={filterCategories}
+          selectedCategory={selectedCategory}
         />
       }
     </section>

@@ -26,12 +26,24 @@ function ProductsCategories({
   toggleShowFavorites,
   categoriesProduct,
   filterCategory,
+  selectedCategory,
 }) {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const isCarousel = useRef(null)
   const [categories, setCategories] = useState()
   const { token } = useTokenStore()
+
+  const isCategoryActive = (category) => {
+    if (
+      category === selectedCategory ||
+      (category === 'All' && selectedCategory === 'All')
+    ) {
+      return true
+    }
+    return false
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,37 +60,27 @@ function ProductsCategories({
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
   const urlImg = process.env.EXPO_PUBLIC_BASE_IMG
   const updatedCategories = [...categoriesProduct, 'Favorites']
+
   const renderItem = ({ item }) => {
     return (
-      <View style={ProductsStyles.contenImage}>
-        {item === 'Favorites' && showFavorites ? (
-          <TouchableOpacity onPress={toggleShowFavorites}>
-            <Iconify icon="icon-park-solid:back" size={65} color="#62C471" />
-          </TouchableOpacity>
-        ) : item === 'Favorites' ? (
-          <TouchableOpacity onPress={toggleShowFavorites}>
-            <MaterialIcons name="favorite" size={65} color="#62C471" />
-          </TouchableOpacity>
-        ) : null}
+      <View
+        style={[
+          ProductsStyle.contenImage,
+          isCategoryActive(item) && ProductsStyle.activeCategory,
+        ]}
+      >
         <TouchableOpacity key={item} onPress={() => filterCategory(item)}>
-          {item === 'All' && (
-            <Iconify icon="fluent-emoji:basket" size={65} color="#62C471" />
-          )}
-          {categories?.map((categoryApi) => (
-            <View key={categoryApi.id}>
-              {item === categoryApi.name && (
-                <>
-                  <Image
-                    style={{ width: 65, height: 65 }}
-                    source={{ uri: urlImg + categoryApi.image }}
-                  />
-                </>
-              )}
-            </View>
-          ))}
-          <Text style={ProductsStyle.text}>{item}</Text>
+          <Text
+            style={[
+              ProductsStyle.text,
+              isCategoryActive(item) && ProductsStyle.activeCategory,
+            ]}
+          >
+            {item}
+          </Text>
         </TouchableOpacity>
       </View>
     )
@@ -90,8 +92,8 @@ function ProductsCategories({
     <SafeAreaView style={ProductsStyle.fixedContainer}>
       <LinearGradient
         colors={['rgba(255, 255, 255, 0)', 'white']}
-        start={[0.5, 0.2]}
-        end={[0.5, 0.4]}
+        start={[0.5, 0.1]}
+        end={[0.5, 0.5]}
       >
         <Carousel
           data={updatedCategories}
