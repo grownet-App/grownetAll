@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
@@ -12,7 +12,6 @@ import { supplierProducts } from "../../config/urls.config";
 import "../../css/products.css";
 import useOrderStore from "../../store/useOrderStore";
 import useTokenStore from "../../store/useTokenStore";
-import { useRef } from "react";
 
 export default function Products(props) {
   const { t } = useTranslation();
@@ -48,13 +47,20 @@ export default function Products(props) {
         .filter((product) => product.prices.some((price) => price.nameUoms))
         .map((product) => {
           const pricesWithTax = product.prices.map((price) => {
-            const priceWithTaxCalculation = (price.price + price.price * product.tax).toFixed(2);
+            const priceWithTaxCalculation = (
+              price.price +
+              price.price * product.tax
+            ).toFixed(2);
             return {
               ...price,
-              priceWithTax: isNaN(priceWithTaxCalculation) || parseFloat(priceWithTaxCalculation) === 0 ? null : priceWithTaxCalculation,
+              priceWithTax:
+                isNaN(priceWithTaxCalculation) ||
+                parseFloat(priceWithTaxCalculation) === 0
+                  ? null
+                  : priceWithTaxCalculation,
             };
           });
-      
+
           return {
             ...product,
             amount: 0,
@@ -63,7 +69,11 @@ export default function Products(props) {
             prices: pricesWithTax,
           };
         })
-        .filter((product) => product.prices.some((price) => price.priceWithTax && parseFloat(price.priceWithTax) > 0));
+        .filter((product) =>
+          product.prices.some(
+            (price) => price.priceWithTax && parseFloat(price.priceWithTax) > 0
+          )
+        );
       useOrderStore.setState({ articlesToPay: productsWithTax });
       if (page !== 0) {
         setArticles((prevArticles) => [...prevArticles, ...productsWithTax]);
@@ -149,24 +159,27 @@ export default function Products(props) {
   // PAGINATION
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        setCurrentPage((prevPage) => prevPage + 1);
-      }
-    }, { threshold: 1.0 });
-  
+    const currentLoader = loader.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setCurrentPage((prevPage) => prevPage + 1);
+        }
+      },
+      { threshold: 1.0 }
+    );
+
     if (loader.current) {
       observer.observe(loader.current);
     }
-  
+
     return () => {
-      if (loader.current) {
-        observer.unobserve(loader.current);
+      if (currentLoader) {
+        observer.unobserve(currentLoader);
       }
     };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
 
   return (
     <section className="products">
