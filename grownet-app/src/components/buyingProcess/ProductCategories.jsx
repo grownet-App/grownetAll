@@ -72,6 +72,15 @@ function ProductsCategories({
           isCategoryActive(item) && ProductsStyle.activeCategory,
         ]}
       >
+        {item === 'Favorites' && showFavorites ? (
+          <TouchableOpacity onPress={toggleShowFavorites}>
+            <Text>close</Text>
+          </TouchableOpacity>
+        ) : item === 'Favorites' ? (
+          <TouchableOpacity onPress={toggleShowFavorites}>
+            <MaterialIcons name="favorite" size={65} color="blue" />
+          </TouchableOpacity>
+        ) : null}
         <TouchableOpacity key={item} onPress={() => filterCategory(item)}>
           <Text
             style={[
