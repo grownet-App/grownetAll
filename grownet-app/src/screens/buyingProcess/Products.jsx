@@ -7,7 +7,7 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native'
-import axios from '../../../axiosConfig.'
+import axios from '../../../axiosConfig'
 import ProductCategories from '../../components/buyingProcess/ProductCategories'
 import Favorites from '../../components/buyingProcess/Favorites'
 import ProductCard from '../../components/buyingProcess/ProductCards'
