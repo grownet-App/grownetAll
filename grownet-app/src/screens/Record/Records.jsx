@@ -1,6 +1,6 @@
 import { Feather, MaterialIcons } from '@expo/vector-icons'
 import DateTimePicker from '@react-native-community/datetimepicker'
-import axios from 'axios'
+import axios from '../../../axiosConfig'
 import { isSameDay, parseISO } from 'date-fns'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -36,17 +36,18 @@ const Records = ({ navigation }) => {
     )
   }
   useEffect(() => {
-    if (selectedRestaurant === null) {
-      navigation.navigate('restaurants')
-      return
-    }
-    axios
-      .get(apiOrders, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
+    const fetchData = async () => {
+      if (selectedRestaurant === null) {
+        navigation.navigate('restaurants')
+        return
+      }
+      try {
+        const response = await axios.get(apiOrders, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
         const closedOrders = response.data.orders.filter(
           (order) => order.id_stateOrders === 5,
         )
@@ -57,13 +58,14 @@ const Records = ({ navigation }) => {
         console.log('Pending orders:', pendingOrders)
         setClosedOrders(closedOrders)
         setPendingOrders(pendingOrders)
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log('Error al llamar las ordenes', error)
-      })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+      }
+    }
 
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [apiOrders])
   const handleClosedOrderSelect = (orderReference) => {
     setSelectedPendingOrder(orderReference)
     navigation.navigate('pastRecord')
@@ -161,7 +163,6 @@ const Records = ({ navigation }) => {
                   },
                   RecordStyle.btnTab,
                 ]}
-                onPress={switchTab}
               >
                 <Text
                   style={{

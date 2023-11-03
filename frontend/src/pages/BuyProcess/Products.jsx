@@ -12,6 +12,7 @@ import { supplierProducts } from "../../config/urls.config";
 import "../../css/products.css";
 import useOrderStore from "../../store/useOrderStore";
 import useTokenStore from "../../store/useTokenStore";
+import { useRef } from "react";
 
 export default function Products(props) {
   const { t } = useTranslation();
@@ -24,12 +25,15 @@ export default function Products(props) {
     useOrderStore();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [resetInput, setResetInput] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const loader = useRef(null);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (page = 0) => {
     const requestBody = {
       id: selectedSupplier.id,
       country: countryCode,
       accountNumber: selectedRestaurant.accountNumber,
+      page,
     };
 
     try {
@@ -42,19 +46,50 @@ export default function Products(props) {
 
       const productsWithTax = defaultProducts
         .filter((product) => product.prices.some((price) => price.nameUoms))
-        .map((product) => ({
-          ...product,
-          amount: 0,
-          uomToPay: product.prices[0].nameUoms,
-          idUomToPay: product.prices[0].id,
-          prices: product.prices.map((price) => ({
-            ...price,
-            priceWithTax: (price.price + price.price * product.tax).toFixed(2),
-          })),
-        }));
+        .map((product) => {
+          const pricesWithTax = product.prices.map((price) => {
+            const priceWithTaxCalculation = (
+              price.price +
+              price.price * product.tax
+            ).toFixed(2);
+            return {
+              ...price,
+              priceWithTax:
+                isNaN(priceWithTaxCalculation) ||
+                parseFloat(priceWithTaxCalculation) === 0
+                  ? null
+                  : priceWithTaxCalculation,
+            };
+          });
+
+          return {
+            ...product,
+            amount: 0,
+            uomToPay: product.prices[0].nameUoms,
+            idUomToPay: product.prices[0].id,
+            prices: pricesWithTax,
+          };
+        })
+        .filter((product) =>
+          product.prices.some(
+            (price) => price.priceWithTax && parseFloat(price.priceWithTax) > 0
+          )
+        );
       useOrderStore.setState({ articlesToPay: productsWithTax });
-      setArticles(productsWithTax);
-      setProducts(productsWithTax);
+      setArticles((prevProducts) => {
+        const productIds = new Set(prevProducts.map((p) => p.id));
+        const newProducts = productsWithTax.filter(
+          (p) => !productIds.has(p.id)
+        );
+        return [...prevProducts, ...newProducts];
+      });
+      setProducts((prevProducts) => {
+        const productIds = new Set(prevProducts.map((p) => p.id));
+        const newProducts = productsWithTax.filter(
+          (p) => !productIds.has(p.id)
+        );
+        return [...prevProducts, ...newProducts];
+      });
     } catch (error) {
       console.error("Error al obtener los productos del proveedor:", error);
     }
@@ -62,12 +97,12 @@ export default function Products(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetchProducts();
+      await fetchProducts(currentPage);
     };
 
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentPage]);
 
   const resetInputSearcher = () => {
     setResetInput((prevKey) => prevKey + 1);
@@ -128,13 +163,35 @@ export default function Products(props) {
     setShowFavorites(false);
     resetInputSearcher();
   };
-
   //Filtro
   const [showProductSearch, setShowProductSearch] = useState(false);
 
   const toggleProductSearch = () => {
     setShowProductSearch(!showProductSearch);
   };
+  // PAGINATION
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setCurrentPage((prevPage) => prevPage + 1);
+        }
+      },
+      { threshold: 1.0 }
+    );
+
+    if (loader.current) {
+      observer.observe(loader.current);
+    }
+
+    return () => {
+      if (loader.current) {
+        observer.unobserve(loader.current);
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section className="products">
@@ -192,6 +249,7 @@ export default function Products(props) {
           )}
         </>
       )}
+      <div ref={loader} className="loading"></div>
       <div className="space-CatgMenu"></div>
       {
         <CategoriesMenu

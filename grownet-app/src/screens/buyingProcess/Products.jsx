@@ -49,16 +49,35 @@ export default function Products() {
 
       const productsWithTax = defaultProducts
         .filter((product) => product.prices.some((price) => price.nameUoms))
-        .map((product) => ({
-          ...product,
-          amount: 0,
-          uomToPay: product.prices[0].nameUoms,
-          idUomToPay: product.prices[0].id,
-          prices: product.prices.map((price) => ({
-            ...price,
-            priceWithTax: (price.price + price.price * product.tax).toFixed(2),
-          })),
-        }))
+        .map((product) => {
+          const pricesWithTax = product.prices.map((price) => {
+            const priceWithTaxCalculation = (
+              price.price +
+              price.price * product.tax
+            ).toFixed(2)
+            return {
+              ...price,
+              priceWithTax:
+                isNaN(priceWithTaxCalculation) ||
+                parseFloat(priceWithTaxCalculation) === 0
+                  ? null
+                  : priceWithTaxCalculation,
+            }
+          })
+
+          return {
+            ...product,
+            amount: 0,
+            uomToPay: product.prices[0].nameUoms,
+            idUomToPay: product.prices[0].id,
+            prices: pricesWithTax,
+          }
+        })
+        .filter((product) =>
+          product.prices.some(
+            (price) => price.priceWithTax && parseFloat(price.priceWithTax) > 0,
+          ),
+        )
       useOrderStore.setState({ articlesToPay: productsWithTax })
       setArticles(productsWithTax)
       setProducts(productsWithTax)
