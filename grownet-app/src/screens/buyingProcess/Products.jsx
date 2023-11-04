@@ -14,7 +14,6 @@ import ProductCard from '../../components/buyingProcess/ProductCards'
 import ProductCategories from '../../components/buyingProcess/ProductCategories'
 import ProductSearcher from '../../components/buyingProcess/ProductSearch'
 import ProductsFind from '../../components/buyingProcess/ProductsFind'
-import { supplierProducts } from '../../config/urls.config'
 import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
 import { supplierCategorie, supplierProducts } from '../../config/urls.config'
@@ -239,6 +238,13 @@ export default function Products() {
     } catch (error) {
       console.error('Error al obtener productos al mostrar categoría:', error)
     }
+  }
+  const handleScroll = (event) => {
+    const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent
+
+    const offsetY = contentOffset.y
+    const contentHeight = contentSize.height
+    const screenHeight = layoutMeasurement.height
 
     // SCROLL PAGINATION
     if (offsetY >= contentHeight - screenHeight - 20) {
