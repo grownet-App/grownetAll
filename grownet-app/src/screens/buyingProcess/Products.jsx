@@ -17,7 +17,7 @@ export default function Products() {
   const [showSearchResults, setShowSearchResults] = useState(false)
   const [products, setProducts] = useState([])
   const [articles, setArticles] = useState(products)
-  const { articlesToPay, selectedSupplier, selectedRestaurant } =
+  const { articlesToPay, selectedSupplier, selectedRestaurant, categories } =
     useOrderStore()
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [resetInput, setResetInput] = useState(0)
@@ -50,6 +50,7 @@ export default function Products() {
           })),
         }))
       useOrderStore.setState({ articlesToPay: productsWithTax })
+      useOrderStore.setState({ categories: productsWithTax })
       setArticles(productsWithTax)
       setProducts(productsWithTax)
     } catch (error) {
@@ -161,10 +162,11 @@ export default function Products() {
     useOrderStore.setState({ articlesToPay: updatedArticlesToPay })
   }
 
-  const productsCategory =
-    selectedCategory === 'All'
-      ? ['All', ...new Set(articles.map((article) => article.nameCategorie))]
-      : ['All', selectedCategory]
+  const allCategories = [
+    'All',
+    ...new Set(categories.map((article) => article.nameCategorie)),
+  ]
+  const productsCategory = allCategories
 
   const filterCategories = async (category, categoryId) => {
     setSelectedCategory(category)
@@ -177,7 +179,7 @@ export default function Products() {
       console.error('Error al obtener productos al mostrar categoría:', error)
     }
   }
-  console.log('EarticlesToPay:', articlesToPay)
+
   return (
     <View style={styles.container}>
       <ProductSearcher
