@@ -12,6 +12,7 @@ export default function CategoriesMenu({
   toggleShowFavorites,
   categoriesProduct,
   filterCategory,
+  selectedCategory,
 }) {
   const { t } = useTranslation();
   const [categories, setCategories] = useState();
@@ -39,45 +40,30 @@ export default function CategoriesMenu({
     <section className="menu-categories me-auto">
       <div className="contenido">
         <div className="carousel-categ">
-          {showFavorites ? (
-            <button className="card-products" onClick={toggleShowFavorites}>
-              <Icon icon="icon-park-solid:back" className="fav" />
-              <h6>{t("categoriesMenu.goBack")}</h6>
-            </button>
-          ) : (
-            <button className="card-products" onClick={toggleShowFavorites}>
-              <Icon icon="solar:heart-bold" className="fav" />
-              <h6>{t("categoriesMenu.favorites")}</h6>
-            </button>
-          )}
+          <button
+            className={`card-products ${
+              showFavorites ? "activeCategory" : "inactiveCategory"
+            }`}
+            onClick={toggleShowFavorites}
+          >
+            <h6>
+              {showFavorites
+                ? t("categoriesMenu.goBack")
+                : t("categoriesMenu.favorites")}
+            </h6>
+          </button>
 
           {categoriesProduct.map((category) => (
             <button
               type="button"
-              className="card-products"
+              className={`card-products ${
+                selectedCategory === category && !showFavorites
+                  ? "activeCategory"
+                  : "inactiveCategory"
+              }`}
               key={category}
               onClick={() => filterCategory(category)}
             >
-              {category === "All" && (
-                <Icon icon="fluent-emoji:basket" className="fav" />
-              )}
-              {categories?.map(
-                (categoryApi) => (
-                  (
-                    <section key={categoryApi.id}>
-                      {category === categoryApi.name && (
-                        <>
-                          <img
-                            alt={categoryApi.name}
-                            src={urlImg + categoryApi.image}
-                          />
-                        </>
-                      )}
-                    </section>
-                  )
-                )
-              )}
-
               <h6>{category}</h6>
             </button>
           ))}

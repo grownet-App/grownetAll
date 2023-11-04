@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { SafeAreaView, ScrollView, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { ActivityIndicator } from 'react-native-paper'
 import axios from '../../../axiosConfig'
-import ProductCategories from '../../components/buyingProcess/ProductCategories'
 import Favorites from '../../components/buyingProcess/Favorites'
 import ProductCard from '../../components/buyingProcess/ProductCards'
+import ProductCategories from '../../components/buyingProcess/ProductCategories'
 import ProductSearcher from '../../components/buyingProcess/ProductSearch'
 import ProductsFind from '../../components/buyingProcess/ProductsFind'
+import { supplierProducts } from '../../config/urls.config'
 import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
+
 import { supplierCategorie, supplierProducts } from '../../config/urls.config'
+
 import { ProductsStyle } from '../../styles/ProductsStyle'
+import { useTranslation } from 'react-i18next'
+import { Ionicons } from '@expo/vector-icons'
 
 export default function Products() {
   const { token, countryCode } = useTokenStore()
@@ -21,15 +27,19 @@ export default function Products() {
     useOrderStore()
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [resetInput, setResetInput] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [isFetchingMore, setIsFetchingMore] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (page) => {
     const requestBody = {
       id: selectedSupplier.id,
       country: countryCode,
       accountNumber: selectedRestaurant.accountNumber,
+      page,
     }
-
     try {
+      setIsFetchingMore(true)
       const response = await axios.post(`${supplierProducts}`, requestBody, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -39,38 +49,87 @@ export default function Products() {
 
       const productsWithTax = defaultProducts
         .filter((product) => product.prices.some((price) => price.nameUoms))
-        .map((product) => ({
-          ...product,
-          amount: 0,
-          uomToPay: product.prices[0].nameUoms,
-          idUomToPay: product.prices[0].id,
-          prices: product.prices.map((price) => ({
-            ...price,
-            priceWithTax: (price.price + price.price * product.tax).toFixed(2),
-          })),
-        }))
+        .map((product) => {
+          const pricesWithTax = product.prices.map((price) => {
+            const priceWithTaxCalculation = (
+              price.price +
+              price.price * product.tax
+            ).toFixed(2)
+            return {
+              ...price,
+              priceWithTax:
+                isNaN(priceWithTaxCalculation) ||
+                parseFloat(priceWithTaxCalculation) === 0
+                  ? null
+                  : priceWithTaxCalculation,
+            }
+          })
+
+          return {
+            ...product,
+            amount: 0,
+            uomToPay: product.prices[0].nameUoms,
+            idUomToPay: product.prices[0].id,
+            prices: pricesWithTax,
+          }
+        })
+        .filter((product) =>
+          product.prices.some(
+            (price) => price.priceWithTax && parseFloat(price.priceWithTax) > 0,
+          ),
+        )
       useOrderStore.setState({ articlesToPay: productsWithTax })
+
       useOrderStore.setState({ categories: productsWithTax })
-      setArticles(productsWithTax)
-      setProducts(productsWithTax)
+     
+
+      if (page !== 0) {
+        setArticles((prevProducts) => [...prevProducts, ...productsWithTax])
+        setProducts((prevProducts) => [...prevProducts, ...productsWithTax])
+      } else {
+        setArticles(productsWithTax)
+        setProducts(productsWithTax)
+      }
+      setHasMore(false)
+
     } catch (error) {
       console.error('Error al obtener los productos del proveedor:', error)
     }
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (articlesToPay && articlesToPay.length > 0) {
-        setArticles(articlesToPay)
-        setProducts(articlesToPay)
-      } else {
-        await fetchProducts()
+useEffect(() => {
+  const fetchData = async () => {
+    if (articlesToPay && articlesToPay.length > 0) {
+      setArticles(articlesToPay)
+      setProducts(articlesToPay)
+    } else {
+      if (hasMore && !isFetchingMore) {
+        fetchProducts(currentPage)
+          .then(() => {
+            setIsFetchingMore(false)
+          })
+          .catch((error) => {
+            console.error('Error al cargar más productos:', error)
+            setIsFetchingMore(false)
+          })
       }
     }
+  }
 
-    fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  fetchData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [currentPage])
+
+
+  const handleLoadMore = () => {
+    if (!hasMore && !isFetchingMore) {
+      setHasMore(true)
+      setCurrentPage((prevPage) => {
+        const nextPage = prevPage + 1
+        return nextPage
+      })
+    }
+  }
 
   const fetchProductsByCategory = async (categoryId) => {
     if (categoryId === 'All') {
@@ -178,17 +237,45 @@ export default function Products() {
     } catch (error) {
       console.error('Error al obtener productos al mostrar categoría:', error)
     }
-  }
 
+    // SCROLL PAGINATION
+    if (offsetY >= contentHeight - screenHeight - 20) {
+      handleLoadMore()
+    }
+  }
+  const { t } = useTranslation()
+
+  //Filtro
+  const [showProductSearch, setShowProductSearch] = useState(false)
+
+  const toggleProductSearch = () => {
+    setShowProductSearch(!showProductSearch)
+  }
   return (
     <View style={styles.container}>
-      <ProductSearcher
-        products={articlesToPay}
-        setShowSearchResults={setShowSearchResults}
-        resetInput={resetInput}
-      />
+      <View style={styles.tittleDiv}>
+        <Text style={styles.textTittle}>
+          {t('stackNavigator.makeYourOrder')}
+        </Text>
+        <TouchableOpacity
+          style={styles.iconFilter}
+          onPress={toggleProductSearch}
+        >
+          <Ionicons name="search-circle-outline" size={32} color="#04444f" />
+        </TouchableOpacity>
+      </View>
+
+      {showProductSearch && (
+        <ProductSearcher
+          products={articlesToPay}
+          setShowSearchResults={setShowSearchResults}
+          resetInput={resetInput}
+        />
+      )}
       <SafeAreaView style={ProductsStyle.containerCards}>
-        <ScrollView>
+
+        <ScrollView onScroll={handleScroll} onMomentumScrollEnd={handleScroll}>
+
           {showSearchResults ? (
             <ProductsFind
               onAmountChange={handleAmountChange}
@@ -225,8 +312,13 @@ export default function Products() {
               )}
             </>
           )}
+          {isFetchingMore && (
+            <View style={styles.loadingMore}>
+              <ActivityIndicator size="large" color="#026CD2" />
+            </View>
+          )}
           <View style={{ height: 220 }} />
-        </ScrollView>
+        </ScrollView> 
       </SafeAreaView>
       <View style={ProductsStyle.viewCategories} />
       <ProductCategories
@@ -234,6 +326,7 @@ export default function Products() {
         toggleShowFavorites={toggleShowFavorites}
         categoriesProduct={productsCategory}
         filterCategory={filterCategories}
+
       />
     </View>
   )
@@ -244,5 +337,27 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'relative',
     backgroundColor: 'white',
+  },
+  textTittle: {
+    fontFamily: 'PoppinsSemi',
+    fontSize: 22,
+    textAlign: 'center',
+    marginVertical: 10,
+    marginTop: 18,
+    color: '#04444f',
+  },
+  tittleDiv: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconFilter: {
+    position: 'relative',
+    left: 45,
+  },
+  loadingMore: {
+    paddingVertical: 20,
+    alignItems: 'center',
   },
 })

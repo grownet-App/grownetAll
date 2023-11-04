@@ -119,8 +119,8 @@ const ProductCards = ({
         <View>
           <View style={ProductsStyle.containName}>
             <View>
-              <Text style={ProductsStyle.textName}>{name}</Text>
-              <Text style={ProductsStyle.textName1}>
+              <Text style={ProductsStyle.textName}>
+                {name}{' '}
                 {prices.find((price) => price.nameUoms === uomToPay).name}
               </Text>
               <Text style={ProductsStyle.textPrice}>

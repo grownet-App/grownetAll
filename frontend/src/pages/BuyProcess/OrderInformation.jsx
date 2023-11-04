@@ -349,7 +349,7 @@ export default function OrderInformation() {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     const formattedDate = `${day}/${month}/${year}`;
-    const dateMysqlFormat = `${year}/${month}/${day}`;
+    const dateMysqlFormat = `${year}-${month}-${day}`;
 
     setDeliveryData(formattedDate);
     setMysqlDate(dateMysqlFormat);
