@@ -81,11 +81,16 @@ export default function ProductDetail({
   }
 
   // CALCULAR TAXES
-  const calculateItemTaxes = (prices, tax, amount, uomToPay) => {
-    const selectedPrice = prices.find((price) => price.nameUoms === uomToPay)
-    const taxes = selectedPrice.price * tax * amount
-    return parseFloat(taxes.toFixed(2))
-  }
+   // CALCULAR TAXES 
+   const calculateItemTaxes = (prices, tax, amount, uomToPay) => {
+    const selectedPrice = prices.find((price) => price.nameUoms === uomToPay);
+    if (!selectedPrice || isNaN(tax) || isNaN(amount)) {
+      return 0;
+    }
+    const taxes = selectedPrice.price * tax * amount;
+    const parsedTaxes = parseFloat(taxes.toFixed(2));
+  return isNaN(parsedTaxes) ? 0 : parsedTaxes;
+  };
 
   const calculateTotalTaxes = (articls) => {
     const totalTaxes = articls.reduce((total, article) => {

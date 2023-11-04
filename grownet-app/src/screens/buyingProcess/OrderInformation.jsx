@@ -68,6 +68,7 @@ const OrderInformation = () => {
       total_tax: totalTaxes,
       products: jsonProducts,
     }
+    console.log('este es  :DDD', jsonOrderData)
 
     try {
       const response = await axios.post(createStorageOrder, jsonOrderData, {

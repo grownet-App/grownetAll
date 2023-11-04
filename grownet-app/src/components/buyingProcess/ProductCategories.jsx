@@ -26,12 +26,24 @@ function ProductsCategories({
   toggleShowFavorites,
   categoriesProduct,
   filterCategory,
+  selectedCategory,
 }) {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const isCarousel = useRef(null)
   const [categories, setCategories] = useState()
   const { token } = useTokenStore()
+
+  const isCategoryActive = (category) => {
+    if (
+      category === selectedCategory ||
+      (category === 'All' && selectedCategory === 'All')
+    ) {
+      return true
+    }
+    return false
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,12 +60,18 @@ function ProductsCategories({
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
   const urlImg = process.env.EXPO_PUBLIC_BASE_IMG
   const updatedCategories = [...categoriesProduct, 'Favorites']
 
   const renderItem = ({ item }) => {
     return (
-      <View style={ProductsStyles.contenImage}>
+      <View
+        style={[
+          ProductsStyle.contenImage,
+          isCategoryActive(item) && ProductsStyle.activeCategory,
+        ]}
+      >
         {item === 'Favorites' && showFavorites ? (
           <TouchableOpacity onPress={toggleShowFavorites}>
             <Iconify icon="icon-park-solid:back" size={65} color="#62C471" />
@@ -78,7 +96,14 @@ function ProductsCategories({
           >
             {item === categoryApi.name && (
               <>
-                <Text style={ProductsStyle.text}>{categoryApi.name}</Text>
+                <Text
+                  style={[
+                    ProductsStyle.text,
+                    isCategoryActive(item) && ProductsStyle.activeCategory,
+                  ]}
+                >
+                  {categoryApi.name}
+                </Text>
               </>
             )}
           </TouchableOpacity>
@@ -93,8 +118,8 @@ function ProductsCategories({
     <SafeAreaView style={ProductsStyle.fixedContainer}>
       <LinearGradient
         colors={['rgba(255, 255, 255, 0)', 'white']}
-        start={[0.5, 0.2]}
-        end={[0.5, 0.4]}
+        start={[0.5, 0.1]}
+        end={[0.5, 0.5]}
       >
         <Carousel
           data={updatedCategories}

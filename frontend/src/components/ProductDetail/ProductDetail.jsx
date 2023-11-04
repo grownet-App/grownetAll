@@ -15,6 +15,7 @@ export default function ProductDetail({
   const [articles, setArticles] = useState(articlesToPay);
   useEffect(() => {
     setArticles(articlesToPay);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [articles]);
 
   const handleAmountChange = (productId, newAmount) => {
@@ -96,11 +97,15 @@ export default function ProductDetail({
     return parseFloat(totalNet.toFixed(2));
   };
 
-  // CALCULAR TAXES
+  // CALCULAR TAXES 
   const calculateItemTaxes = (prices, tax, amount, uomToPay) => {
     const selectedPrice = prices.find((price) => price.nameUoms === uomToPay);
+    if (!selectedPrice || isNaN(tax) || isNaN(amount)) {
+      return 0;
+    }
     const taxes = selectedPrice.price * tax * amount;
-    return parseFloat(taxes.toFixed(2));
+    const parsedTaxes = parseFloat(taxes.toFixed(2));
+  return isNaN(parsedTaxes) ? 0 : parsedTaxes;
   };
 
   const calculateTotalTaxes = (articles) => {
