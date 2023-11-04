@@ -74,20 +74,18 @@ function ProductsCategories({
       >
         {item === 'Favorites' && showFavorites ? (
           <TouchableOpacity onPress={toggleShowFavorites}>
-            <Iconify icon="icon-park-solid:back" size={65} color="#62C471" />
+            <Text>Favorites</Text>
           </TouchableOpacity>
         ) : item === 'Favorites' ? (
           <TouchableOpacity onPress={toggleShowFavorites}>
-            <MaterialIcons name="favorite" size={65} color="#62C471" />
+            <Text>Favorites</Text>
           </TouchableOpacity>
         ) : null}
         <TouchableOpacity
           key={item}
           onPress={() => filterCategory('All', item)}
         >
-          {item === 'All' && (
-            <Iconify icon="fluent-emoji:basket" size={65} color="#62C471" />
-          )}
+          {item === 'All' && <Text>All</Text>}
         </TouchableOpacity>
         {categories?.map((categoryApi) => (
           <TouchableOpacity
