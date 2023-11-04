@@ -134,7 +134,14 @@ export default function Products() {
 
   const fetchProductsByCategory = async (categoryId) => {
     if (categoryId === 'All') {
-      await fetchProducts()
+      fetchProducts(currentPage)
+        .then(() => {
+          setIsFetchingMore(false)
+        })
+        .catch((error) => {
+          console.error('Error al cargar más productos:', error)
+          setIsFetchingMore(false)
+        })
       return
     }
     const requestBody = {
