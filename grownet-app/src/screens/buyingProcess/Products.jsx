@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+} from 'react-native'
 import { ActivityIndicator } from 'react-native-paper'
 import axios from '../../../axiosConfig'
 import Favorites from '../../components/buyingProcess/Favorites'
@@ -7,21 +14,20 @@ import ProductCard from '../../components/buyingProcess/ProductCards'
 import ProductCategories from '../../components/buyingProcess/ProductCategories'
 import ProductSearcher from '../../components/buyingProcess/ProductSearch'
 import ProductsFind from '../../components/buyingProcess/ProductsFind'
-import { supplierProducts } from '../../config/urls.config'
 import useOrderStore from '../../store/useOrderStore'
 import useTokenStore from '../../store/useTokenStore'
+import { supplierCategorie, supplierProducts } from '../../config/urls.config'
 import { ProductsStyle } from '../../styles/ProductsStyle'
 import { useTranslation } from 'react-i18next'
 import { Ionicons } from '@expo/vector-icons'
 
 export default function Products() {
-  const [blurIntensity, setBlurIntensity] = useState(30)
   const { token, countryCode } = useTokenStore()
   const [showFavorites, setShowFavorites] = useState(false)
   const [showSearchResults, setShowSearchResults] = useState(false)
   const [products, setProducts] = useState([])
   const [articles, setArticles] = useState(products)
-  const { articlesToPay, selectedSupplier, selectedRestaurant } =
+  const { articlesToPay, selectedSupplier, selectedRestaurant, categories } =
     useOrderStore()
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [resetInput, setResetInput] = useState(0)
@@ -77,6 +83,9 @@ export default function Products() {
           ),
         )
       useOrderStore.setState({ articlesToPay: productsWithTax })
+
+      useOrderStore.setState({ categories: productsWithTax })
+
       if (page !== 0) {
         setArticles((prevProducts) => [...prevProducts, ...productsWithTax])
         setProducts((prevProducts) => [...prevProducts, ...productsWithTax])
@@ -91,16 +100,25 @@ export default function Products() {
   }
 
   useEffect(() => {
-    if (hasMore && !isFetchingMore) {
-      fetchProducts(currentPage)
-        .then(() => {
-          setIsFetchingMore(false)
-        })
-        .catch((error) => {
-          console.error('Error al cargar más productos:', error)
-          setIsFetchingMore(false)
-        })
+    const fetchData = async () => {
+      if (articlesToPay && articlesToPay.length > 0) {
+        setArticles(articlesToPay)
+        setProducts(articlesToPay)
+      } else {
+        if (hasMore && !isFetchingMore) {
+          fetchProducts(currentPage)
+            .then(() => {
+              setIsFetchingMore(false)
+            })
+            .catch((error) => {
+              console.error('Error al cargar más productos:', error)
+              setIsFetchingMore(false)
+            })
+        }
+      }
     }
+
+    fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage])
 
@@ -111,6 +129,48 @@ export default function Products() {
         const nextPage = prevPage + 1
         return nextPage
       })
+    }
+  }
+
+  const fetchProductsByCategory = async (categoryId) => {
+    if (categoryId === 'All') {
+      await fetchProducts()
+      return
+    }
+    const requestBody = {
+      supplier: selectedSupplier.id,
+      categorie: categoryId,
+      country: countryCode,
+      accountNumber: selectedRestaurant.accountNumber,
+    }
+
+    try {
+      const response = await axios.post(supplierCategorie, requestBody, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      const categorizedProducts = response.data.products
+
+      const productsWithTax = categorizedProducts
+        .filter((product) => product.prices.some((price) => price.nameUoms))
+        .map((product) => ({
+          ...product,
+          amount: 0,
+          uomToPay: product.prices[0].nameUoms,
+          idUomToPay: product.prices[0].id,
+          prices: product.prices.map((price) => ({
+            ...price,
+            priceWithTax: (price.price + price.price * product.tax).toFixed(2),
+          })),
+        }))
+      useOrderStore.setState({ articlesToPay: productsWithTax })
+
+      setProducts(productsWithTax)
+      setArticles(productsWithTax)
+    } catch (error) {
+      console.error('Error al obtener los productos por categoría:', error)
     }
   }
 
@@ -162,31 +222,29 @@ export default function Products() {
     useOrderStore.setState({ articlesToPay: updatedArticlesToPay })
   }
 
-  const productsCategory =
-    selectedCategory === 'All'
-      ? ['All', ...new Set(articles.map((article) => article.nameCategorie))]
-      : ['All', selectedCategory]
+  const allCategories = [
+    'All',
+    ...new Set(categories.map((article) => article.nameCategorie)),
+  ]
+  const productsCategory = allCategories
 
-  const filterCategories = (category) => {
+  const filterCategories = async (category, categoryId) => {
     setSelectedCategory(category)
+
     setShowFavorites(false)
     resetInputSearcher()
+    try {
+      await fetchProductsByCategory(categoryId)
+    } catch (error) {
+      console.error('Error al obtener productos al mostrar categoría:', error)
+    }
   }
-
   const handleScroll = (event) => {
     const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent
 
     const offsetY = contentOffset.y
     const contentHeight = contentSize.height
     const screenHeight = layoutMeasurement.height
-
-    const maxScroll = contentHeight - screenHeight
-
-    if (offsetY >= maxScroll - 5) {
-      setBlurIntensity(0)
-    } else {
-      setBlurIntensity(30)
-    }
 
     // SCROLL PAGINATION
     if (offsetY >= contentHeight - screenHeight - 20) {
@@ -266,7 +324,7 @@ export default function Products() {
             </View>
           )}
           <View style={{ height: 220 }} />
-        </ScrollView> 
+        </ScrollView>
       </SafeAreaView>
       <View style={ProductsStyle.viewCategories} />
       <ProductCategories
@@ -274,8 +332,6 @@ export default function Products() {
         toggleShowFavorites={toggleShowFavorites}
         categoriesProduct={productsCategory}
         filterCategory={filterCategories}
-        blurIntensity={blurIntensity}
-        selectedCategory={selectedCategory}
       />
     </View>
   )
