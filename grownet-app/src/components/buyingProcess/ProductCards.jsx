@@ -18,6 +18,7 @@ const ProductCards = ({
   opacity,
 }) => {
   const { id, name, image, prices, uomToPay, active } = productData
+
   const { selectedSupplier, selectedRestaurant } = useOrderStore()
   const { token } = useTokenStore()
   const [isFocus, setIsFocus] = useState(false)

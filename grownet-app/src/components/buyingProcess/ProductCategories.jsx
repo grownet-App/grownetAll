@@ -72,16 +72,42 @@ function ProductsCategories({
           isCategoryActive(item) && ProductsStyle.activeCategory,
         ]}
       >
-        <TouchableOpacity key={item} onPress={() => filterCategory(item)}>
-          <Text
-            style={[
-              ProductsStyle.text,
-              isCategoryActive(item) && ProductsStyle.activeCategory,
-            ]}
-          >
-            {item}
-          </Text>
+        {item === 'Favorites' && showFavorites ? (
+          <TouchableOpacity onPress={toggleShowFavorites}>
+            <Iconify icon="icon-park-solid:back" size={65} color="#62C471" />
+          </TouchableOpacity>
+        ) : item === 'Favorites' ? (
+          <TouchableOpacity onPress={toggleShowFavorites}>
+            <MaterialIcons name="favorite" size={65} color="#62C471" />
+          </TouchableOpacity>
+        ) : null}
+        <TouchableOpacity
+          key={item}
+          onPress={() => filterCategory('All', item)}
+        >
+          {item === 'All' && (
+            <Iconify icon="fluent-emoji:basket" size={65} color="#62C471" />
+          )}
         </TouchableOpacity>
+        {categories?.map((categoryApi) => (
+          <TouchableOpacity
+            key={categoryApi.id}
+            onPress={() => filterCategory(categoryApi.name, categoryApi.id)}
+          >
+            {item === categoryApi.name && (
+              <>
+                <Text
+                  style={[
+                    ProductsStyle.text,
+                    isCategoryActive(item) && ProductsStyle.activeCategory,
+                  ]}
+                >
+                  {categoryApi.name}
+                </Text>
+              </>
+            )}
+          </TouchableOpacity>
+        ))}
       </View>
     )
   }
