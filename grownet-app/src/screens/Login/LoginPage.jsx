@@ -88,12 +88,22 @@ const LoginPage = () => {
     closeModal()
   }
 
+  const ContainerComponent =
+    Platform.OS === 'ios' ? KeyboardAwareScrollView : View
+
+  const containerProps =
+    Platform.OS === 'ios'
+      ? {
+          resetScrollToCoords: { x: 0, y: 0 },
+          contentContainerStyle: LoginStyle.container,
+          scrollEnabled: true,
+        }
+      : {
+          style: LoginStyle.container,
+        }
+
   return (
-    <KeyboardAwareScrollView
-      resetScrollToCoords={{ x: 0, y: 0 }}
-      contentContainerStyle={LoginStyle.container}
-      scrollEnabled
-    >
+    <ContainerComponent {...containerProps}>
       <Image
         style={LoginStyle.tinyLogo2}
         source={require('../../../assets/logo.png')}
@@ -152,7 +162,7 @@ const LoginPage = () => {
         message2={t('codeOtp.code')}
         Top
       />
-    </KeyboardAwareScrollView>
+    </ContainerComponent>
   )
 }
 
