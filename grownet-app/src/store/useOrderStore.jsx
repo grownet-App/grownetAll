@@ -16,7 +16,7 @@ const useOrderStore = create((set) => ({
   specialRequirements: null,
   orderNumber: null,
   categories: [],
-  setCategories: (restaurants) => set({ categories: restaurants }),
+  setCategories: (categorie) => set({ categories: categorie }),
   setRestaurants: (restaurants) => set({ restaurants: restaurants }),
   setSelectedRestaurant: (restaurant) =>
     set({ selectedRestaurant: restaurant }),

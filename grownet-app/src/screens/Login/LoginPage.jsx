@@ -88,12 +88,22 @@ const LoginPage = () => {
     closeModal()
   }
 
-  return Platform === 'ios' ? (
-    <KeyboardAwareScrollView
-      resetScrollToCoords={{ x: 0, y: 0 }}
-      contentContainerStyle={LoginStyle.container}
-      scrollEnabled
-    >
+  const ContainerComponent =
+    Platform.OS === 'ios' ? KeyboardAwareScrollView : View
+
+  const containerProps =
+    Platform.OS === 'ios'
+      ? {
+          resetScrollToCoords: { x: 0, y: 0 },
+          contentContainerStyle: LoginStyle.container,
+          scrollEnabled: true,
+        }
+      : {
+          style: LoginStyle.container,
+        }
+
+  return (
+    <ContainerComponent {...containerProps}>
       <Image
         style={LoginStyle.tinyLogo2}
         source={require('../../../assets/logo.png')}
@@ -152,68 +162,7 @@ const LoginPage = () => {
         message2={t('codeOtp.code')}
         Top
       />
-    </KeyboardAwareScrollView>
-  ) : (
-    <View style={LoginStyle.container}>
-      <Image
-        style={LoginStyle.tinyLogo2}
-        source={require('../../../assets/logo.png')}
-        resizeMode="contain"
-      />
-
-      <Text style={GlobalStyles.p}>{t('login.enterMobileNumber')}</Text>
-      <View style={LoginStyle.inputCountry}>
-        {countries.length > 0 ? (
-          <PhoneInput
-            countryPickerProps={{
-              countryCodes: countries,
-            }}
-            defaultCode={'GB'}
-            placeholder={t('login.phoneNumber')}
-            defaultValue={phoneNumber}
-            onChangeText={(text) => {
-              setPhoneNumber(text)
-            }}
-            countryCode={(info) => {
-              setPhoneDos(info)
-            }}
-            onChangeFormattedText={(text) => {
-              setPhoneDos(text)
-            }}
-          />
-        ) : null}
-      </View>
-      <TouchableOpacity
-        style={GlobalStyles.btnSecundary}
-        onPress={handleChange}
-      >
-        <Text style={GlobalStyles.textBtnSecundary}>
-          {t('login.letsBegin')}
-        </Text>
-      </TouchableOpacity>
-      <StatusBar style="auto" />
-
-      <ModalAlert
-        showModal={showModal}
-        closeModal={closeModal}
-        handleOutsidePress={handleOutsidePress}
-        Title={t('login.modalTitle_1')}
-        message={t('login.FirstModalmessage')}
-        countryCode={`+${countryCode}`}
-        phoneNumber={phoneNumber}
-        message2={t('login.FirstModalmessage2')}
-      />
-
-      <ModalAlert
-        showModal={showEmptyInputModal}
-        closeModal={closeModal}
-        handleOutsidePress={handleOutsidePress}
-        Title={t('login.modalTitle_2')}
-        message={t('login.secondModalMessage')}
-        message2={t('codeOtp.code')}
-        Top
-      />
-    </View>
+    </ContainerComponent>
   )
 }
 
