@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Tab, Tabs } from "react-bootstrap";
+import { Tab, Tabs, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import MenuPrimary from "../../../components/Menu/MenuPrimary";
@@ -126,7 +126,7 @@ export default function PendingRecord() {
                           </p>
                         </div>
                         <div className="calification-reception">
-                          {/* <Form.Check id="flexCheck"/>  */}
+                          <Form.Check id="flexCheck" />
                           <Link
                             to={`/record/reception/${product.id}/${product.name}/${product.quantity}/${product.uom}`}
                             className="warning-record"

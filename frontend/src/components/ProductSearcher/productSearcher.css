@@ -28,7 +28,9 @@
     background-color: transparent;
     cursor: pointer;
     font-size: 22px;
-    margin-right: 9px;
+
+    margin-right: 8px;
+
     color: var(--color-dark-blue);
   }
   

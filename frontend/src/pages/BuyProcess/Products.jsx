@@ -94,6 +94,7 @@ export default function Products(props) {
       console.error("Error al obtener los productos del proveedor:", error);
     }
   };
+
   const fetchProductsByCategory = async (categoryId) => {
     if (categoryId === "All") {
       await fetchProducts(currentPage);
@@ -167,6 +168,7 @@ export default function Products(props) {
       console.error("Error al obtener los productos por categoría:", error);
     }
   };
+
 
   useEffect(() => {
     const fetchData = async () => {

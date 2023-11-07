@@ -136,7 +136,6 @@ export default function Reception() {
               <Nav.Link eventKey="3">{t("reception.other")}</Nav.Link>
             </Nav.Item>
           </Nav>
-          <h4>{t("reception.comments")}</h4>
           <Tab.Content>
             <Tab.Pane eventKey="1">
               <form
@@ -149,18 +148,11 @@ export default function Reception() {
                   <div className="unit-reception">
                     <input
                       type="text"
-                      placeholder="Number of item received"
+                      placeholder="Number of item"
                       value={quantityDispute}
                       onChange={handleQuantityChange}
                       required
                     />
-                    <h3>{t("reception.addComent")}</h3>
-                    <textarea
-                      type="text"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      required
-                    ></textarea>
                   </div>
                 </div>
                 <div className="wrong-product">
@@ -201,18 +193,11 @@ export default function Reception() {
                   <div className="unit-reception">
                     <input
                       type="text"
-                      placeholder="Number of item received"
+                      placeholder="Number of item"
                       value={quantityDispute}
                       onChange={handleQuantityChange}
                       required
                     />
-                    <h3>{t("reception.addComent")}</h3>
-                    <textarea
-                      type="text"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      required
-                    ></textarea>
                   </div>
                 </div>
                 <div className="wrong-product">
@@ -237,7 +222,8 @@ export default function Reception() {
                     />
                   </div>
                 </div>
-                <div className="wrong-product">
+                {/* TODO MOVER ESTE CODIGO PARA QUE LA PERSONA ADJUNTE SU EVIDENCIA */}
+                {/* <div className="wrong-product">
                   <h3>{t("reception.attachPhoto")}</h3>
                   <div className="uploaded-images">
                     {evidences.map((file, index) => (
@@ -270,7 +256,7 @@ export default function Reception() {
                     <Icon id="upload-icon" icon="tabler:upload" />{" "}
                     {t("reception.customUpload")}
                   </label>
-                </div>
+                </div> */}
                 <button type="submit" className="bttn btn-primary">
                   {t("reception.send")}
                 </button>
@@ -290,40 +276,6 @@ export default function Reception() {
                     onChange={(e) => setDescription(e.target.value)}
                     required
                   ></textarea>
-                </div>
-                <div className="wrong-product">
-                  <h3>{t("reception.attachPhoto")}</h3>
-                  <div className="uploaded-images">
-                    {evidences.map((file, index) => (
-                      <div key={index} className="image-preview">
-                        <img
-                          src={URL.createObjectURL(file)}
-                          alt="uploaded-preview"
-                          width="30"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const newEvidences = [...evidences];
-                            newEvidences.splice(index, 1);
-                            setEvidences(newEvidences);
-                          }}
-                        >
-                          X
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                  <label className="custom-file-upload">
-                    <input
-                      type="file"
-                      onChange={handleFilesChange}
-                      multiple
-                      required
-                    />
-                    <Icon id="upload-icon" icon="tabler:upload" />{" "}
-                    {t("reception.customUpload")}
-                  </label>
                 </div>
                 <button type="submit" className="bttn btn-primary">
                   {t("reception.send")}

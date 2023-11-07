@@ -13,6 +13,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { PastStyle } from '../../styles/PastRecordStyle'
 import { useTranslation } from 'react-i18next'
 import { closeSelectedOrder } from '../../config/urls.config'
+import CheckList from '../../components/CheckList'
 
 function PendingRecord({ navigation }) {
   const { t } = useTranslation()
@@ -21,9 +22,9 @@ function PendingRecord({ navigation }) {
   const { selectedPendingOrder } = useRecordStore()
   const [detailsToShow, setDetailsToShow] = useState({})
 
-/*   const onToggleCheckbox = () => {
+  const onToggleCheckbox = () => {
     setChecked(!checked)
-  } */
+  }
 
   const [activeTab, setActiveTab] = useState('reception')
 
@@ -49,27 +50,27 @@ function PendingRecord({ navigation }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-    // CERRAR LA ORDEN SELECCIONADA
-    const onCloseOrder = (e) => {
-      e.preventDefault();
-      const bodyCloseOrder = {
-        reference: selectedPendingOrder,
-        state: 5,
-      };
-      axios
-        .post(closeSelectedOrder, bodyCloseOrder, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          navigation.navigate('record')
-        })
-        .catch((error) => {
-          console.log("Error al cerrar la orden", error);
-        });
-    };
+  // CERRAR LA ORDEN SELECCIONADA
+  const onCloseOrder = (e) => {
+    e.preventDefault()
+    const bodyCloseOrder = {
+      reference: selectedPendingOrder,
+      state: 5,
+    }
+    axios
+      .post(closeSelectedOrder, bodyCloseOrder, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data)
+        navigation.navigate('record')
+      })
+      .catch((error) => {
+        console.log('Error al cerrar la orden', error)
+      })
+  }
 
   return (
     <SafeAreaView style={RecordStyle.record}>
@@ -193,10 +194,7 @@ function PendingRecord({ navigation }) {
                     </Text>
                   </View>
                   <View style={PendingStyle.disputeRight}>
-                    {/* <Checkbox
-                    status={checked ? 'checked' : 'unchecked'}
-                    onPress={onToggleCheckbox}
-                  /> */}
+                    <CheckList />
                     <Button
                       onPress={() => navigation.navigate('disputeRecord')}
                     >
