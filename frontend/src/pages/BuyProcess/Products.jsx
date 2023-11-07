@@ -170,6 +170,10 @@ export default function Products(props) {
 
   useEffect(() => {
     const fetchData = async () => {
+      const hasMoreProductsToLoad = () => {
+        return articlesToPay.length > products.length;
+      };
+
       if (articlesToPay.length > 0) {
         setArticles((prevArticles) => {
           const productIds = new Set(prevArticles.map((p) => p.id));
@@ -187,9 +191,7 @@ export default function Products(props) {
           return [...prevProducts, ...newProducts];
         });
 
-        // Paginación para cargar más datos si es necesario
-        const lastArticleId = articlesToPay[articlesToPay.length - 1]?.id;
-        if (lastArticleId) {
+        if (hasMoreProductsToLoad()) {
           await fetchProducts(currentPage + 1);
         }
       } else {
@@ -198,6 +200,13 @@ export default function Products(props) {
     };
 
     fetchData();
+    const hasMore = articlesToPay.length > products.length;
+    if (!hasMore) {
+      const loaderElement = loader.current;
+      if (loaderElement) {
+        loaderElement.style.display = "none";
+      }
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
@@ -295,6 +304,7 @@ export default function Products(props) {
         observer.unobserve(currentLoader);
       }
     };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

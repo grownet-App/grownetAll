@@ -34,6 +34,7 @@ export default function Products() {
   const [currentPage, setCurrentPage] = useState(1)
   const [isFetchingMore, setIsFetchingMore] = useState(false)
   const [hasMore, setHasMore] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
 
   const fetchProducts = async (page) => {
     const requestBody = {
@@ -104,15 +105,19 @@ export default function Products() {
       if (articlesToPay && articlesToPay.length > 0) {
         setArticles(articlesToPay)
         setProducts(articlesToPay)
+        setIsLoading(false) // Cambio de estado cuando ya hay datos para mostrar
       } else {
         if (hasMore && !isFetchingMore) {
+          setIsFetchingMore(true)
           fetchProducts(currentPage)
             .then(() => {
               setIsFetchingMore(false)
+              setIsLoading(false) // Cambio de estado cuando se han cargado los datos
             })
             .catch((error) => {
               console.error('Error al cargar más productos:', error)
               setIsFetchingMore(false)
+              setIsLoading(false) // Cambio de estado en caso de error
             })
         }
       }
@@ -327,7 +332,12 @@ export default function Products() {
           )}
           {isFetchingMore && (
             <View style={styles.loadingMore}>
-              <ActivityIndicator size="large" color="#026CD2" />
+              <ActivityIndicator
+                animating={isLoading}
+                color="#026CD2"
+                size="large"
+                style={isLoading ? styles.loading : styles.hidden}
+              />
             </View>
           )}
           <View style={{ height: 220 }} />
