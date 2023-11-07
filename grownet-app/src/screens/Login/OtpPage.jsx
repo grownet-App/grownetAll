@@ -76,7 +76,7 @@ const Otp = () => {
     Platform.OS === 'ios'
       ? {
           resetScrollToCoords: { x: 0, y: 0 },
-          contentContainerStyle: LoginStyle.container,
+          contentContainerStyle: OtpStyle.containerOtpPage,
           scrollEnabled: true,
         }
       : {
