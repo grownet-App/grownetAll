@@ -93,6 +93,7 @@ export default function Products(props) {
       console.error("Error al obtener los productos del proveedor:", error);
     }
   };
+  console.log("ARTICLES", articles);
 
   useEffect(() => {
     const fetchData = async () => {

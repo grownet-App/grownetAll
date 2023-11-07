@@ -113,7 +113,6 @@ const esTranslations = {
     wrong: "Cantidad incorrecta",
     defective: "Defectuoso",
     other: "Otro",
-    comments: "Deja tus comentarios aquí:",
     enterQuantity: "Ingresa la cantidad entregada:",
     addComent: "Agregar un comentario:",
     sendNextOrder: "Enviar con el próximo pedido",
