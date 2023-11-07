@@ -1,4 +1,4 @@
-import closeOutline from '@iconify/icons-eva/close-outline';
+import closeOutline from "@iconify/icons-eva/close-outline";
 import searchIcon from "@iconify/icons-heroicons-outline/search";
 import { Icon } from "@iconify/react";
 import React, { useEffect, useState } from "react";
@@ -55,20 +55,18 @@ function ProductSearcher({ products, setShowSearchResults, resetInput }) {
   };
 
   return (
-    <div className="flex-container">
-      <form className="search-form">
-        <input
-          type="text"
-          value={input}
-          onChange={handleInputChange}
-          placeholder={t("productSearcher.placeholder")}
-          className="search-input"
-        />
-        <button type="button" onClick={handleReset} className="search-button">
-          <Icon icon={searchButtonIcon} />
-        </button>
-      </form>
-    </div>
+    <form className="search-form">
+      <input
+        type="text"
+        value={input}
+        onChange={handleInputChange}
+        placeholder={t("productSearcher.placeholder")}
+        className="search-input"
+      />
+      <button type="button" onClick={handleReset} className="search-button">
+        <Icon icon={searchButtonIcon} />
+      </button>
+    </form>
   );
 }
 
