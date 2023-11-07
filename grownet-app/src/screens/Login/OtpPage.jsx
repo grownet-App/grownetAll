@@ -15,6 +15,7 @@ import axios from '../../../axiosConfig'
 import useTokenStore from '../../store/useTokenStore'
 import { useTranslation } from 'react-i18next'
 import ModalAlert from '../../components/ModalAlert'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const Otp = () => {
   const { t } = useTranslation()
@@ -68,9 +69,22 @@ const Otp = () => {
   const handleOutsidePress = () => {
     closeModal()
   }
+  const ContainerComponent =
+    Platform.OS === 'ios' ? KeyboardAwareScrollView : SafeAreaView
+
+  const containerProps =
+    Platform.OS === 'ios'
+      ? {
+          resetScrollToCoords: { x: 0, y: 0 },
+          contentContainerStyle: OtpStyle.containerOtpPage,
+          scrollEnabled: true,
+        }
+      : {
+          style: OtpStyle.containerOtpPage,
+        }
 
   return (
-    <SafeAreaView style={OtpStyle.containerOtpPage}>
+    <ContainerComponent {...containerProps}>
       <Image
         style={OtpStyle.tinyLogoOtp}
         source={require('../../../assets/logo.png')}
@@ -162,7 +176,7 @@ const Otp = () => {
         message2={t('codeOtp.code')}
         Top
       />
-    </SafeAreaView>
+    </ContainerComponent>
   )
 }
 
