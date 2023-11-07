@@ -147,6 +147,7 @@ export const ProductsStyle = StyleSheet.create({
     alignItems: 'center',
     shadowColor: '#144D56',
     elevation: 4,
+    width: '100%',
   },
   activeCategory: {
     backgroundColor: '#62C471',

@@ -65,32 +65,47 @@ function ProductsCategories({
   const updatedCategories = [...categoriesProduct, 'Favorites']
 
   const renderItem = ({ item }) => {
+    const isFavorites = item === 'Favorites'
+
+    const handleFavoritesClick = () => {
+      if (isFavorites) {
+        toggleShowFavorites()
+      } else {
+        filterCategory(item)
+      }
+    }
+
     return (
       <View
         style={[
           ProductsStyle.contenImage,
-          isCategoryActive(item) && ProductsStyle.activeCategory,
+          showFavorites && isFavorites && ProductsStyle.activeCategory,
+          !isFavorites &&
+            isCategoryActive(item) &&
+            ProductsStyle.activeCategory,
         ]}
       >
-        {item === 'Favorites' && showFavorites ? (
-          <TouchableOpacity onPress={toggleShowFavorites}>
-            <Text>close</Text>
+        {isFavorites && (
+          <TouchableOpacity onPress={handleFavoritesClick}>
+            <Text style={ProductsStyle.text}>
+              {showFavorites ? 'Go back' : 'Favorites'}
+            </Text>
           </TouchableOpacity>
-        ) : item === 'Favorites' ? (
-          <TouchableOpacity onPress={toggleShowFavorites}>
-            <MaterialIcons name="favorite" size={65} color="blue" />
+        )}
+        {!isFavorites && (
+          <TouchableOpacity key={item} onPress={handleFavoritesClick}>
+            <Text
+              style={[
+                ProductsStyle.text,
+                isCategoryActive(item) &&
+                  !showFavorites &&
+                  ProductsStyle.activeCategory,
+              ]}
+            >
+              {item}
+            </Text>
           </TouchableOpacity>
-        ) : null}
-        <TouchableOpacity key={item} onPress={() => filterCategory(item)}>
-          <Text
-            style={[
-              ProductsStyle.text,
-              isCategoryActive(item) && ProductsStyle.activeCategory,
-            ]}
-          >
-            {item}
-          </Text>
-        </TouchableOpacity>
+        )}
       </View>
     )
   }
@@ -107,6 +122,7 @@ function ProductsCategories({
         <Carousel
           data={updatedCategories}
           renderItem={renderItem}
+          y
           sliderWidth={width}
           itemWidth={width / 3}
           autoplay={true}
